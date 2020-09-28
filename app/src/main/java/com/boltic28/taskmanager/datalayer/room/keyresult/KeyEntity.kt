@@ -1,26 +1,16 @@
 package com.boltic28.taskmanager.datalayer.room.keyresult
 
 import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.TypeConverters
-import com.boltic28.taskmanager.datalayer.room.Converter
-import com.boltic28.taskmanager.datalayer.room.goal.GoalEntity
+import androidx.room.PrimaryKey
 import java.time.LocalDateTime
 
-@Entity(
-    tableName = "key_entity",
-    foreignKeys = [
-        ForeignKey(
-            entity = GoalEntity::class,
-            parentColumns = ["id"],
-            childColumns = ["ownerId"],
-            onDelete = ForeignKey.CASCADE
-        )
-    ]
-)
+@Entity(tableName = "key_entity")
 data class KeyEntity(
+    @PrimaryKey(autoGenerate = true)
     val id: Long,
-    val ownerId: Long,
+    val goalId: Long,
+    val name: String,
+    val description: String,
     val date: LocalDateTime,
     val progress: Int
 )

@@ -3,13 +3,17 @@ package com.boltic28.taskmanager.datalayer.dto
 import com.boltic28.taskmanager.datalayer.Cycle
 import java.time.LocalDateTime
 
-data class Task(
-    val id: Long,
-    val name: String,
-    val icon: String,
-    val date: LocalDateTime,
-    val dateClose: LocalDateTime,
-    val cycle: Cycle,
-    val isDone: Boolean,
-    val isProcess: Process
+class Task(
+    var id: Long,
+    var stepId: Long,
+    var keyId: Long,
+    var goalId: Long,
+    var name: String,
+    var description: String,
+    var icon: String,
+    var date: LocalDateTime,
+    var dateClose: LocalDateTime,
+    var cycle: Cycle,
+    var isDone: Boolean,
+    var isStarted: Boolean
 )

@@ -18,6 +18,15 @@ interface TaskDao {
     @Query("SELECT * FROM task WHERE id = :id ORDER BY id")
     fun readById(id: Long): Single<TaskEntity>
 
-    @Query("SELECT * FROM task WHERE stepId = :ownerId")
-    fun readAllForOwner(ownerId: Long): Single<List<TaskEntity>>
+    @Query("SELECT * FROM task WHERE stepId = 0 AND keyId = 0 AND goalId = 0")
+    fun readAllFree(): Single<List<TaskEntity>>
+
+    @Query("SELECT * FROM task WHERE stepId = :stepId")
+    fun readAllForStep(stepId: Long): Single<List<TaskEntity>>
+
+    @Query("SELECT * FROM task WHERE goalId = :goalId")
+    fun readAllForGoal(goalId: Long): Single<List<TaskEntity>>
+
+    @Query("SELECT * FROM task WHERE keyId = :keyId")
+    fun readAllForKey(keyId: Long): Single<List<TaskEntity>>
 }

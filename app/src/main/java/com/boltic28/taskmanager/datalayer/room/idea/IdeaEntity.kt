@@ -12,6 +12,7 @@ data class IdeaEntity(
     val keyId: Long,
     val goalId: Long,
     val name: String,
+    val description: String,
     val icon: String,
     val date: LocalDateTime
 )

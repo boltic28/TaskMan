@@ -1,11 +1,11 @@
 package com.boltic28.taskmanager.datalayer.room.goal
 
-import androidx.room.Dao
 import com.boltic28.taskmanager.datalayer.dto.Goal
 import com.boltic28.taskmanager.datalayer.room.DBService
 import io.reactivex.Single
 
-class GoalService: DBService<Goal> {
+class GoalService(private val dao: GoalDao) : DBService<Goal, GoalEntity> {
+
     override fun create(item: Goal): Single<Long> {
         TODO("Not yet implemented")
     }
@@ -25,4 +25,21 @@ class GoalService: DBService<Goal> {
     override fun delete(item: Goal): Single<Int> {
         TODO("Not yet implemented")
     }
+
+    override fun toEntity(item: Goal): GoalEntity =
+        GoalEntity(
+            item.id,
+            item.name,
+            item.description,
+            item.icon,
+            item.date,
+            item.dateClose,
+            item.isDone,
+            item.isStarted
+        )
+
+    override fun fromEntity(entity: GoalEntity): Goal {
+        TODO("Not yet implemented")
+    }
+
 }

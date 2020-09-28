@@ -4,7 +4,7 @@ import com.boltic28.taskmanager.datalayer.dto.Task
 import com.boltic28.taskmanager.datalayer.room.DBService
 import io.reactivex.Single
 
-class TaskService: DBService<Task> {
+class TaskService: DBService<Task, TaskEntity> {
     override fun create(item: Task): Single<Long> {
         TODO("Not yet implemented")
     }
@@ -22,6 +22,14 @@ class TaskService: DBService<Task> {
     }
 
     override fun delete(item: Task): Single<Int> {
+        TODO("Not yet implemented")
+    }
+
+    override fun toEntity(item: Task): TaskEntity {
+        TODO("Not yet implemented")
+    }
+
+    override fun fromEntity(entity: TaskEntity): Task {
         TODO("Not yet implemented")
     }
 }

@@ -14,14 +14,15 @@ interface StepDao {
     @Delete
     fun delete(stepEntity: StepEntity): Single<Int>
 
+    @Transaction
     @Query("SELECT * FROM step WHERE id = :id ORDER BY id")
     fun readById(id: Long): Single<StepWithTasks>
 
     @Transaction
-    @Query("SELECT * FROM step WHERE ownerId = :ownerId")
-    fun readAllForOwner(ownerId: Long): Single<List<StepWithTasks>>
+    @Query("SELECT * FROM step WHERE goalId = :goalId")
+    fun readAllForOwner(goalId: Long): Single<List<StepWithTasks>>
 
     @Transaction
-    @Query("SELECT * FROM step WHERE ownerId = :ownerId")
-    fun readAllForKey(ownerId: Long): Single<List<StepWithTasks>>
+    @Query("SELECT * FROM step WHERE goalId = :goalId")
+    fun readAllForKey(goalId: Long): Single<List<StepWithTasks>>
 }

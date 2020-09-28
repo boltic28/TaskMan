@@ -1,12 +1,16 @@
 package com.boltic28.taskmanager.datalayer.room.keyresult
 
-import androidx.room.Embedded
 import androidx.room.Relation
-import com.boltic28.taskmanager.datalayer.room.step.StepWithTasks
+import com.boltic28.taskmanager.datalayer.room.step.StepEntity
+import java.time.LocalDateTime
 
-data class KeyWithSteps(
-    @Embedded
-    val key: KeyEntity,
+class KeyWithSteps(
+    val id: Long,
+    val goalId: Long,
+    val name: String,
+    val description: String,
+    val date: LocalDateTime,
+    val progress: Int,
     @Relation(parentColumn = "id", entityColumn = "keyId")
-    var steps: List<StepWithTasks>
+    var steps: List<StepEntity>
 )
