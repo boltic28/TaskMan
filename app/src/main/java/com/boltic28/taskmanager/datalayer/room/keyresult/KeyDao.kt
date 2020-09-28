@@ -17,9 +17,12 @@ interface KeyDao {
 
     @Transaction
     @Query("SELECT * FROM key_entity WHERE id = :id ORDER BY id")
-    fun readById(id: Long): Single<KeyWithSteps>
+    fun readById(id: Long): Single<KeyEntity>
+
+    @Query("SELECT * FROM key_entity")
+    fun readAll(): Single<List<KeyEntity>>
 
     @Transaction
     @Query("SELECT * FROM key_entity WHERE goalId = :goalId")
-    fun readAllForGoal(goalId: Long): Single<List<KeyWithSteps>>
+    fun readAllForGoal(goalId: Long): Single<List<KeyEntity>>
 }

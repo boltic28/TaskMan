@@ -8,6 +8,6 @@ interface DBService<T, K> {
     fun readById(id: Long): Single<T>
     fun update(item: T): Single<Int>
     fun delete(item: T): Single<Int>
-    fun toEntity(item: T): K
-    fun fromEntity(entity: K): T
+    fun getEntity(item: T): K
+    fun getItem(entity: K): T
 }

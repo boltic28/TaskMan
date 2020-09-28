@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.datalayer.room.dagger
+package com.boltic28.taskmanager.datalayer.room.di
 
 import android.content.Context
 import androidx.room.Room

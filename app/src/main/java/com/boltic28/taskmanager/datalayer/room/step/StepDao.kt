@@ -16,13 +16,16 @@ interface StepDao {
 
     @Transaction
     @Query("SELECT * FROM step WHERE id = :id ORDER BY id")
-    fun readById(id: Long): Single<StepWithTasks>
+    fun readById(id: Long): Single<StepEntity>
+
+    @Query("SELECT * FROM step")
+    fun readAll(): Single<List<StepEntity>>
 
     @Transaction
     @Query("SELECT * FROM step WHERE goalId = :goalId")
-    fun readAllForOwner(goalId: Long): Single<List<StepWithTasks>>
+    fun readAllForOwner(goalId: Long): Single<List<StepEntity>>
 
     @Transaction
     @Query("SELECT * FROM step WHERE goalId = :goalId")
-    fun readAllForKey(goalId: Long): Single<List<StepWithTasks>>
+    fun readAllForKey(goalId: Long): Single<List<StepEntity>>
 }

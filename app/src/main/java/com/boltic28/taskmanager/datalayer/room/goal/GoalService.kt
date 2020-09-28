@@ -6,27 +6,27 @@ import io.reactivex.Single
 
 class GoalService(private val dao: GoalDao) : DBService<Goal, GoalEntity> {
 
-    override fun create(item: Goal): Single<Long> {
-        TODO("Not yet implemented")
-    }
+    override fun create(item: Goal): Single<Long> =
+        dao.insert(getEntity(item))
 
-    override fun readAll(): Single<List<Goal>> {
-        TODO("Not yet implemented")
-    }
+    override fun readAll(): Single<List<Goal>> =
+        dao.readAll().map { list ->
+            list.map { entity ->
+                getItem(entity) }
+        }
 
-    override fun readById(id: Long): Single<Goal> {
-        TODO("Not yet implemented")
-    }
+    override fun readById(id: Long): Single<Goal> =
+        dao.readById(id).map { entity ->
+            getItem(entity)
+        }
 
-    override fun update(item: Goal): Single<Int> {
-        TODO("Not yet implemented")
-    }
+    override fun update(item: Goal): Single<Int> =
+        dao.update(getEntity(item))
 
-    override fun delete(item: Goal): Single<Int> {
-        TODO("Not yet implemented")
-    }
+    override fun delete(item: Goal): Single<Int> =
+        dao.delete(getEntity(item))
 
-    override fun toEntity(item: Goal): GoalEntity =
+    override fun getEntity(item: Goal): GoalEntity =
         GoalEntity(
             item.id,
             item.name,
@@ -38,8 +38,19 @@ class GoalService(private val dao: GoalDao) : DBService<Goal, GoalEntity> {
             item.isStarted
         )
 
-    override fun fromEntity(entity: GoalEntity): Goal {
-        TODO("Not yet implemented")
-    }
+    override fun getItem(entity: GoalEntity): Goal =
+        Goal(
+            entity.id,
+            entity.name,
+            entity.description,
+            entity.icon,
+            entity.date,
+            entity.dateClose,
+            entity.isDone,
+            entity.isStarted,
+            mutableListOf(),
+            mutableListOf(),
+            mutableListOf()
+        )
 
 }

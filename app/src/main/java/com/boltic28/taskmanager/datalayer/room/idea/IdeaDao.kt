@@ -17,6 +17,9 @@ interface IdeaDao {
     @Query("SELECT * FROM idea WHERE id = :id ORDER BY id")
     fun readById(id: Long): Single<IdeaEntity>
 
+    @Query("SELECT * FROM idea")
+    fun readAll(): Single<List<IdeaEntity>>
+
     @Query("SELECT * FROM idea WHERE stepId = 0 AND keyId = 0 AND goalId = 0")
     fun readAllFree(): Single<List<IdeaEntity>>
 

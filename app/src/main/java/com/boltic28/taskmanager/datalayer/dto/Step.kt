@@ -4,7 +4,7 @@ import java.time.LocalDateTime
 
 class Step(
     var id: Long,
-    var ownerId: Long,
+    var goalId: Long,
     var keyId: Long,
     var name: String,
     var description: String,

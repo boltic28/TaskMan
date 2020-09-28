@@ -1,8 +1,8 @@
 package com.boltic28.taskmanager.daggermain
 
 import androidx.lifecycle.ViewModel
-import com.boltic28.taskmanager.datalayer.room.dagger.DataBaseModule
-import com.boltic28.taskmanager.datalayer.room.dagger.ServiceModule
+import com.boltic28.taskmanager.datalayer.room.di.DataBaseModule
+import com.boltic28.taskmanager.datalayer.room.di.ServiceModule
 import com.boltic28.taskmanager.datalayer.room.goal.GoalService
 import com.boltic28.taskmanager.datalayer.room.idea.IdeaService
 import com.boltic28.taskmanager.datalayer.room.keyresult.KeyService
@@ -24,12 +24,6 @@ interface AppComponent {
     fun injectFragment(fragment: MainFragment)
     fun injectActivity(act: MainActivity)
     fun injectManager(manager: FireUserManager)
-
-    fun injectService(service: GoalService)
-    fun injectService(service: StepService)
-    fun injectService(service: KeyService)
-    fun injectService(service: TaskService)
-    fun injectService(service: IdeaService)
 
     @Component.Builder
     interface DataBuilder {
