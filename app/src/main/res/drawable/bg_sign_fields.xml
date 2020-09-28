@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners
+        android:bottomRightRadius="@dimen/sign_field_corner"
+        android:topRightRadius="@dimen/sign_field_corner" />
+    <gradient
+        android:endColor="@color/colorSignFieldEnd"
+        android:startColor="@color/colorSignFieldStart"
+        android:angle="360"/>
+    <stroke
+        android:color="@color/colorSignFieldStroke"
+        android:width="1dp"
+        />
+</shape>

@@ -3,4 +3,15 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <color name="colorSignFieldEnd">#1912E6</color>
+    <color name="colorSignFieldStart">#AEBCEC</color>
+    <color name="colorSignFieldStroke">#080909</color>
+    <color name="colorSignFieldStrokeBadInput">#F44336</color>
+    <color name="colorButton">#03DAC5</color>
+    <color name="colorSignEditText">#E8F1F0</color>
+    <color name="colorSignInfoText">#767878</color>
+    <color name="colorSignInButton">#068806</color>
+    <color name="colorSignOutButton">#C80505</color>
+    <color name="colorSignRegButton">#595856</color>
 </resources>

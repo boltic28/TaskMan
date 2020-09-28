@@ -2,4 +2,15 @@
 <resources>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <!--Sign fragment -->
+    <dimen name="sign_field_corner">60dp</dimen>
+    <dimen name="sign_field_width">200dp</dimen>
+    <dimen name="sign_field_height">60dp</dimen>
+    <dimen name="sign_field_login_margin_end">40dp</dimen>
+    <dimen name="sign_field_password_margin_end">70dp</dimen>
+    <dimen name="sign_field_password_margin_top">8dp</dimen>
+    <dimen name="sign_field_text_start_padding">50dp</dimen>
+    <dimen name="sign_field_text_size">24sp</dimen>
+    <dimen name="sign_info_text_size">20sp</dimen>
+    <dimen name="sign_info_text_margin_bottom">16dp</dimen>
 </resources>

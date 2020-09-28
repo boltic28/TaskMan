@@ -1,18 +1,20 @@
-package com.boltic28.taskmanager.presentation
+package com.boltic28.taskmanager.screens.sign
 
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.dagger.AppDagger
-import com.boltic28.taskmanager.presentation.MainActivity.Companion.TAG
+import com.boltic28.taskmanager.screens.MainActivity.Companion.TAG
+import com.boltic28.taskmanager.screens.main.MainFragment
 import com.boltic28.taskmanager.utils.Messenger
-import com.boltic28.taskmanager.signin.FireUserManager
-import com.boltic28.taskmanager.signin.UserIn
-import com.google.firebase.auth.FirebaseUser
+import com.boltic28.taskmanager.signtools.FireUserManager
+import com.boltic28.taskmanager.signtools.UserIn
 import io.reactivex.disposables.Disposables
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_sign.sign_in_button
 import kotlinx.android.synthetic.main.activity_sign.sign_mail
 import kotlinx.android.synthetic.main.activity_sign.sign_password
@@ -24,7 +26,7 @@ import javax.inject.Inject
 class SignFragment : Fragment(R.layout.fragment_sign) {
 
     companion object{
-        const val FR_TAG = "sign_frag"
+        const val TAG = "mainActivity_test"
     }
 
     @Inject
@@ -38,15 +40,23 @@ class SignFragment : Fragment(R.layout.fragment_sign) {
 
     private var disposable = Disposables.disposed()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        AppDagger.component.injectFragment(this)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d(MainFragment.TAG, "-> signFragment")
 
-        AppDagger.component.injectFragment(this)
         model.userManager = FireUserManager.getInstance(requireActivity())
-        disposable = model.userManager.user.
-            subscribe {
-                Log.d(TAG, "loading....")
-                checkUserdata(it)
+        disposable = model.userManager.user
+            .subscribe {user ->
+                if (user.id.isNotEmpty()){
+                    findNavController().navigate(R.id.action_signFragment_to_mainFragment)
+                }else {
+                    checkUserdata(user)
+                }
             }
         setOnButtons()
     }
@@ -57,15 +67,16 @@ class SignFragment : Fragment(R.layout.fragment_sign) {
     }
 
     private fun checkUserdata(user: UserIn){
+        Log.d(TAG, "loading users data to view....")
         if (user.id.isNotEmpty()){
             sign_mail.setText(user.email)
-            sign_result.text = "you work like ${user.name}"
+            sign_text.text = resources.getString(R.string.sign_signout_text, user.name)
             sign_in_button.visibility = View.GONE
             sign_up_button.visibility = View.GONE
             sign_out_button.visibility = View.VISIBLE
         }else{
-            sign_mail.hint = "E-mail"
-            sign_result.text = "you not logged"
+            sign_mail.hint = resources.getString(R.string.sign_email)
+            sign_text.text = resources.getString(R.string.sign_signin_or_register)
             sign_in_button.visibility = View.VISIBLE
             sign_up_button.visibility = View.VISIBLE
             sign_out_button.visibility = View.GONE
@@ -102,8 +113,8 @@ class SignFragment : Fragment(R.layout.fragment_sign) {
         ) {
             true
         } else {
-            messenger.showMessage("input right data")
+            messenger.showMessage(resources.getString(R.string.tip_input_right_data))
+            sign_mail.setBackgroundResource(R.drawable.bg_sign_bad_input)
             false
         }
-
 }

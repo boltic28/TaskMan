@@ -8,31 +8,30 @@
 
     <TextView
         android:id="@+id/sign_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="SignIn or signUp"
-        app:layout_constraintTop_toTopOf="parent"
+        style="@style/Sign.Text.Info"
+        android:text="@string/sign_signin_or_register"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.24"
         />
 
     <EditText
         android:id="@+id/sign_mail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/Sign.Fields.Login"
         android:hint="@string/email_mail_com"
-        android:inputType="textEmailAddress"
+        tools:text="@string/sign_out"
         app:layout_constraintTop_toBottomOf="@id/sign_text"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/sign_password"
         />
 
     <EditText
         android:id="@+id/sign_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/Sign.Fields.Password"
         android:hint="@string/password"
-        android:inputType="textPassword"
         app:layout_constraintTop_toBottomOf="@id/sign_mail"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -40,43 +39,36 @@
 
     <Button
         android:id="@+id/sign_in_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/Sign.Button"
+        android:backgroundTint="@color/colorSignInButton"
         android:text="@string/sign_in"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/sign_up_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sign_password"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintVertical_bias="0.1" />
 
     <Button
         android:id="@+id/sign_up_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/Sign.Button"
+        android:backgroundTint="@color/colorSignRegButton"
         android:text="@string/sign_up"
-        app:layout_constraintStart_toEndOf="@id/sign_in_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/sign_in_button"
         app:layout_constraintTop_toBottomOf="@id/sign_password"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintVertical_bias="0.1" />
 
     <Button
         android:id="@+id/sign_out_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/Sign.Button"
+        android:backgroundTint="@color/colorSignOutButton"
         android:text="@string/sign_out_b"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sign_in_button"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sign_password"
+        app:layout_constraintVertical_bias="0.1" />
 
-    <TextView
-        android:id="@+id/sign_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="@string/not_autorizated"
-        app:layout_constraintTop_toBottomOf="@id/sign_in_button"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

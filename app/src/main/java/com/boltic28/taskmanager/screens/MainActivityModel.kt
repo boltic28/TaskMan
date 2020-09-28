@@ -1,7 +1,7 @@
-package com.boltic28.taskmanager.presentation
+package com.boltic28.taskmanager.screens
 
 import androidx.lifecycle.ViewModel
-import com.boltic28.taskmanager.signin.FireUserManager
+import com.boltic28.taskmanager.signtools.FireUserManager
 
 class MainActivityModel : ViewModel() {
 

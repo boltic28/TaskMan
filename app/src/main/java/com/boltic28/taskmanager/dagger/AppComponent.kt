@@ -1,10 +1,10 @@
 package com.boltic28.taskmanager.dagger
 
 import androidx.lifecycle.ViewModel
-import com.boltic28.taskmanager.presentation.MainActivity
-import com.boltic28.taskmanager.presentation.MainFragment
-import com.boltic28.taskmanager.presentation.SignFragment
-import com.boltic28.taskmanager.signin.FireUserManager
+import com.boltic28.taskmanager.screens.MainActivity
+import com.boltic28.taskmanager.screens.main.MainFragment
+import com.boltic28.taskmanager.screens.sign.SignFragment
+import com.boltic28.taskmanager.signtools.FireUserManager
 import dagger.Component
 import javax.inject.Singleton
 

@@ -1,9 +1,9 @@
-package com.boltic28.taskmanager.signin
+package com.boltic28.taskmanager.signtools
 
 import android.app.Activity
 import android.util.Log
 import com.boltic28.taskmanager.dagger.AppDagger
-import com.boltic28.taskmanager.presentation.MainActivity.Companion.TAG
+import com.boltic28.taskmanager.screens.MainActivity.Companion.TAG
 import com.boltic28.taskmanager.utils.Messenger
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
@@ -36,11 +36,10 @@ class FireUserManager(private val activity: Activity) :
     lateinit var messenger: Messenger
 
     private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
-    private val userSubject = BehaviorSubject.createDefault<UserIn>(convertUser(mAuth.currentUser))
 
+    private val userSubject = BehaviorSubject.createDefault<UserIn>(convertUser(mAuth.currentUser))
     val user: Observable<UserIn>
         get() = userSubject.hide()
-    var userIn: UserIn = convertUser(mAuth.currentUser)
 
     init {
         mAuth.addAuthStateListener {
@@ -96,7 +95,7 @@ class FireUserManager(private val activity: Activity) :
     private fun checkTaskAndSetUser(task: Task<AuthResult>, type: String) {
         if (task.isSuccessful) {
             Log.d(TAG, "$type : success")
-            messenger.showMessage("$type success")
+            messenger.showMessage("$type successful")
         } else {
             Log.d(TAG, "$type : failed")
             messenger.showMessage("$type failed")

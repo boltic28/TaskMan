@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.signin
+package com.boltic28.taskmanager.signtools
 
 interface UserManager<T> {
 

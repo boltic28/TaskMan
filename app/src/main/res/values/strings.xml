@@ -7,4 +7,9 @@
     <string name="password">password</string>
     <string name="sign_up">sign Up</string>
     <string name="sign_out_b">sign OUT</string>
+    <string name="registration">registration</string>
+    <string name="sign_signin_or_register">SignIn or register</string>
+    <string name="sign_signout_text">You entered like , %s</string>
+    <string name="sign_email">e-mail</string>
+    <string name="tip_input_right_data">input right data</string>
 </resources>
