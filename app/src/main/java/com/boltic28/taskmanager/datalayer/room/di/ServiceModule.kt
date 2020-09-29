@@ -37,27 +37,4 @@ class ServiceModule(private val db: AppDataBase) {
     @Singleton
     @Provides
     fun provideIdeaService(): DefaultIdeaService = DefaultIdeaService(db.ideaDao())
-
-
-// for delete
-    @Singleton
-    @Provides
-    fun provideGoalDao(): GoalDao = db.goalDao()
-
-    @Singleton
-    @Provides
-    fun provideKeyDao(): KeyDao = db.keyDao()
-
-    @Singleton
-    @Provides
-    fun provideStepDao(): StepDao = db.stepDao()
-
-    @Singleton
-    @Provides
-    fun provideTaskDao(): TaskDao = db.taskDao()
-
-    @Singleton
-    @Provides
-    fun provideIdeaDao(): IdeaDao = db.ideaDao()
-
 }

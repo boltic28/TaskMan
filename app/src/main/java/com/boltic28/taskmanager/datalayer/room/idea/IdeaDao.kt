@@ -15,20 +15,20 @@ interface IdeaDao {
     fun delete(ideaEntity: IdeaEntity): Single<Int>
 
     @Query("SELECT * FROM idea WHERE id = :id ORDER BY id")
-    fun readById(id: Long): Single<IdeaEntity>
+    fun getById(id: Long): Single<IdeaEntity>
 
     @Query("SELECT * FROM idea")
-    fun readAll(): Single<List<IdeaEntity>>
+    fun getAll(): Single<List<IdeaEntity>>
 
     @Query("SELECT * FROM idea WHERE stepId = 0 AND keyId = 0 AND goalId = 0")
-    fun readAllFree(): Single<List<IdeaEntity>>
+    fun getAllFree(): Single<List<IdeaEntity>>
 
     @Query("SELECT * FROM idea WHERE stepId = :stepId")
-    fun readAllForStep(stepId: Long): Single<List<IdeaEntity>>
+    fun getAllForStep(stepId: Long): Single<List<IdeaEntity>>
 
     @Query("SELECT * FROM idea WHERE goalId = :goalId")
-    fun readAllForGoal(goalId: Long): Single<List<IdeaEntity>>
+    fun getAllForGoal(goalId: Long): Single<List<IdeaEntity>>
 
     @Query("SELECT * FROM idea WHERE keyId = :keyId")
-    fun readAllForKey(keyId: Long): Single<List<IdeaEntity>>
+    fun getAllForKey(keyId: Long): Single<List<IdeaEntity>>
 }

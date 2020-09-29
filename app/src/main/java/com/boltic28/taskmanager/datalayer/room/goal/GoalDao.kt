@@ -17,9 +17,9 @@ interface GoalDao {
 
     @Transaction
     @Query("SELECT * FROM goal WHERE id = :id ORDER BY id")
-    fun readById(id: Long): Single<GoalEntity>
+    fun getById(id: Long): Single<GoalEntity>
 
     @Transaction
     @Query("SELECT * FROM goal")
-    fun readAll(): Single<List<GoalEntity>>
+    fun getAll(): Single<List<GoalEntity>>
 }

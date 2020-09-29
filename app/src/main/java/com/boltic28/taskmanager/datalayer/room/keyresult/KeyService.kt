@@ -1,5 +1,6 @@
 package com.boltic28.taskmanager.datalayer.room.keyresult
 
+import com.boltic28.taskmanager.datalayer.classes.Goal
 import com.boltic28.taskmanager.datalayer.classes.KeyResult
 import io.reactivex.Single
 
@@ -10,9 +11,11 @@ interface KeyService {
 
     fun delete(item: KeyResult): Single<Int>
 
-    fun readById(id: Long): Single<KeyResult>
+    fun getById(id: Long): Single<KeyResult>
 
-    fun readAll(): Single<List<KeyResult>>
+    fun getAll(): Single<List<KeyResult>>
 
-    fun readAllForGoal(goalId: Long): Single<List<KeyResult>>
+    fun getAllForGoal(goalId: Long): Single<List<KeyResult>>
+
+    fun getChildrenFor(item: KeyResult): Single<KeyResult>
 }

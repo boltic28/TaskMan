@@ -2,14 +2,14 @@ package com.boltic28.taskmanager.datalayer.classes
 
 import java.time.LocalDateTime
 
-class Goal(
-    var id: Long,
-    var name: String,
-    var description: String,
-    var icon: String,
-    var date: LocalDateTime,
-    var dateClose: LocalDateTime,
-    var isDone: Boolean,
+data class Goal(
+    val id: Long,
+    val name: String,
+    val description: String,
+    val icon: String,
+    val date: LocalDateTime,
+    val dateClose: LocalDateTime,
+    val isDone: Boolean,
     val isStarted: Boolean,
     val steps: List<Step>,
     val tasks: List<Task>,

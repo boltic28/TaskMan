@@ -2,7 +2,7 @@ package com.boltic28.taskmanager.datalayer.classes
 
 import java.time.LocalDateTime
 
-class KeyResult(
+data class KeyResult(
     val id: Long,
     val goalId: Long,
     val name: String,

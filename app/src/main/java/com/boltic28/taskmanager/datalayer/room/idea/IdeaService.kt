@@ -10,15 +10,15 @@ interface IdeaService {
 
     fun delete(item: Idea): Single<Int>
 
-    fun readById(id: Long): Single<Idea>
+    fun getById(id: Long): Single<Idea>
 
-    fun readAll(): Single<List<Idea>>
+    fun getAll(): Single<List<Idea>>
 
-    fun readAllFree(): Single<List<Idea>>
+    fun getAllFree(): Single<List<Idea>>
 
-    fun readAllForStep(stepId: Long): Single<List<Idea>>
+    fun getAllForStep(stepId: Long): Single<List<Idea>>
 
-    fun readAllForGoal(goalId: Long): Single<List<Idea>>
+    fun getAllForGoal(goalId: Long): Single<List<Idea>>
 
-    fun readAllForKey(keyId: Long): Single<List<Idea>>
+    fun getAllForKey(keyId: Long): Single<List<Idea>>
 }

@@ -10,15 +10,15 @@ interface TaskService {
 
     fun delete(item: Task): Single<Int>
 
-    fun readById(id: Long): Single<Task>
+    fun getById(id: Long): Single<Task>
 
-    fun readAll(): Single<List<Task>>
+    fun getAll(): Single<List<Task>>
 
-    fun readAllFree(): Single<List<Task>>
+    fun getAllFree(): Single<List<Task>>
 
-    fun readAllForStep(stepId: Long): Single<List<Task>>
+    fun getAllForStep(stepId: Long): Single<List<Task>>
 
-    fun readAllForGoal(goalId: Long): Single<List<Task>>
+    fun getAllForGoal(goalId: Long): Single<List<Task>>
 
-    fun readAllForKey(keyId: Long): Single<List<Task>>
+    fun getAllForKey(keyId: Long): Single<List<Task>>
 }

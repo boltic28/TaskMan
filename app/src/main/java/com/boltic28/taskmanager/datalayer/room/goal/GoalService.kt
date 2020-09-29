@@ -10,7 +10,9 @@ interface GoalService {
 
     fun delete(item: Goal): Single<Int>
 
-    fun readById(id: Long): Single<Goal>
+    fun getById(id: Long): Single<Goal>
 
-    fun readAll(): Single<List<Goal>>
+    fun getAll(): Single<List<Goal>>
+
+    fun getChildrenFor(item: Goal): Single<Goal>
 }

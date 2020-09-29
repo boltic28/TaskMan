@@ -13,5 +13,6 @@ data class Step(
     val dateClose: LocalDateTime,
     val isDone: Boolean,
     val isStarted: Boolean,
-    val tasks: List<Task>
+    val tasks: List<Task>,
+    val ideas: List<Idea>
 )

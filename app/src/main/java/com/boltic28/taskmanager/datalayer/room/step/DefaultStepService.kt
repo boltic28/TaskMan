@@ -1,62 +1,59 @@
 package com.boltic28.taskmanager.datalayer.room.step
 
+import com.boltic28.taskmanager.datalayer.classes.Idea
 import com.boltic28.taskmanager.datalayer.classes.Step
+import com.boltic28.taskmanager.datalayer.classes.Task
+import com.boltic28.taskmanager.datalayer.room.idea.DefaultIdeaService
+import com.boltic28.taskmanager.datalayer.room.task.DefaultTaskService
 import io.reactivex.Single
+import io.reactivex.functions.BiFunction
+import javax.inject.Inject
 
 class DefaultStepService(private val dao: StepDao) : StepService {
+
+    @Inject
+    lateinit var taskService: DefaultTaskService
+
+    @Inject
+    lateinit var ideaService: DefaultIdeaService
+
     override fun insert(item: Step): Single<Long> =
         dao.insert(item.toEntity())
 
-    override fun readAll(): Single<List<Step>> =
-        dao.readAll().map { list ->
+    override fun getAll(): Single<List<Step>> =
+        dao.getAll().map { list ->
             list.map { it.toStep() }
         }
 
-    override fun readAllForGoal(goalId: Long): Single<List<Step>> =
-        dao.readAllForGoal(goalId).map { list ->
+    override fun getAllForGoal(goalId: Long): Single<List<Step>> =
+        dao.getAllForGoal(goalId).map { list ->
             list.map { it.toStep() }
         }
 
-    override fun readAllForKey(keyId: Long): Single<List<Step>> =
-        dao.readAllForKey(keyId).map { list ->
+    override fun getAllForKey(keyId: Long): Single<List<Step>> =
+        dao.getAllForKey(keyId).map { list ->
             list.map { it.toStep() }
         }
 
-    override fun readById(id: Long): Single<Step> =
-        dao.readById(id).map { it.toStep() }
+    override fun getById(id: Long): Single<Step> =
+        dao.getById(id).map { it.toStep() }
 
     override fun update(item: Step): Single<Int> =
         dao.update(item.toEntity())
 
     override fun delete(item: Step): Single<Int> =
         dao.delete(item.toEntity())
+
+    override fun getChildrenFor(item: Step): Single<Step> =
+        Single.just(item)
+            .zipWith(
+                taskService.getAllForGoal(item.id),
+                BiFunction<Step, List<Task>, Step> { step, tasks ->
+                    step.copy(tasks = tasks)
+                })
+            .zipWith(
+                ideaService.getAllForGoal(item.id),
+                BiFunction<Step, List<Idea>, Step> { step, ideas ->
+                    step.copy(ideas = ideas)
+                })
 }
-
-private fun Step.toEntity(): StepEntity =
-    StepEntity(
-        id = this.id,
-        goalId = this.goalId,
-        keyId = this.keyId,
-        name = this.name,
-        description = this.description,
-        icon = this.icon,
-        date = this.date,
-        dateClose = this.dateClose,
-        isDone = this.isDone,
-        isStarted = this.isStarted
-    )
-
-private fun StepEntity.toStep(): Step =
-    Step(
-        id = this.id,
-        goalId = this.goalId,
-        keyId = this.keyId,
-        name = this.name,
-        description = this.description,
-        icon = this.icon,
-        date = this.date,
-        dateClose = this.dateClose,
-        isDone = this.isDone,
-        isStarted = this.isStarted,
-        tasks = emptyList()
-    )
