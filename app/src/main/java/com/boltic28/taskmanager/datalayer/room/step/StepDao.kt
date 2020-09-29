@@ -23,7 +23,7 @@ interface StepDao {
 
     @Transaction
     @Query("SELECT * FROM step WHERE goalId = :goalId")
-    fun readAllForOwner(goalId: Long): Single<List<StepEntity>>
+    fun readAllForGoal(goalId: Long): Single<List<StepEntity>>
 
     @Transaction
     @Query("SELECT * FROM step WHERE goalId = :goalId")

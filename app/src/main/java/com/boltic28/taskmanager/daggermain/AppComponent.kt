@@ -3,11 +3,6 @@ package com.boltic28.taskmanager.daggermain
 import androidx.lifecycle.ViewModel
 import com.boltic28.taskmanager.datalayer.room.di.DataBaseModule
 import com.boltic28.taskmanager.datalayer.room.di.ServiceModule
-import com.boltic28.taskmanager.datalayer.room.goal.GoalService
-import com.boltic28.taskmanager.datalayer.room.idea.IdeaService
-import com.boltic28.taskmanager.datalayer.room.keyresult.KeyService
-import com.boltic28.taskmanager.datalayer.room.step.StepService
-import com.boltic28.taskmanager.datalayer.room.task.TaskService
 import com.boltic28.taskmanager.screens.MainActivity
 import com.boltic28.taskmanager.screens.main.MainFragment
 import com.boltic28.taskmanager.screens.sign.SignFragment

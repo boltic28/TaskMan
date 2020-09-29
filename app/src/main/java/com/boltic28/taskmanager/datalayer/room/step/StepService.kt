@@ -1,56 +1,20 @@
 package com.boltic28.taskmanager.datalayer.room.step
 
-import com.boltic28.taskmanager.datalayer.dto.Step
-import com.boltic28.taskmanager.datalayer.room.DBService
+import com.boltic28.taskmanager.datalayer.classes.Step
 import io.reactivex.Single
 
-class StepService(private val dao: StepDao) : DBService<Step, StepEntity> {
-    override fun create(item: Step): Single<Long> =
-        dao.insert(getEntity(item))
+interface StepService {
+    fun insert(item: Step): Single<Long>
 
-    override fun readAll(): Single<List<Step>> =
-        dao.readAll().map { list ->
-            list.map { entity ->
-                getItem(entity)
-            }
-        }
+    fun update(item: Step): Single<Int>
 
-    override fun readById(id: Long): Single<Step> =
-        dao.readById(id).map { entity ->
-            getItem(entity)
-        }
+    fun delete(item: Step): Single<Int>
 
-    override fun update(item: Step): Single<Int> =
-        dao.update(getEntity(item))
+    fun readById(id: Long): Single<Step>
 
-    override fun delete(item: Step): Single<Int> =
-        dao.delete(getEntity(item))
+    fun readAll(): Single<List<Step>>
 
-    override fun getEntity(item: Step): StepEntity =
-        StepEntity(
-            item.id,
-            item.goalId,
-            item.keyId,
-            item.name,
-            item.description,
-            item.icon,
-            item.date,
-            item.dateClose,
-            item.isDone,
-            item.isStarted
-        )
+    fun readAllForGoal(goalId: Long): Single<List<Step>>
 
-    override fun getItem(entity: StepEntity): Step =
-        Step(
-            entity.id,
-            entity.goalId,
-            entity.keyId,
-            entity.name,
-            entity.description,
-            entity.icon,
-            entity.date,
-            entity.dateClose,
-            entity.isDone,
-            entity.isStarted
-        )
+    fun readAllForKey(keyId: Long): Single<List<Step>>
 }

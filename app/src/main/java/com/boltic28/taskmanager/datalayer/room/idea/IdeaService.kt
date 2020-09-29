@@ -1,52 +1,24 @@
 package com.boltic28.taskmanager.datalayer.room.idea
 
-import com.boltic28.taskmanager.datalayer.dto.Idea
-import com.boltic28.taskmanager.datalayer.room.DBService
+import com.boltic28.taskmanager.datalayer.classes.Idea
 import io.reactivex.Single
 
-class IdeaService(private val dao: IdeaDao) : DBService<Idea, IdeaEntity> {
-    override fun create(item: Idea): Single<Long> =
-        dao.insert(getEntity(item))
+interface IdeaService {
+    fun insert(item: Idea): Single<Long>
 
-    override fun readAll(): Single<List<Idea>> =
-        dao.readAll().map { list ->
-            list.map { entity ->
-                getItem(entity)
-            }
-        }
+    fun update(item: Idea): Single<Int>
 
-    override fun readById(id: Long): Single<Idea> =
-        dao.readById(id).map { entity ->
-            getItem(entity)
-        }
+    fun delete(item: Idea): Single<Int>
 
-    override fun update(item: Idea): Single<Int> =
-        dao.update(getEntity(item))
+    fun readById(id: Long): Single<Idea>
 
-    override fun delete(item: Idea): Single<Int> =
-        dao.delete(getEntity(item))
+    fun readAll(): Single<List<Idea>>
 
-    override fun getEntity(item: Idea): IdeaEntity =
-        IdeaEntity(
-            item.id,
-            item.stepId,
-            item.keyId,
-            item.goalId,
-            item.name,
-            item.description,
-            item.icon,
-            item.date
-        )
+    fun readAllFree(): Single<List<Idea>>
 
-    override fun getItem(entity: IdeaEntity): Idea =
-        Idea(
-            entity.id,
-            entity.stepId,
-            entity.keyId,
-            entity.goalId,
-            entity.name,
-            entity.description,
-            entity.icon,
-            entity.date
-        )
+    fun readAllForStep(stepId: Long): Single<List<Idea>>
+
+    fun readAllForGoal(goalId: Long): Single<List<Idea>>
+
+    fun readAllForKey(keyId: Long): Single<List<Idea>>
 }

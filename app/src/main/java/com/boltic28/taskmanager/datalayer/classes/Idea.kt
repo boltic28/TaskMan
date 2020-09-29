@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.datalayer.dto
+package com.boltic28.taskmanager.datalayer.classes
 
 import java.time.LocalDateTime
 

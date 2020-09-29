@@ -1,60 +1,24 @@
 package com.boltic28.taskmanager.datalayer.room.task
 
-import com.boltic28.taskmanager.datalayer.dto.Task
-import com.boltic28.taskmanager.datalayer.room.DBService
+import com.boltic28.taskmanager.datalayer.classes.Task
 import io.reactivex.Single
 
-class TaskService(private val dao: TaskDao) : DBService<Task, TaskEntity> {
-    override fun create(item: Task): Single<Long> =
-        dao.insert(getEntity(item))
+interface TaskService {
+    fun insert(item: Task): Single<Long>
 
-    override fun readAll(): Single<List<Task>> =
-        dao.readAll().map { list ->
-            list.map { entity ->
-                getItem(entity)
-            }
-        }
+    fun update(item: Task): Single<Int>
 
-    override fun readById(id: Long): Single<Task> =
-        dao.readById(id).map { entity ->
-            getItem(entity)
-        }
+    fun delete(item: Task): Single<Int>
 
-    override fun update(item: Task): Single<Int> =
-        dao.update(getEntity(item))
+    fun readById(id: Long): Single<Task>
 
-    override fun delete(item: Task): Single<Int> =
-        dao.delete(getEntity(item))
+    fun readAll(): Single<List<Task>>
 
-    override fun getEntity(item: Task): TaskEntity =
-        TaskEntity(
-            item.id,
-            item.stepId,
-            item.keyId,
-            item.goalId,
-            item.name,
-            item.description,
-            item.icon,
-            item.date,
-            item.dateClose,
-            item.cycle,
-            item.isDone,
-            item.isStarted
-        )
+    fun readAllFree(): Single<List<Task>>
 
-    override fun getItem(entity: TaskEntity): Task =
-        Task(
-            entity.id,
-            entity.stepId,
-            entity.keyId,
-            entity.goalId,
-            entity.name,
-            entity.description,
-            entity.icon,
-            entity.date,
-            entity.dateClose,
-            entity.cycle,
-            entity.isDone,
-            entity.isStarted
-        )
+    fun readAllForStep(stepId: Long): Single<List<Task>>
+
+    fun readAllForGoal(goalId: Long): Single<List<Task>>
+
+    fun readAllForKey(keyId: Long): Single<List<Task>>
 }

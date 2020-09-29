@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.datalayer.dto
+package com.boltic28.taskmanager.datalayer.classes
 
 import java.time.LocalDateTime
 
@@ -11,7 +11,8 @@ class Goal(
     var dateClose: LocalDateTime,
     var isDone: Boolean,
     val isStarted: Boolean,
-    var steps: MutableList<Step>,
-    var keys: MutableList<KeyResult>,
-    var tasks: MutableList<Task>
+    val steps: List<Step>,
+    val tasks: List<Task>,
+    val ideas: List<Idea>,
+    val keys: List<KeyResult>
 )
