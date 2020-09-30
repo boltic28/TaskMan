@@ -13,10 +13,6 @@ import com.boltic28.taskmanager.utils.Messenger
 import com.boltic28.taskmanager.signtools.FireUserManager
 import com.boltic28.taskmanager.signtools.UserIn
 import io.reactivex.disposables.Disposables
-import kotlinx.android.synthetic.main.activity_sign.sign_in_button
-import kotlinx.android.synthetic.main.activity_sign.sign_mail
-import kotlinx.android.synthetic.main.activity_sign.sign_password
-import kotlinx.android.synthetic.main.activity_sign.sign_up_button
 import kotlinx.android.synthetic.main.fragment_sign.*
 import javax.inject.Inject
 
@@ -52,6 +48,7 @@ class SignFragment : Fragment(R.layout.fragment_sign) {
                 if (user.id.isNotEmpty()){
                     findNavController().navigate(R.id.action_signFragment_to_mainFragment)
                 }else {
+                    turnOnButtonSignIn()
                     checkUserdata(user)
                 }
             }
@@ -83,6 +80,7 @@ class SignFragment : Fragment(R.layout.fragment_sign) {
     private fun setOnButtons() {
         sign_in_button.setOnClickListener {
             if (isFieldsFillRight()) {
+                turnOffButtonSignIn()
                 model.userManager.signIn(
                     sign_mail.text.toString()
                     , sign_password.text.toString()
@@ -102,6 +100,18 @@ class SignFragment : Fragment(R.layout.fragment_sign) {
         sign_out_button.setOnClickListener {
             model.userManager.signOut()
         }
+    }
+
+    private fun turnOffButtonSignIn(){
+        sign_in_button.isEnabled = false
+        sign_in_button.text = ""
+        sign_progress.show()
+    }
+
+    private fun turnOnButtonSignIn(){
+        sign_in_button.isEnabled = true
+        sign_in_button.text = resources.getString(R.string.sign_in)
+        sign_progress.hide()
     }
 
     private fun isFieldsFillRight(): Boolean =

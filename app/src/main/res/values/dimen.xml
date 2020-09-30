@@ -2,6 +2,7 @@
 <resources>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
     <!--Sign fragment -->
     <dimen name="sign_field_corner">60dp</dimen>
     <dimen name="sign_field_width">200dp</dimen>
@@ -13,4 +14,20 @@
     <dimen name="sign_field_text_size">24sp</dimen>
     <dimen name="sign_info_text_size">20sp</dimen>
     <dimen name="sign_info_text_margin_bottom">16dp</dimen>
+    <dimen name="sign_progress_bar_size">30dp</dimen>
+
+    <!--Main fragment -->
+    <dimen name="main_search_field_w">200dp</dimen>
+    <dimen name="main_search_field_h">40dp</dimen>
+    <dimen name="main_panel_height">60dp</dimen>
+    <dimen name="main_panel_searching_padding_start">16dp</dimen>
+
+    <!--Item -->
+    <dimen name="item_image_size">80dp</dimen>
+    <dimen name="item_padding_for_view">12dp</dimen>
+    <dimen name="item_margin_left_image_progress">24dp</dimen>
+    <dimen name="item_margin_top_progress">8dp</dimen>
+    <dimen name="item_progress_point_size_w">50dp</dimen>
+    <dimen name="item_progress_point_size_h">20dp</dimen>
+    <dimen name="item_progress_point_space_between">4dp</dimen>
 </resources>

@@ -70,5 +70,13 @@
         app:layout_constraintTop_toBottomOf="@id/sign_password"
         app:layout_constraintVertical_bias="0.1" />
 
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/sign_progress"
+        style="@style/Sign.Progress"
+        app:layout_constraintLeft_toLeftOf="@+id/sign_in_button"
+        app:layout_constraintRight_toRightOf="@+id/sign_in_button"
+        app:layout_constraintBottom_toBottomOf="@id/sign_in_button"
+        app:layout_constraintTop_toTopOf="@id/sign_in_button"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

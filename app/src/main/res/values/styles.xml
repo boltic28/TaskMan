@@ -46,4 +46,68 @@
         <item name="android:layout_marginEnd">@dimen/sign_field_password_margin_end</item>
     </style>
 
+    <style name="Sign.Progress" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:visibility">invisible</item>
+        <item name="android:inputType">textPassword</item>
+        <item name="android:layout_width">@dimen/sign_progress_bar_size</item>
+        <item name="android:layout_height">@dimen/sign_progress_bar_size</item>
+    </style>
+
+
+    <!-- Main Fragment-->
+    <style name="Main.Search" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_width">@dimen/main_search_field_w</item>
+        <item name="android:layout_height">@dimen/main_search_field_h</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="SearchPanel">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/main_panel_height</item>
+        <item name="android:background">@drawable/bg_sign_fields</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingStart">@dimen/main_panel_searching_padding_start</item>
+        <item name="android:inputType">text</item>
+    </style>
+    <!-- Item goal -->
+    <style name="ItemGoal.Header" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorItemHeader</item>
+    </style>
+
+    <style name="ItemGoal.Start" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorItemDateStart</item>
+    </style>
+
+    <style name="ItemGoal.TextProgress" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/item_margin_left_image_progress</item>
+        <item name="android:layout_marginBottom">@dimen/item_margin_top_progress</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorItemDateStart</item>
+    </style>
+
+    <style name="ItemGoal.ProgressPoint" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">@dimen/item_progress_point_size_w</item>
+        <item name="android:layout_height">@dimen/item_progress_point_size_h</item>
+        <item name="android:layout_marginStart">@dimen/item_progress_point_space_between</item>
+        <item name="android:layout_marginTop">@dimen/item_margin_top_progress</item>
+        <item name="android:background">@color/colorItemProgressOff</item>
+    </style>
+
+    <style name="ItemGoal.Image" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">@dimen/item_image_size</item>
+        <item name="android:layout_height">@dimen/item_image_size</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorItemDateStart</item>
+    </style>
 </resources>

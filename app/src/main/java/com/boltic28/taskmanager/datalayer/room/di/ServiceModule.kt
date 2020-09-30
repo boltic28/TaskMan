@@ -1,16 +1,16 @@
 package com.boltic28.taskmanager.datalayer.room.di
 
 import com.boltic28.taskmanager.datalayer.room.AppDataBase
-import com.boltic28.taskmanager.datalayer.room.goal.GoalDao
 import com.boltic28.taskmanager.datalayer.room.goal.DefaultGoalService
-import com.boltic28.taskmanager.datalayer.room.idea.IdeaDao
+import com.boltic28.taskmanager.datalayer.room.goal.GoalService
 import com.boltic28.taskmanager.datalayer.room.idea.DefaultIdeaService
-import com.boltic28.taskmanager.datalayer.room.keyresult.KeyDao
+import com.boltic28.taskmanager.datalayer.room.idea.IdeaService
 import com.boltic28.taskmanager.datalayer.room.keyresult.DefaultKeyService
-import com.boltic28.taskmanager.datalayer.room.step.StepDao
+import com.boltic28.taskmanager.datalayer.room.keyresult.KeyService
 import com.boltic28.taskmanager.datalayer.room.step.DefaultStepService
-import com.boltic28.taskmanager.datalayer.room.task.TaskDao
+import com.boltic28.taskmanager.datalayer.room.step.StepService
 import com.boltic28.taskmanager.datalayer.room.task.DefaultTaskService
+import com.boltic28.taskmanager.datalayer.room.task.TaskService
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -20,21 +20,21 @@ class ServiceModule(private val db: AppDataBase) {
 
     @Singleton
     @Provides
-    fun provideGoalService(): DefaultGoalService = DefaultGoalService(db.goalDao())
+    fun provideGoalService(): GoalService = DefaultGoalService(db.goalDao())
 
     @Singleton
     @Provides
-    fun provideKeyService(): DefaultKeyService = DefaultKeyService(db.keyDao())
+    fun provideKeyService(): KeyService = DefaultKeyService(db.keyDao())
 
     @Singleton
     @Provides
-    fun provideStepService(): DefaultStepService = DefaultStepService(db.stepDao())
+    fun provideStepService(): StepService = DefaultStepService(db.stepDao())
 
     @Singleton
     @Provides
-    fun provideTaskService(): DefaultTaskService = DefaultTaskService(db.taskDao())
+    fun provideTaskService(): TaskService = DefaultTaskService(db.taskDao())
 
     @Singleton
     @Provides
-    fun provideIdeaService(): DefaultIdeaService = DefaultIdeaService(db.ideaDao())
+    fun provideIdeaService(): IdeaService = DefaultIdeaService(db.ideaDao())
 }

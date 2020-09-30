@@ -3,10 +3,11 @@ package com.boltic28.taskmanager.daggermain
 import android.app.Application
 import com.boltic28.taskmanager.datalayer.room.di.DataBaseModule
 import com.boltic28.taskmanager.datalayer.room.di.ServiceModule
+import com.boltic28.taskmanager.screens.settings.SettingsModule
 
-class AppDagger: Application() {
+class AppDagger : Application() {
 
-    companion object{
+    companion object {
         lateinit var component: AppComponent
     }
 
@@ -20,11 +21,13 @@ class AppDagger: Application() {
             ServiceModule(
                 dataBaseModule.provideDataBase()
             )
+        val settingsModule = SettingsModule(this)
 
         component = DaggerAppComponent
             .builder()
             .createDataBaseModule(dataBaseModule)
             .createDataModule(contextModule)
+            .createSettingModule(settingsModule)
             .createServiceModule(serviceModule)
             .buildComponent()
     }

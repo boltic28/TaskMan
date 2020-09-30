@@ -19,5 +19,16 @@
         <action
             android:id="@+id/action_mainFragment_to_signFragment"
             app:destination="@id/signFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_creatorFragment"
+            app:destination="@id/creatorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/creatorFragment"
+        android:name="com.boltic28.taskmanager.screens.creator.CreatorFragment"
+        android:label="CreatorFragment" >
+        <action
+            android:id="@+id/action_creatorFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 </navigation>

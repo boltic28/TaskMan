@@ -41,12 +41,11 @@ class MainFragment: Fragment(R.layout.fragment_main) {
         model.userManager.user
             .subscribe({ user ->
                 if (user.id.isEmpty()){
-                    Log.d(TAG,"MF -> user empty")
+                    Log.d(TAG,"user empty")
                     (activity as? ActivityHelper)?.setToolbarText(resources.getString(R.string.app_name))
                     findNavController().navigate(R.id.signFragment)
                 }else{
                     (activity as? ActivityHelper)?.setToolbarText(user.email)
-                    Log.d(TAG,"MF -> try to set toolbar")
                 }
             },{
                 Log.d(TAG,it.toString())
@@ -54,8 +53,8 @@ class MainFragment: Fragment(R.layout.fragment_main) {
     }
 
     private fun setOnButtons(){
-        sign_button.setOnClickListener {
-            model.userManager.signOut()
+        main_add_button.setOnClickListener {
+            findNavController().navigate(R.id.creatorFragment)
         }
     }
 }

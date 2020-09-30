@@ -16,5 +16,5 @@ class Converter {
     fun cycleToString(cycle: Cycle): String = cycle.value
 
     @TypeConverter
-    fun stringToCycle(cycle: String): Cycle = Cycle.valueOf(cycle)
+    fun stringToCycle(cycle: String): Cycle = Cycle.fromString(cycle)
 }

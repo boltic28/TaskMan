@@ -12,4 +12,16 @@
     <string name="sign_signout_text">You entered like , %s</string>
     <string name="sign_email">e-mail</string>
     <string name="tip_input_right_data">input right data</string>
+    <string name="description_icon_of_goal">icon of goal</string>
+    <string name="item_progress">progress</string>
+    <string name="create">create</string>
+    <string name="is_cycle">is cycle</string>
+
+    <string-array name="cycle">
+        <item>hour</item>
+        <item>day</item>
+        <item>week</item>
+        <item>month</item>
+        <item>year</item>
+    </string-array>
 </resources>

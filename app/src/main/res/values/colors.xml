@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
 
+    <color name="colorWhite">#F5F8F8</color>
+
     <color name="colorSignFieldEnd">#1912E6</color>
     <color name="colorSignFieldStart">#AEBCEC</color>
     <color name="colorSignFieldStroke">#080909</color>
@@ -14,4 +16,10 @@
     <color name="colorSignInButton">#068806</color>
     <color name="colorSignOutButton">#C80505</color>
     <color name="colorSignRegButton">#595856</color>
+
+
+    <color name="colorItemHeader">#595856</color>
+    <color name="colorItemDateStart">#A6A5A2</color>
+    <color name="colorItemProgressOn">#04BF04</color>
+    <color name="colorItemProgressOff">#C5C4C1</color>
 </resources>

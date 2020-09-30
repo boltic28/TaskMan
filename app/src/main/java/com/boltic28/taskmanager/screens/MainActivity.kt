@@ -2,13 +2,12 @@ package com.boltic28.taskmanager.screens
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.screens.main.MainFragment
-import com.boltic28.taskmanager.screens.sign.SignFragment
 import com.boltic28.taskmanager.signtools.FireUserManager
 
 class MainActivity : AppCompatActivity(), ActivityHelper {
@@ -28,9 +27,14 @@ class MainActivity : AppCompatActivity(), ActivityHelper {
         model.userManager = FireUserManager.getInstance(this)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.sign_out -> {
+            R.id.sign_out_toolbar -> {
                 model.userManager.signOut()
                 return true
             }
@@ -39,6 +43,7 @@ class MainActivity : AppCompatActivity(), ActivityHelper {
     }
 
     override fun setToolbarText(text: String) {
+        Log.d(MainFragment.TAG,"set toolbar")
         title = text
     }
 }
