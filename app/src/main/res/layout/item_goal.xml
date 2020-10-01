@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/item_goal_header"
-        style="@style/ItemGoal.Header"
+        style="@style/Item.Header"
         tools:text="Become a doctor"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -16,7 +16,7 @@
 
     <TextView
         android:id="@+id/item_goal_start"
-        style="@style/ItemGoal.Start"
+        style="@style/Item.Start"
         tools:text="since: 22.09.2020"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -24,14 +24,14 @@
 
     <ImageView
         android:id="@+id/item_goal_image"
-        style="@style/ItemGoal.Image"
+        style="@style/Item.Image"
         app:layout_constraintTop_toBottomOf="@+id/item_goal_header"
         app:layout_constraintLeft_toLeftOf="parent"
         android:contentDescription="@string/description_icon_of_goal" />
 
     <TextView
         android:id="@+id/item_goal_text_progress"
-        style="@style/ItemGoal.TextProgress"
+        style="@style/Item.TextProgress"
         android:text="@string/item_progress"
         app:layout_constraintLeft_toRightOf="@+id/item_goal_image"
         app:layout_constraintBottom_toTopOf="@+id/item_goal_progress_20_percent"
@@ -40,31 +40,31 @@
 
     <ImageView
         android:id="@+id/item_goal_progress_20_percent"
-        style="@style/ItemGoal.ProgressPoint"
+        style="@style/Item.ProgressPoint"
         app:layout_constraintBottom_toBottomOf="@+id/item_goal_image"
         app:layout_constraintStart_toStartOf="@+id/item_goal_text_progress"
         android:contentDescription="@string/description_icon_of_goal" />
     <ImageView
         android:id="@+id/item_goal_progress_40_percent"
-        style="@style/ItemGoal.ProgressPoint"
+        style="@style/Item.ProgressPoint"
         app:layout_constraintBottom_toBottomOf="@+id/item_goal_image"
         app:layout_constraintLeft_toRightOf="@+id/item_goal_progress_20_percent"
         android:contentDescription="@string/description_icon_of_goal" />
     <ImageView
         android:id="@+id/item_goal_progress_60_percent"
-        style="@style/ItemGoal.ProgressPoint"
+        style="@style/Item.ProgressPoint"
         app:layout_constraintBottom_toBottomOf="@+id/item_goal_image"
         app:layout_constraintLeft_toRightOf="@+id/item_goal_progress_40_percent"
         android:contentDescription="@string/description_icon_of_goal" />
     <ImageView
         android:id="@+id/item_goal_progress_80_percent"
-        style="@style/ItemGoal.ProgressPoint"
+        style="@style/Item.ProgressPoint"
         app:layout_constraintBottom_toBottomOf="@+id/item_goal_image"
         app:layout_constraintLeft_toRightOf="@+id/item_goal_progress_60_percent"
         android:contentDescription="@string/description_icon_of_goal" />
     <ImageView
         android:id="@+id/item_goal_progress_100_percent"
-        style="@style/ItemGoal.ProgressPoint"
+        style="@style/Item.ProgressPoint"
         app:layout_constraintBottom_toBottomOf="@+id/item_goal_image"
         app:layout_constraintLeft_toRightOf="@+id/item_goal_progress_80_percent"
         android:contentDescription="@string/description_icon_of_goal" />

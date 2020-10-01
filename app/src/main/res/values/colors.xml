@@ -20,6 +20,7 @@
 
     <color name="colorItemHeader">#595856</color>
     <color name="colorItemDateStart">#A6A5A2</color>
+    <color name="colorItemDescription">#7C7B79</color>
     <color name="colorItemProgressOn">#04BF04</color>
     <color name="colorItemProgressOff">#C5C4C1</color>
 </resources>

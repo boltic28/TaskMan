@@ -2,8 +2,8 @@ package com.boltic28.taskmanager.signtools
 
 import android.app.Activity
 import android.util.Log
-import com.boltic28.taskmanager.daggermain.AppDagger
-import com.boltic28.taskmanager.screens.MainActivity.Companion.TAG
+import com.boltic28.taskmanager.dagger.AppDagger
+import com.boltic28.taskmanager.ui.screens.MainActivity.Companion.TAG
 import com.boltic28.taskmanager.utils.Messenger
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
@@ -14,7 +14,7 @@ import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
 
 class FireUserManager(private val activity: Activity) :
-    UserManager<FirebaseUser?> {
+    UserManager {
 
     companion object {
         const val CREATE = "create"
@@ -38,7 +38,7 @@ class FireUserManager(private val activity: Activity) :
     private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
     private val userSubject = BehaviorSubject.createDefault<UserIn>(convertUser(mAuth.currentUser))
-    val user: Observable<UserIn>
+    override val user: Observable<UserIn>
         get() = userSubject.hide()
 
     init {
@@ -75,7 +75,7 @@ class FireUserManager(private val activity: Activity) :
         Log.d(TAG, "user is signed Out")
     }
 
-    override fun convertUser(user: FirebaseUser?): UserIn =
+    private fun convertUser(user: FirebaseUser?): UserIn =
         if (user != null) {
             UserIn(
                 user.uid,

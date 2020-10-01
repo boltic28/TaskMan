@@ -30,4 +30,9 @@
     <dimen name="item_progress_point_size_w">50dp</dimen>
     <dimen name="item_progress_point_size_h">20dp</dimen>
     <dimen name="item_progress_point_space_between">4dp</dimen>
+
+    <dimen name="item_idea_button_w">80dp</dimen>
+    <dimen name="item_idea_button_h">30dp</dimen>
+    <dimen name="item_idea_space_between_button">16dp</dimen>
+    <dimen name="item_idea_text_on_button">8sp</dimen>
 </resources>

@@ -1,7 +1,7 @@
-package com.boltic28.taskmanager.screens.creator
+package com.boltic28.taskmanager.ui.screens.creator
 
 import androidx.lifecycle.ViewModel
-import com.boltic28.taskmanager.daggermain.AppDagger
+import com.boltic28.taskmanager.dagger.AppDagger
 import com.boltic28.taskmanager.datalayer.Cycle
 import com.boltic28.taskmanager.datalayer.classes.*
 import com.boltic28.taskmanager.datalayer.room.goal.GoalService

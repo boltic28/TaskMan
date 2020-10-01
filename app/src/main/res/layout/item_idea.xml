@@ -1,0 +1,69 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    android:padding="@dimen/item_padding_for_view"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/item_idea_header"
+        style="@style/Item.Header"
+        tools:text="Some stupid idea"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/item_idea_start"
+        style="@style/Item.Start"
+        tools:text="since: 22.09.2020"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/item_idea_description"
+        style="@style/Item.Description"
+        android:maxLines="2"
+        tools:text="since: 22.09.2020 Some stupid idea come into my head,since: 22.09.2020 Some stupid idea come into my head,since: 22.09...."
+        app:layout_constraintLeft_toRightOf="@id/item_idea_image"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_idea_header"
+        />
+
+    <ImageView
+        android:id="@+id/item_idea_image"
+        style="@style/Item.Image"
+        app:layout_constraintTop_toBottomOf="@+id/item_idea_header"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:contentDescription="@string/description_icon_of_goal" />
+
+    <Button
+        android:id="@+id/idea_button_convert_to_task"
+        style="@style/Item.Button.Idea"
+        android:text="@string/to_task"
+        app:layout_constraintLeft_toRightOf="@+id/item_idea_image"
+        app:layout_constraintRight_toLeftOf="@+id/idea_button_convert_to_step"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <Button
+        android:id="@+id/idea_button_convert_to_step"
+        style="@style/Item.Button.Idea"
+        android:text="@string/to_step"
+        app:layout_constraintLeft_toRightOf="@+id/idea_button_convert_to_task"
+        app:layout_constraintRight_toLeftOf="@+id/idea_button_convert_to_goal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <Button
+        android:id="@+id/idea_button_convert_to_goal"
+        style="@style/Item.Button.Idea"
+        android:text="@string/to_goal"
+        app:layout_constraintLeft_toRightOf="@+id/idea_button_convert_to_step"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

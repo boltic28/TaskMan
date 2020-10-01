@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/signFragment"
-        android:name="com.boltic28.taskmanager.screens.sign.SignFragment"
+        android:name="com.boltic28.taskmanager.ui.screens.sign.SignFragment"
         android:label="SignFragment" >
         <action
             android:id="@+id/action_signFragment_to_mainFragment"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.boltic28.taskmanager.screens.main.MainFragment"
+        android:name="com.boltic28.taskmanager.ui.screens.main.MainFragment"
         android:label="MainFragment" >
         <action
             android:id="@+id/action_mainFragment_to_signFragment"
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/creatorFragment"
-        android:name="com.boltic28.taskmanager.screens.creator.CreatorFragment"
+        android:name="com.boltic28.taskmanager.ui.screens.creator.CreatorFragment"
         android:label="CreatorFragment" >
         <action
             android:id="@+id/action_creatorFragment_to_mainFragment"

@@ -71,8 +71,8 @@
         <item name="android:paddingStart">@dimen/main_panel_searching_padding_start</item>
         <item name="android:inputType">text</item>
     </style>
-    <!-- Item goal -->
-    <style name="ItemGoal.Header" parent="TextAppearance.AppCompat">
+    <!-- Items -->
+    <style name="Item.Header" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">24sp</item>
@@ -80,14 +80,23 @@
         <item name="android:textColor">@color/colorItemHeader</item>
     </style>
 
-    <style name="ItemGoal.Start" parent="TextAppearance.AppCompat">
+    <style name="Item.Start" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorItemDateStart</item>
     </style>
 
-    <style name="ItemGoal.TextProgress" parent="TextAppearance.AppCompat">
+    <style name="Item.Description" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorItemDateStart</item>
+    </style>
+
+    <style name="Item.TextProgress" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">@dimen/item_margin_left_image_progress</item>
@@ -96,7 +105,7 @@
         <item name="android:textColor">@color/colorItemDateStart</item>
     </style>
 
-    <style name="ItemGoal.ProgressPoint" parent="TextAppearance.AppCompat">
+    <style name="Item.ProgressPoint" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">@dimen/item_progress_point_size_w</item>
         <item name="android:layout_height">@dimen/item_progress_point_size_h</item>
         <item name="android:layout_marginStart">@dimen/item_progress_point_space_between</item>
@@ -104,10 +113,19 @@
         <item name="android:background">@color/colorItemProgressOff</item>
     </style>
 
-    <style name="ItemGoal.Image" parent="TextAppearance.AppCompat">
+    <!-- Item goal -->
+    <style name="Item.Image" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">@dimen/item_image_size</item>
         <item name="android:layout_height">@dimen/item_image_size</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorItemDateStart</item>
+    </style>
+
+    <!-- Item idea -->
+    <style name="Item.Button.Idea" parent="Widget.AppCompat.Button">
+        <item name="android:layout_width">@dimen/item_idea_button_w</item>
+        <item name="android:layout_height">@dimen/item_idea_button_h</item>
+        <item name="android:layout_marginStart">@dimen/item_idea_space_between_button</item>
+        <item name="android:textSize">@dimen/item_idea_text_on_button</item>
     </style>
 </resources>

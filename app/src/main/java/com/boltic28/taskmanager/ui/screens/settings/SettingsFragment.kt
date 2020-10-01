@@ -1,11 +1,11 @@
-package com.boltic28.taskmanager.screens.settings
+package com.boltic28.taskmanager.ui.screens.settings
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.daggermain.AppDagger
+import com.boltic28.taskmanager.dagger.AppDagger
 import com.boltic28.taskmanager.utils.Messenger
 import javax.inject.Inject
 

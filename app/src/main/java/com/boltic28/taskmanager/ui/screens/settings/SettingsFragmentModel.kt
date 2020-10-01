@@ -1,8 +1,8 @@
-package com.boltic28.taskmanager.screens.settings
+package com.boltic28.taskmanager.ui.screens.settings
 
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
-import com.boltic28.taskmanager.daggermain.AppDagger
+import com.boltic28.taskmanager.dagger.AppDagger
 import javax.inject.Inject
 
 class SettingsFragmentModel: ViewModel() {

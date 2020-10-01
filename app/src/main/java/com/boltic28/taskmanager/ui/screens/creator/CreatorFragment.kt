@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.screens.creator
+package com.boltic28.taskmanager.ui.screens.creator
 
 import android.os.Bundle
 import android.util.Log
@@ -9,10 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.daggermain.AppDagger
-import com.boltic28.taskmanager.screens.ActivityHelper
-import com.boltic28.taskmanager.screens.MainActivity
-import com.boltic28.taskmanager.screens.main.MainFragment
+import com.boltic28.taskmanager.dagger.AppDagger
+import com.boltic28.taskmanager.ui.screens.ActivityHelper
+import com.boltic28.taskmanager.ui.screens.MainActivity
+import com.boltic28.taskmanager.ui.screens.main.MainFragment
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -20,7 +20,6 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.disposables.Disposables
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_creator.*
-import kotlinx.android.synthetic.main.fragment_sign.*
 import java.time.LocalDateTime
 import javax.inject.Inject
 

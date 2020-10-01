@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.daggermain
+package com.boltic28.taskmanager.dagger
 
 import android.content.Context
 import com.boltic28.taskmanager.utils.Messenger

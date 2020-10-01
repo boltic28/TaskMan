@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.screens.settings
+package com.boltic28.taskmanager.ui.screens.settings
 
 import android.content.Context
 import android.content.SharedPreferences
