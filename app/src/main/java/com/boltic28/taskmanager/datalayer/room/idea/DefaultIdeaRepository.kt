@@ -1,9 +1,9 @@
 package com.boltic28.taskmanager.datalayer.room.idea
 
-import com.boltic28.taskmanager.datalayer.classes.Idea
+import com.boltic28.taskmanager.datalayer.entities.Idea
 import io.reactivex.Single
 
-class DefaultIdeaService(private val dao: IdeaDao) : IdeaService {
+class DefaultIdeaRepository(private val dao: IdeaDao) : IdeaRepository {
     override fun insert(item: Idea): Single<Long> =
         dao.insert(item.toEntity())
 

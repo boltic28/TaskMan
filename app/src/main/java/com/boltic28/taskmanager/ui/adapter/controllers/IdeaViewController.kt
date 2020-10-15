@@ -1,7 +1,7 @@
 package com.boltic28.taskmanager.ui.adapter.controllers
 
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.datalayer.classes.Idea
+import com.boltic28.taskmanager.datalayer.entities.Idea
 import com.boltic28.taskmanager.ui.adapter.DefaultViewHolder
 import kotlin.reflect.KClass
 

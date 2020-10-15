@@ -1,10 +1,9 @@
 package com.boltic28.taskmanager.datalayer.room.step
 
-import com.boltic28.taskmanager.datalayer.classes.KeyResult
-import com.boltic28.taskmanager.datalayer.classes.Step
+import com.boltic28.taskmanager.datalayer.entities.Step
 import io.reactivex.Single
 
-interface StepService {
+interface StepRepository {
     fun insert(item: Step): Single<Long>
 
     fun update(item: Step): Single<Int>
@@ -18,6 +17,4 @@ interface StepService {
     fun getAllForGoal(goalId: Long): Single<List<Step>>
 
     fun getAllForKey(keyId: Long): Single<List<Step>>
-
-    fun getChildrenFor(item: Step): Single<Step>
 }

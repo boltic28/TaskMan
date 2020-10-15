@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.dagger.AppDagger
+import com.boltic28.taskmanager.di.AppDagger
 import com.boltic28.taskmanager.utils.Messenger
 import javax.inject.Inject
 

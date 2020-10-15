@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.datalayer.classes.Goal
+import com.boltic28.taskmanager.datalayer.entities.Goal
 import com.boltic28.taskmanager.ui.screens.MainActivity
 import com.boltic28.taskmanager.ui.adapter.DefaultViewHolder
 import kotlin.reflect.KClass

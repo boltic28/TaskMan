@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.dagger.AppDagger
+import com.boltic28.taskmanager.di.AppDagger
 import com.boltic28.taskmanager.ui.screens.ActivityHelper
 import com.boltic28.taskmanager.ui.screens.MainActivity
 import com.boltic28.taskmanager.ui.screens.main.MainFragment

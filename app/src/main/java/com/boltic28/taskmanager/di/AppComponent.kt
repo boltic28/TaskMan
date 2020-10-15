@@ -1,8 +1,9 @@
-package com.boltic28.taskmanager.dagger
+package com.boltic28.taskmanager.di
 
+import com.boltic28.taskmanager.businesslayer.di.BusinessModule
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.datalayer.room.di.DataBaseModule
-import com.boltic28.taskmanager.datalayer.room.di.ServiceModule
+import com.boltic28.taskmanager.datalayer.room.di.RepositoryModule
 import com.boltic28.taskmanager.ui.screens.MainActivity
 import com.boltic28.taskmanager.ui.screens.main.MainFragmentModule
 import com.boltic28.taskmanager.ui.screens.creator.CreatorFragment
@@ -20,9 +21,12 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [
-    ContextModule::class, ServiceModule::class, DataBaseModule::class,
-    SettingsModule::class, MainFragmentModule::class, GoalFragmentModule::class])
+@Component(
+    modules = [
+        ContextModule::class, RepositoryModule::class, DataBaseModule::class,
+        SettingsModule::class, MainFragmentModule::class, GoalFragmentModule::class,
+        BusinessModule::class]
+)
 interface AppComponent {
 
     fun injectModel(model: MainFragmentModel)
@@ -44,10 +48,11 @@ interface AppComponent {
     @Component.Builder
     interface DataBuilder {
         fun createDataModule(module: ContextModule): DataBuilder
-        fun createServiceModule(module: ServiceModule): DataBuilder
+        fun createServiceModule(module: RepositoryModule): DataBuilder
         fun createDataBaseModule(module: DataBaseModule): DataBuilder
         fun createSettingModule(module: SettingsModule): DataBuilder
         fun createMainFragModule(module: MainFragmentModule): DataBuilder
+        fun createBusinessModule(module: BusinessModule): DataBuilder
         fun buildComponent(): AppComponent
     }
 }

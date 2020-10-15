@@ -1,10 +1,8 @@
-package com.boltic28.taskmanager.datalayer.room.step
+package com.boltic28.taskmanager.datalayer.entities
 
-import androidx.room.Relation
-import com.boltic28.taskmanager.datalayer.room.task.TaskEntity
 import java.time.LocalDateTime
 
-data class StepWithTasks(
+data class Step(
     val id: Long,
     val goalId: Long,
     val keyId: Long,
@@ -15,6 +13,6 @@ data class StepWithTasks(
     val dateClose: LocalDateTime,
     val isDone: Boolean,
     val isStarted: Boolean,
-    @Relation(parentColumn = "id", entityColumn = "stepId")
-    val tasks: List<TaskEntity>
+    val tasks: List<Task>,
+    val ideas: List<Idea>
 )

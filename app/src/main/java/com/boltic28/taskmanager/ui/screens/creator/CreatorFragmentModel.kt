@@ -1,14 +1,14 @@
 package com.boltic28.taskmanager.ui.screens.creator
 
 import androidx.lifecycle.ViewModel
-import com.boltic28.taskmanager.dagger.AppDagger
+import com.boltic28.taskmanager.di.AppDagger
 import com.boltic28.taskmanager.datalayer.Cycle
-import com.boltic28.taskmanager.datalayer.classes.*
-import com.boltic28.taskmanager.datalayer.room.goal.GoalService
-import com.boltic28.taskmanager.datalayer.room.idea.IdeaService
-import com.boltic28.taskmanager.datalayer.room.keyresult.KeyService
-import com.boltic28.taskmanager.datalayer.room.step.StepService
-import com.boltic28.taskmanager.datalayer.room.task.TaskService
+import com.boltic28.taskmanager.datalayer.entities.*
+import com.boltic28.taskmanager.datalayer.room.goal.GoalRepository
+import com.boltic28.taskmanager.datalayer.room.idea.IdeaRepository
+import com.boltic28.taskmanager.datalayer.room.keyresult.KeyRepository
+import com.boltic28.taskmanager.datalayer.room.step.StepRepository
+import com.boltic28.taskmanager.datalayer.room.task.TaskRepository
 import io.reactivex.Single
 import java.time.LocalDateTime
 import javax.inject.Inject
@@ -16,38 +16,38 @@ import javax.inject.Inject
 class CreatorFragmentModel : ViewModel() {
 
     @Inject
-    lateinit var goalService: GoalService
+    lateinit var goalRepository: GoalRepository
 
     @Inject
-    lateinit var keyService: KeyService
+    lateinit var keyRepository: KeyRepository
 
     @Inject
-    lateinit var stepService: StepService
+    lateinit var stepRepository: StepRepository
 
     @Inject
-    lateinit var taskService: TaskService
+    lateinit var taskRepository: TaskRepository
 
     @Inject
-    lateinit var ideaService: IdeaService
+    lateinit var ideaRepository: IdeaRepository
 
     init {
         AppDagger.component.injectModel(this)
     }
 
     fun create(item: Goal): Single<Long> =
-        goalService.insert(item)
+        goalRepository.insert(item)
 
     fun create(item: KeyResult): Single<Long> =
-        keyService.insert(item)
+        keyRepository.insert(item)
 
     fun create(item: Step): Single<Long> =
-        stepService.insert(item)
+        stepRepository.insert(item)
 
     fun create(item: Task): Single<Long> =
-        taskService.insert(item)
+        taskRepository.insert(item)
 
     fun create(item: Idea): Single<Long> =
-        ideaService.insert(item)
+        ideaRepository.insert(item)
 
     fun saveGoal(name: String, description: String, endDate: LocalDateTime): Single<Long> =
         create(

@@ -1,6 +1,6 @@
 package com.boltic28.taskmanager.datalayer.room.goal
 
-import com.boltic28.taskmanager.datalayer.classes.Goal
+import com.boltic28.taskmanager.datalayer.entities.Goal
 
 fun Goal.toEntity(): GoalEntity =
     GoalEntity(

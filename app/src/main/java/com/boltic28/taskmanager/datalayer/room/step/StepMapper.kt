@@ -1,6 +1,6 @@
 package com.boltic28.taskmanager.datalayer.room.step
 
-import com.boltic28.taskmanager.datalayer.classes.Step
+import com.boltic28.taskmanager.datalayer.entities.Step
 
 fun Step.toEntity(): StepEntity =
     StepEntity(

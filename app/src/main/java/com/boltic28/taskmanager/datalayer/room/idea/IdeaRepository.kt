@@ -1,9 +1,9 @@
 package com.boltic28.taskmanager.datalayer.room.idea
 
-import com.boltic28.taskmanager.datalayer.classes.Idea
+import com.boltic28.taskmanager.datalayer.entities.Idea
 import io.reactivex.Single
 
-interface IdeaService {
+interface IdeaRepository {
     fun insert(item: Idea): Single<Long>
 
     fun update(item: Idea): Single<Int>

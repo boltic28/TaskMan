@@ -1,9 +1,10 @@
-package com.boltic28.taskmanager.datalayer.room.task
+package com.boltic28.taskmanager.businesslayer
 
-import com.boltic28.taskmanager.datalayer.classes.Task
+import com.boltic28.taskmanager.datalayer.entities.Task
 import io.reactivex.Single
 
-interface TaskService {
+interface TaskInteractor {
+
     fun insert(item: Task): Single<Long>
 
     fun update(item: Task): Single<Int>

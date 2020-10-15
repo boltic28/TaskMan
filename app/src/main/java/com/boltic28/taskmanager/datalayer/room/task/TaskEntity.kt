@@ -3,7 +3,6 @@ package com.boltic28.taskmanager.datalayer.room.task
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.boltic28.taskmanager.datalayer.Cycle
-import com.boltic28.taskmanager.datalayer.classes.Task
 import java.time.LocalDateTime
 
 @Entity(tableName = "task")

@@ -1,9 +1,10 @@
-package com.boltic28.taskmanager.datalayer.room.goal
+package com.boltic28.taskmanager.businesslayer
 
-import com.boltic28.taskmanager.datalayer.classes.Goal
+import com.boltic28.taskmanager.datalayer.entities.Goal
 import io.reactivex.Single
 
-interface GoalService {
+interface GoalInteractor {
+
     fun insert(item: Goal): Single<Long>
 
     fun update(item: Goal): Single<Int>

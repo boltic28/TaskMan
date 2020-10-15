@@ -1,6 +1,6 @@
 package com.boltic28.taskmanager.datalayer.room.keyresult
 
-import com.boltic28.taskmanager.datalayer.classes.KeyResult
+import com.boltic28.taskmanager.datalayer.entities.KeyResult
 
 fun KeyResult.toEntity(): KeyEntity =
     KeyEntity(

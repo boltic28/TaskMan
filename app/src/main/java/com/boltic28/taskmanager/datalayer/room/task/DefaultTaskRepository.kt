@@ -1,9 +1,9 @@
 package com.boltic28.taskmanager.datalayer.room.task
 
-import com.boltic28.taskmanager.datalayer.classes.Task
+import com.boltic28.taskmanager.datalayer.entities.Task
 import io.reactivex.Single
 
-class DefaultTaskService(private val dao: TaskDao) : TaskService {
+class DefaultTaskRepository(private val dao: TaskDao) : TaskRepository {
     override fun insert(item: Task): Single<Long> =
         dao.insert(item.toEntity())
 

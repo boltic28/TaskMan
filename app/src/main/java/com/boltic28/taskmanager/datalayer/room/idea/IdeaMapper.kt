@@ -1,6 +1,6 @@
 package com.boltic28.taskmanager.datalayer.room.idea
 
-import com.boltic28.taskmanager.datalayer.classes.Idea
+import com.boltic28.taskmanager.datalayer.entities.Idea
 
 fun Idea.toEntity(): IdeaEntity =
     IdeaEntity(

@@ -2,7 +2,7 @@ package com.boltic28.taskmanager.signtools
 
 import android.app.Activity
 import android.util.Log
-import com.boltic28.taskmanager.dagger.AppDagger
+import com.boltic28.taskmanager.di.AppDagger
 import com.boltic28.taskmanager.ui.screens.MainActivity.Companion.TAG
 import com.boltic28.taskmanager.utils.Messenger
 import com.google.android.gms.tasks.Task
