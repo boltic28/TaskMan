@@ -7,32 +7,16 @@ import com.boltic28.taskmanager.datalayer.room.idea.IdeaRepository
 import com.boltic28.taskmanager.datalayer.room.keyresult.KeyRepository
 import com.boltic28.taskmanager.datalayer.room.step.StepRepository
 import com.boltic28.taskmanager.datalayer.room.task.TaskRepository
+import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
 
-class MainFragmentInteractorImpl(
+class CaseGoalStructureImpl(
     private val keyRepository: KeyRepository,
     private val stepRepository: StepRepository,
     private val taskRepository: TaskRepository,
-    private val ideaRepository: IdeaRepository,
-    private var goalRepository: GoalRepository
-) : MainFragmentInteractor {
-
-    override fun getFreeTasks(): Single<List<Task>> =
-        taskRepository.getAllFree()
-
-    override fun getFreeIdeas(): Single<List<Idea>> =
-        ideaRepository.getAllFree()
-
-    override fun getFreeKeys(): Single<List<KeyResult>> =
-        keyRepository.getAllFree()
-
-    override fun getFreeSteps(): Single<List<Step>> =
-        stepRepository.getAllFree()
-
-    override fun getGoals(): Single<List<Goal>> =
-        goalRepository.getAll()
-
+    private val ideaRepository: IdeaRepository
+): CaseGoalStructure {
 
     override fun setChildrenFor(goal: Goal): Single<Goal> =
         Single.just(goal)

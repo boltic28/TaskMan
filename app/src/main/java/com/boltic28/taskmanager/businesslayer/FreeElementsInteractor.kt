@@ -3,7 +3,7 @@ package com.boltic28.taskmanager.businesslayer
 import com.boltic28.taskmanager.datalayer.entities.*
 import io.reactivex.Single
 
-interface MainFragmentInteractor {
+interface FreeElementsInteractor {
 
     fun getFreeTasks(): Single<List<Task>>
 

@@ -22,13 +22,36 @@ class BusinessModule(
 
     @Singleton
     @Provides
-    fun provideGoalInteractor(): MainFragmentInteractor =
-        MainFragmentInteractorImpl(
+    fun provideMainFragmentInteractor(): FreeElementsInteractor =
+        FreeElementsInteractorImpl(
             keyRepository,
             stepRepository,
             taskRepository,
             ideaRepository,
-            goalRepository
+            goalRepository,
+            provideCaseGoalStructure()
+        )
+
+    @Singleton
+    @Provides
+    fun provideGoalFragmentInteractor(): GoalFragmentInteractor =
+        GoalFragmentInteractorImpl(
+            keyRepository,
+            stepRepository,
+            taskRepository,
+            ideaRepository,
+            goalRepository,
+            provideCaseGoalStructure()
+        )
+
+    @Singleton
+    @Provides
+    fun provideCaseGoalStructure(): CaseGoalStructure =
+        CaseGoalStructureImpl(
+            keyRepository,
+            stepRepository,
+            taskRepository,
+            ideaRepository
         )
 
     @Singleton

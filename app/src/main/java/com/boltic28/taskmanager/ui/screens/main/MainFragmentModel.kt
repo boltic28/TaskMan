@@ -2,7 +2,7 @@ package com.boltic28.taskmanager.ui.screens.main
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.boltic28.taskmanager.businesslayer.MainFragmentInteractor
+import com.boltic28.taskmanager.businesslayer.FreeElementsInteractor
 import com.boltic28.taskmanager.datalayer.entities.Goal
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.di.AppDagger
@@ -16,7 +16,7 @@ import javax.inject.Inject
 class MainFragmentModel : ViewModel() {
 
     @Inject
-    lateinit var interactor: MainFragmentInteractor
+    lateinit var interactor: FreeElementsInteractor
 
     @Inject
     lateinit var adapter: ItemAdapter

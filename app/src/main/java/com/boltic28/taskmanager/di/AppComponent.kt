@@ -17,6 +17,7 @@ import com.boltic28.taskmanager.ui.screens.settings.SettingsFragmentModel
 import com.boltic28.taskmanager.ui.screens.settings.SettingsModule
 import com.boltic28.taskmanager.ui.screens.sign.SignFragment
 import com.boltic28.taskmanager.signtools.FireUserManager
+import com.boltic28.taskmanager.ui.screens.goalview.GoalFragmentModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -30,6 +31,7 @@ import javax.inject.Singleton
 interface AppComponent {
 
     fun injectModel(model: MainFragmentModel)
+    fun injectModel(model: GoalFragmentModel)
     fun injectModel(model: CreatorFragmentModel)
     fun injectModel(model: SettingsFragmentModel)
 
