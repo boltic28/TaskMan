@@ -13,6 +13,11 @@ class DefaultKeyRepository(private val dao: KeyDao) : KeyRepository {
             list.map { it.toKey() }
         }
 
+    override fun getAllFree(): Single<List<KeyResult>> =
+        dao.getAllFree().map { list ->
+            list.map { it.toKey() }
+        }
+
     override fun getAllForGoal(goalId: Long): Single<List<KeyResult>> =
         dao.getAllForGoal(goalId).map { list ->
             list.map { it.toKey() }

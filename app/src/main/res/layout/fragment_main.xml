@@ -28,6 +28,30 @@
             style="@style/Main.Search"
             android:drawableStart="@drawable/ic_search" />
 
+        <ImageButton
+            android:id="@+id/main_free_goals"
+            style="@style/Main.Buttons"
+            android:src="@drawable/ic_star" />
+
+        <ImageButton
+            android:id="@+id/main_free_steps"
+            style="@style/Main.Buttons"
+            android:src="@drawable/ic_star" />
+
+        <ImageButton
+            android:id="@+id/main_free_tasks"
+            style="@style/Main.Buttons"
+            android:src="@drawable/ic_star" />
+
+        <ImageButton
+            android:id="@+id/main_free_keys"
+            style="@style/Main.Buttons"
+            android:src="@drawable/ic_star" />
+
+        <ImageButton
+            android:id="@+id/main_free_ideas"
+            style="@style/Main.Buttons"
+            android:src="@drawable/ic_star" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -38,11 +62,11 @@
         android:backgroundTint="@color/colorSignFieldEnd"
         android:clickable="true"
         android:foregroundTint="#FFFFFF"
-        app:maxImageSize="36dp"
         app:fabSize="auto"
         app:layout_constraintBottom_toTopOf="@+id/main_panel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/main_panel"
+        app:maxImageSize="36dp"
         app:srcCompat="@drawable/ic_add" />
 
 

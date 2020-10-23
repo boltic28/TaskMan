@@ -14,5 +14,7 @@ interface KeyRepository {
 
     fun getAll(): Single<List<KeyResult>>
 
+    fun getAllFree(): Single<List<KeyResult>>
+
     fun getAllForGoal(goalId: Long): Single<List<KeyResult>>
 }

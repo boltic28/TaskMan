@@ -2,40 +2,102 @@ package com.boltic28.taskmanager.ui.screens.main
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.boltic28.taskmanager.businesslayer.MainFragmentInteractor
+import com.boltic28.taskmanager.datalayer.entities.Goal
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.di.AppDagger
-import com.boltic28.taskmanager.datalayer.room.goal.GoalRepository
 import com.boltic28.taskmanager.ui.screens.MainActivity
-import com.boltic28.taskmanager.signtools.FireUserManager
+import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.disposables.Disposables
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class MainFragmentModel : ViewModel() {
 
     @Inject
-    lateinit var goalRepository: GoalRepository
+    lateinit var interactor: MainFragmentInteractor
 
     @Inject
     lateinit var adapter: ItemAdapter
 
-    lateinit var userManager: FireUserManager
+    @Inject
+    lateinit var messenger: Messenger
 
-    var disposable = Disposables.disposed()
+    val disposables = mutableListOf<Disposable>()
 
     init {
         AppDagger.component.injectModel(this)
     }
 
-    fun checkGoals(): Disposable =
-        goalRepository.getAll()
+    fun loadTasks(){
+        disposables + interactor.getFreeKeys()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                adapter.refreshData(it)
+            .subscribe({result ->
+                adapter.refreshData(result)
+            },{
+                Log.d(MainActivity.TAG, "getKeys - error \n ->$it")
+            })
+    }
+
+    fun loadKeys(){
+        disposables + interactor.getFreeTasks()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({result ->
+                adapter.refreshData(result)
+            },{
+                Log.d(MainActivity.TAG, "getTasks - error \n ->$it")
+            })
+    }
+
+    fun loadIdeas(){
+        disposables + interactor.getFreeIdeas()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({result ->
+                adapter.refreshData(result)
+            },{
+                Log.d(MainActivity.TAG, "getIdeas - error \n ->$it")
+            })
+    }
+
+    fun loadSteps(){
+        disposables + interactor.getFreeSteps()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({result ->
+                adapter.refreshData(result)
+            },{
+                Log.d(MainActivity.TAG, "getSteps - error \n ->$it")
+            })
+    }
+
+    fun loadGoals() {
+        disposables + interactor.getGoals()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ goalsList ->
+                    adapter.clearAll()
+                    goalsList.forEach { goal ->
+                    makeAnalyzeAndPushIntoAdapter(goal)
+                }
             }, {
                 Log.d(MainActivity.TAG, "getAll - Goal error \n ->$it")
             })
+    }
+
+    private fun makeAnalyzeAndPushIntoAdapter(goal: Goal){
+        disposables + interactor.setChildrenFor(goal)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe( {
+                adapter.addElement(interactor.setProgressFor(it))
+            },{
+                Log.d(MainActivity.TAG, "getGoalInfo - Goal error \n ->$it")
+            })
+    }
+
+
 }

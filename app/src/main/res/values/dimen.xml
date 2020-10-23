@@ -17,8 +17,10 @@
     <dimen name="sign_progress_bar_size">30dp</dimen>
 
     <!--Main fragment -->
-    <dimen name="main_search_field_w">200dp</dimen>
+    <dimen name="main_search_field_w">100dp</dimen>
     <dimen name="main_search_field_h">40dp</dimen>
+    <dimen name="main_item_switcher_button_w">40dp</dimen>
+    <dimen name="main_item_switcher_button_h">40dp</dimen>
     <dimen name="main_panel_height">60dp</dimen>
     <dimen name="main_panel_searching_padding_start">16dp</dimen>
 

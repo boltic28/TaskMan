@@ -21,6 +21,9 @@ interface StepDao {
     @Query("SELECT * FROM step")
     fun getAll(): Single<List<StepEntity>>
 
+    @Query("SELECT * FROM step WHERE keyId = 0 AND goalId = 0")
+    fun getAllFree(): Single<List<StepEntity>>
+
     @Transaction
     @Query("SELECT * FROM step WHERE goalId = :goalId")
     fun getAllForGoal(goalId: Long): Single<List<StepEntity>>

@@ -18,6 +18,11 @@ class DefaultStepRepository(private val dao: StepDao) : StepRepository {
             list.map { it.toStep() }
         }
 
+    override fun getAllFree(): Single<List<Step>> =
+        dao.getAllFree().map { list ->
+            list.map { it.toStep() }
+        }
+
     override fun getAllForKey(keyId: Long): Single<List<Step>> =
         dao.getAllForKey(keyId).map { list ->
             list.map { it.toStep() }

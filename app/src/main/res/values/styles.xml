@@ -53,12 +53,17 @@
         <item name="android:layout_height">@dimen/sign_progress_bar_size</item>
     </style>
 
-
     <!-- Main Fragment-->
     <style name="Main.Search" parent="Widget.AppCompat.EditText">
         <item name="android:layout_width">@dimen/main_search_field_w</item>
         <item name="android:layout_height">@dimen/main_search_field_h</item>
         <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="Main.Buttons" parent="Widget.AppCompat.ImageButton">
+        <item name="android:layout_width">@dimen/main_item_switcher_button_w</item>
+        <item name="android:layout_height">@dimen/main_item_switcher_button_h</item>
+        <item name="android:background">@color/transparent</item>
     </style>
 
     <style name="SearchPanel">

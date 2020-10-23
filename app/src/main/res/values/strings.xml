@@ -22,6 +22,7 @@
     <string name="start_it">START</string>
     <string name="done_it">DONE</string>
     <string name="description_icon_of_step">description of the step</string>
+    <string name="dateFormatterForItems">dd.MM.yyyy</string>
 
     <string-array name="cycle">
         <item>hour</item>

@@ -1,5 +1,6 @@
 package com.boltic28.taskmanager.datalayer.entities
 
+import com.boltic28.taskmanager.datalayer.Progress
 import java.time.LocalDateTime
 
 data class Goal(
@@ -14,5 +15,6 @@ data class Goal(
     val steps: List<Step>,
     val tasks: List<Task>,
     val ideas: List<Idea>,
-    val keys: List<KeyResult>
+    val keys: List<KeyResult>,
+    val progress: Progress
 )

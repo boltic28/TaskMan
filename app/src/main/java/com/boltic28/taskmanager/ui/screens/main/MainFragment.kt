@@ -9,12 +9,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.di.AppDagger
-import com.boltic28.taskmanager.ui.screens.ActivityHelper
 import com.boltic28.taskmanager.signtools.FireUserManager
-import com.boltic28.taskmanager.utils.Messenger
-import io.reactivex.disposables.Disposables
+import com.boltic28.taskmanager.ui.screens.ActivityHelper
 import kotlinx.android.synthetic.main.fragment_main.*
-import javax.inject.Inject
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
@@ -22,10 +19,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         const val TAG = "mainActivity_test"
     }
 
-    @Inject
-    lateinit var messenger: Messenger
-
-    private var disposable = Disposables.disposed()
+    private lateinit var userManager: FireUserManager
 
     private val model: MainFragmentModel by lazy {
         ViewModelProviders.of(this).get(
@@ -38,20 +32,39 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         AppDagger.component.injectFragment(this)
     }
 
-    override fun onStop() {
-        super.onStop()
-        disposable.dispose()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "-> mainFragment")
 
-        initRecycler()
-        model.userManager = FireUserManager.getInstance(requireActivity())
-        setOnButtons()
+        initView()
+        userManager = FireUserManager.getInstance(requireActivity())
 
-        disposable = model.userManager.user
+        checkUser()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        model.disposables.forEach { it.dispose() }
+    }
+
+    private fun initView() {
+        main_recycler.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        main_recycler.adapter = model.adapter
+
+        main_add_button.setOnClickListener {
+            findNavController().navigate(R.id.creatorFragment)
+        }
+        main_free_goals.setOnClickListener { model.loadGoals() }
+        main_free_keys.setOnClickListener { model.loadKeys() }
+        main_free_tasks.setOnClickListener { model.loadTasks() }
+        main_free_ideas.setOnClickListener { model.loadIdeas() }
+        main_free_steps.setOnClickListener { model.loadSteps() }
+    }
+
+    // move to activity
+    private fun checkUser() {
+        model.disposables + userManager.user
             .subscribe({ user ->
                 if (user.id.isEmpty()) {
                     Log.d(TAG, "user empty")
@@ -59,22 +72,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                     findNavController().navigate(R.id.signFragment)
                 } else {
                     (activity as? ActivityHelper)?.setToolbarText(user.email)
-                    model.disposable = model.checkGoals()
+                    model.loadGoals()
                 }
             }, {
                 Log.d(TAG, it.toString())
             })
-    }
-
-    private fun initRecycler() {
-        main_recycler.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        main_recycler.adapter = model.adapter
-    }
-
-    private fun setOnButtons() {
-        main_add_button.setOnClickListener {
-            findNavController().navigate(R.id.creatorFragment)
-        }
     }
 }

@@ -14,6 +14,8 @@ interface StepRepository {
 
     fun getAll(): Single<List<Step>>
 
+    fun getAllFree(): Single<List<Step>>
+
     fun getAllForGoal(goalId: Long): Single<List<Step>>
 
     fun getAllForKey(keyId: Long): Single<List<Step>>

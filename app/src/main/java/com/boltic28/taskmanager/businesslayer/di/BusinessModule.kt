@@ -22,8 +22,8 @@ class BusinessModule(
 
     @Singleton
     @Provides
-    fun provideGoalInteractor(): GoalInteractor =
-        GoalInteractorImpl(
+    fun provideGoalInteractor(): MainFragmentInteractor =
+        MainFragmentInteractorImpl(
             keyRepository,
             stepRepository,
             taskRepository,

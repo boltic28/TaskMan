@@ -3,6 +3,7 @@ package com.boltic28.taskmanager.ui.screens.creator
 import androidx.lifecycle.ViewModel
 import com.boltic28.taskmanager.di.AppDagger
 import com.boltic28.taskmanager.datalayer.Cycle
+import com.boltic28.taskmanager.datalayer.Progress
 import com.boltic28.taskmanager.datalayer.entities.*
 import com.boltic28.taskmanager.datalayer.room.goal.GoalRepository
 import com.boltic28.taskmanager.datalayer.room.idea.IdeaRepository
@@ -63,7 +64,8 @@ class CreatorFragmentModel : ViewModel() {
                 steps = emptyList(),
                 tasks = emptyList(),
                 ideas = emptyList(),
-                keys = emptyList()
+                keys = emptyList(),
+                progress = Progress.PROGRESS_0
             )
         )
 
@@ -75,7 +77,7 @@ class CreatorFragmentModel : ViewModel() {
                 name = name,
                 description = description,
                 date = LocalDateTime.now(),
-                progress = 0,
+                progress = Progress.PROGRESS_0,
                 steps = emptyList(),
                 tasks = emptyList(),
                 ideas = emptyList()

@@ -22,6 +22,9 @@ interface KeyDao {
     @Query("SELECT * FROM key_entity")
     fun getAll(): Single<List<KeyEntity>>
 
+    @Query("SELECT * FROM key_entity WHERE goalId = 0")
+    fun getAllFree(): Single<List<KeyEntity>>
+
     @Transaction
     @Query("SELECT * FROM key_entity WHERE goalId = :goalId")
     fun getAllForGoal(goalId: Long): Single<List<KeyEntity>>
