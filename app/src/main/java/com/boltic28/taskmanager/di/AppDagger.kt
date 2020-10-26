@@ -4,6 +4,11 @@ import android.app.Application
 import com.boltic28.taskmanager.businesslayer.di.BusinessModule
 import com.boltic28.taskmanager.datalayer.room.di.DataBaseModule
 import com.boltic28.taskmanager.datalayer.room.di.RepositoryModule
+import com.boltic28.taskmanager.ui.screens.goalview.DaggerGoalComponent
+import com.boltic28.taskmanager.ui.screens.goalview.GoalComponent
+import com.boltic28.taskmanager.ui.screens.goalview.GoalFragmentModule
+import com.boltic28.taskmanager.ui.screens.main.DaggerMainComponent
+import com.boltic28.taskmanager.ui.screens.main.MainComponent
 import com.boltic28.taskmanager.ui.screens.main.MainFragmentModule
 import com.boltic28.taskmanager.ui.screens.settings.SettingsModule
 
@@ -11,6 +16,8 @@ class AppDagger : Application() {
 
     companion object {
         lateinit var component: AppComponent
+        lateinit var goalComponent: GoalComponent
+        lateinit var mainComponent: MainComponent
     }
 
     override fun onCreate() {
@@ -24,8 +31,6 @@ class AppDagger : Application() {
                 dataBaseModule.provideDataBase()
             )
         val settingsModule = SettingsModule(this)
-        val adapterModule =
-            MainFragmentModule()
         val businessModule = BusinessModule(
             repositoryModule.provideKeyService(),
             repositoryModule.provideStepService(),
@@ -36,12 +41,29 @@ class AppDagger : Application() {
 
         component = DaggerAppComponent
             .builder()
-            .createDataBaseModule(dataBaseModule)
-            .createDataModule(contextModule)
-            .createSettingModule(settingsModule)
-            .createServiceModule(repositoryModule)
-            .createMainFragModule(adapterModule)
-            .createBusinessModule(businessModule)
+            .createModule(dataBaseModule)
+            .createModule(contextModule)
+            .createModule(settingsModule)
+            .createModule(repositoryModule)
+            .createModule(businessModule)
+            .buildComponent()
+
+        val goalModule = GoalFragmentModule()
+
+        goalComponent = DaggerGoalComponent
+            .builder()
+            .createModule(contextModule)
+            .createModule(businessModule)
+            .createModule(goalModule)
+            .buildComponent()
+
+        val mainModule = MainFragmentModule()
+
+        mainComponent = DaggerMainComponent
+            .builder()
+            .createModule(contextModule)
+            .createModule(businessModule)
+            .createModule(mainModule)
             .buildComponent()
     }
 }

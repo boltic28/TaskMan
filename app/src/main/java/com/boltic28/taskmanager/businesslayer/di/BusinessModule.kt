@@ -7,6 +7,7 @@ import com.boltic28.taskmanager.datalayer.room.idea.IdeaRepository
 import com.boltic28.taskmanager.datalayer.room.keyresult.KeyRepository
 import com.boltic28.taskmanager.datalayer.room.step.StepRepository
 import com.boltic28.taskmanager.datalayer.room.task.TaskRepository
+import com.boltic28.taskmanager.di.AppScope
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -19,8 +20,6 @@ class BusinessModule(
     private val ideaRepository: IdeaRepository,
     private var goalRepository: GoalRepository
 ) {
-
-    @Singleton
     @Provides
     fun provideMainFragmentInteractor(): FreeElementsInteractor =
         FreeElementsInteractorImpl(
@@ -32,7 +31,6 @@ class BusinessModule(
             provideCaseGoalStructure()
         )
 
-    @Singleton
     @Provides
     fun provideGoalFragmentInteractor(): GoalFragmentInteractor =
         GoalFragmentInteractorImpl(
@@ -44,7 +42,17 @@ class BusinessModule(
             provideCaseGoalStructure()
         )
 
-    @Singleton
+    @Provides
+    fun provideFreeElementsInteractor(): FreeElementsInteractorImpl =
+        FreeElementsInteractorImpl(
+            keyRepository,
+            stepRepository,
+            taskRepository,
+            ideaRepository,
+            goalRepository,
+            provideCaseGoalStructure()
+        )
+
     @Provides
     fun provideCaseGoalStructure(): CaseGoalStructure =
         CaseGoalStructureImpl(
@@ -54,7 +62,6 @@ class BusinessModule(
             ideaRepository
         )
 
-    @Singleton
     @Provides
     fun provideStepInteractor(): StepInteractor =
         StepInteractorImpl(
@@ -63,7 +70,6 @@ class BusinessModule(
             stepRepository
         )
 
-    @Singleton
     @Provides
     fun provideKeyInteractor(): KeyInteractor =
         KeyInteractorImpl(
@@ -73,14 +79,12 @@ class BusinessModule(
             ideaRepository
         )
 
-    @Singleton
     @Provides
     fun provideTaskInteractor(): TaskInteractor =
         TaskInteractorImpl(
             taskRepository
         )
 
-    @Singleton
     @Provides
     fun provideIdeaInteractor(): IdeaInteractor =
         IdeaInteractorImpl(

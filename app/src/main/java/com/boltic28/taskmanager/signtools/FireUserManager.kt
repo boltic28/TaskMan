@@ -75,6 +75,9 @@ class FireUserManager(private val activity: Activity) :
         Log.d(TAG, "user is signed Out")
     }
 
+    override fun isUserSigned(): Boolean =
+        convertUser(mAuth.currentUser).id != EMPTY_STRING
+
     private fun convertUser(user: FirebaseUser?): UserIn =
         if (user != null) {
             UserIn(

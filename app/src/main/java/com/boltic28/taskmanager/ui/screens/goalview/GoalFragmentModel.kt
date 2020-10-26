@@ -6,12 +6,15 @@ import com.boltic28.taskmanager.businesslayer.GoalFragmentInteractor
 import com.boltic28.taskmanager.businesslayer.FreeElementsInteractor
 import com.boltic28.taskmanager.datalayer.entities.*
 import com.boltic28.taskmanager.di.AppDagger
+import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.screens.MainActivity
 import com.boltic28.taskmanager.utils.Messenger
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
 
 class GoalFragmentModel: ViewModel() {
@@ -28,12 +31,34 @@ class GoalFragmentModel: ViewModel() {
     @Inject
     lateinit var adapter: ItemAdapter
 
-    lateinit var goal: Goal
+    lateinit var userManager: UserManager
+
+    private val mGoal = BehaviorSubject.create<Goal>()
+    val goal: Observable<Goal>
+    get() = mGoal.hide()
+
+    var goalId = 0L
 
     val disposables = mutableListOf<Disposable>()
 
     init {
-        AppDagger.component.injectModel(this)
+        AppDagger.goalComponent.inject(this)
+    }
+
+    fun loadFreeElementIntoAdapter(){
+        adapter.clearAll()
+        loadKeys()
+        loadSteps()
+        loadTasks()
+        loadIdeas()
+    }
+
+    fun loadGoalsElementIntoAdapter(goal: Goal){
+        adapter.clearAll()
+        adapter.addList(goal.keys)
+        adapter.addList(goal.steps)
+        adapter.addList(goal.tasks)
+        adapter.addList(goal.ideas)
     }
 
     fun addToGoal(item: Step){
@@ -41,7 +66,7 @@ class GoalFragmentModel: ViewModel() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                refreshGoal(goal.id)
+                refreshGoal()
             },{
                 Log.d(MainActivity.TAG, "getStep - error \n ->$it")
             })
@@ -52,7 +77,7 @@ class GoalFragmentModel: ViewModel() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                refreshGoal(goal.id)
+                refreshGoal()
             },{
                 Log.d(MainActivity.TAG, "getKey - error \n ->$it")
             })
@@ -63,7 +88,7 @@ class GoalFragmentModel: ViewModel() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                refreshGoal(goal.id)
+                refreshGoal()
             },{
                 Log.d(MainActivity.TAG, "getTask - error \n ->$it")
             })
@@ -74,13 +99,13 @@ class GoalFragmentModel: ViewModel() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                refreshGoal(goal.id)
+                refreshGoal()
             },{
                 Log.d(MainActivity.TAG, "getIdea - error \n ->$it")
             })
     }
 
-    fun loadTasks(){
+    private fun loadTasks(){
         disposables + freeElementsInteractor.getFreeKeys()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -91,7 +116,7 @@ class GoalFragmentModel: ViewModel() {
             })
     }
 
-    fun loadKeys(){
+    private fun loadKeys(){
         disposables + freeElementsInteractor.getFreeTasks()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -102,7 +127,7 @@ class GoalFragmentModel: ViewModel() {
             })
     }
 
-    fun loadIdeas(){
+    private fun loadIdeas(){
         disposables + freeElementsInteractor.getFreeIdeas()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -113,7 +138,7 @@ class GoalFragmentModel: ViewModel() {
             })
     }
 
-    fun loadSteps(){
+    private fun loadSteps(){
         disposables + freeElementsInteractor.getFreeSteps()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -124,23 +149,23 @@ class GoalFragmentModel: ViewModel() {
             })
     }
 
-    fun refreshGoal(id: Long){
-        disposables + goalInteractor.getGoal(id)
+    fun refreshGoal(){
+        disposables + goalInteractor.getGoal(goalId)
             .subscribe(
                 {
-                    makeAnalyzeAndPushIntoAdapter(it)
+                    initGoalValue(it)
                 },{
                     Log.d(MainActivity.TAG, "getGoal - error \n ->$it")
                 }
             )
     }
 
-    private fun makeAnalyzeAndPushIntoAdapter(goal: Goal){
+    private fun initGoalValue(goal: Goal){
         disposables + goalInteractor.setChildrenFor(goal)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe( {
-                this.goal = goalInteractor.setProgressFor(it)
+                mGoal.onNext(goalInteractor.setProgressFor(it))
             },{
                 Log.d(MainActivity.TAG, "getGoalInfo - Goal error \n ->$it")
             })

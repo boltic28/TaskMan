@@ -11,6 +11,7 @@ import com.boltic28.taskmanager.datalayer.room.step.DefaultStepRepository
 import com.boltic28.taskmanager.datalayer.room.step.StepRepository
 import com.boltic28.taskmanager.datalayer.room.task.DefaultTaskRepository
 import com.boltic28.taskmanager.datalayer.room.task.TaskRepository
+import com.boltic28.taskmanager.di.AppScope
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -18,23 +19,23 @@ import javax.inject.Singleton
 @Module
 class RepositoryModule(private val db: AppDataBase) {
 
-    @Singleton
+    @AppScope
     @Provides
     fun provideGoalService(): GoalRepository = DefaultGoalRepository(db.goalDao())
 
-    @Singleton
+    @AppScope
     @Provides
     fun provideKeyService(): KeyRepository = DefaultKeyRepository(db.keyDao())
 
-    @Singleton
+    @AppScope
     @Provides
     fun provideStepService(): StepRepository = DefaultStepRepository(db.stepDao())
 
-    @Singleton
+    @AppScope
     @Provides
     fun provideTaskService(): TaskRepository = DefaultTaskRepository(db.taskDao())
 
-    @Singleton
+    @AppScope
     @Provides
     fun provideIdeaService(): IdeaRepository = DefaultIdeaRepository(db.ideaDao())
 }

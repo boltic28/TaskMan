@@ -26,6 +26,13 @@ class ItemAdapter(private val controllers: List<HolderController>) : RecyclerVie
         refreshData(newList)
     }
 
+    override fun addList(list: List<Any>) {
+        val newList = mutableListOf<Any>()
+        newList.addAll(items)
+        newList.add(list)
+        refreshData(newList)
+    }
+
     override fun clearAll() {
         refreshData(listOf())
     }

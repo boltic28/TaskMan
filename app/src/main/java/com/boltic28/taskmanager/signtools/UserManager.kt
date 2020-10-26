@@ -7,4 +7,5 @@ interface UserManager {
     fun create(email: String, password: String)
     fun signIn(email: String, password: String)
     fun signOut()
+    fun isUserSigned(): Boolean
 }

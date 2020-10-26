@@ -21,40 +21,29 @@ import com.boltic28.taskmanager.ui.screens.goalview.GoalFragmentModel
 import dagger.Component
 import javax.inject.Singleton
 
-@Singleton
+@AppScope
 @Component(
     modules = [
         ContextModule::class, RepositoryModule::class, DataBaseModule::class,
-        SettingsModule::class, MainFragmentModule::class, GoalFragmentModule::class,
-        BusinessModule::class]
+        SettingsModule::class, BusinessModule::class]
 )
 interface AppComponent {
 
-    fun injectModel(model: MainFragmentModel)
-    fun injectModel(model: GoalFragmentModel)
     fun injectModel(model: CreatorFragmentModel)
     fun injectModel(model: SettingsFragmentModel)
 
     fun injectFragment(fragment: SignFragment)
-    fun injectFragment(fragment: MainFragment)
     fun injectFragment(fragment: CreatorFragment)
     fun injectFragment(fragment: SettingsFragment)
-    fun injectFragment(fragment: GoalFragment)
-
-    fun injectActivity(act: MainActivity)
-
     fun injectManager(manager: FireUserManager)
-
-    fun injectAdapter(adapter: ItemAdapter)
 
     @Component.Builder
     interface DataBuilder {
-        fun createDataModule(module: ContextModule): DataBuilder
-        fun createServiceModule(module: RepositoryModule): DataBuilder
-        fun createDataBaseModule(module: DataBaseModule): DataBuilder
-        fun createSettingModule(module: SettingsModule): DataBuilder
-        fun createMainFragModule(module: MainFragmentModule): DataBuilder
-        fun createBusinessModule(module: BusinessModule): DataBuilder
+        fun createModule(module: ContextModule): DataBuilder
+        fun createModule(module: RepositoryModule): DataBuilder
+        fun createModule(module: DataBaseModule): DataBuilder
+        fun createModule(module: SettingsModule): DataBuilder
+        fun createModule(module: BusinessModule): DataBuilder
         fun buildComponent(): AppComponent
     }
 }

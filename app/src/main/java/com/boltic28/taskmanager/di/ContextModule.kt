@@ -10,12 +10,10 @@ import javax.inject.Singleton
 @Module
 class ContextModule(private val context: Context) {
 
-    @Singleton
     @Provides
     fun provideMessenger(): Messenger =
         Messenger(context)
 
-    @Singleton
     @Provides
     fun provideNetworkChecker(): NetworkChecker =
         NetworkChecker(context)

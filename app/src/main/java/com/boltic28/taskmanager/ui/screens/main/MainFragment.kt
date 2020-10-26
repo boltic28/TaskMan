@@ -19,27 +19,18 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         const val TAG = "mainActivity_test"
     }
 
-    private lateinit var userManager: FireUserManager
-
     private val model: MainFragmentModel by lazy {
         ViewModelProviders.of(this).get(
             MainFragmentModel::class.java
         )
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        AppDagger.component.injectFragment(this)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "-> mainFragment")
 
-        initView()
-        userManager = FireUserManager.getInstance(requireActivity())
-
         checkUser()
+        initView()
     }
 
     override fun onStop() {
@@ -62,12 +53,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         main_free_steps.setOnClickListener { model.loadSteps() }
     }
 
-    // move to activity
     private fun checkUser() {
-        model.disposables + userManager.user
+        model.disposables + FireUserManager.getInstance(requireActivity()).user
             .subscribe({ user ->
                 if (user.id.isEmpty()) {
-                    Log.d(TAG, "user empty")
                     (activity as? ActivityHelper)?.setToolbarText(resources.getString(R.string.app_name))
                     findNavController().navigate(R.id.signFragment)
                 } else {

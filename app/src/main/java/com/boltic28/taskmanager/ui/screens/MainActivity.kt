@@ -6,11 +6,8 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.ui.screens.main.MainFragment
-import com.boltic28.taskmanager.signtools.FireUserManager
 
 class MainActivity : AppCompatActivity(), ActivityHelper {
 
@@ -25,8 +22,6 @@ class MainActivity : AppCompatActivity(), ActivityHelper {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Log.d(MainFragment.TAG, "-> mainActivity")
-
-        model.userManager = FireUserManager.getInstance(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

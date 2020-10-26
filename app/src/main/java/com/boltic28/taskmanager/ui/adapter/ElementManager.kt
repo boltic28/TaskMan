@@ -6,5 +6,7 @@ interface ElementManager {
 
     fun addElement(item: Any)
 
+    fun addList(list: List<Any>)
+
     fun clearAll()
 }

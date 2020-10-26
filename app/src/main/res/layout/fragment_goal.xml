@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/goal_fr_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/goal_fr_description"/>
+
+    <TextView
+        android:id="@+id/goal_fr_percentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        tools:text="Progress: 34%"
+        app:layout_constraintLeft_toRightOf="@+id/goal_fr_image"
+        app:layout_constraintBottom_toBottomOf="@+id/goal_fr_image"
+        />
+
+    <TextView
+        android:id="@+id/goal_fr_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text = "description of some goal, description of some goal, description of some goal,"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/goal_fr_image"
+        app:layout_constraintBottom_toTopOf="@+id/goal_fr_start_date"/>
+
+    <TextView
+        android:id="@+id/goal_fr_start_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="textEnd"
+        tools:text = "23 sep 2020"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/goal_fr_description"
+        app:layout_constraintBottom_toTopOf="@+id/goal_fr_recycler"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/goal_fr_recycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/goal_fr_add_action"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goal_fr_start_date" />
+
+    <Button
+        android:id="@+id/goal_fr_add_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_new_item"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goal_fr_recycler"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,7 +27,7 @@ class MainFragmentModel : ViewModel() {
     val disposables = mutableListOf<Disposable>()
 
     init {
-        AppDagger.component.injectModel(this)
+        AppDagger.mainComponent.inject(this)
     }
 
     fun loadTasks(){

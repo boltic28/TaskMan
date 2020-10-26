@@ -23,6 +23,8 @@
     <string name="done_it">DONE</string>
     <string name="description_icon_of_step">description of the step</string>
     <string name="dateFormatterForItems">dd.MM.yyyy</string>
+    <string name="add_new_item">add new item</string>
+    <string name="percentage">Progress $s %</string>
 
     <string-array name="cycle">
         <item>hour</item>
