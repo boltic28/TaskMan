@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.ui.screens.goalview
+package com.boltic28.taskmanager.ui.screens.goalfragment
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

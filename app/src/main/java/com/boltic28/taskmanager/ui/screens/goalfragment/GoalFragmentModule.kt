@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.ui.screens.goalview
+package com.boltic28.taskmanager.ui.screens.goalfragment
 
 import com.boltic28.taskmanager.di.GoalFragmentScope
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter

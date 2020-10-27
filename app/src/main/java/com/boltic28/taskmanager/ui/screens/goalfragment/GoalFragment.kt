@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.ui.screens.goalview
+package com.boltic28.taskmanager.ui.screens.goalfragment
 
 import android.os.Bundle
 import android.util.Log
@@ -11,8 +11,8 @@ import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.entities.Goal
 import com.boltic28.taskmanager.signtools.FireUserManager
 import com.boltic28.taskmanager.ui.screens.ActivityHelper
-import com.boltic28.taskmanager.ui.screens.main.MainFragment
-import com.boltic28.taskmanager.ui.screens.main.MainFragment.Companion.GOAL_ID
+import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment
+import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment.Companion.GOAL_ID
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_goal.*
@@ -31,7 +31,7 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
 
         val goalId: Long? = arguments?.getLong(GOAL_ID)
 
-        if (!model.userManager.isUserSigned()){
+        if (!model.userManager.isUserSigned()) {
             (activity as? ActivityHelper)?.setToolbarText(resources.getString(R.string.app_name))
             findNavController().navigate(R.id.signFragment)
         }
@@ -64,7 +64,7 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
                                 .ofPattern(resources.getString(R.string.dateFormatterForItems))
                         )
                     goal_fr_percentage.text =
-                        resources.getString(R.string.percentage)// make it correct
+                        resources.getString(R.string.percentage)
                     goal_fr_recycler.layoutManager =
                         LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                     goal_fr_recycler.adapter = model.adapter
@@ -78,12 +78,12 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
             })
     }
 
-    private fun loadDataIntoRecycler(goal: Goal){
-        if (model.isGoalsElementIntoRecycler){
+    private fun loadDataIntoRecycler(goal: Goal) {
+        if (model.isGoalsElementIntoRecycler) {
             model.isGoalsElementIntoRecycler = false
             model.loadFreeElementIntoAdapter()
             goal_fr_add_action.text = resources.getString(R.string.to_goals_element)
-        }else{
+        } else {
             model.isGoalsElementIntoRecycler = true
             model.loadGoalsElementIntoAdapter(goal)
             goal_fr_add_action.text = resources.getString(R.string.to_free_elements)

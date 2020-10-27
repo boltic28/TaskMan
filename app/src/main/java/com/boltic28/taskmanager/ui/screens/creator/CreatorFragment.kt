@@ -12,7 +12,7 @@ import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.di.AppDagger
 import com.boltic28.taskmanager.ui.screens.ActivityHelper
 import com.boltic28.taskmanager.ui.screens.MainActivity
-import com.boltic28.taskmanager.ui.screens.main.MainFragment
+import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers

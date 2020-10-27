@@ -4,12 +4,12 @@ import android.app.Application
 import com.boltic28.taskmanager.businesslayer.di.BusinessModule
 import com.boltic28.taskmanager.datalayer.room.di.DataBaseModule
 import com.boltic28.taskmanager.datalayer.room.di.RepositoryModule
-import com.boltic28.taskmanager.ui.screens.goalview.DaggerGoalComponent
-import com.boltic28.taskmanager.ui.screens.goalview.GoalComponent
-import com.boltic28.taskmanager.ui.screens.goalview.GoalFragmentModule
-import com.boltic28.taskmanager.ui.screens.main.DaggerMainComponent
-import com.boltic28.taskmanager.ui.screens.main.MainComponent
-import com.boltic28.taskmanager.ui.screens.main.MainFragmentModule
+import com.boltic28.taskmanager.ui.screens.goalfragment.DaggerGoalComponent
+import com.boltic28.taskmanager.ui.screens.goalfragment.GoalComponent
+import com.boltic28.taskmanager.ui.screens.goalfragment.GoalFragmentModule
+import com.boltic28.taskmanager.ui.screens.mainfragment.DaggerMainComponent
+import com.boltic28.taskmanager.ui.screens.mainfragment.MainComponent
+import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragmentModule
 import com.boltic28.taskmanager.ui.screens.settings.SettingsModule
 
 class AppDagger : Application() {

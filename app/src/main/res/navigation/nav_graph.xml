@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.boltic28.taskmanager.ui.screens.main.MainFragment"
+        android:name="com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment"
         android:label="MainFragment" >
         <action
             android:id="@+id/action_mainFragment_to_signFragment"
@@ -25,6 +25,18 @@
         <action
             android:id="@+id/action_mainFragment_to_goalFragment"
             app:destination="@id/goalFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_ideaFragment"
+            app:destination="@id/ideaFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_keyFragment"
+            app:destination="@id/keyFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_stepFragment"
+            app:destination="@id/stepFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_taskFragment"
+            app:destination="@id/taskFragment" />
     </fragment>
     <fragment
         android:id="@+id/creatorFragment"
@@ -36,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/goalFragment"
-        android:name="com.boltic28.taskmanager.ui.screens.goalview.GoalFragment"
+        android:name="com.boltic28.taskmanager.ui.screens.goalfragment.GoalFragment"
         android:label="GoalFragment" >
         <action
             android:id="@+id/action_goalFragment_to_mainFragment"
@@ -44,5 +56,33 @@
         <action
             android:id="@+id/action_goalFragment_to_signFragment"
             app:destination="@id/signFragment" />
+        <action
+            android:id="@+id/action_goalFragment_to_ideaFragment"
+            app:destination="@id/ideaFragment" />
+        <action
+            android:id="@+id/action_goalFragment_to_keyFragment"
+            app:destination="@id/keyFragment" />
+        <action
+            android:id="@+id/action_goalFragment_to_stepFragment"
+            app:destination="@id/stepFragment" />
+        <action
+            android:id="@+id/action_goalFragment_to_taskFragment"
+            app:destination="@id/taskFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/ideaFragment"
+        android:name="com.boltic28.taskmanager.ui.screens.ideafragment.IdeaFragment"
+        android:label="IdeaFragment" />
+    <fragment
+        android:id="@+id/keyFragment"
+        android:name="com.boltic28.taskmanager.ui.screens.keyfragment.KeyFragment"
+        android:label="KeyFragment" />
+    <fragment
+        android:id="@+id/stepFragment"
+        android:name="com.boltic28.taskmanager.ui.screens.stepfragment.StepFragment"
+        android:label="StepFragment" />
+    <fragment
+        android:id="@+id/taskFragment"
+        android:name="com.boltic28.taskmanager.ui.screens.taskfragment.TaskFragment"
+        android:label="TaskFragment" />
 </navigation>

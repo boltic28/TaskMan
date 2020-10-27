@@ -7,7 +7,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.ui.screens.main.MainFragment
+import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment
 
 class MainActivity : AppCompatActivity(), ActivityHelper {
 

@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.ui.screens.main
+package com.boltic28.taskmanager.ui.screens.mainfragment
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -6,7 +6,7 @@ import com.boltic28.taskmanager.businesslayer.FreeElementsInteractor
 import com.boltic28.taskmanager.datalayer.entities.Goal
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.di.AppDagger
-import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
+import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.screens.MainActivity
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -24,6 +24,8 @@ class MainFragmentModel : ViewModel() {
 
     @Inject
     lateinit var messenger: Messenger
+
+    lateinit var userManager: UserManager
 
     val disposables = mutableListOf<Disposable>()
 
