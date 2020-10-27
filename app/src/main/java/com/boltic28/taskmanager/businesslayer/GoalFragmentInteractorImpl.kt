@@ -29,17 +29,15 @@ class GoalFragmentInteractorImpl(
     override fun setProgressFor(goal: Goal): Goal =
         goalCase.setProgressFor(goal)
 
-    override fun addTask(item: Task): Single<Int> =
+    override fun updateTask(item: Task): Single<Int> =
         taskRepository.update(item)
 
-    override fun addStep(item: Step): Single<Int> =
+    override fun updateStep(item: Step): Single<Int> =
         stepRepository.update(item)
 
-    override fun addIdea(item: Idea): Single<Int> =
+    override fun updateIdea(item: Idea): Single<Int> =
         ideaRepository.update(item)
 
-    override fun addKey(item: KeyResult): Single<Int> =
+    override fun updateKey(item: KeyResult): Single<Int> =
         keyRepository.update(item)
-
-
 }

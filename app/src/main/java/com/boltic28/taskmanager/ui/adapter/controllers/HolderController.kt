@@ -5,7 +5,15 @@ import android.view.ViewGroup
 import com.boltic28.taskmanager.ui.adapter.DefaultViewHolder
 import kotlin.reflect.KClass
 
-abstract class HolderController{
+abstract class HolderController {
+
+    private var mListener: OnActionClickListener = object : OnActionClickListener{
+        override fun onActionButtonClick(item: Any) {}
+        override fun onViewClick(item: Any) {}
+    }
+        var listener: OnActionClickListener
+        get() = mListener
+        set(value) {mListener = value}
 
     abstract fun getType(): Int
 
@@ -28,5 +36,8 @@ abstract class HolderController{
     fun fitTo(holder: DefaultViewHolder): Boolean =
         holder.type == getType()
 
-
+    interface OnActionClickListener {
+        fun onActionButtonClick(item: Any)
+        fun onViewClick(item: Any)
+    }
 }

@@ -13,11 +13,11 @@ interface GoalFragmentInteractor {
 
     fun setProgressFor(goal: Goal): Goal
 
-    fun addTask(item: Task): Single<Int>
+    fun updateTask(item: Task): Single<Int>
 
-    fun addStep(item: Step): Single<Int>
+    fun updateStep(item: Step): Single<Int>
 
-    fun addIdea(item: Idea): Single<Int>
+    fun updateIdea(item: Idea): Single<Int>
 
-    fun addKey(item: KeyResult): Single<Int>
+    fun updateKey(item: KeyResult): Single<Int>
 }

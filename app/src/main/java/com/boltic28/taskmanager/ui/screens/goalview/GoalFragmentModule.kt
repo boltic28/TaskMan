@@ -18,7 +18,11 @@ class GoalFragmentModule {
                 StepSmallViewController(),
                 IdeaSmallViewController(),
                 KeySmallViewController()
-            )
+            ),
+            object : HolderController.OnActionClickListener{
+                override fun onActionButtonClick(item: Any) {}
+                override fun onViewClick(item: Any) {}
+            }
         )
 
 

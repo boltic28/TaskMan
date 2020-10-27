@@ -2,13 +2,13 @@ package com.boltic28.taskmanager.datalayer.entities
 
 import java.time.LocalDateTime
 
-class Idea(
-    var id: Long,
-    var stepId: Long,
-    var keyId: Long,
-    var goalId: Long,
-    var name: String,
-    var description: String,
-    var icon: String,
-    var date: LocalDateTime
+data class Idea(
+    val id: Long,
+    val stepId: Long,
+    val keyId: Long,
+    val goalId: Long,
+    val name: String,
+    val description: String,
+    val icon: String,
+    val date: LocalDateTime
 )

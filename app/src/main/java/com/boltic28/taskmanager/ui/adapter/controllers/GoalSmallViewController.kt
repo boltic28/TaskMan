@@ -11,7 +11,7 @@ import kotlin.reflect.KClass
 
 class GoalSmallViewController : HolderController() {
 
-    override fun getType(): Int = R.layout.item_small_row
+    override fun getType(): Int = R.layout.item_small_goal
 
     override fun getItemType(): KClass<*> = Goal::class
 
@@ -20,9 +20,9 @@ class GoalSmallViewController : HolderController() {
 
         val itemView: View = holder.itemView
 
-        val name: TextView = itemView.findViewById(R.id.small_item_name)
-        val dateStart: TextView = itemView.findViewById(R.id.small_item_date)
-        val icon: ImageView = itemView.findViewById(R.id.small_item_image)
+        val name: TextView = itemView.findViewById(R.id.small_goal_name)
+        val dateStart: TextView = itemView.findViewById(R.id.small_goal_date)
+        val icon: ImageView = itemView.findViewById(R.id.small_goal_image)
 
         name.text = item.name
         dateStart.text = item.date.format(DateTimeFormatter.ofPattern(itemView.resources.getString(R.string.dateFormatterForItems)))

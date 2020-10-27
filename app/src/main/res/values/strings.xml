@@ -25,6 +25,8 @@
     <string name="dateFormatterForItems">dd.MM.yyyy</string>
     <string name="add_new_item">add new item</string>
     <string name="percentage">Progress $s %</string>
+    <string name="to_goals_element">To Goal\'s Elements</string>
+    <string name="to_free_elements">to free elements</string>
 
     <string-array name="cycle">
         <item>hour</item>

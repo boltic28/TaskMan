@@ -6,6 +6,7 @@ import com.boltic28.taskmanager.businesslayer.FreeElementsInteractor
 import com.boltic28.taskmanager.datalayer.entities.Goal
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.di.AppDagger
+import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.screens.MainActivity
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.android.schedulers.AndroidSchedulers

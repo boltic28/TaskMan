@@ -7,7 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.boltic28.taskmanager.ui.screens.MainActivity
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 
-class ItemAdapter(private val controllers: List<HolderController>) : RecyclerView.Adapter<DefaultViewHolder>(), ElementManager {
+class ItemAdapter(
+    private val controllers: List<HolderController>,
+    private var itemListener: HolderController.OnActionClickListener
+) :
+    RecyclerView.Adapter<DefaultViewHolder>(), ElementManager {
 
     private var items: List<Any> = emptyList()
 
@@ -19,7 +23,7 @@ class ItemAdapter(private val controllers: List<HolderController>) : RecyclerVie
         result.dispatchUpdatesTo(this)
     }
 
-    override fun addElement(item: Any){
+    override fun addElement(item: Any) {
         val newList = mutableListOf<Any>()
         newList.addAll(items)
         newList.add(item)
@@ -29,7 +33,7 @@ class ItemAdapter(private val controllers: List<HolderController>) : RecyclerVie
     override fun addList(list: List<Any>) {
         val newList = mutableListOf<Any>()
         newList.addAll(items)
-        newList.add(list)
+        newList.addAll(list)
         refreshData(newList)
     }
 
@@ -56,10 +60,13 @@ class ItemAdapter(private val controllers: List<HolderController>) : RecyclerVie
         )
 
         controllers.first { controller ->
-            controller.fitTo(holder)
+            controller.fitTo(holder) }.apply {
+            listener = itemListener
+            bind(holder, items[position])
         }
-            .bind(holder, items[position])
     }
 
-
+    fun setAdapterListener(listener: HolderController.OnActionClickListener) {
+        itemListener = listener
+    }
 }

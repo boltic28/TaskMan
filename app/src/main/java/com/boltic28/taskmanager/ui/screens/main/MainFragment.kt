@@ -8,8 +8,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.di.AppDagger
+import com.boltic28.taskmanager.datalayer.entities.Goal
 import com.boltic28.taskmanager.signtools.FireUserManager
+import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.screens.ActivityHelper
 import kotlinx.android.synthetic.main.fragment_main.*
 
@@ -17,6 +18,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     companion object {
         const val TAG = "mainActivity_test"
+        const val GOAL_ID = "goalId"
     }
 
     private val model: MainFragmentModel by lazy {
@@ -46,11 +48,40 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         main_add_button.setOnClickListener {
             findNavController().navigate(R.id.creatorFragment)
         }
-        main_free_goals.setOnClickListener { model.loadGoals() }
-        main_free_keys.setOnClickListener { model.loadKeys() }
-        main_free_tasks.setOnClickListener { model.loadTasks() }
-        main_free_ideas.setOnClickListener { model.loadIdeas() }
-        main_free_steps.setOnClickListener { model.loadSteps() }
+        main_free_goals.setOnClickListener {
+            loadGoals()
+        }
+        main_free_keys.setOnClickListener { model.loadKeys()
+            model.adapter.setAdapterListener(object : HolderController.OnActionClickListener{
+                override fun onActionButtonClick(item: Any) {}
+                override fun onViewClick(item: Any) {
+
+                }
+
+            })}
+        main_free_tasks.setOnClickListener { model.loadTasks()
+            model.adapter.setAdapterListener(object : HolderController.OnActionClickListener{
+                override fun onActionButtonClick(item: Any) {}
+                override fun onViewClick(item: Any) {
+
+                }
+
+            })}
+        main_free_ideas.setOnClickListener { model.loadIdeas()
+            model.adapter.setAdapterListener(object : HolderController.OnActionClickListener{
+                override fun onActionButtonClick(item: Any) {}
+                override fun onViewClick(item: Any){
+                }
+
+            })}
+        main_free_steps.setOnClickListener { model.loadSteps()
+            model.adapter.setAdapterListener(object : HolderController.OnActionClickListener{
+                override fun onActionButtonClick(item: Any) {}
+                override fun onViewClick(item: Any) {
+
+                }
+
+            })}
     }
 
     private fun checkUser() {
@@ -61,10 +92,23 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                     findNavController().navigate(R.id.signFragment)
                 } else {
                     (activity as? ActivityHelper)?.setToolbarText(user.email)
-                    model.loadGoals()
+                    loadGoals()
                 }
             }, {
                 Log.d(TAG, it.toString())
             })
+    }
+
+    private fun loadGoals(){
+        model.adapter.setAdapterListener(object : HolderController.OnActionClickListener{
+            override fun onActionButtonClick(item: Any) {}
+            override fun onViewClick(item: Any) {
+                item as Goal
+                val bundle = Bundle()
+                bundle.putLong(GOAL_ID, item.id)
+                findNavController().navigate(R.id.goalFragment, bundle)
+            }
+        })
+        model.loadGoals()
     }
 }

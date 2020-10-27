@@ -19,6 +19,10 @@ class MainFragmentModule {
                 StepViewController(),
                 IdeaViewController(),
                 KeyViewController()
-            )
+            ),
+            object : HolderController.OnActionClickListener{
+                override fun onActionButtonClick(item: Any) {}
+                override fun onViewClick(item: Any) {}
+            }
         )
 }

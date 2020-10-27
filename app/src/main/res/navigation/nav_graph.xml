@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_mainFragment_to_creatorFragment"
             app:destination="@id/creatorFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_goalFragment"
+            app:destination="@id/goalFragment" />
     </fragment>
     <fragment
         android:id="@+id/creatorFragment"
@@ -30,5 +33,16 @@
         <action
             android:id="@+id/action_creatorFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/goalFragment"
+        android:name="com.boltic28.taskmanager.ui.screens.goalview.GoalFragment"
+        android:label="GoalFragment" >
+        <action
+            android:id="@+id/action_goalFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_goalFragment_to_signFragment"
+            app:destination="@id/signFragment" />
     </fragment>
 </navigation>

@@ -7,8 +7,8 @@ import android.widget.TextView
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.Progress
 import com.boltic28.taskmanager.datalayer.entities.Goal
-import com.boltic28.taskmanager.ui.screens.MainActivity
 import com.boltic28.taskmanager.ui.adapter.DefaultViewHolder
+import com.boltic28.taskmanager.ui.screens.MainActivity
 import java.time.format.DateTimeFormatter
 import kotlin.reflect.KClass
 
@@ -59,8 +59,15 @@ class GoalViewController : HolderController() {
         )
 
         itemView.setOnClickListener {
+            listener.onViewClick(item)
             // go to item page
-            Log.d(MainActivity.TAG, "Item Goal is clicked")
+            Log.d(MainActivity.TAG, "Item smallIdea clicked")
+        }
+
+        icon.setOnClickListener {
+            listener.onActionButtonClick(item)
+
+            Log.d(MainActivity.TAG, "Plus smallIdea clicked")
         }
     }
 }
