@@ -7,6 +7,9 @@ import com.boltic28.taskmanager.datalayer.room.di.RepositoryModule
 import com.boltic28.taskmanager.ui.screens.goalfragment.DaggerGoalComponent
 import com.boltic28.taskmanager.ui.screens.goalfragment.GoalComponent
 import com.boltic28.taskmanager.ui.screens.goalfragment.GoalFragmentModule
+import com.boltic28.taskmanager.ui.screens.keyfragment.DaggerKeyComponent
+import com.boltic28.taskmanager.ui.screens.keyfragment.KeyComponent
+import com.boltic28.taskmanager.ui.screens.keyfragment.KeyFragmentModule
 import com.boltic28.taskmanager.ui.screens.mainfragment.DaggerMainComponent
 import com.boltic28.taskmanager.ui.screens.mainfragment.MainComponent
 import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragmentModule
@@ -22,6 +25,7 @@ class AppDagger : Application() {
         lateinit var goalComponent: GoalComponent
         lateinit var mainComponent: MainComponent
         lateinit var stepComponent: StepComponent
+        lateinit var keyComponent: KeyComponent
     }
 
     override fun onCreate() {
@@ -77,6 +81,15 @@ class AppDagger : Application() {
             .createModule(contextModule)
             .createModule(businessModule)
             .createModule(stepModule)
+            .buildComponent()
+
+        val keyModule = KeyFragmentModule()
+
+        keyComponent = DaggerKeyComponent
+            .builder()
+            .createModule(contextModule)
+            .createModule(businessModule)
+            .createModule(keyModule)
             .buildComponent()
     }
 }

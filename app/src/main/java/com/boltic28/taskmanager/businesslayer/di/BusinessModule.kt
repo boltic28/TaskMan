@@ -70,12 +70,12 @@ class BusinessModule(
         )
 
     @Provides
-    fun provideKeyInteractor(): KeyInteractor =
-        KeyInteractorImpl(
+    fun provideKeyFragmentInteractor(): KeyFragmentInteractor =
+        KeyFragmentInteractorImpl(
             keyRepository,
-            stepRepository,
             taskRepository,
-            ideaRepository
+            ideaRepository,
+            goalRepository
         )
 
     @Provides

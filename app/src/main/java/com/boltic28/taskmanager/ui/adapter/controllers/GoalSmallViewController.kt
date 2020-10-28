@@ -32,7 +32,6 @@ class GoalSmallViewController : HolderController() {
 
         button.setImageDrawable(itemView.resources.getDrawable(R.drawable.ic_attach))
 
-
         itemView.setOnClickListener { listener.onViewClick(item) }
         button.setOnClickListener { listener.onActionButtonClick(item) }
     }
