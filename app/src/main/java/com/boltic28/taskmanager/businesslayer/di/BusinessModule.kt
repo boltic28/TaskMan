@@ -7,10 +7,8 @@ import com.boltic28.taskmanager.datalayer.room.idea.IdeaRepository
 import com.boltic28.taskmanager.datalayer.room.keyresult.KeyRepository
 import com.boltic28.taskmanager.datalayer.room.step.StepRepository
 import com.boltic28.taskmanager.datalayer.room.task.TaskRepository
-import com.boltic28.taskmanager.di.AppScope
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 @Module
 class BusinessModule(
@@ -63,11 +61,12 @@ class BusinessModule(
         )
 
     @Provides
-    fun provideStepInteractor(): StepInteractor =
-        StepInteractorImpl(
+    fun provideStepInteractor(): StepFragmentInteractor =
+        StepFragmentInteractorImpl(
             taskRepository,
             ideaRepository,
-            stepRepository
+            stepRepository,
+            goalRepository
         )
 
     @Provides

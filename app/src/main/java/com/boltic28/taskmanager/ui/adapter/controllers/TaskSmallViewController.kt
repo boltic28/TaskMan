@@ -32,7 +32,7 @@ class TaskSmallViewController : HolderController() {
         dateStart.text = item.date.format(DateTimeFormatter.ofPattern(itemView.resources.getString(R.string.dateFormatterForItems)))
         // TODO icon inject
 
-        if (item.goalId == 0L){
+        if (item.goalId == 0L && item.keyId == 0L && item.stepId == 0L){
             button.setImageDrawable(itemView.resources.getDrawable(R.drawable.ic_add_item))
         }else{
             button.setImageDrawable(itemView.resources.getDrawable(R.drawable.ic_remove_item))

@@ -1,6 +1,7 @@
 package com.boltic28.taskmanager.ui.adapter.controllers
 
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.boltic28.taskmanager.R
@@ -27,5 +28,12 @@ class GoalSmallViewController : HolderController() {
         name.text = item.name
         dateStart.text = item.date.format(DateTimeFormatter.ofPattern(itemView.resources.getString(R.string.dateFormatterForItems)))
         // TODO icon inject
+        val button: ImageButton = itemView.findViewById(R.id.small_goal_button_action)
+
+        button.setImageDrawable(itemView.resources.getDrawable(R.drawable.ic_attach))
+
+
+        itemView.setOnClickListener { listener.onViewClick(item) }
+        button.setOnClickListener { listener.onActionButtonClick(item) }
     }
 }

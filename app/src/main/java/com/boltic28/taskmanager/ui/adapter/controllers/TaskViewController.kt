@@ -20,10 +20,10 @@ class TaskViewController: HolderController() {
         item as Task
         val itemView: View = holder.itemView
 
-        val header: TextView = itemView.findViewById(R.id.item_idea_header)
-        val description: TextView = itemView.findViewById(R.id.item_idea_description)
-        val dateStart: TextView = itemView.findViewById(R.id.item_idea_start)
-        val icon: ImageView = itemView.findViewById(R.id.item_idea_image)
+        val header: TextView = itemView.findViewById(R.id.item_task_header)
+        val description: TextView = itemView.findViewById(R.id.item_task_description)
+        val dateStart: TextView = itemView.findViewById(R.id.item_task_start)
+        val icon: ImageView = itemView.findViewById(R.id.item_task_image)
 
         header.text = item.name
         description.text = item.description

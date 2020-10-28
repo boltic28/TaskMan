@@ -2,6 +2,7 @@ package com.boltic28.taskmanager.datalayer.room.step
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.boltic28.taskmanager.datalayer.Progress
 import java.time.LocalDateTime
 
 @Entity(tableName = "step")
@@ -15,6 +16,7 @@ data class StepEntity(
     val icon: String,
     val date: LocalDateTime,
     val dateClose: LocalDateTime,
+    val progress: Progress,
     val isDone: Boolean,
     val isStarted: Boolean
 )

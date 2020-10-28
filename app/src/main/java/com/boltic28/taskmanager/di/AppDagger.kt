@@ -11,6 +11,9 @@ import com.boltic28.taskmanager.ui.screens.mainfragment.DaggerMainComponent
 import com.boltic28.taskmanager.ui.screens.mainfragment.MainComponent
 import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragmentModule
 import com.boltic28.taskmanager.ui.screens.settings.SettingsModule
+import com.boltic28.taskmanager.ui.screens.stepfragment.DaggerStepComponent
+import com.boltic28.taskmanager.ui.screens.stepfragment.StepComponent
+import com.boltic28.taskmanager.ui.screens.stepfragment.StepFragmentModule
 
 class AppDagger : Application() {
 
@@ -18,12 +21,13 @@ class AppDagger : Application() {
         lateinit var component: AppComponent
         lateinit var goalComponent: GoalComponent
         lateinit var mainComponent: MainComponent
+        lateinit var stepComponent: StepComponent
     }
 
     override fun onCreate() {
         super.onCreate()
 
-        val contextModule = ContextModule(this)
+        val contextModule = AppModule(this)
         val dataBaseModule =
             DataBaseModule(this)
         val repositoryModule =
@@ -64,6 +68,15 @@ class AppDagger : Application() {
             .createModule(contextModule)
             .createModule(businessModule)
             .createModule(mainModule)
+            .buildComponent()
+
+        val stepModule = StepFragmentModule()
+
+        stepComponent = DaggerStepComponent
+            .builder()
+            .createModule(contextModule)
+            .createModule(businessModule)
+            .createModule(stepModule)
             .buildComponent()
     }
 }

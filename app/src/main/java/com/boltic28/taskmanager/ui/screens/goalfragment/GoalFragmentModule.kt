@@ -1,6 +1,5 @@
 package com.boltic28.taskmanager.ui.screens.goalfragment
 
-import com.boltic28.taskmanager.di.GoalFragmentScope
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.*
 import dagger.Module
@@ -24,6 +23,4 @@ class GoalFragmentModule {
                 override fun onViewClick(item: Any) {}
             }
         )
-
-
 }

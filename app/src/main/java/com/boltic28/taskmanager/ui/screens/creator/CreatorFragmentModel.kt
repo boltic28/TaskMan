@@ -97,6 +97,7 @@ class CreatorFragmentModel : ViewModel() {
                 dateClose = endDate,
                 isDone = false,
                 isStarted = false,
+                progress = Progress.PROGRESS_0,
                 tasks = emptyList(),
                 ideas = emptyList()
             )

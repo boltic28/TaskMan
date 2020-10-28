@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.di
+package com.boltic28.taskmanager.ui.screens.mainfragment
 
 import javax.inject.Scope
 

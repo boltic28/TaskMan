@@ -22,7 +22,7 @@
         />
 
     <TextView
-        android:id="@+id/item_idea_description"
+        android:id="@+id/item_task_description"
         style="@style/Item.Description"
         android:maxLines="2"
         tools:text="since: 22.09.2020 Some stupid idea come into my head,since: 22.09.2020 Some stupid idea come into my head,since: 22.09...."

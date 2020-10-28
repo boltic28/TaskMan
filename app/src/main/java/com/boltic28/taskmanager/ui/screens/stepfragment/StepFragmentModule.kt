@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.ui.screens.mainfragment
+package com.boltic28.taskmanager.ui.screens.stepfragment
 
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.*
@@ -6,18 +6,16 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class MainFragmentModule {
+class StepFragmentModule {
 
-    @MainFragmentScope
+    @StepFragmentScope
     @Provides
     fun provideAdapter(): ItemAdapter =
         ItemAdapter(
             listOf(
-                GoalViewController(),
-                TaskViewController(),
-                StepViewController(),
-                IdeaViewController(),
-                KeyViewController()
+                TaskSmallViewController(),
+                IdeaSmallViewController(),
+                GoalSmallViewController()
             ),
             object : HolderController.OnActionClickListener{
                 override fun onActionButtonClick(item: Any) {}

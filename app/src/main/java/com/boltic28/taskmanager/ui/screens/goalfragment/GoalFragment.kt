@@ -81,11 +81,11 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
     private fun loadDataIntoRecycler(goal: Goal) {
         if (model.isGoalsElementIntoRecycler) {
             model.isGoalsElementIntoRecycler = false
-            model.loadFreeElementIntoAdapter()
+            model.loadFreeElementIntoAdapter(findNavController())
             goal_fr_add_action.text = resources.getString(R.string.to_goals_element)
         } else {
             model.isGoalsElementIntoRecycler = true
-            model.loadGoalsElementIntoAdapter(goal)
+            model.loadGoalsElementIntoAdapter(goal, findNavController())
             goal_fr_add_action.text = resources.getString(R.string.to_free_elements)
         }
     }

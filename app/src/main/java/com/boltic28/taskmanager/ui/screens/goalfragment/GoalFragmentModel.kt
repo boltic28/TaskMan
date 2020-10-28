@@ -1,7 +1,10 @@
 package com.boltic28.taskmanager.ui.screens.goalfragment
 
+import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
+import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.businesslayer.GoalFragmentInteractor
 import com.boltic28.taskmanager.businesslayer.FreeElementsInteractor
 import com.boltic28.taskmanager.datalayer.entities.*
@@ -10,6 +13,10 @@ import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.screens.MainActivity
+import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment.Companion.IDEA_ID
+import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment.Companion.KEY_ID
+import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment.Companion.STEP_ID
+import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment.Companion.TASK_ID
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -47,7 +54,7 @@ class GoalFragmentModel : ViewModel() {
         AppDagger.goalComponent.inject(this)
     }
 
-    fun loadFreeElementIntoAdapter() {
+    fun loadFreeElementIntoAdapter(nav: NavController) {
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun onActionButtonClick(item: Any) {
@@ -56,13 +63,8 @@ class GoalFragmentModel : ViewModel() {
                 if (item is KeyResult) addToGoal(item)
                 if (item is Idea) addToGoal(item)
             }
-
             override fun onViewClick(item: Any) {
-                // move to elements Fragment
-//                if (item is Step) addToGoal(item)
-//                if (item is Task) addToGoal(item)
-//                if (item is KeyResult) addToGoal(item)
-//                if (item is Idea) addToGoal(item)
+                goToItemFragment(item, nav)
             }
 
         })
@@ -70,10 +72,9 @@ class GoalFragmentModel : ViewModel() {
         loadSteps()
         loadTasks()
         loadIdeas()
-
     }
 
-    fun loadGoalsElementIntoAdapter(goal: Goal) {
+    fun loadGoalsElementIntoAdapter(goal: Goal, nav: NavController) {
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun onActionButtonClick(item: Any) {
@@ -82,21 +83,14 @@ class GoalFragmentModel : ViewModel() {
                 if (item is KeyResult) makeFree(item)
                 if (item is Idea) makeFree(item)
             }
-
             override fun onViewClick(item: Any) {
-                // move to elements Fragment
-//                if (item is Step) addToGoal(item)
-//                if (item is Task) addToGoal(item)
-//                if (item is KeyResult) addToGoal(item)
-//                if (item is Idea) addToGoal(item)
+                goToItemFragment(item, nav)
             }
-
         })
         adapter.addList(goal.keys)
         adapter.addList(goal.steps)
         adapter.addList(goal.tasks)
         adapter.addList(goal.ideas)
-
     }
 
     fun refreshGoal() {
@@ -220,7 +214,7 @@ class GoalFragmentModel : ViewModel() {
     }
 
     private fun loadTasks() {
-        disposables + freeElementsInteractor.getFreeKeys()
+        disposables + freeElementsInteractor.getFreeTasks()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
@@ -231,7 +225,7 @@ class GoalFragmentModel : ViewModel() {
     }
 
     private fun loadKeys() {
-        disposables + freeElementsInteractor.getFreeTasks()
+        disposables + freeElementsInteractor.getFreeKeys()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
@@ -261,5 +255,25 @@ class GoalFragmentModel : ViewModel() {
             }, {
                 Log.d(MainActivity.TAG, "getSteps - error \n ->$it")
             })
+    }
+
+    private fun goToItemFragment(item: Any, nav: NavController){
+        val bundle = Bundle()
+        if (item is Step){
+            bundle.putLong(STEP_ID, item.id)
+            nav.navigate(R.id.stepFragment, bundle)
+        }
+        if (item is Task){
+            bundle.putLong(TASK_ID, item.id)
+            nav.navigate(R.id.taskFragment, bundle)
+        }
+        if (item is Idea){
+            bundle.putLong(IDEA_ID, item.id)
+            nav.navigate(R.id.ideaFragment, bundle)
+        }
+        if (item is KeyResult){
+            bundle.putLong(KEY_ID, item.id)
+            nav.navigate(R.id.keyFragment, bundle)
+        }
     }
 }

@@ -12,6 +12,7 @@ fun Step.toEntity(): StepEntity =
         icon = this.icon,
         date = this.date,
         dateClose = this.dateClose,
+        progress = this.progress,
         isDone = this.isDone,
         isStarted = this.isStarted
     )
@@ -26,6 +27,7 @@ fun StepEntity.toStep(): Step =
         icon = this.icon,
         date = this.date,
         dateClose = this.dateClose,
+        progress = this.progress,
         isDone = this.isDone,
         isStarted = this.isStarted,
         tasks = emptyList(),

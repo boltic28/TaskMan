@@ -15,7 +15,7 @@ import dagger.Component
 @AppScope
 @Component(
     modules = [
-        ContextModule::class, RepositoryModule::class, DataBaseModule::class,
+        AppModule::class, RepositoryModule::class, DataBaseModule::class,
         SettingsModule::class, BusinessModule::class]
 )
 interface AppComponent {
@@ -30,7 +30,7 @@ interface AppComponent {
 
     @Component.Builder
     interface DataBuilder {
-        fun createModule(module: ContextModule): DataBuilder
+        fun createModule(module: AppModule): DataBuilder
         fun createModule(module: RepositoryModule): DataBuilder
         fun createModule(module: DataBaseModule): DataBuilder
         fun createModule(module: SettingsModule): DataBuilder

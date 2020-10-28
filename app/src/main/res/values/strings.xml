@@ -27,6 +27,10 @@
     <string name="percentage">Progress $s %</string>
     <string name="to_goals_element">To Goal\'s Elements</string>
     <string name="to_free_elements">to free elements</string>
+    <string name="unpin">unpin</string>
+    <string name="attach">attach To</string>
+    <string name="to_steps_element">to steps elements</string>
+    <string name="not_attached">not attached</string>
 
     <string-array name="cycle">
         <item>hour</item>
