@@ -31,6 +31,9 @@
     <string name="attach">attach To</string>
     <string name="to_steps_element">to steps elements</string>
     <string name="not_attached">not attached</string>
+    <string name="tasks_image_description">tasks image</string>
+    <string name="in_progress">in progress</string>
+    <string name="not_started">task is not started</string>
 
     <string-array name="cycle">
         <item>hour</item>

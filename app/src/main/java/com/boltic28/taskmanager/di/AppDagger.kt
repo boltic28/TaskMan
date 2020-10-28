@@ -7,6 +7,9 @@ import com.boltic28.taskmanager.datalayer.room.di.RepositoryModule
 import com.boltic28.taskmanager.ui.screens.goalfragment.DaggerGoalComponent
 import com.boltic28.taskmanager.ui.screens.goalfragment.GoalComponent
 import com.boltic28.taskmanager.ui.screens.goalfragment.GoalFragmentModule
+import com.boltic28.taskmanager.ui.screens.ideafragment.DaggerIdeaComponent
+import com.boltic28.taskmanager.ui.screens.ideafragment.IdeaComponent
+import com.boltic28.taskmanager.ui.screens.ideafragment.IdeaFragmentModule
 import com.boltic28.taskmanager.ui.screens.keyfragment.DaggerKeyComponent
 import com.boltic28.taskmanager.ui.screens.keyfragment.KeyComponent
 import com.boltic28.taskmanager.ui.screens.keyfragment.KeyFragmentModule
@@ -17,6 +20,9 @@ import com.boltic28.taskmanager.ui.screens.settings.SettingsModule
 import com.boltic28.taskmanager.ui.screens.stepfragment.DaggerStepComponent
 import com.boltic28.taskmanager.ui.screens.stepfragment.StepComponent
 import com.boltic28.taskmanager.ui.screens.stepfragment.StepFragmentModule
+import com.boltic28.taskmanager.ui.screens.taskfragment.DaggerTaskComponent
+import com.boltic28.taskmanager.ui.screens.taskfragment.TaskComponent
+import com.boltic28.taskmanager.ui.screens.taskfragment.TaskFragmentModule
 
 class AppDagger : Application() {
 
@@ -26,6 +32,8 @@ class AppDagger : Application() {
         lateinit var mainComponent: MainComponent
         lateinit var stepComponent: StepComponent
         lateinit var keyComponent: KeyComponent
+        lateinit var ideaComponent: IdeaComponent
+        lateinit var taskComponent: TaskComponent
     }
 
     override fun onCreate() {
@@ -57,7 +65,6 @@ class AppDagger : Application() {
             .buildComponent()
 
         val goalModule = GoalFragmentModule()
-
         goalComponent = DaggerGoalComponent
             .builder()
             .createModule(contextModule)
@@ -66,7 +73,6 @@ class AppDagger : Application() {
             .buildComponent()
 
         val mainModule = MainFragmentModule()
-
         mainComponent = DaggerMainComponent
             .builder()
             .createModule(contextModule)
@@ -75,7 +81,6 @@ class AppDagger : Application() {
             .buildComponent()
 
         val stepModule = StepFragmentModule()
-
         stepComponent = DaggerStepComponent
             .builder()
             .createModule(contextModule)
@@ -84,12 +89,27 @@ class AppDagger : Application() {
             .buildComponent()
 
         val keyModule = KeyFragmentModule()
-
         keyComponent = DaggerKeyComponent
             .builder()
             .createModule(contextModule)
             .createModule(businessModule)
             .createModule(keyModule)
+            .buildComponent()
+
+        val ideaModule = IdeaFragmentModule()
+        ideaComponent = DaggerIdeaComponent
+            .builder()
+            .createModule(contextModule)
+            .createModule(businessModule)
+            .createModule(ideaModule)
+            .buildComponent()
+
+        val taskModule = TaskFragmentModule()
+        taskComponent = DaggerTaskComponent
+            .builder()
+            .createModule(contextModule)
+            .createModule(businessModule)
+            .createModule(taskModule)
             .buildComponent()
     }
 }

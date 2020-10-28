@@ -1,6 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/task_fr_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="24dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/tasks_image_description" />
+
+    <TextView
+        android:id="@+id/task_fr_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textSize="32sp"
+        tools:text="Task numb 2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/task_fr_start_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="textEnd"
+        tools:text = "23 sep 2020"
+        app:layout_constraintRight_toRightOf="@id/task_fr_name"
+        app:layout_constraintTop_toBottomOf="@id/task_fr_name"
+        />
+
+    <TextView
+        android:id="@+id/task_fr_is_started"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="not started"
+        app:layout_constraintLeft_toLeftOf="@id/task_fr_name"
+        app:layout_constraintBottom_toBottomOf="@id/task_fr_image"
+        />
+
+    <TextView
+        android:id="@+id/task_fr_common_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        tools:text="information about:"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/task_fr_image"
+        />
+
+    <TextView
+        android:id="@+id/task_fr_description_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        tools:text="Description:"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/task_fr_common_data"
+        />
+
+    <TextView
+        android:id="@+id/task_fr_description_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        tools:text="information about:"
+        app:layout_constraintLeft_toRightOf="@+id/task_fr_description_header"
+        app:layout_constraintTop_toBottomOf="@id/task_fr_common_data"
+        />
+
+    <TextView
+        android:id="@+id/task_fr_cycle_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        tools:text="Cycle:"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/task_fr_description_content"
+        />
+
+    <TextView
+        android:id="@+id/task_fr_cycle_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        tools:text="information about:"
+        app:layout_constraintLeft_toRightOf="@+id/task_fr_description_header"
+        app:layout_constraintTop_toBottomOf="@id/task_fr_description_content"
+        />
+
+    <TextView
+        android:id="@+id/task_fr_finish_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        tools:text="Cycle:"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/task_fr_cycle_content"
+        />
+
+    <TextView
+        android:id="@+id/task_fr_finish_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        tools:text="information about:"
+        app:layout_constraintLeft_toRightOf="@+id/task_fr_description_header"
+        app:layout_constraintTop_toBottomOf="@id/task_fr_cycle_content"
+        />
+
+    <Button
+        android:id="@+id/task_fr_add_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_it"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
