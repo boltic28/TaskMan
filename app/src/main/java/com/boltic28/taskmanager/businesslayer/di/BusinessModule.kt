@@ -85,8 +85,12 @@ class BusinessModule(
         )
 
     @Provides
-    fun provideIdeaInteractor(): IdeaInteractor =
-        IdeaInteractorImpl(
-            ideaRepository
+    fun provideIdeaInteractor(): IdeaFragmentInteractor =
+        IdeaFragmentInteractorImpl(
+            ideaRepository,
+            stepRepository,
+            keyRepository,
+            goalRepository,
+            taskRepository
         )
 }

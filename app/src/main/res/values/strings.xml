@@ -34,6 +34,11 @@
     <string name="tasks_image_description">tasks image</string>
     <string name="in_progress">in progress</string>
     <string name="not_started">task is not started</string>
+    <string name="idea_image_description">idea image description</string>
+    <string name="convert_to">Convert to...</string>
+    <string name="image_button_description">image button</string>
+    <string name="attach_to">Attach idea to...</string>
+    <string name="attached">attached</string>
 
     <string-array name="cycle">
         <item>hour</item>

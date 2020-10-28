@@ -30,7 +30,7 @@ class GoalSmallViewController : HolderController() {
         // TODO icon inject
         val button: ImageButton = itemView.findViewById(R.id.small_goal_button_action)
 
-        button.setImageDrawable(itemView.resources.getDrawable(R.drawable.ic_attach))
+        button.setImageResource(R.drawable.ic_attach)
 
         itemView.setOnClickListener { listener.onViewClick(item) }
         button.setOnClickListener { listener.onActionButtonClick(item) }

@@ -33,9 +33,9 @@ class IdeaSmallViewController : HolderController() {
         // TODO icon inject
 
         if (item.goalId == 0L && item.keyId == 0L && item.stepId == 0L){
-            button.setImageDrawable(itemView.resources.getDrawable(R.drawable.ic_add_item))
+            button.setImageResource(R.drawable.ic_link)
         }else{
-            button.setImageDrawable(itemView.resources.getDrawable(R.drawable.ic_remove_item))
+            button.setImageResource(R.drawable.ic_unlink)
         }
 
         itemView.setOnClickListener {
