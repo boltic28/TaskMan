@@ -1,7 +1,7 @@
 package com.boltic28.taskmanager.ui.screens.creator
 
 import androidx.lifecycle.ViewModel
-import com.boltic28.taskmanager.di.AppDagger
+import com.boltic28.taskmanager.di.App
 import com.boltic28.taskmanager.datalayer.Cycle
 import com.boltic28.taskmanager.datalayer.Progress
 import com.boltic28.taskmanager.datalayer.entities.*
@@ -32,7 +32,7 @@ class CreatorFragmentModel : ViewModel() {
     lateinit var ideaRepository: IdeaRepository
 
     init {
-        AppDagger.component.injectModel(this)
+        App.component.injectModel(this)
     }
 
     fun create(item: Goal): Single<Long> =

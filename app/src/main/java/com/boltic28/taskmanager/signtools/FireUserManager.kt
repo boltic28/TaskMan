@@ -2,7 +2,7 @@ package com.boltic28.taskmanager.signtools
 
 import android.app.Activity
 import android.util.Log
-import com.boltic28.taskmanager.di.AppDagger
+import com.boltic28.taskmanager.di.App
 import com.boltic28.taskmanager.ui.screens.MainActivity.Companion.TAG
 import com.boltic28.taskmanager.utils.Messenger
 import com.google.android.gms.tasks.Task
@@ -26,7 +26,7 @@ class FireUserManager(private val activity: Activity) :
             if (manager == null) {
                 manager =
                     FireUserManager(activity)
-                AppDagger.component.injectManager(manager!!)
+                App.component.injectManager(manager!!)
             }
             return manager!!
         }

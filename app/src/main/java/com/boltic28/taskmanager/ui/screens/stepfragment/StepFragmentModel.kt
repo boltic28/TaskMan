@@ -7,7 +7,7 @@ import androidx.navigation.NavController
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.businesslayer.StepFragmentInteractor
 import com.boltic28.taskmanager.datalayer.entities.*
-import com.boltic28.taskmanager.di.AppDagger
+import com.boltic28.taskmanager.di.App
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
@@ -44,7 +44,7 @@ class StepFragmentModel: ViewModel() {
     val disposables = mutableListOf<Disposable>()
 
     init {
-        AppDagger.stepComponent.inject(this)
+        App.stepComponent.inject(this)
     }
 
     fun loadFreeElementIntoAdapter(nav: NavController) {

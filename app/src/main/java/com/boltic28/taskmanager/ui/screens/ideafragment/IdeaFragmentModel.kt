@@ -6,7 +6,7 @@ import androidx.navigation.NavController
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.businesslayer.IdeaFragmentInteractor
 import com.boltic28.taskmanager.datalayer.entities.*
-import com.boltic28.taskmanager.di.AppDagger
+import com.boltic28.taskmanager.di.App
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
@@ -37,7 +37,7 @@ class IdeaFragmentModel : ViewModel() {
     val disposables = mutableListOf<Disposable>()
 
     init {
-        AppDagger.ideaComponent.inject(this)
+        App.ideaComponent.inject(this)
     }
 
     fun refresh() {

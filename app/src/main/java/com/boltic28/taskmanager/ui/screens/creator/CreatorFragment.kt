@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.di.AppDagger
+import com.boltic28.taskmanager.di.App
 import com.boltic28.taskmanager.ui.screens.ActivityHelper
 import com.boltic28.taskmanager.ui.screens.MainActivity
 import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment
@@ -33,7 +33,7 @@ class CreatorFragment : Fragment(R.layout.fragment_creator) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AppDagger.component.injectFragment(this)
+        App.component.injectFragment(this)
     }
 
     private val model: CreatorFragmentModel by lazy {

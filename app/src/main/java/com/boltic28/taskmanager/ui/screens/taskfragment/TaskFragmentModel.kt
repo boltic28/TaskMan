@@ -3,7 +3,7 @@ package com.boltic28.taskmanager.ui.screens.taskfragment
 import androidx.lifecycle.ViewModel
 import com.boltic28.taskmanager.businesslayer.TaskFragmentInteractor
 import com.boltic28.taskmanager.datalayer.entities.Task
-import com.boltic28.taskmanager.di.AppDagger
+import com.boltic28.taskmanager.di.App
 import com.boltic28.taskmanager.signtools.UserManager
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -28,7 +28,7 @@ class TaskFragmentModel: ViewModel() {
     val disposables = mutableListOf<Disposable>()
 
     init {
-        AppDagger.taskComponent.inject(this)
+        App.taskComponent.inject(this)
     }
 
     fun refresh() {

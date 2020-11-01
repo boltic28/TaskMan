@@ -10,7 +10,7 @@ import com.boltic28.taskmanager.datalayer.entities.Goal
 import com.boltic28.taskmanager.datalayer.entities.Idea
 import com.boltic28.taskmanager.datalayer.entities.KeyResult
 import com.boltic28.taskmanager.datalayer.entities.Task
-import com.boltic28.taskmanager.di.AppDagger
+import com.boltic28.taskmanager.di.App
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
@@ -47,7 +47,7 @@ class KeyFragmentModel: ViewModel() {
     val disposables = mutableListOf<Disposable>()
 
     init {
-        AppDagger.keyComponent.inject(this)
+        App.keyComponent.inject(this)
     }
 
     fun loadGoalsIntoAdapter(key: KeyResult, nav: NavController){

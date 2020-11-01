@@ -1,15 +1,14 @@
 package com.boltic28.taskmanager.ui.screens
 
-import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.boltic28.taskmanager.R
+import com.boltic28.taskmanager.ui.base.BaseActivity
 import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment
 
-class MainActivity : AppCompatActivity(), ActivityHelper {
+class MainActivity : BaseActivity<MainActivityModel>(R.layout.activity_main), ActivityHelper {
 
     companion object {
         const val TAG = "mainActivity_test"
@@ -17,12 +16,6 @@ class MainActivity : AppCompatActivity(), ActivityHelper {
 
     private val model: MainActivityModel by lazy { ViewModelProviders.of(this).get(
         MainActivityModel::class.java)}
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        Log.d(MainFragment.TAG, "-> mainActivity")
-    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)

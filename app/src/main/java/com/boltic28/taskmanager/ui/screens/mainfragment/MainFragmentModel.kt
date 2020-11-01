@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.boltic28.taskmanager.businesslayer.FreeElementsInteractor
 import com.boltic28.taskmanager.datalayer.entities.Goal
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
-import com.boltic28.taskmanager.di.AppDagger
+import com.boltic28.taskmanager.di.App
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.screens.MainActivity
 import com.boltic28.taskmanager.utils.Messenger
@@ -30,7 +30,7 @@ class MainFragmentModel : ViewModel() {
     val disposables = mutableListOf<Disposable>()
 
     init {
-        AppDagger.mainComponent.inject(this)
+        App.mainComponent.inject(this)
     }
 
     fun loadTasks(){

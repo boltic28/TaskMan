@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.di.AppDagger
+import com.boltic28.taskmanager.di.App
 import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment
 import com.boltic28.taskmanager.utils.Messenger
 import com.boltic28.taskmanager.signtools.FireUserManager
@@ -35,7 +35,7 @@ class SignFragment : Fragment(R.layout.fragment_sign) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AppDagger.component.injectFragment(this)
+        App.component.injectFragment(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -2,7 +2,7 @@ package com.boltic28.taskmanager.ui.screens.settings
 
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
-import com.boltic28.taskmanager.di.AppDagger
+import com.boltic28.taskmanager.di.App
 import javax.inject.Inject
 
 class SettingsFragmentModel: ViewModel() {
@@ -11,6 +11,6 @@ class SettingsFragmentModel: ViewModel() {
     lateinit var preferences: SharedPreferences
 
     init {
-        AppDagger.component.injectModel(this)
+        App.component.injectModel(this)
     }
 }

@@ -8,7 +8,7 @@ import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.businesslayer.GoalFragmentInteractor
 import com.boltic28.taskmanager.businesslayer.FreeElementsInteractor
 import com.boltic28.taskmanager.datalayer.entities.*
-import com.boltic28.taskmanager.di.AppDagger
+import com.boltic28.taskmanager.di.App
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
@@ -51,7 +51,7 @@ class GoalFragmentModel : ViewModel() {
     val disposables = mutableListOf<Disposable>()
 
     init {
-        AppDagger.goalComponent.inject(this)
+        App.goalComponent.inject(this)
     }
 
     fun loadFreeElementIntoAdapter(nav: NavController) {
