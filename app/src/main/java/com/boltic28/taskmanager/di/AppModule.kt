@@ -15,14 +15,6 @@ import javax.inject.Inject
 class AppModule(private val app: App) {
 
     @Provides
-    fun provideMessenger(): Messenger =
-        Messenger(app)
-
-    @Provides
-    fun provideNetworkChecker(): NetworkChecker =
-        NetworkChecker(app)
-
-    @Provides
     fun provideApplication(): App = app
 
     @Provides
@@ -31,4 +23,15 @@ class AppModule(private val app: App) {
     @Provides
     fun provideFirebaseManager (activity: Activity): UserManager =
         FireUserManager(activity, provideMessenger())
+
+    @Provides
+    fun provideMessenger(): Messenger =
+        Messenger(app)
+
+    @Provides
+    fun provideNetworkChecker(): NetworkChecker =
+        NetworkChecker(app)
+
+
+
 }

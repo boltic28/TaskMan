@@ -24,9 +24,8 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
         const val KEY_ID = "keyId"
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun onResume() {
+        super.onResume()
         if (model.userManager.isUserSigned()) {
             model.disposables + model.userManager.user
                 .subscribeOn(Schedulers.io())
