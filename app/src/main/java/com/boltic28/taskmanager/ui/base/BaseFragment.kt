@@ -7,4 +7,5 @@ abstract class BaseFragment<VM : BaseViewModel>(layout: Int) : DaggerFragment(la
 
     @Inject
     lateinit var model: VM
+
 }

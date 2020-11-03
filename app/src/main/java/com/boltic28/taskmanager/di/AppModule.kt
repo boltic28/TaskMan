@@ -21,17 +21,11 @@ class AppModule(private val app: App) {
     fun providesViewModelFactory(factory: AppViewModelFactory): ViewModelProvider.Factory = factory
 
     @Provides
-    fun provideFirebaseManager (activity: Activity): UserManager =
-        FireUserManager(activity, provideMessenger())
-
-    @Provides
     fun provideMessenger(): Messenger =
         Messenger(app)
 
     @Provides
     fun provideNetworkChecker(): NetworkChecker =
         NetworkChecker(app)
-
-
 
 }

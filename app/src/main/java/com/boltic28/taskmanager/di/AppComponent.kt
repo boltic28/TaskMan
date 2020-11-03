@@ -9,10 +9,11 @@ import com.boltic28.taskmanager.ui.screens.stepfragment.StepFragmentModule
 import com.boltic28.taskmanager.ui.screens.taskfragment.TaskFragmentModule
 import dagger.Component
 import dagger.Subcomponent
+import dagger.android.AndroidInjectionModule
 
 @AppScope
 @Component(
-    modules = [AppModule::class]
+    modules = [AndroidInjectionModule::class, AppModule::class]
 )
 interface AppComponent {
 
@@ -31,15 +32,37 @@ interface AppComponent {
         keyFragModule: KeyFragmentModule
     ): LocalActivityComponent
 
-    @ActivityScope
+//    fun getFragmentComponent(
+//        fragmentModule: FragmentModule,
+//        interactModule: InteractModule,
+//        goalFragModule: GoalFragmentModule,
+//        stepFragModule: StepFragmentModule,
+//        taskFragModule: TaskFragmentModule,
+//        ideaFragModule: IdeaFragmentModule,
+//        keyFragModule: KeyFragmentModule
+//    ): LocalFragmentComponent
+
     @Subcomponent(
-        modules = [ScreensModule::class, ActivityModule::class,
+        modules = [
+            ScreensModule::class, AppModule::class,
+            ActivityModule::class, FragmentModule::class,
             InteractModule::class, GoalFragmentModule::class,
             StepFragmentModule::class, TaskFragmentModule::class,
             IdeaFragmentModule::class, KeyFragmentModule::class
         ]
     )
     interface LocalActivityComponent : ActivityComponent
+
+//    @FragmentScope
+//    @Subcomponent(
+//        modules = [
+//            ScreensModule::class, ActivityModule::class, FragmentModule::class,
+//            InteractModule::class, GoalFragmentModule::class,
+//            StepFragmentModule::class, TaskFragmentModule::class,
+//            IdeaFragmentModule::class, KeyFragmentModule::class
+//        ]
+//    )
+//    interface LocalFragmentComponent : FragmentComponent
 
     @Component.Builder
     interface Builder{

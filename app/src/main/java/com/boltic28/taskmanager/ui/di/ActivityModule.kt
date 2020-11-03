@@ -5,6 +5,7 @@ import com.boltic28.taskmanager.di.AppScope
 import com.boltic28.taskmanager.signtools.FireUserManager
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.base.BaseActivity
+import com.boltic28.taskmanager.ui.screens.MainActivity
 import com.boltic28.taskmanager.ui.screens.goalfragment.GoalFragmentModule
 import com.boltic28.taskmanager.ui.screens.ideafragment.IdeaFragmentModule
 import com.boltic28.taskmanager.ui.screens.keyfragment.KeyFragmentModule
@@ -21,4 +22,8 @@ open class ActivityModule(private val activity: BaseActivity<*>) {
 
     @Provides
     fun provideActivity(): Activity = activity
+
+    @Provides
+    fun provideFirebaseManager(messenger: Messenger): UserManager =
+        FireUserManager(activity, messenger)
 }
