@@ -1,13 +1,15 @@
 package com.boltic28.taskmanager.di
 
-import androidx.lifecycle.ViewModel
+import android.app.Activity
 import androidx.lifecycle.ViewModelProvider
+import com.boltic28.taskmanager.signtools.FireUserManager
+import com.boltic28.taskmanager.signtools.UserManager
+import com.boltic28.taskmanager.ui.di.ActivityScope
 import com.boltic28.taskmanager.utils.Messenger
 import com.boltic28.taskmanager.utils.NetworkChecker
-import dagger.MapKey
 import dagger.Module
 import dagger.Provides
-import kotlin.reflect.KClass
+import javax.inject.Inject
 
 @Module
 class AppModule(private val app: App) {
@@ -20,23 +22,13 @@ class AppModule(private val app: App) {
     fun provideNetworkChecker(): NetworkChecker =
         NetworkChecker(app)
 
-
     @Provides
     fun provideApplication(): App = app
 
     @Provides
     fun providesViewModelFactory(factory: AppViewModelFactory): ViewModelProvider.Factory = factory
 
+    @Provides
+    fun provideFirebaseManager (activity: Activity): UserManager =
+        FireUserManager(activity, provideMessenger())
 }
-
-
-@Target(
-    AnnotationTarget.FUNCTION,
-    AnnotationTarget.PROPERTY_GETTER,
-    AnnotationTarget.PROPERTY_SETTER
-)
-@Retention(AnnotationRetention.RUNTIME)
-@MapKey
-annotation class ViewModelKey(
-    val value: KClass<out ViewModel>
-)

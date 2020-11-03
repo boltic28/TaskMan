@@ -1,6 +1,12 @@
 package com.boltic28.taskmanager.di
 
-import com.boltic28.taskmanager.ui.screens.*
+import androidx.lifecycle.ViewModel
+import com.boltic28.taskmanager.ui.di.*
+import com.boltic28.taskmanager.ui.screens.goalfragment.GoalFragmentModule
+import com.boltic28.taskmanager.ui.screens.ideafragment.IdeaFragmentModule
+import com.boltic28.taskmanager.ui.screens.keyfragment.KeyFragmentModule
+import com.boltic28.taskmanager.ui.screens.stepfragment.StepFragmentModule
+import com.boltic28.taskmanager.ui.screens.taskfragment.TaskFragmentModule
 import dagger.Component
 import dagger.Subcomponent
 
@@ -12,29 +18,32 @@ interface AppComponent {
 
     val activityComponent: ActivityComponent
 
-    fun getActivityComponent(activityModule: ActivityModule): LocalActivityComponent
+    fun inject(model: ViewModel)
+//    fun inject(fragment: BaseFragment<*>)
+
+    fun getActivityComponent(
+        activityModule: ActivityModule,
+        interactModule: InteractModule,
+        goalFragModule: GoalFragmentModule,
+        stepFragModule: StepFragmentModule,
+        taskFragModule: TaskFragmentModule,
+        ideaFragModule: IdeaFragmentModule,
+        keyFragModule: KeyFragmentModule
+    ): LocalActivityComponent
 
     @ActivityScope
-    @Subcomponent(modules = [ActivityModule::class, ScreensModule::class])
+    @Subcomponent(
+        modules = [ScreensModule::class, ActivityModule::class,
+            InteractModule::class, GoalFragmentModule::class,
+            StepFragmentModule::class, TaskFragmentModule::class,
+            IdeaFragmentModule::class, KeyFragmentModule::class
+        ]
+    )
     interface LocalActivityComponent : ActivityComponent
 
-
-//-------------------------
-//    fun injectModel(model: CreatorFragmentModel)
-//    fun injectModel(model: SettingsFragmentModel)
-//
-//    fun injectFragment(fragment: SignFragment)
-//    fun injectFragment(fragment: CreatorFragment)
-//    fun injectFragment(fragment: SettingsFragment)
-//    fun injectManager(manager: FireUserManager)
-//
-//    @Component.Builder
-//    interface DataBuilder {
-//        fun createModule(module: AppModule): DataBuilder
-//        fun createModule(module: RepositoryModule): DataBuilder
-//        fun createModule(module: DataBaseModule): DataBuilder
-//        fun createModule(module: SettingsModule): DataBuilder
-//        fun createModule(module: BusinessModule): DataBuilder
-//        fun buildComponent(): AppComponent
-//    }
+    @Component.Builder
+    interface Builder{
+        fun addModule(module: AppModule): Builder
+        fun createComponent(): AppComponent
+    }
 }

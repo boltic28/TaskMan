@@ -1,51 +1,34 @@
 package com.boltic28.taskmanager.ui.screens.ideafragment
 
-import android.os.Bundle
-import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
-import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.businesslayer.IdeaFragmentInteractor
-import com.boltic28.taskmanager.datalayer.entities.*
-import com.boltic28.taskmanager.di.App
+import com.boltic28.taskmanager.datalayer.entities.Goal
+import com.boltic28.taskmanager.datalayer.entities.Idea
+import com.boltic28.taskmanager.datalayer.entities.KeyResult
+import com.boltic28.taskmanager.datalayer.entities.Step
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
-import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment
-import io.reactivex.Observable
+import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
+import com.boltic28.taskmanager.ui.screens.goalfragment.AdapterForGoal
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
+import javax.inject.Named
 
-class IdeaFragmentModel : ViewModel() {
+class IdeaFragmentModel @Inject constructor(
+    @AdapterForIdea
+    val adapter: ItemAdapter,
+    private val interactor: IdeaFragmentInteractor,
+    override var userManager: UserManager,
+) : BaseEntityFragmentModel<Idea>() {
 
-    @Inject
-    lateinit var interactor: IdeaFragmentInteractor
-
-    @Inject
-    lateinit var adapter: ItemAdapter
-
-    lateinit var userManager: UserManager
-
-    private val mIdea = BehaviorSubject.create<Idea>()
-    val idea: Observable<Idea>
-        get() = mIdea.hide()
-
-    var taskId = 0L
-
-    val disposables = mutableListOf<Disposable>()
-
-    init {
-        App.ideaComponent.inject(this)
-    }
-
-    fun refresh() {
-        disposables + interactor.getIdeaById(taskId)
+    override fun refresh() {
+        disposables + interactor.getIdeaById(itemId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { item ->
-                mIdea.onNext(item)
+                mItem.onNext(item)
             }
     }
 
@@ -89,26 +72,6 @@ class IdeaFragmentModel : ViewModel() {
             disposables + interactor.update(idea.copy(keyId = item.id))
                 .subscribeOn(Schedulers.io())
                 .subscribe { _ -> refresh() }
-        }
-    }
-
-    private fun goToItemFragment(item: Any, nav: NavController) {
-        val bundle = Bundle()
-        if (item is Step) {
-            bundle.putLong(MainFragment.STEP_ID, item.id)
-            nav.navigate(R.id.stepFragment, bundle)
-        }
-        if (item is Task) {
-            bundle.putLong(MainFragment.TASK_ID, item.id)
-            nav.navigate(R.id.taskFragment, bundle)
-        }
-        if (item is Idea) {
-            bundle.putLong(MainFragment.IDEA_ID, item.id)
-            nav.navigate(R.id.ideaFragment, bundle)
-        }
-        if (item is KeyResult) {
-            bundle.putLong(MainFragment.KEY_ID, item.id)
-            nav.navigate(R.id.keyFragment, bundle)
         }
     }
 }

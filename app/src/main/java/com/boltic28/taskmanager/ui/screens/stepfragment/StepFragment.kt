@@ -1,54 +1,21 @@
 package com.boltic28.taskmanager.ui.screens.stepfragment
 
-import android.os.Bundle
-import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.entities.Step
-import com.boltic28.taskmanager.signtools.FireUserManager
+import com.boltic28.taskmanager.ui.base.BaseEntityFragment
 import com.boltic28.taskmanager.ui.screens.ActivityHelper
-import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment
+import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment.Companion.STEP_ID
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_step.*
 import java.time.format.DateTimeFormatter
 
-class StepFragment : Fragment(R.layout.fragment_step) {
+class StepFragment : BaseEntityFragment<StepFragmentModel>(R.layout.fragment_step, STEP_ID) {
 
-    private val model: StepFragmentModel by lazy {
-        ViewModelProviders.of(this).get(StepFragmentModel::class.java)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        model.userManager = FireUserManager.getInstance(requireActivity())
-
-        val stepId: Long? = arguments?.getLong(MainFragment.STEP_ID)
-
-        if (!model.userManager.isUserSigned()) {
-            (activity as? ActivityHelper)?.setToolbarText(resources.getString(R.string.app_name))
-            findNavController().navigate(R.id.signFragment)
-        }
-
-        if (stepId != null) {
-            model.stepId = stepId
-            model.refreshStep()
-        } else {
-            findNavController().navigate(R.id.mainFragment)
-        }
-        initView()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        model.disposables.forEach { it.dispose() }
-    }
-
-    private fun initView() {
-        model.disposables + model.step
+    override fun initView() {
+        model.disposables + model.item
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ step ->
@@ -84,8 +51,8 @@ class StepFragment : Fragment(R.layout.fragment_step) {
                 model.interactor.update(step.copy(goalId = 0L))
                     .subscribeOn(Schedulers.io())
                     .subscribe { _ ->
-                        model.refreshStep()
-                        model.isStepsElementIntoRecycler = false
+                        model.refresh()
+                        model.isItemsElementIntoRecycler = false
                     }
             }
             model.disposables + model.interactor.getGoalById(step.goalId)
@@ -100,19 +67,19 @@ class StepFragment : Fragment(R.layout.fragment_step) {
             step_fr_owner_text.text = resources.getString(R.string.not_attached)
             step_fr_owner_button.text = resources.getString(R.string.attach)
             step_fr_owner_button.setOnClickListener {
-                model.isStepsElementIntoRecycler = false
+                model.isItemsElementIntoRecycler = false
                 model.loadGoalsIntoAdapter(step, findNavController())
             }
         }
     }
 
     private fun loadDataIntoRecycler(step: Step) {
-        if (model.isStepsElementIntoRecycler) {
-            model.isStepsElementIntoRecycler = false
+        if (model.isItemsElementIntoRecycler) {
+            model.isItemsElementIntoRecycler = false
             model.loadFreeElementIntoAdapter(findNavController())
             step_fr_add_action.text = resources.getString(R.string.to_steps_element)
         } else {
-            model.isStepsElementIntoRecycler = true
+            model.isItemsElementIntoRecycler = true
             model.loadStepsElementIntoAdapter(step, findNavController())
             step_fr_add_action.text = resources.getString(R.string.to_free_elements)
         }

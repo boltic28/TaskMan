@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.businesslayer.di
+package com.boltic28.taskmanager.ui.di
 
 import com.boltic28.taskmanager.businesslayer.TaskFragmentInteractorImpl
 import com.boltic28.taskmanager.businesslayer.*
@@ -11,12 +11,12 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class BusinessModule(
+class InteractModule(
     private val keyRepository: KeyRepository,
     private val stepRepository: StepRepository,
     private val taskRepository: TaskRepository,
     private val ideaRepository: IdeaRepository,
-    private var goalRepository: GoalRepository
+    private val goalRepository: GoalRepository
 ) {
     @Provides
     fun provideMainFragmentInteractor(): FreeElementsInteractor =

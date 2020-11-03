@@ -5,11 +5,9 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.di.App
+import com.boltic28.taskmanager.ui.base.BaseFragment
 import com.boltic28.taskmanager.ui.screens.ActivityHelper
 import com.boltic28.taskmanager.ui.screens.MainActivity
 import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment
@@ -23,24 +21,13 @@ import kotlinx.android.synthetic.main.fragment_creator.*
 import java.time.LocalDateTime
 import javax.inject.Inject
 
-class CreatorFragment : Fragment(R.layout.fragment_creator) {
+class CreatorFragment : BaseFragment<CreatorFragmentModel>(R.layout.fragment_creator){
 
     @Inject
     lateinit var messenger: Messenger
 
     private var cycleType: String = ""
     private var disposable: Disposable = Disposables.disposed()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        App.component.injectFragment(this)
-    }
-
-    private val model: CreatorFragmentModel by lazy {
-        ViewModelProviders.of(this).get(
-            CreatorFragmentModel::class.java
-        )
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -2,7 +2,6 @@ package com.boltic28.taskmanager.signtools
 
 import android.app.Activity
 import android.util.Log
-import com.boltic28.taskmanager.di.App
 import com.boltic28.taskmanager.ui.screens.MainActivity.Companion.TAG
 import com.boltic28.taskmanager.utils.Messenger
 import com.google.android.gms.tasks.Task
@@ -11,29 +10,18 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
-import javax.inject.Inject
 
-class FireUserManager(private val activity: Activity) :
+class FireUserManager(
+    private val activity: Activity,
+    private val messenger: Messenger
+) :
     UserManager {
 
     companion object {
         const val CREATE = "create"
         const val SIGN_IN = "signIn"
         const val EMPTY_STRING = ""
-        private var manager: FireUserManager? = null
-
-        fun getInstance(activity: Activity): FireUserManager {
-            if (manager == null) {
-                manager =
-                    FireUserManager(activity)
-                App.component.injectManager(manager!!)
-            }
-            return manager!!
-        }
     }
-
-    @Inject
-    lateinit var messenger: Messenger
 
     private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
@@ -42,6 +30,7 @@ class FireUserManager(private val activity: Activity) :
         get() = userSubject.hide()
 
     init {
+
         mAuth.addAuthStateListener {
             val person = mAuth.currentUser
             if (person == null) {

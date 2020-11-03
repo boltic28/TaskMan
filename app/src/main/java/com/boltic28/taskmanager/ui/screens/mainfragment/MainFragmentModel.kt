@@ -1,12 +1,11 @@
 package com.boltic28.taskmanager.ui.screens.mainfragment
 
 import android.util.Log
-import androidx.lifecycle.ViewModel
 import com.boltic28.taskmanager.businesslayer.FreeElementsInteractor
 import com.boltic28.taskmanager.datalayer.entities.Goal
-import com.boltic28.taskmanager.ui.adapter.ItemAdapter
-import com.boltic28.taskmanager.di.App
 import com.boltic28.taskmanager.signtools.UserManager
+import com.boltic28.taskmanager.ui.adapter.ItemAdapter
+import com.boltic28.taskmanager.ui.base.BaseViewModel
 import com.boltic28.taskmanager.ui.screens.MainActivity
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -14,24 +13,14 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class MainFragmentModel : ViewModel() {
-
-    @Inject
-    lateinit var interactor: FreeElementsInteractor
-
-    @Inject
-    lateinit var adapter: ItemAdapter
-
-    @Inject
-    lateinit var messenger: Messenger
-
-    lateinit var userManager: UserManager
+class MainFragmentModel @Inject constructor(
+    private val interactor: FreeElementsInteractor,
+    val  adapter: ItemAdapter,
+    private val  messenger: Messenger,
+    override var userManager: UserManager
+) : BaseViewModel() {
 
     val disposables = mutableListOf<Disposable>()
-
-    init {
-        App.mainComponent.inject(this)
-    }
 
     fun loadTasks(){
         disposables + interactor.getFreeKeys()
@@ -101,6 +90,4 @@ class MainFragmentModel : ViewModel() {
                 Log.d(MainActivity.TAG, "getGoalInfo - Goal error \n ->$it")
             })
     }
-
-
 }

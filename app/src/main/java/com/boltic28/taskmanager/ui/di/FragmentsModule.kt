@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.ui.screens
+package com.boltic28.taskmanager.ui.di
 
 import dagger.Module
 

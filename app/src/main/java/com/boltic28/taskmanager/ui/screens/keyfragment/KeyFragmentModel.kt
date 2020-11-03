@@ -1,54 +1,53 @@
 package com.boltic28.taskmanager.ui.screens.keyfragment
 
-import android.os.Bundle
 import android.util.Log
-import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
-import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.businesslayer.KeyFragmentInteractor
 import com.boltic28.taskmanager.datalayer.entities.Goal
 import com.boltic28.taskmanager.datalayer.entities.Idea
 import com.boltic28.taskmanager.datalayer.entities.KeyResult
 import com.boltic28.taskmanager.datalayer.entities.Task
-import com.boltic28.taskmanager.di.App
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
+import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
 import com.boltic28.taskmanager.ui.screens.MainActivity
-import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment
-import com.boltic28.taskmanager.utils.Messenger
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
+import javax.inject.Named
 
-class KeyFragmentModel: ViewModel() {
-
-    @Inject
-    lateinit var interactor: KeyFragmentInteractor
-
-    @Inject
-    lateinit var messenger: Messenger
-
-    @Inject
-    lateinit var adapter: ItemAdapter
-
-    lateinit var userManager: UserManager
-
-    private val mKey = BehaviorSubject.create<KeyResult>()
-    val key: Observable<KeyResult>
-        get() = mKey.hide()
-
-    var keyId = 0L
-    var isKeysElementIntoRecycler = false
-
-    val disposables = mutableListOf<Disposable>()
-
-    init {
-        App.keyComponent.inject(this)
+class KeyFragmentModel @Inject constructor(
+    @AdapterForKey
+    val adapter: ItemAdapter,
+    val interactor: KeyFragmentInteractor,
+    override var userManager: UserManager
+): BaseEntityFragmentModel<KeyResult>() {
+    override fun refresh() {
+        disposables + interactor.getKeyById(itemId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    initValue(it)
+                }, {
+                    Log.d(MainActivity.TAG, "getGoal - error \n ->$it")
+                }
+            )
     }
+
+    private fun initValue(key: KeyResult) {
+        disposables + interactor.setChildrenFor(key)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                mItem.onNext(interactor.setProgressFor(it))
+            }, {
+                Log.d(MainActivity.TAG, "getGoalInfo - Goal error \n ->$it")
+            })
+    }
+
+
 
     fun loadGoalsIntoAdapter(key: KeyResult, nav: NavController){
         adapter.clearAll()
@@ -58,8 +57,8 @@ class KeyFragmentModel: ViewModel() {
                 disposables + interactor.update(key.copy(goalId = item.id))
                     .subscribeOn(Schedulers.io())
                     .subscribe { _ ->
-                        refreshKey()
-                        isKeysElementIntoRecycler = false
+                        refresh()
+                        isItemsElementIntoRecycler = false
                     }
             }
             override fun onViewClick(item: Any) {
@@ -89,8 +88,8 @@ class KeyFragmentModel: ViewModel() {
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun onActionButtonClick(item: Any) {
-                if (item is Idea) addToStep(item)
-                if (item is Task) addToStep(item)
+                if (item is Idea) addToKey(item)
+                if (item is Task) addToKey(item)
             }
             override fun onViewClick(item: Any) {
                 goToItemFragment(item, nav)
@@ -100,49 +99,25 @@ class KeyFragmentModel: ViewModel() {
         loadIdeas()
     }
 
-    fun refreshKey() {
-        disposables + interactor.getKeyById(keyId)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    initStepValue(it)
-                }, {
-                    Log.d(MainActivity.TAG, "getGoal - error \n ->$it")
-                }
-            )
-    }
-
-    private fun initStepValue(key: KeyResult) {
-        disposables + interactor.setChildrenFor(key)
+    private fun addToKey(item: Task) {
+        disposables + interactor.updateTask(item.copy(keyId = itemId))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                mKey.onNext(interactor.setProgressFor(it))
-            }, {
-                Log.d(MainActivity.TAG, "getGoalInfo - Goal error \n ->$it")
-            })
-    }
-
-    private fun addToStep(item: Task) {
-        disposables + interactor.updateTask(item.copy(keyId = keyId))
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                refreshKey()
-                isKeysElementIntoRecycler = true
+                refresh()
+                isItemsElementIntoRecycler = true
             }, {
                 Log.d(MainActivity.TAG, "getTask - error \n ->$it")
             })
     }
 
-    private fun addToStep(item: Idea) {
-        disposables + interactor.updateIdea(item.copy(keyId = keyId))
+    private fun addToKey(item: Idea) {
+        disposables + interactor.updateIdea(item.copy(keyId = itemId))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                refreshKey()
-                isKeysElementIntoRecycler = true
+                refresh()
+                isItemsElementIntoRecycler = true
             }, {
                 Log.d(MainActivity.TAG, "getIdea - error \n ->$it")
             })
@@ -153,8 +128,8 @@ class KeyFragmentModel: ViewModel() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                refreshKey()
-                isKeysElementIntoRecycler = false
+                refresh()
+                isItemsElementIntoRecycler = false
             }, {
                 Log.d(MainActivity.TAG, "getIdea - error \n ->$it")
             })
@@ -165,8 +140,8 @@ class KeyFragmentModel: ViewModel() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                refreshKey()
-                isKeysElementIntoRecycler = false
+                refresh()
+                isItemsElementIntoRecycler = false
             }, {
                 Log.d(MainActivity.TAG, "getTask - error \n ->$it")
             })
@@ -203,21 +178,5 @@ class KeyFragmentModel: ViewModel() {
             }, {
                 Log.d(MainActivity.TAG, "getIdeas - error \n ->$it")
             })
-    }
-
-    private fun goToItemFragment(item: Any, nav: NavController){
-        val bundle = Bundle()
-        if (item is Task){
-            bundle.putLong(MainFragment.TASK_ID, item.id)
-            nav.navigate(R.id.taskFragment, bundle)
-        }
-        if (item is Idea){
-            bundle.putLong(MainFragment.IDEA_ID, item.id)
-            nav.navigate(R.id.ideaFragment, bundle)
-        }
-        if (item is KeyResult){
-            bundle.putLong(MainFragment.KEY_ID, item.id)
-            nav.navigate(R.id.keyFragment, bundle)
-        }
     }
 }

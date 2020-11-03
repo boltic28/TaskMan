@@ -9,46 +9,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.entities.KeyResult
 import com.boltic28.taskmanager.signtools.FireUserManager
+import com.boltic28.taskmanager.ui.base.BaseEntityFragment
 import com.boltic28.taskmanager.ui.screens.ActivityHelper
 import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment
+import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment.Companion.KEY_ID
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_key.*
 import java.time.format.DateTimeFormatter
 
-class KeyFragment: Fragment(R.layout.fragment_key) {
+class KeyFragment: BaseEntityFragment<KeyFragmentModel>(R.layout.fragment_key, KEY_ID) {
 
-    private val model: KeyFragmentModel by lazy {
-        ViewModelProviders.of(this).get(KeyFragmentModel::class.java)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        model.userManager = FireUserManager.getInstance(requireActivity())
-
-        val keyId: Long? = arguments?.getLong(MainFragment.KEY_ID)
-
-        if (!model.userManager.isUserSigned()) {
-            (activity as? ActivityHelper)?.setToolbarText(resources.getString(R.string.app_name))
-            findNavController().navigate(R.id.signFragment)
-        }
-
-        if (keyId != null) {
-            model.keyId = keyId
-            model.refreshKey()
-        } else {
-            findNavController().navigate(R.id.mainFragment)
-        }
-        initView()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        model.disposables.forEach { it.dispose() }
-    }
-
-    private fun initView() {
-        model.disposables + model.key
+    override fun initView() {
+        model.disposables + model.item
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ key ->
@@ -84,8 +57,8 @@ class KeyFragment: Fragment(R.layout.fragment_key) {
                 model.interactor.update(key.copy(goalId = 0L))
                     .subscribeOn(Schedulers.io())
                     .subscribe { _ ->
-                        model.refreshKey()
-                        model.isKeysElementIntoRecycler = false
+                        model.refresh()
+                        model.isItemsElementIntoRecycler = false
                     }
             }
             model.disposables + model.interactor.getGoalById(key.goalId)
@@ -100,19 +73,19 @@ class KeyFragment: Fragment(R.layout.fragment_key) {
             key_fr_owner_text.text = resources.getString(R.string.not_attached)
             key_fr_owner_button.text = resources.getString(R.string.attach)
             key_fr_owner_button.setOnClickListener {
-                model.isKeysElementIntoRecycler = false
+                model.isItemsElementIntoRecycler = false
                 model.loadGoalsIntoAdapter(key, findNavController())
             }
         }
     }
 
     private fun loadDataIntoRecycler(key: KeyResult) {
-        if (model.isKeysElementIntoRecycler) {
-            model.isKeysElementIntoRecycler = false
+        if (model.isItemsElementIntoRecycler) {
+            model.isItemsElementIntoRecycler = false
             model.loadFreeElementIntoAdapter(findNavController())
             key_fr_add_action.text = resources.getString(R.string.to_steps_element)
         } else {
-            model.isKeysElementIntoRecycler = true
+            model.isItemsElementIntoRecycler = true
             model.loadKeysElementIntoAdapter(key, findNavController())
             key_fr_add_action.text = resources.getString(R.string.to_free_elements)
         }

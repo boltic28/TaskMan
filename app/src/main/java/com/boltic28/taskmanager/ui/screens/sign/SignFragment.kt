@@ -1,48 +1,21 @@
 package com.boltic28.taskmanager.ui.screens.sign
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.di.App
-import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment
-import com.boltic28.taskmanager.utils.Messenger
-import com.boltic28.taskmanager.signtools.FireUserManager
 import com.boltic28.taskmanager.signtools.UserIn
+import com.boltic28.taskmanager.ui.base.BaseFragment
 import io.reactivex.disposables.Disposables
 import kotlinx.android.synthetic.main.fragment_sign.*
-import javax.inject.Inject
 
-class SignFragment : Fragment(R.layout.fragment_sign) {
-
-    companion object{
-        const val TAG = "mainActivity_test"
-    }
-
-    @Inject
-    lateinit var messenger: Messenger
-
-    private val model: SignFragmentModel by lazy {
-        ViewModelProviders.of(this).get(
-            SignFragmentModel::class.java
-        )
-    }
+class SignFragment : BaseFragment<SignFragmentModel>(R.layout.fragment_sign) {
 
     private var disposable = Disposables.disposed()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        App.component.injectFragment(this)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d(MainFragment.TAG, "-> signFragment")
 
-        model.userManager = FireUserManager.getInstance(requireActivity())
         disposable = model.userManager.user
             .subscribe {user ->
                 if (user.id.isNotEmpty()){
@@ -61,7 +34,6 @@ class SignFragment : Fragment(R.layout.fragment_sign) {
     }
 
     private fun checkUserdata(user: UserIn){
-        Log.d(TAG, "loading users data to view....")
         if (user.id.isNotEmpty()){
             sign_mail.setText(user.email)
             sign_text.text = resources.getString(R.string.sign_signout_text, user.name)
@@ -120,7 +92,7 @@ class SignFragment : Fragment(R.layout.fragment_sign) {
         ) {
             true
         } else {
-            messenger.showMessage(resources.getString(R.string.tip_input_right_data))
+            model.messenger.showMessage(resources.getString(R.string.tip_input_right_data))
             sign_mail.setBackgroundResource(R.drawable.bg_sign_bad_input)
             false
         }

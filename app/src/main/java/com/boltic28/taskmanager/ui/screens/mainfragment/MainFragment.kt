@@ -1,22 +1,19 @@
 package com.boltic28.taskmanager.ui.screens.mainfragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.entities.*
-import com.boltic28.taskmanager.signtools.FireUserManager
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
+import com.boltic28.taskmanager.ui.base.BaseFragment
 import com.boltic28.taskmanager.ui.screens.ActivityHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class MainFragment : Fragment(R.layout.fragment_main) {
+class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
 
     companion object {
         const val TAG = "mainActivity_test"
@@ -27,16 +24,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         const val KEY_ID = "keyId"
     }
 
-    private val model: MainFragmentModel by lazy {
-        ViewModelProviders.of(this).get(
-            MainFragmentModel::class.java
-        )
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d(TAG, "-> mainFragment")
-        model.userManager = FireUserManager.getInstance(requireActivity())
 
         if (model.userManager.isUserSigned()) {
             model.disposables + model.userManager.user

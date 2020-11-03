@@ -1,7 +1,7 @@
 package com.boltic28.taskmanager.ui.screens.taskfragment
 
-import javax.inject.Scope
+import javax.inject.Qualifier
 
-@Scope
+@Qualifier
 @Retention(AnnotationRetention.RUNTIME)
-annotation class TaskFragmentScope
+annotation class AdapterForTask

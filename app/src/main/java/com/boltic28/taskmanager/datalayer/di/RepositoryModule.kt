@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.datalayer.room.di
+package com.boltic28.taskmanager.datalayer.di
 
 import com.boltic28.taskmanager.datalayer.room.AppDataBase
 import com.boltic28.taskmanager.datalayer.room.goal.DefaultGoalRepository
@@ -21,21 +21,21 @@ class RepositoryModule(private val db: AppDataBase) {
 
     @AppScope
     @Provides
-    fun provideGoalService(): GoalRepository = DefaultGoalRepository(db.goalDao())
+    fun provideGoalRepo(): GoalRepository = DefaultGoalRepository(db.goalDao())
 
     @AppScope
     @Provides
-    fun provideKeyService(): KeyRepository = DefaultKeyRepository(db.keyDao())
+    fun provideKeyRepo(): KeyRepository = DefaultKeyRepository(db.keyDao())
 
     @AppScope
     @Provides
-    fun provideStepService(): StepRepository = DefaultStepRepository(db.stepDao())
+    fun provideStepRepo(): StepRepository = DefaultStepRepository(db.stepDao())
 
     @AppScope
     @Provides
-    fun provideTaskService(): TaskRepository = DefaultTaskRepository(db.taskDao())
+    fun provideTaskRepo(): TaskRepository = DefaultTaskRepository(db.taskDao())
 
     @AppScope
     @Provides
-    fun provideIdeaService(): IdeaRepository = DefaultIdeaRepository(db.ideaDao())
+    fun provideIdeaRepo(): IdeaRepository = DefaultIdeaRepository(db.ideaDao())
 }

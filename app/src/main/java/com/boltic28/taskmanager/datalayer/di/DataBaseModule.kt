@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.datalayer.room.di
+package com.boltic28.taskmanager.datalayer.di
 
 import android.content.Context
 import androidx.room.Room
@@ -6,7 +6,6 @@ import com.boltic28.taskmanager.datalayer.room.AppDataBase
 import com.boltic28.taskmanager.di.AppScope
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 @Module
 class DataBaseModule(private val context: Context) {

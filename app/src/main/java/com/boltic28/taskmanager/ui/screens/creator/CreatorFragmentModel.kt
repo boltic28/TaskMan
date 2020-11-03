@@ -1,7 +1,5 @@
 package com.boltic28.taskmanager.ui.screens.creator
 
-import androidx.lifecycle.ViewModel
-import com.boltic28.taskmanager.di.App
 import com.boltic28.taskmanager.datalayer.Cycle
 import com.boltic28.taskmanager.datalayer.Progress
 import com.boltic28.taskmanager.datalayer.entities.*
@@ -10,30 +8,20 @@ import com.boltic28.taskmanager.datalayer.room.idea.IdeaRepository
 import com.boltic28.taskmanager.datalayer.room.keyresult.KeyRepository
 import com.boltic28.taskmanager.datalayer.room.step.StepRepository
 import com.boltic28.taskmanager.datalayer.room.task.TaskRepository
+import com.boltic28.taskmanager.signtools.UserManager
+import com.boltic28.taskmanager.ui.base.BaseViewModel
 import io.reactivex.Single
 import java.time.LocalDateTime
 import javax.inject.Inject
 
-class CreatorFragmentModel : ViewModel() {
-
-    @Inject
-    lateinit var goalRepository: GoalRepository
-
-    @Inject
-    lateinit var keyRepository: KeyRepository
-
-    @Inject
-    lateinit var stepRepository: StepRepository
-
-    @Inject
-    lateinit var taskRepository: TaskRepository
-
-    @Inject
-    lateinit var ideaRepository: IdeaRepository
-
-    init {
-        App.component.injectModel(this)
-    }
+class CreatorFragmentModel @Inject constructor(
+    private val goalRepository: GoalRepository,
+    private val keyRepository: KeyRepository,
+    private val stepRepository: StepRepository,
+    private val taskRepository: TaskRepository,
+    private val ideaRepository: IdeaRepository,
+    override var userManager: UserManager
+) : BaseViewModel() {
 
     fun create(item: Goal): Single<Long> =
         goalRepository.insert(item)

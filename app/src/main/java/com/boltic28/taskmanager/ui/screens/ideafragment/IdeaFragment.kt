@@ -1,54 +1,22 @@
 package com.boltic28.taskmanager.ui.screens.ideafragment
 
-import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.entities.Idea
-import com.boltic28.taskmanager.signtools.FireUserManager
+import com.boltic28.taskmanager.ui.base.BaseEntityFragment
 import com.boltic28.taskmanager.ui.screens.ActivityHelper
-import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment
+import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment.Companion.IDEA_ID
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_idea.*
 import java.time.format.DateTimeFormatter
 
-class IdeaFragment : Fragment(R.layout.fragment_idea) {
+class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>(R.layout.fragment_idea, IDEA_ID) {
 
-    private val model: IdeaFragmentModel by lazy {
-        ViewModelProviders.of(this).get(IdeaFragmentModel::class.java)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        model.userManager = FireUserManager.getInstance(requireActivity())
-
-        val ideaId: Long? = arguments?.getLong(MainFragment.IDEA_ID)
-
-        if (!model.userManager.isUserSigned()) {
-            (activity as? ActivityHelper)?.setToolbarText(resources.getString(R.string.app_name))
-            findNavController().navigate(R.id.signFragment)
-        }
-
-        if (ideaId != null) {
-            model.taskId = ideaId
-            model.refresh()
-        } else {
-            findNavController().navigate(R.id.mainFragment)
-        }
-        initView()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        model.disposables.forEach { it.dispose() }
-    }
-
-    private fun initView() {
-        model.disposables + model.idea
+    override fun initView() {
+        model.disposables + model.item
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { idea ->

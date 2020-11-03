@@ -1,57 +1,49 @@
 package com.boltic28.taskmanager.ui.screens.goalfragment
 
-import android.os.Bundle
 import android.util.Log
-import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
-import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.businesslayer.GoalFragmentInteractor
 import com.boltic28.taskmanager.businesslayer.FreeElementsInteractor
+import com.boltic28.taskmanager.businesslayer.GoalFragmentInteractor
 import com.boltic28.taskmanager.datalayer.entities.*
-import com.boltic28.taskmanager.di.App
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
+import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
 import com.boltic28.taskmanager.ui.screens.MainActivity
-import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment.Companion.IDEA_ID
-import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment.Companion.KEY_ID
-import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment.Companion.STEP_ID
-import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment.Companion.TASK_ID
-import com.boltic28.taskmanager.utils.Messenger
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
 
-class GoalFragmentModel : ViewModel() {
+class GoalFragmentModel @Inject constructor(
+    @AdapterForGoal
+    val adapter: ItemAdapter,
+    private val goalInteract: GoalFragmentInteractor,
+    private val freeElementsInteract: FreeElementsInteractor,
+    override var userManager: UserManager
+) : BaseEntityFragmentModel<Goal>() {
 
-    @Inject
-    lateinit var goalInteractor: GoalFragmentInteractor
+    override fun refresh() {
+        disposables + goalInteract.getGoal(itemId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    initGoalValue(it)
+                }, {
+                    Log.d(MainActivity.TAG, "getGoal - error \n ->$it")
+                }
+            )
+    }
 
-    @Inject
-    lateinit var freeElementsInteractor: FreeElementsInteractor
-
-    @Inject
-    lateinit var messenger: Messenger
-
-    @Inject
-    lateinit var adapter: ItemAdapter
-
-    lateinit var userManager: UserManager
-
-    private val mGoal = BehaviorSubject.create<Goal>()
-    val goal: Observable<Goal>
-        get() = mGoal.hide()
-
-    var goalId = 0L
-    var isGoalsElementIntoRecycler = false
-
-    val disposables = mutableListOf<Disposable>()
-
-    init {
-        App.goalComponent.inject(this)
+    private fun initGoalValue(goal: Goal) {
+        disposables + goalInteract.setChildrenFor(goal)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                mItem.onNext(goalInteract.setProgressFor(it))
+            }, {
+                Log.d(MainActivity.TAG, "getGoalInfo - Goal error \n ->$it")
+            })
     }
 
     fun loadFreeElementIntoAdapter(nav: NavController) {
@@ -93,128 +85,104 @@ class GoalFragmentModel : ViewModel() {
         adapter.addList(goal.ideas)
     }
 
-    fun refreshGoal() {
-        disposables + goalInteractor.getGoal(goalId)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    initGoalValue(it)
-                }, {
-                    Log.d(MainActivity.TAG, "getGoal - error \n ->$it")
-                }
-            )
-    }
-
-    private fun initGoalValue(goal: Goal) {
-        disposables + goalInteractor.setChildrenFor(goal)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                mGoal.onNext(goalInteractor.setProgressFor(it))
-            }, {
-                Log.d(MainActivity.TAG, "getGoalInfo - Goal error \n ->$it")
-            })
-    }
-
     private fun addToGoal(item: Step) {
-        disposables + goalInteractor.updateStep(item.copy(goalId = goalId))
+        disposables + goalInteract.updateStep(item.copy(goalId = itemId))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                refreshGoal()
-                isGoalsElementIntoRecycler = true
+                refresh()
+                isItemsElementIntoRecycler = true
             }, {
                 Log.d(MainActivity.TAG, "getStep - error \n ->$it")
             })
     }
 
     private fun addToGoal(item: KeyResult) {
-        disposables + goalInteractor.updateKey(item.copy(goalId = goalId))
+        disposables + goalInteract.updateKey(item.copy(goalId = itemId))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                refreshGoal()
-                isGoalsElementIntoRecycler = true
+                refresh()
+                isItemsElementIntoRecycler = true
             }, {
                 Log.d(MainActivity.TAG, "getKey - error \n ->$it")
             })
     }
 
     private fun addToGoal(item: Task) {
-        disposables + goalInteractor.updateTask(item.copy(goalId = goalId))
+        disposables + goalInteract.updateTask(item.copy(goalId = itemId))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                refreshGoal()
-                isGoalsElementIntoRecycler = true
+                refresh()
+                isItemsElementIntoRecycler = true
             }, {
                 Log.d(MainActivity.TAG, "getTask - error \n ->$it")
             })
     }
 
     private fun addToGoal(item: Idea) {
-        disposables + goalInteractor.updateIdea(item.copy(goalId = goalId))
+        disposables + goalInteract.updateIdea(item.copy(goalId = itemId))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                refreshGoal()
-                isGoalsElementIntoRecycler = true
+                refresh()
+                isItemsElementIntoRecycler = true
             }, {
                 Log.d(MainActivity.TAG, "getIdea - error \n ->$it")
             })
     }
 
     private fun makeFree(item: Idea) {
-        disposables + goalInteractor.updateIdea(item.copy(goalId = 0L))
+        disposables + goalInteract.updateIdea(item.copy(goalId = 0L))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                refreshGoal()
-                isGoalsElementIntoRecycler = false
+                refresh()
+                isItemsElementIntoRecycler = false
             }, {
                 Log.d(MainActivity.TAG, "getIdea - error \n ->$it")
             })
     }
 
     private fun makeFree(item: Step) {
-        disposables + goalInteractor.updateStep(item.copy(goalId = 0L))
+        disposables + goalInteract.updateStep(item.copy(goalId = 0L))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                refreshGoal()
-                isGoalsElementIntoRecycler = false
+                refresh()
+                isItemsElementIntoRecycler = false
             }, {
                 Log.d(MainActivity.TAG, "getStep - error \n ->$it")
             })
     }
 
     private fun makeFree(item: KeyResult) {
-        disposables + goalInteractor.updateKey(item.copy(goalId = 0L))
+        disposables + goalInteract.updateKey(item.copy(goalId = 0L))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                refreshGoal()
-                isGoalsElementIntoRecycler = false
+                refresh()
+                isItemsElementIntoRecycler = false
             }, {
                 Log.d(MainActivity.TAG, "getKey - error \n ->$it")
             })
     }
 
     private fun makeFree(item: Task) {
-        disposables + goalInteractor.updateTask(item.copy(goalId = 0L))
+        disposables + goalInteract.updateTask(item.copy(goalId = 0L))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                refreshGoal()
-                isGoalsElementIntoRecycler = false
+                refresh()
+                isItemsElementIntoRecycler = false
             }, {
                 Log.d(MainActivity.TAG, "getTask - error \n ->$it")
             })
     }
 
     private fun loadTasks() {
-        disposables + freeElementsInteractor.getFreeTasks()
+        disposables + freeElementsInteract.getFreeTasks()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
@@ -225,7 +193,7 @@ class GoalFragmentModel : ViewModel() {
     }
 
     private fun loadKeys() {
-        disposables + freeElementsInteractor.getFreeKeys()
+        disposables + freeElementsInteract.getFreeKeys()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
@@ -236,7 +204,7 @@ class GoalFragmentModel : ViewModel() {
     }
 
     private fun loadIdeas() {
-        disposables + freeElementsInteractor.getFreeIdeas()
+        disposables + freeElementsInteract.getFreeIdeas()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
@@ -247,7 +215,7 @@ class GoalFragmentModel : ViewModel() {
     }
 
     private fun loadSteps() {
-        disposables + freeElementsInteractor.getFreeSteps()
+        disposables + freeElementsInteract.getFreeSteps()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
@@ -255,25 +223,5 @@ class GoalFragmentModel : ViewModel() {
             }, {
                 Log.d(MainActivity.TAG, "getSteps - error \n ->$it")
             })
-    }
-
-    private fun goToItemFragment(item: Any, nav: NavController){
-        val bundle = Bundle()
-        if (item is Step){
-            bundle.putLong(STEP_ID, item.id)
-            nav.navigate(R.id.stepFragment, bundle)
-        }
-        if (item is Task){
-            bundle.putLong(TASK_ID, item.id)
-            nav.navigate(R.id.taskFragment, bundle)
-        }
-        if (item is Idea){
-            bundle.putLong(IDEA_ID, item.id)
-            nav.navigate(R.id.ideaFragment, bundle)
-        }
-        if (item is KeyResult){
-            bundle.putLong(KEY_ID, item.id)
-            nav.navigate(R.id.keyFragment, bundle)
-        }
     }
 }

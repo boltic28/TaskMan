@@ -1,26 +1,27 @@
 package com.boltic28.taskmanager.ui.base
 
-import android.os.Bundle
+import android.content.Context
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
+import com.boltic28.taskmanager.di.App
+import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.AndroidSupportInjection
+import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-abstract class BaseFragment<VM : ViewModel>(layout: Int) : Fragment(layout){
+abstract class BaseFragment<VM : BaseViewModel>(layout: Int) : Fragment(layout),
+    AndroidInjector<Fragment> {
 
     private var fragmentInjector: DispatchingAndroidInjector<Fragment>? = null
 
     @Inject
-    lateinit var vm: VM
+    lateinit var model: VM
 
-    @Inject
-    fun injectDependencies(fragmentInjector: DispatchingAndroidInjector<Fragment>) {
-        this.fragmentInjector = fragmentInjector
+    override fun onAttach(context: Context) {
+        (activity?.application as App).tryInjectActivity(this)
+        super.onAttach(context)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        AndroidSupportInjection.inject(this)
+    override fun inject(instance: Fragment?) {
+        TODO("Not yet implemented")
     }
 }
