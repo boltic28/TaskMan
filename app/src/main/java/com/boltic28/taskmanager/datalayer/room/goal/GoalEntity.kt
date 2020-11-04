@@ -2,7 +2,6 @@ package com.boltic28.taskmanager.datalayer.room.goal
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.boltic28.taskmanager.datalayer.Cycle
 import java.time.LocalDateTime
 
 @Entity(tableName = "goal")

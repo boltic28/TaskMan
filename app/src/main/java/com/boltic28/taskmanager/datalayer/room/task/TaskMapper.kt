@@ -1,6 +1,6 @@
 package com.boltic28.taskmanager.datalayer.room.task
 
-import com.boltic28.taskmanager.datalayer.classes.Task
+import com.boltic28.taskmanager.datalayer.entities.Task
 
 fun Task.toEntity(): TaskEntity =
     TaskEntity(

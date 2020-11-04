@@ -16,6 +16,29 @@
     <string name="item_progress">progress</string>
     <string name="create">create</string>
     <string name="is_cycle">is cycle</string>
+    <string name="to_task">to TASK</string>
+    <string name="to_goal">to GOAL</string>
+    <string name="to_step">to STEP</string>
+    <string name="start_it">START</string>
+    <string name="done_it">DONE</string>
+    <string name="description_icon_of_step">description of the step</string>
+    <string name="dateFormatterForItems">dd.MM.yyyy</string>
+    <string name="add_new_item">add new item</string>
+    <string name="percentage">Progress $s %</string>
+    <string name="to_goals_element">To Goal\'s Elements</string>
+    <string name="to_free_elements">to free elements</string>
+    <string name="unpin">unpin</string>
+    <string name="attach">attach To</string>
+    <string name="to_steps_element">to steps elements</string>
+    <string name="not_attached">not attached</string>
+    <string name="tasks_image_description">tasks image</string>
+    <string name="in_progress">in progress</string>
+    <string name="not_started">task is not started</string>
+    <string name="idea_image_description">idea image description</string>
+    <string name="convert_to">Convert to...</string>
+    <string name="image_button_description">image button</string>
+    <string name="attach_to">Attach idea to...</string>
+    <string name="attached">attached</string>
 
     <string-array name="cycle">
         <item>hour</item>
