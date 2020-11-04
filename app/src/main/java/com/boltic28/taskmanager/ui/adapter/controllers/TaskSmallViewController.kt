@@ -1,6 +1,5 @@
 package com.boltic28.taskmanager.ui.adapter.controllers
 
-import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -8,7 +7,6 @@ import android.widget.TextView
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.entities.Task
 import com.boltic28.taskmanager.ui.adapter.DefaultViewHolder
-import com.boltic28.taskmanager.ui.screens.MainActivity
 import java.time.format.DateTimeFormatter
 import kotlin.reflect.KClass
 
@@ -30,7 +28,7 @@ class TaskSmallViewController : HolderController() {
 
         name.text = item.name
         dateStart.text = item.date.format(DateTimeFormatter.ofPattern(itemView.resources.getString(R.string.dateFormatterForItems)))
-        // TODO icon inject
+        icon.setImageResource(R.drawable.task_ph)
 
         if (item.goalId == 0L && item.keyId == 0L && item.stepId == 0L){
             button.setImageResource(R.drawable.ic_link)

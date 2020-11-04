@@ -1,124 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ItemFragment">
 
     <ImageView
         android:id="@+id/idea_fr_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_margin="24dp"
+        style="@style/ItemFragment.Image"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/idea_image_description" />
+        android:contentDescription="@string/description"/>
+
+    <ImageView
+        android:id="@+id/idea_fr_isDone_icon"
+        style="@style/ItemFragment.IsDone"
+        app:layout_constraintLeft_toRightOf="@id/idea_fr_name"
+        app:layout_constraintTop_toTopOf="@id/idea_fr_name"
+        app:layout_constraintBottom_toBottomOf="@id/idea_fr_name"
+        android:contentDescription="@string/description"/>
 
     <TextView
         android:id="@+id/idea_fr_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textSize="32sp"
-        tools:text="Idea numb 2"
+        style="@style/ItemFragment.Header"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="@id/idea_fr_image"
+        tools:text="idea numb 2" />
 
     <TextView
         android:id="@+id/idea_fr_start_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAlignment="textEnd"
-        tools:text = "23 sep 2020"
-        app:layout_constraintRight_toRightOf="@id/idea_fr_name"
+        style="@style/ItemFragment.StartDate"
+        app:layout_constraintRight_toLeftOf="@id/idea_fr_image"
         app:layout_constraintTop_toBottomOf="@id/idea_fr_name"
-        />
-
-    <TextView
-        android:id="@+id/idea_fr_is_attached"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="not attached"
-        android:layout_marginStart="24dp"
-        app:layout_constraintLeft_toRightOf="@id/idea_fr_owner_button"
-        app:layout_constraintBottom_toBottomOf="@id/idea_fr_image"
-        />
-
-    <ImageButton
-        android:id="@+id/idea_fr_owner_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_link"
-        android:background="@color/transparent"
-        android:layout_marginStart="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/idea_fr_is_attached"
-        app:layout_constraintRight_toLeftOf="@+id/idea_fr_is_attached"
-        android:contentDescription="@string/image_button_description" />
+        tools:text="23 sep 2020" />
 
     <TextView
         android:id="@+id/idea_fr_common_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        tools:text="information about:"
+        style="@style/ItemFragment.Header2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/idea_fr_image"
-        />
+        android:text="@string/information_about" />
 
     <TextView
         android:id="@+id/idea_fr_description_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        tools:text="Description:"
+        style="@style/ItemFragment.Header2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/idea_fr_common_data"
-        />
+        android:text="@string/description" />
 
     <TextView
         android:id="@+id/idea_fr_description_content"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="16dp"
-        tools:text = "description of some goal, description of some goal, description of some goal,"
+        style="@style/ItemFragment.OtherText"
         app:layout_constraintLeft_toRightOf="@id/idea_fr_description_header"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/idea_fr_common_data"
-        />
+        app:layout_constraintTop_toTopOf="@id/idea_fr_description_header"
+        tools:text="description of some step, description of some goal, description of some goal," />
 
     <TextView
-        android:id="@+id/idea_fr_name_of_list_in_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textAlignment="center"
-        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/idea_fr_relative_header"
+        style="@style/ItemFragment.Header2"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/idea_fr_description_content"
-        tools:text="Elements" />
+        android:text="@string/attached_to" />
+
+    <TextView
+        android:id="@+id/idea_fr_relative_owner"
+        style="@style/ItemFragment.OtherText"
+        app:layout_constraintLeft_toRightOf="@id/idea_fr_description_header"
+        app:layout_constraintTop_toTopOf="@id/idea_fr_relative_header"
+        tools:text="@string/not_attached" />
+
+    <ImageButton
+        android:id="@+id/idea_fr_owner_button"
+        style="@style/ItemFragment.Button.Relative"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/idea_fr_relative_owner"
+        app:layout_constraintBottom_toBottomOf="@id/idea_fr_relative_owner"
+        android:contentDescription="@string/image_button_description" />
+
+    <TextView
+        android:id="@+id/idea_fr_its_elements"
+        style="@style/ItemFragment.Header2"
+        app:layout_constraintTop_toBottomOf="@+id/idea_fr_relative_owner"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/elements" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/idea_fr_recycler"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/idea_fr_add_action"
+        style="@style/ItemFragment.Recycler"
+        app:layout_constraintBottom_toTopOf="@+id/idea_fr_button_action"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idea_fr_name_of_list_in_recycler" />
+        app:layout_constraintTop_toBottomOf="@+id/idea_fr_its_elements" />
 
-    <Button
-        android:id="@+id/idea_fr_add_action"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/convert_to"
+    <ImageButton
+        android:id="@+id/idea_fr_button_back"
+        style="@style/ItemFragment.Button.Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toLeftOf="@+id/idea_fr_button_action"
+        app:layout_constraintTop_toTopOf="@+id/idea_fr_button_action"
+        android:contentDescription="@string/description" />
+
+    <ImageButton
+        android:id="@+id/idea_fr_button_action"
+        style="@style/ItemFragment.Button.Action"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/idea_fr_button_back"
+        app:layout_constraintRight_toLeftOf="@+id/idea_fr_button_home"
+        app:layout_constraintTop_toBottomOf="@+id/idea_fr_recycler"
+        android:contentDescription="@string/description" />
+
+    <ImageButton
+        android:id="@+id/idea_fr_button_home"
+        style="@style/ItemFragment.Button.Home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/idea_fr_button_action"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/idea_fr_button_action"
+        android:contentDescription="@string/description" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,7 +30,7 @@ class IdeaSmallViewController : HolderController() {
 
         name.text = item.name
         dateStart.text = item.date.format(DateTimeFormatter.ofPattern(itemView.resources.getString(R.string.dateFormatterForItems)))
-        // TODO icon inject
+        icon.setImageResource(R.drawable.idea_ph)
 
         if (item.goalId == 0L && item.keyId == 0L && item.stepId == 0L){
             button.setImageResource(R.drawable.ic_link)

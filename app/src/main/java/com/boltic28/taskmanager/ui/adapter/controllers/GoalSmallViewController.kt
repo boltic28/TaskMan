@@ -27,7 +27,7 @@ class GoalSmallViewController : HolderController() {
 
         name.text = item.name
         dateStart.text = item.date.format(DateTimeFormatter.ofPattern(itemView.resources.getString(R.string.dateFormatterForItems)))
-        // TODO icon inject
+        icon.setImageResource(R.drawable.goal_ph)
         val button: ImageButton = itemView.findViewById(R.id.small_goal_button_action)
 
         button.setImageResource(R.drawable.ic_attach)

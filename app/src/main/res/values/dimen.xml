@@ -24,6 +24,20 @@
     <dimen name="main_panel_height">60dp</dimen>
     <dimen name="main_panel_searching_padding_start">16dp</dimen>
 
+    <!--Items fragment -->
+    <dimen name="item_fragment_margin_between_view">16dp</dimen>
+    <dimen name="item_fragment_image_size">150dp</dimen>
+    <dimen name="item_fragment_is_done_size">30dp</dimen>
+    <dimen name="item_fragment_button_link_size">24dp</dimen>
+    <dimen name="item_fragment_layout_padding">16dp</dimen>
+    <dimen name="item_fragment_buttons_height">50dp</dimen>
+    <dimen name="item_fragment_small_padding">8dp</dimen>
+    <dimen name="item_fragment_margin_between_blocks">24dp</dimen>
+    <dimen name="item_fragment_progress_height">20dp</dimen>
+    <dimen name="item_fragment_header1_text_size">28sp</dimen>
+    <dimen name="item_fragment_header2_text_size">18sp</dimen>
+    <dimen name="item_fragment_other_text_size">14sp</dimen>
+
     <!--Item -->
     <dimen name="item_image_size">80dp</dimen>
     <dimen name="item_padding_for_view">12dp</dimen>

@@ -28,7 +28,7 @@ class KeyViewController: HolderController() {
         header.text = item.name
         description.text = item.description
         dateStart.text = item.date.format(DateTimeFormatter.ofPattern(itemView.resources.getString(R.string.dateFormatterForItems)))
-
+        icon.setImageResource(R.drawable.key_ph)
 
         // describe buttons to other entity
         // TODO

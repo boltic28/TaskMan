@@ -1,47 +1,38 @@
 package com.boltic28.taskmanager.ui.screens.keyfragment
 
-import android.os.Bundle
-import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.boltic28.taskmanager.R
+import com.boltic28.taskmanager.datalayer.Progress
 import com.boltic28.taskmanager.datalayer.entities.KeyResult
-import com.boltic28.taskmanager.signtools.FireUserManager
 import com.boltic28.taskmanager.ui.base.BaseEntityFragment
 import com.boltic28.taskmanager.ui.screens.ActivityHelper
-import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment
 import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment.Companion.KEY_ID
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_key.*
-import java.time.format.DateTimeFormatter
+import kotlinx.android.synthetic.main.fragment_step.*
 
 class KeyFragment: BaseEntityFragment<KeyFragmentModel>(R.layout.fragment_key, KEY_ID) {
 
     override fun initView() {
+        setButtonsBack()
         model.disposables + model.item
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ key ->
                 if (key.id != 0L) {
                     (activity as? ActivityHelper)?.setToolbarText(key.name)
-                    key_fr_description.text = key.description
-                    key_fr_start_date.text =
-                        key.date.format(
-                            DateTimeFormatter
-                                .ofPattern(resources.getString(R.string.dateFormatterForItems))
-                        )
-                    key_fr_percentage.text =
-                        resources.getString(R.string.percentage)
+                    key_fr_name.text = fetchName(key.name)
+                    key_fr_image.setImageResource(R.drawable.key_ph)
+                    key_fr_start_date.text = fetchDate(key.date)
+                    key_fr_description_content.text = key.description
                     key_fr_recycler.layoutManager =
                         LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                     key_fr_recycler.adapter = model.adapter
-                    key_fr_add_action.setOnClickListener {
-                        loadDataIntoRecycler(key)
-                    }
+                    key_fr_button_action.setOnClickListener { loadDataIntoRecycler(key) }
 
+                    setProgress(key.progress)
                     setButtonOwner(key)
                     loadDataIntoRecycler(key)
                 }
@@ -50,9 +41,42 @@ class KeyFragment: BaseEntityFragment<KeyFragmentModel>(R.layout.fragment_key, K
             })
     }
 
+    private fun setProgress(progress: Progress) {
+        step_fr_progress.text = resources.getString(R.string.progres_00, 0)
+        if (progress.value >= Progress.PROGRESS_20.value) {
+            step_fr_progress_20.setImageResource(R.drawable.bg_progress_on)
+            step_fr_progress.text = resources.getString(R.string.progres_00, 20)
+        }
+        if (progress.value >= Progress.PROGRESS_40.value) {
+            step_fr_progress_40.setImageResource(R.drawable.bg_progress_on)
+            step_fr_progress.text = resources.getString(R.string.progres_00, 40)
+        }
+        if (progress.value >= Progress.PROGRESS_60.value) {
+            step_fr_progress_60.setImageResource(R.drawable.bg_progress_on)
+            step_fr_progress.text = resources.getString(R.string.progres_00, 60)
+        }
+        if (progress.value >= Progress.PROGRESS_80.value) {
+            step_fr_progress_80.setImageResource(R.drawable.bg_progress_on)
+            step_fr_progress.text = resources.getString(R.string.progres_00, 80)
+        }
+        if (progress.value == Progress.DONE.value) {
+            step_fr_progress_100.setImageResource(R.drawable.bg_progress_on)
+            step_fr_progress.text = resources.getString(R.string.progres_00, 100)
+        }
+    }
+
+    private fun setButtonsBack(){
+        key_fr_button_back.setOnClickListener {
+            activity?.onBackPressed()
+        }
+        key_fr_button_home.setOnClickListener {
+            findNavController().navigate(R.id.mainFragment)
+        }
+    }
+
     private fun setButtonOwner(key: KeyResult){
         if (key.goalId != 0L){
-            key_fr_owner_button.text = resources.getString(R.string.unpin)
+            key_fr_owner_button.setImageResource(R.drawable.ic_unlink)
             key_fr_owner_button.setOnClickListener {
                 model.interactor.update(key.copy(goalId = 0L))
                     .subscribeOn(Schedulers.io())
@@ -65,13 +89,13 @@ class KeyFragment: BaseEntityFragment<KeyFragmentModel>(R.layout.fragment_key, K
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe( {
-                    key_fr_owner_text.text = it.name
+                    key_fr_relative_owner.text = it.name
                 },{
 
                 })
         }else{
-            key_fr_owner_text.text = resources.getString(R.string.not_attached)
-            key_fr_owner_button.text = resources.getString(R.string.attach)
+            key_fr_relative_owner.text = resources.getString(R.string.not_attached)
+            key_fr_owner_button.setImageResource(R.drawable.ic_link)
             key_fr_owner_button.setOnClickListener {
                 model.isItemsElementIntoRecycler = false
                 model.loadGoalsIntoAdapter(key, findNavController())
@@ -83,11 +107,13 @@ class KeyFragment: BaseEntityFragment<KeyFragmentModel>(R.layout.fragment_key, K
         if (model.isItemsElementIntoRecycler) {
             model.isItemsElementIntoRecycler = false
             model.loadFreeElementIntoAdapter(findNavController())
-            key_fr_add_action.text = resources.getString(R.string.to_steps_element)
+            key_fr_its_elements.text = resources.getString(R.string.free_elements)
+            key_fr_button_action.setImageResource(R.drawable.ic_elements)
         } else {
             model.isItemsElementIntoRecycler = true
             model.loadKeysElementIntoAdapter(key, findNavController())
-            key_fr_add_action.text = resources.getString(R.string.to_free_elements)
+            key_fr_its_elements.text = resources.getString(R.string.its_elements)
+            key_fr_button_action.setImageResource(R.drawable.ic_add_item)
         }
     }
 }
