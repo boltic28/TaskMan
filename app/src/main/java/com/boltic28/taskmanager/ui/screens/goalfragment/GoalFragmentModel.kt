@@ -1,6 +1,5 @@
 package com.boltic28.taskmanager.ui.screens.goalfragment
 
-import android.util.Log
 import androidx.navigation.NavController
 import com.boltic28.taskmanager.businesslayer.FreeElementsInteractor
 import com.boltic28.taskmanager.businesslayer.GoalFragmentInteractor
@@ -9,7 +8,6 @@ import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
-import com.boltic28.taskmanager.ui.screens.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -30,7 +28,6 @@ class GoalFragmentModel @Inject constructor(
                 {
                     initGoalValue(it)
                 }, {
-                    Log.d(MainActivity.TAG, "getGoal - error \n ->$it")
                 }
             )
     }
@@ -42,7 +39,6 @@ class GoalFragmentModel @Inject constructor(
             .subscribe({
                 mItem.onNext(goalInteract.setProgressFor(it))
             }, {
-                Log.d(MainActivity.TAG, "getGoalInfo - Goal error \n ->$it")
             })
     }
 
@@ -93,7 +89,6 @@ class GoalFragmentModel @Inject constructor(
                 refresh()
                 isItemsElementIntoRecycler = true
             }, {
-                Log.d(MainActivity.TAG, "getStep - error \n ->$it")
             })
     }
 
@@ -105,7 +100,6 @@ class GoalFragmentModel @Inject constructor(
                 refresh()
                 isItemsElementIntoRecycler = true
             }, {
-                Log.d(MainActivity.TAG, "getKey - error \n ->$it")
             })
     }
 
@@ -117,7 +111,6 @@ class GoalFragmentModel @Inject constructor(
                 refresh()
                 isItemsElementIntoRecycler = true
             }, {
-                Log.d(MainActivity.TAG, "getTask - error \n ->$it")
             })
     }
 
@@ -129,7 +122,6 @@ class GoalFragmentModel @Inject constructor(
                 refresh()
                 isItemsElementIntoRecycler = true
             }, {
-                Log.d(MainActivity.TAG, "getIdea - error \n ->$it")
             })
     }
 
@@ -141,7 +133,6 @@ class GoalFragmentModel @Inject constructor(
                 refresh()
                 isItemsElementIntoRecycler = false
             }, {
-                Log.d(MainActivity.TAG, "getIdea - error \n ->$it")
             })
     }
 
@@ -153,7 +144,6 @@ class GoalFragmentModel @Inject constructor(
                 refresh()
                 isItemsElementIntoRecycler = false
             }, {
-                Log.d(MainActivity.TAG, "getStep - error \n ->$it")
             })
     }
 
@@ -165,7 +155,6 @@ class GoalFragmentModel @Inject constructor(
                 refresh()
                 isItemsElementIntoRecycler = false
             }, {
-                Log.d(MainActivity.TAG, "getKey - error \n ->$it")
             })
     }
 
@@ -177,7 +166,6 @@ class GoalFragmentModel @Inject constructor(
                 refresh()
                 isItemsElementIntoRecycler = false
             }, {
-                Log.d(MainActivity.TAG, "getTask - error \n ->$it")
             })
     }
 
@@ -188,7 +176,6 @@ class GoalFragmentModel @Inject constructor(
             .subscribe({ result ->
                 adapter.addList(result)
             }, {
-                Log.d(MainActivity.TAG, "getTasks - error \n ->$it")
             })
     }
 
@@ -199,7 +186,6 @@ class GoalFragmentModel @Inject constructor(
             .subscribe({ result ->
                 adapter.addList(result)
             }, {
-                Log.d(MainActivity.TAG, "getKeys - error \n ->$it")
             })
     }
 
@@ -210,7 +196,6 @@ class GoalFragmentModel @Inject constructor(
             .subscribe({ result ->
                 adapter.addList(result)
             }, {
-                Log.d(MainActivity.TAG, "getIdeas - error \n ->$it")
             })
     }
 
@@ -221,7 +206,6 @@ class GoalFragmentModel @Inject constructor(
             .subscribe({ result ->
                 adapter.addList(result)
             }, {
-                Log.d(MainActivity.TAG, "getSteps - error \n ->$it")
             })
     }
 }

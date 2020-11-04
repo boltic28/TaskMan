@@ -22,7 +22,7 @@ class KeyFragmentModel @Inject constructor(
     val adapter: ItemAdapter,
     val interactor: KeyFragmentInteractor,
     override var userManager: UserManager
-): BaseEntityFragmentModel<KeyResult>() {
+) : BaseEntityFragmentModel<KeyResult>() {
     override fun refresh() {
         disposables + interactor.getKeyById(itemId)
             .subscribeOn(Schedulers.io())
@@ -31,7 +31,6 @@ class KeyFragmentModel @Inject constructor(
                 {
                     initValue(it)
                 }, {
-                    Log.d(MainActivity.TAG, "getGoal - error \n ->$it")
                 }
             )
     }
@@ -40,16 +39,16 @@ class KeyFragmentModel @Inject constructor(
         disposables + interactor.setChildrenFor(key)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                mItem.onNext(interactor.setProgressFor(it))
-            }, {
-                Log.d(MainActivity.TAG, "getGoalInfo - Goal error \n ->$it")
-            })
+            .subscribe(
+                {
+                    mItem.onNext(interactor.setProgressFor(it))
+                }, {
+                }
+            )
     }
 
 
-
-    fun loadGoalsIntoAdapter(key: KeyResult, nav: NavController){
+    fun loadGoalsIntoAdapter(key: KeyResult, nav: NavController) {
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun onActionButtonClick(item: Any) {
@@ -61,6 +60,7 @@ class KeyFragmentModel @Inject constructor(
                         isItemsElementIntoRecycler = false
                     }
             }
+
             override fun onViewClick(item: Any) {
                 goToItemFragment(item, nav)
             }
@@ -75,6 +75,7 @@ class KeyFragmentModel @Inject constructor(
                 if (item is Task) makeFree(item)
                 if (item is Idea) makeFree(item)
             }
+
             override fun onViewClick(item: Any) {
                 goToItemFragment(item, nav)
             }
@@ -91,6 +92,7 @@ class KeyFragmentModel @Inject constructor(
                 if (item is Idea) addToKey(item)
                 if (item is Task) addToKey(item)
             }
+
             override fun onViewClick(item: Any) {
                 goToItemFragment(item, nav)
             }
@@ -107,7 +109,6 @@ class KeyFragmentModel @Inject constructor(
                 refresh()
                 isItemsElementIntoRecycler = true
             }, {
-                Log.d(MainActivity.TAG, "getTask - error \n ->$it")
             })
     }
 
@@ -119,7 +120,6 @@ class KeyFragmentModel @Inject constructor(
                 refresh()
                 isItemsElementIntoRecycler = true
             }, {
-                Log.d(MainActivity.TAG, "getIdea - error \n ->$it")
             })
     }
 
@@ -131,7 +131,6 @@ class KeyFragmentModel @Inject constructor(
                 refresh()
                 isItemsElementIntoRecycler = false
             }, {
-                Log.d(MainActivity.TAG, "getIdea - error \n ->$it")
             })
     }
 
@@ -143,7 +142,6 @@ class KeyFragmentModel @Inject constructor(
                 refresh()
                 isItemsElementIntoRecycler = false
             }, {
-                Log.d(MainActivity.TAG, "getTask - error \n ->$it")
             })
     }
 
@@ -154,7 +152,6 @@ class KeyFragmentModel @Inject constructor(
             .subscribe({ result ->
                 adapter.addList(result)
             }, {
-                Log.d(MainActivity.TAG, "getTasks - error \n ->$it")
             })
     }
 
@@ -165,18 +162,16 @@ class KeyFragmentModel @Inject constructor(
             .subscribe({ result ->
                 adapter.addList(result)
             }, {
-                Log.d(MainActivity.TAG, "getIdeas - error \n ->$it")
             })
     }
 
-    private fun loadGoals(){
+    private fun loadGoals() {
         disposables + interactor.getGoals()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
                 adapter.addList(result)
             }, {
-                Log.d(MainActivity.TAG, "getIdeas - error \n ->$it")
             })
     }
 }

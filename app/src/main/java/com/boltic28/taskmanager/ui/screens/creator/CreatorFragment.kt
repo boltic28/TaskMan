@@ -1,7 +1,6 @@
 package com.boltic28.taskmanager.ui.screens.creator
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -9,8 +8,6 @@ import androidx.navigation.fragment.findNavController
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.ui.base.BaseFragment
 import com.boltic28.taskmanager.ui.screens.ActivityHelper
-import com.boltic28.taskmanager.ui.screens.MainActivity
-import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -31,7 +28,6 @@ class CreatorFragment : BaseFragment<CreatorFragmentModel>(R.layout.fragment_cre
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d(MainFragment.TAG, "-> creatorFragment")
 
         (activity as? ActivityHelper)?.setToolbarText("Create new object")
         setOnButtons()
@@ -51,10 +47,8 @@ class CreatorFragment : BaseFragment<CreatorFragmentModel>(R.layout.fragment_cre
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { id ->
                     if (id == 0L){
-                        Log.d(MainActivity.TAG, "creating item is FAILED")
                         messenger.showMessage("new instance is not created")
                     }else{
-                        Log.d(MainActivity.TAG, "creating item is SUCCESS: id = $id")
                         messenger.showMessage("new instance is created")
                         findNavController().navigate(R.id.mainFragment)
                     }

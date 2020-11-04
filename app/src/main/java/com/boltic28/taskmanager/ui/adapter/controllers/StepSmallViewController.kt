@@ -41,13 +41,10 @@ class StepSmallViewController : HolderController() {
         itemView.setOnClickListener {
             listener.onViewClick(item)
             // go to item page
-            Log.d(MainActivity.TAG, "Item smallIdea clicked")
         }
 
         button.setOnClickListener {
             listener.onActionButtonClick(item)
-
-            Log.d(MainActivity.TAG, "Plus smallIdea clicked")
         }
     }
 }

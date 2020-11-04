@@ -2,7 +2,6 @@ package com.boltic28.taskmanager.signtools
 
 import android.app.Activity
 import android.util.Log
-import com.boltic28.taskmanager.ui.screens.MainActivity.Companion.TAG
 import com.boltic28.taskmanager.utils.Messenger
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
@@ -59,10 +58,7 @@ class FireUserManager(
             }
     }
 
-    override fun signOut() {
-        mAuth.signOut()
-        Log.d(TAG, "user is signed Out")
-    }
+    override fun signOut() = mAuth.signOut()
 
     override fun isUserSigned(): Boolean =
         convertUser(mAuth.currentUser).id != EMPTY_STRING
@@ -86,10 +82,8 @@ class FireUserManager(
 
     private fun checkTaskAndSetUser(task: Task<AuthResult>, type: String) {
         if (task.isSuccessful) {
-            Log.d(TAG, "$type : success")
             messenger.showMessage("$type successful")
         } else {
-            Log.d(TAG, "$type : failed")
             messenger.showMessage("$type failed")
         }
         userSubject.onNext(convertUser(mAuth.currentUser))

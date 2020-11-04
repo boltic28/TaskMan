@@ -1,6 +1,5 @@
 package com.boltic28.taskmanager.ui.screens.stepfragment
 
-import android.util.Log
 import androidx.navigation.NavController
 import com.boltic28.taskmanager.businesslayer.StepFragmentInteractor
 import com.boltic28.taskmanager.datalayer.entities.Goal
@@ -11,18 +10,16 @@ import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
-import com.boltic28.taskmanager.ui.screens.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
-import javax.inject.Named
 
 class StepFragmentModel @Inject constructor(
     @AdapterForStep
     val adapter: ItemAdapter,
     val interactor: StepFragmentInteractor,
     override var userManager: UserManager,
-): BaseEntityFragmentModel<Step>() {
+) : BaseEntityFragmentModel<Step>() {
 
     override fun refresh() {
         disposables + interactor.getStepById(itemId)
@@ -32,7 +29,6 @@ class StepFragmentModel @Inject constructor(
                 {
                     initStepValue(it)
                 }, {
-                    Log.d(MainActivity.TAG, "getGoal - error \n ->$it")
                 }
             )
     }
@@ -44,7 +40,6 @@ class StepFragmentModel @Inject constructor(
             .subscribe({
                 mItem.onNext(interactor.setProgressFor(it))
             }, {
-                Log.d(MainActivity.TAG, "getGoalInfo - Goal error \n ->$it")
             })
     }
 
@@ -55,6 +50,7 @@ class StepFragmentModel @Inject constructor(
                 if (item is Idea) addToStep(item)
                 if (item is Task) addToStep(item)
             }
+
             override fun onViewClick(item: Any) {
                 goToItemFragment(item, nav)
             }
@@ -63,7 +59,7 @@ class StepFragmentModel @Inject constructor(
         loadIdeas()
     }
 
-    fun loadGoalsIntoAdapter(step: Step, nav: NavController){
+    fun loadGoalsIntoAdapter(step: Step, nav: NavController) {
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun onActionButtonClick(item: Any) {
@@ -75,6 +71,7 @@ class StepFragmentModel @Inject constructor(
                         isItemsElementIntoRecycler = false
                     }
             }
+
             override fun onViewClick(item: Any) {
                 goToItemFragment(item, nav)
             }
@@ -89,6 +86,7 @@ class StepFragmentModel @Inject constructor(
                 if (item is Task) makeFree(item)
                 if (item is Idea) makeFree(item)
             }
+
             override fun onViewClick(item: Any) {
                 goToItemFragment(item, nav)
             }
@@ -106,7 +104,6 @@ class StepFragmentModel @Inject constructor(
                 refresh()
                 isItemsElementIntoRecycler = true
             }, {
-                Log.d(MainActivity.TAG, "getTask - error \n ->$it")
             })
     }
 
@@ -118,7 +115,6 @@ class StepFragmentModel @Inject constructor(
                 refresh()
                 isItemsElementIntoRecycler = true
             }, {
-                Log.d(MainActivity.TAG, "getIdea - error \n ->$it")
             })
     }
 
@@ -130,7 +126,6 @@ class StepFragmentModel @Inject constructor(
                 refresh()
                 isItemsElementIntoRecycler = false
             }, {
-                Log.d(MainActivity.TAG, "getIdea - error \n ->$it")
             })
     }
 
@@ -142,7 +137,6 @@ class StepFragmentModel @Inject constructor(
                 refresh()
                 isItemsElementIntoRecycler = false
             }, {
-                Log.d(MainActivity.TAG, "getTask - error \n ->$it")
             })
     }
 
@@ -153,7 +147,6 @@ class StepFragmentModel @Inject constructor(
             .subscribe({ result ->
                 adapter.addList(result)
             }, {
-                Log.d(MainActivity.TAG, "getTasks - error \n ->$it")
             })
     }
 
@@ -164,18 +157,16 @@ class StepFragmentModel @Inject constructor(
             .subscribe({ result ->
                 adapter.addList(result)
             }, {
-                Log.d(MainActivity.TAG, "getIdeas - error \n ->$it")
             })
     }
 
-    private fun loadGoals(){
+    private fun loadGoals() {
         disposables + interactor.getGoals()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
                 adapter.addList(result)
             }, {
-                Log.d(MainActivity.TAG, "getIdeas - error \n ->$it")
             })
     }
 }

@@ -52,13 +52,6 @@ class ItemAdapter(
         }.getType()
 
     override fun onBindViewHolder(holder: DefaultViewHolder, position: Int) {
-
-        Log.d(
-            MainActivity.TAG, "load instance into holder:\n " +
-                    "type of the holder - ${holder.type}" +
-                    "\n type of the instance - ${items[position].javaClass.canonicalName}"
-        )
-
         controllers.first { controller ->
             controller.fitTo(holder) }.apply {
             listener = itemListener

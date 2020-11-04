@@ -16,7 +16,6 @@ import kotlinx.android.synthetic.main.fragment_main.*
 class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
 
     companion object {
-        const val TAG = "mainActivity_test"
         const val GOAL_ID = "goalId"
         const val STEP_ID = "stepId"
         const val IDEA_ID = "ideaId"
