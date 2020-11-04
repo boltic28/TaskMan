@@ -40,12 +40,7 @@ class App : Application() {
                 repoModule.provideTaskRepo(),
                 repoModule.provideIdeaRepo(),
                 repoModule.provideGoalRepo()
-            ),
-            GoalFragmentModule(),
-            StepFragmentModule(),
-            TaskFragmentModule(),
-            IdeaFragmentModule(),
-            KeyFragmentModule()
+            )
         )
             .activityInjector.maybeInject(activity)
     }

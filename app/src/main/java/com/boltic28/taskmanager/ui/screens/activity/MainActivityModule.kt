@@ -1,7 +1,7 @@
-package com.boltic28.taskmanager.ui.screens
+package com.boltic28.taskmanager.ui.screens.activity
 
 import androidx.lifecycle.ViewModel
-import com.boltic28.taskmanager.di.ViewModelKey
+import com.boltic28.taskmanager.ui.di.ViewModelKey
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoMap

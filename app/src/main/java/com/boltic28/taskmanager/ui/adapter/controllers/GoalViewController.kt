@@ -1,6 +1,5 @@
 package com.boltic28.taskmanager.ui.adapter.controllers
 
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -8,7 +7,6 @@ import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.Progress
 import com.boltic28.taskmanager.datalayer.entities.Goal
 import com.boltic28.taskmanager.ui.adapter.DefaultViewHolder
-import com.boltic28.taskmanager.ui.screens.MainActivity
 import java.time.format.DateTimeFormatter
 import kotlin.reflect.KClass
 

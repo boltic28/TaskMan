@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.ui.screens
+package com.boltic28.taskmanager.ui.screens.activity
 
 import androidx.lifecycle.ViewModel
 import com.boltic28.taskmanager.signtools.FireUserManager

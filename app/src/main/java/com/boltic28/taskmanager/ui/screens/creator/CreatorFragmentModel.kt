@@ -1,45 +1,24 @@
 package com.boltic28.taskmanager.ui.screens.creator
 
+import com.boltic28.taskmanager.businesslayer.CreatorInteractor
 import com.boltic28.taskmanager.datalayer.Cycle
 import com.boltic28.taskmanager.datalayer.Progress
 import com.boltic28.taskmanager.datalayer.entities.*
-import com.boltic28.taskmanager.datalayer.room.goal.GoalRepository
-import com.boltic28.taskmanager.datalayer.room.idea.IdeaRepository
-import com.boltic28.taskmanager.datalayer.room.keyresult.KeyRepository
-import com.boltic28.taskmanager.datalayer.room.step.StepRepository
-import com.boltic28.taskmanager.datalayer.room.task.TaskRepository
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.base.BaseViewModel
+import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.Single
 import java.time.LocalDateTime
 import javax.inject.Inject
 
 class CreatorFragmentModel @Inject constructor(
-    private val goalRepository: GoalRepository,
-    private val keyRepository: KeyRepository,
-    private val stepRepository: StepRepository,
-    private val taskRepository: TaskRepository,
-    private val ideaRepository: IdeaRepository,
-    override var userManager: UserManager
+    private val interactor: CreatorInteractor,
+    override var userManager: UserManager,
+    val messenger: Messenger
 ) : BaseViewModel() {
 
-    fun create(item: Goal): Single<Long> =
-        goalRepository.insert(item)
-
-    fun create(item: KeyResult): Single<Long> =
-        keyRepository.insert(item)
-
-    fun create(item: Step): Single<Long> =
-        stepRepository.insert(item)
-
-    fun create(item: Task): Single<Long> =
-        taskRepository.insert(item)
-
-    fun create(item: Idea): Single<Long> =
-        ideaRepository.insert(item)
-
     fun saveGoal(name: String, description: String, endDate: LocalDateTime): Single<Long> =
-        create(
+        interactor.create(
             Goal(
                 id = 0,
                 name = name,
@@ -58,7 +37,7 @@ class CreatorFragmentModel @Inject constructor(
         )
 
     fun saveKey(name: String, description: String): Single<Long> =
-        create(
+        interactor.create(
             KeyResult(
                 id = 0,
                 goalId = 0,
@@ -73,7 +52,7 @@ class CreatorFragmentModel @Inject constructor(
         )
 
     fun saveStep(name: String, description: String, endDate: LocalDateTime): Single<Long> =
-        create(
+        interactor.create(
             Step(
                 id = 0,
                 goalId = 0,
@@ -97,7 +76,7 @@ class CreatorFragmentModel @Inject constructor(
         endDate: LocalDateTime,
         cycle: String
     ): Single<Long> =
-        create(
+        interactor.create(
             Task(
                 id = 0,
                 stepId = 0,
@@ -115,7 +94,7 @@ class CreatorFragmentModel @Inject constructor(
         )
 
     fun saveIdea(name: String, description: String): Single<Long> =
-        create(
+        interactor.create(
             Idea(
                 id = 0,
                 stepId = 0,
