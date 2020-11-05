@@ -1,7 +1,7 @@
 package com.boltic28.taskmanager.ui.screens.taskfragment
 
 import androidx.lifecycle.ViewModel
-import com.boltic28.taskmanager.di.ViewModelKey
+import com.boltic28.taskmanager.ui.di.ViewModelKey
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.GoalSmallViewController
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController

@@ -10,6 +10,7 @@ import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
+import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -18,7 +19,8 @@ class KeyFragmentModel @Inject constructor(
     @AdapterForKey
     val adapter: ItemAdapter,
     val interactor: KeyFragmentInteractor,
-    override var userManager: UserManager
+    override var userManager: UserManager,
+    val messenger: Messenger
 ) : BaseEntityFragmentModel<KeyResult>() {
 
     override fun refresh() {

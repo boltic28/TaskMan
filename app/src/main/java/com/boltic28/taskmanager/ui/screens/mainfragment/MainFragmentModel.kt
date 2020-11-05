@@ -14,7 +14,7 @@ import javax.inject.Inject
 class MainFragmentModel @Inject constructor(
     private val interactor: FreeElementsInteractor,
     val adapter: ItemAdapter,
-    private val messenger: Messenger,
+    val messenger: Messenger,
     override var userManager: UserManager
 ) : BaseViewModel() {
 

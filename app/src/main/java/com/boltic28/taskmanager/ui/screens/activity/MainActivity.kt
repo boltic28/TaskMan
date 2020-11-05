@@ -1,11 +1,11 @@
-package com.boltic28.taskmanager.ui.screens
+package com.boltic28.taskmanager.ui.screens.activity
 
 import android.view.Menu
 import android.view.MenuItem
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.ui.base.BaseActivity
 
-class MainActivity : BaseActivity<MainActivityModel>(R.layout.activity_main), ActivityHelper{
+class MainActivity : BaseActivity<MainActivityModel>(R.layout.activity_main), ActivityHelper {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)

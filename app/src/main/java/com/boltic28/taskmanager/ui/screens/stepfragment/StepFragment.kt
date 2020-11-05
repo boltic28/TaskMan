@@ -6,7 +6,7 @@ import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.Progress
 import com.boltic28.taskmanager.datalayer.entities.Step
 import com.boltic28.taskmanager.ui.base.BaseEntityFragment
-import com.boltic28.taskmanager.ui.screens.ActivityHelper
+import com.boltic28.taskmanager.ui.screens.activity.ActivityHelper
 import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment.Companion.STEP_ID
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
