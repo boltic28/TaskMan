@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.ui.screens.ActivityHelper
+import com.boltic28.taskmanager.ui.screens.activity.ActivityHelper
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 

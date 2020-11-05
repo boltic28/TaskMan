@@ -1,6 +1,5 @@
 package com.boltic28.taskmanager.ui.screens.goalfragment
 
-import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.boltic28.taskmanager.R
@@ -12,7 +11,6 @@ import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment.Companion.G
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_goal.*
-import java.time.format.DateTimeFormatter
 
 class GoalFragment : BaseEntityFragment<GoalFragmentModel>(R.layout.fragment_goal, GOAL_ID) {
 

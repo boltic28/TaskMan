@@ -71,7 +71,7 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
         model.loadGoals()
     }
 
-    private fun loadSteps(){
+    private fun loadSteps() {
         model.adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun onActionButtonClick(item: Any) {}
             override fun onViewClick(item: Any) {
@@ -84,9 +84,17 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
         model.loadSteps()
     }
 
-    private fun loadTasks(){
+    private fun loadTasks() {
         model.adapter.setAdapterListener(object : HolderController.OnActionClickListener {
-            override fun onActionButtonClick(item: Any) {}
+            override fun onActionButtonClick(item: Any) {
+                item as Task
+                if (item.isStarted) {
+                    model.update(item.copy(isDone = true))
+                } else {
+                    model.update(item.copy(isStarted = true))
+                }
+            }
+
             override fun onViewClick(item: Any) {
                 item as Task
                 val bundle = Bundle()
@@ -97,9 +105,12 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
         model.loadTasks()
     }
 
-    private fun loadIdeas(){
+    private fun loadIdeas() {
         model.adapter.setAdapterListener(object : HolderController.OnActionClickListener {
-            override fun onActionButtonClick(item: Any) {}
+            override fun onActionButtonClick(item: Any) {
+                // todo go to convert fragment
+            }
+
             override fun onViewClick(item: Any) {
                 item as Idea
                 val bundle = Bundle()
@@ -110,7 +121,7 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
         model.loadIdeas()
     }
 
-    private fun loadKeys(){
+    private fun loadKeys() {
         model.adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun onActionButtonClick(item: Any) {}
             override fun onViewClick(item: Any) {

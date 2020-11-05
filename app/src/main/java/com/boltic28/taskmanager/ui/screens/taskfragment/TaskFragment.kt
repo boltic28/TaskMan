@@ -22,7 +22,7 @@ class TaskFragment : BaseEntityFragment<TaskFragmentModel>(R.layout.fragment_tas
             .subscribe { task ->
                 if (task.id != 0L) {
                     (activity as? ActivityHelper)?.setToolbarText(task.name)
-                    task_fr_name.text = task.name
+                    task_fr_name.text = fetchName(task.name)
                     task_fr_isDone_icon.visibility = fetchVisibility(task.isDone)
                     task_fr_start_date.text = fetchDate(task.date)
                     task_fr_status.text = fetchStatus(task.isStarted, task.isDone)
@@ -68,6 +68,7 @@ class TaskFragment : BaseEntityFragment<TaskFragmentModel>(R.layout.fragment_tas
                 task_fr_recycler.visibility = View.VISIBLE
                 task_fr_recycler.layoutManager =
                     LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                task_fr_recycler.adapter = model.adapter
                 model.loadParentsElements(task, findNavController())
             }
         }
@@ -76,11 +77,12 @@ class TaskFragment : BaseEntityFragment<TaskFragmentModel>(R.layout.fragment_tas
     private fun checkState(task: Task) {
         if (task.isDone) {
             task_fr_button_action.isEnabled = false
+            task_fr_button_action.setColorFilter(R.color.colorItemProgressOff)
         }
         if (task.isStarted) {
             task_fr_button_action.setImageResource(R.drawable.ic_done)
             task_fr_button_action.setOnClickListener {
-                model.update(task.copy(isStarted = true))
+                model.update(task.copy(isDone = true))
             }
         } else {
             task_fr_button_action.setImageResource(R.drawable.ic_start)

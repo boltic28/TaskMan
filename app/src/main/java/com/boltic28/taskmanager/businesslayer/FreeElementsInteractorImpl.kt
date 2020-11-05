@@ -20,14 +20,26 @@ class FreeElementsInteractorImpl(
     override fun getFreeTasks(): Single<List<Task>> =
         taskRepository.getAllFree()
 
+    override fun getTasks(): Single<List<Task>> =
+        taskRepository.getAll()
+
     override fun getFreeIdeas(): Single<List<Idea>> =
         ideaRepository.getAllFree()
+
+    override fun getIdeas(): Single<List<Idea>> =
+        ideaRepository.getAll()
 
     override fun getFreeKeys(): Single<List<KeyResult>> =
         keyRepository.getAllFree()
 
+    override fun getKeys(): Single<List<KeyResult>> =
+        keyRepository.getAll()
+
     override fun getFreeSteps(): Single<List<Step>> =
         stepRepository.getAllFree()
+
+    override fun getSteps(): Single<List<Step>> =
+        stepRepository.getAll()
 
     override fun getGoals(): Single<List<Goal>> =
         goalRepository.getAll()
@@ -38,5 +50,6 @@ class FreeElementsInteractorImpl(
     override fun setProgressFor(goal: Goal): Goal =
         goalCase.setProgressFor(goal)
 
-
+    override fun update(item: Task): Single<Int> =
+        taskRepository.update(item)
 }

@@ -25,4 +25,10 @@
     <color name="colorItemDescription">#7C7B79</color>
     <color name="colorItemProgressOn">#04BF04</color>
     <color name="colorItemProgressOff">#C5C4C1</color>
+
+
+    <color name="colorStatusInfo">#4CAF50</color>
+    <color name="colorStatusAttention">#FF5722</color>
+    <color name="colorStatusDescription">#703C08</color>
+    <color name="colorStatusOff">#C5C4C1</color>
 </resources>

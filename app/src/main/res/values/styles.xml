@@ -180,7 +180,13 @@
         <item name="android:src">@drawable/ic_link</item>
     </style>
 
-    <!-- Items -->
+    <!-- Items big rows-->
+    <style name="Item">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/item_row_high</item>
+        <item name="android:padding">@dimen/item_fragment_layout_padding</item>
+    </style>
+
     <style name="Item.Header" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -201,43 +207,107 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingStart">8dp</item>
         <item name="android:paddingTop">8dp</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/colorItemDateStart</item>
     </style>
 
     <style name="Item.TextProgress" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginStart">@dimen/item_margin_left_image_progress</item>
-        <item name="android:layout_marginBottom">@dimen/item_margin_top_progress</item>
+        <item name="android:layout_marginEnd">@dimen/item_margin_left_image_progress</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/colorItemDateStart</item>
     </style>
 
     <style name="Item.ProgressPoint" parent="TextAppearance.AppCompat">
-        <item name="android:layout_width">@dimen/item_progress_point_size_w</item>
-        <item name="android:layout_height">@dimen/item_progress_point_size_h</item>
-        <item name="android:layout_marginStart">@dimen/item_progress_point_space_between</item>
-        <item name="android:layout_marginTop">@dimen/item_margin_top_progress</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:background">@color/colorItemProgressOff</item>
     </style>
 
-    <!-- Item goal -->
-    <style name="Item.Image" parent="TextAppearance.AppCompat">
-        <item name="android:layout_width">@dimen/item_image_size</item>
-        <item name="android:layout_height">@dimen/item_image_size</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/colorItemDateStart</item>
+    <style name="Item.StatusPoint" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">@dimen/item_image_status_size</item>
+        <item name="android:layout_height">@dimen/item_image_status_size</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@color/transparent</item>
     </style>
 
-    <!-- Item idea -->
+    <style name="Item.Image" parent="TextAppearance.AppCompat">
+        <item name="android:src">@drawable/goal_ph</item>
+        <item name="android:layout_width">@dimen/item_image_size</item>
+        <item name="android:layout_height">@dimen/item_image_size</item>
+    </style>
+
+    <style name="Item.ProgressContainer" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:layout_width">@dimen/item_progress_width</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="Item.StatusContainer" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/item_fragment_margin_between_view</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
     <style name="Item.Button.Idea" parent="Widget.AppCompat.Button">
-        <item name="android:layout_width">@dimen/item_idea_button_w</item>
+        <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">@dimen/item_idea_button_h</item>
         <item name="android:layout_marginStart">@dimen/item_idea_space_between_button</item>
         <item name="android:textSize">@dimen/item_idea_text_on_button</item>
     </style>
 
+    <!-- Items small rows-->
+    <style name="ItemSm">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/item_small_row_high</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="ItemSm.Image" parent="TextAppearance.AppCompat">
+        <item name="android:src">@drawable/goal_ph</item>
+        <item name="android:layout_width">@dimen/item_small_image_size</item>
+        <item name="android:layout_height">@dimen/item_small_image_size</item>
+        <item name="android:layout_margin">@dimen/item_small_margin_between_elements</item>
+    </style>
+
+    <style name="ItemSm.Image.Status" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">@dimen/item_small_image_status_size</item>
+        <item name="android:layout_height">@dimen/item_small_image_status_size</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:layout_marginStart">@dimen/item_small_minus_margin_for_status</item>
+        <item name="android:layout_marginBottom">@dimen/item_small_margin_between_elements</item>
+    </style>
+
+    <style name="ItemSm.Header" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorItemHeader</item>
+    </style>
+
+    <style name="ItemSm.Header.Date">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/colorItemHeader</item>
+    </style>
+
+    <style name="ItemSm.Button" parent="Widget.AppCompat.ImageButton">
+        <item name="android:layout_width">@dimen/item_small_button_size</item>
+        <item name="android:layout_height">@dimen/item_small_button_size</item>
+        <item name="android:layout_margin">@dimen/item_small_margin_between_elements</item>
+        <item name="maxImageSize">@dimen/item_small_button_size</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:src">@drawable/ic_attach</item>
+    </style>
+
+
     <string name="progress_point_description">Point of progress</string>
     <string name="fragment_item_image">item image</string>
+
 </resources>

@@ -1,6 +1,5 @@
 package com.boltic28.taskmanager.ui.di
 
-import com.boltic28.taskmanager.businesslayer.TaskFragmentInteractorImpl
 import com.boltic28.taskmanager.businesslayer.*
 import com.boltic28.taskmanager.datalayer.room.goal.GoalRepository
 import com.boltic28.taskmanager.datalayer.room.idea.IdeaRepository

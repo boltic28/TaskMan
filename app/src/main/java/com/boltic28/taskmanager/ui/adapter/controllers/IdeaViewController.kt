@@ -10,7 +10,7 @@ import com.boltic28.taskmanager.ui.adapter.DefaultViewHolder
 import java.time.format.DateTimeFormatter
 import kotlin.reflect.KClass
 
-class IdeaViewController: HolderController() {
+class IdeaViewController : HolderController() {
     override fun getType(): Int = R.layout.item_idea
 
     override fun getItemType(): KClass<*> = Idea::class
@@ -23,17 +23,30 @@ class IdeaViewController: HolderController() {
         val description: TextView = itemView.findViewById(R.id.item_idea_description)
         val dateStart: TextView = itemView.findViewById(R.id.item_idea_start)
         val icon: ImageView = itemView.findViewById(R.id.item_idea_image)
+        val action: Button = itemView.findViewById(R.id.item_task_button_action)
 
-        header.text = item.name
-        description.text = item.description
-        dateStart.text = item.date.format(DateTimeFormatter.ofPattern(itemView.resources.getString(R.string.dateFormatterForItems)))
+        header.text = fetchName(item.name)
+        description.text = fetchDescription(item.description)
+        dateStart.text =
+            item.date.format(DateTimeFormatter.ofPattern(itemView.resources.getString(R.string.dateFormatterForItems)))
         icon.setImageResource(R.drawable.idea_ph)
 
-        // describe buttons to other entity
-        // TODO
-        itemView.findViewById<Button>(R.id.idea_button_convert_to_goal).setOnClickListener {  }
-        itemView.findViewById<Button>(R.id.idea_button_convert_to_task).setOnClickListener {  }
-        itemView.findViewById<Button>(R.id.idea_button_convert_to_step).setOnClickListener {  }
+        val statusIsAttached: ImageView = itemView.findViewById(R.id.item_idea_status_linked)
+
+        statusIsAttached.setImageResource(
+            if (item.goalId == 0L && item.stepId == 0L && item.keyId == 0L)
+                R.drawable.ic_unlink
+            else
+                R.drawable.ic_link
+        )
+
+        itemView.setOnClickListener {
+            listener.onViewClick(item)
+        }
+
+        action.setOnClickListener {
+            listener.onActionButtonClick(item)
+        }
     }
 
 }

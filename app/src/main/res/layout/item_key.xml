@@ -1,60 +1,116 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="140dp"
-    android:padding="@dimen/item_padding_for_view"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Item">
 
     <TextView
         android:id="@+id/item_key_header"
         style="@style/Item.Header"
-        tools:text="Key for some goal"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Key for some goal" />
+
+    <ImageView
+        android:id="@+id/item_key_image"
+        style="@style/Item.Image"
+        android:contentDescription="@string/description_icon_of_step"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_key_header" />
+
+    <ImageView
+        android:id="@+id/item_key_status_icon"
+        style="@style/ItemFragment.IsDone"
+        android:contentDescription="@string/description"
+        app:layout_constraintBottom_toBottomOf="@id/item_key_header"
+        app:layout_constraintLeft_toRightOf="@id/item_key_header"
+        app:layout_constraintTop_toTopOf="@id/item_key_header" />
 
     <TextView
         android:id="@+id/item_key_start"
         style="@style/Item.Start"
-        tools:text="since: 22.09.2020"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        tools:text="since: 22.09.2020" />
 
     <TextView
         android:id="@+id/item_key_description"
         style="@style/Item.Description"
         android:maxLines="2"
-        tools:text="since: 22.09.2020 Some stupid idea come into my head,since: 22.09.2020 Some stupid idea come into my head,since: 22.09...."
         app:layout_constraintLeft_toRightOf="@id/item_key_image"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/item_key_progress_container"
         app:layout_constraintTop_toBottomOf="@id/item_key_header"
-        />
+        tools:text="since: 22.09.2020 Some stupid idea come into my head,since: 22.09.2020 Some stupid idea come into my head,since: 22.09...." />
 
-    <ImageView
-        android:id="@+id/item_key_image"
-        style="@style/Item.Image"
-        app:layout_constraintTop_toBottomOf="@+id/item_key_header"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:contentDescription="@string/description_icon_of_step" />
+    <TextView
+        android:id="@+id/item_key_text_progress"
+        style="@style/Item.TextProgress"
+        android:text="@string/item_progress"
+        app:layout_constraintBottom_toBottomOf="@+id/item_key_progress_container"
+        app:layout_constraintRight_toLeftOf="@+id/item_key_progress_container" />
 
-    <Button
-        android:id="@+id/key_button_start"
-        style="@style/Item.Button.Idea"
-        android:text="@string/start_it"
-        app:layout_constraintLeft_toRightOf="@+id/item_key_image"
-        app:layout_constraintRight_toLeftOf="@+id/key_button_done"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
-
-    <Button
-        android:id="@+id/key_button_done"
-        style="@style/Item.Button.Idea"
-        android:text="@string/done_it"
-        app:layout_constraintLeft_toRightOf="@+id/key_button_start"
+    <LinearLayout
+        android:id="@+id/item_key_progress_container"
+        style="@style/Item.ProgressContainer"
+        app:layout_constraintBottom_toBottomOf="@+id/item_key_image"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="@id/item_key_image">
 
+        <ImageView
+            android:id="@+id/item_key_progress_20_percent"
+            style="@style/Item.ProgressPoint"
+            android:contentDescription="@string/description_icon_of_goal" />
+
+        <ImageView
+            android:id="@+id/item_key_progress_40_percent"
+            style="@style/Item.ProgressPoint"
+            android:contentDescription="@string/description_icon_of_goal" />
+
+        <ImageView
+            android:id="@+id/item_key_progress_60_percent"
+            style="@style/Item.ProgressPoint"
+            android:contentDescription="@string/description_icon_of_goal" />
+
+        <ImageView
+            android:id="@+id/item_key_progress_80_percent"
+            style="@style/Item.ProgressPoint"
+            android:contentDescription="@string/description_icon_of_goal" />
+
+        <ImageView
+            android:id="@+id/item_key_progress_100_percent"
+            style="@style/Item.ProgressPoint"
+            android:contentDescription="@string/description_icon_of_goal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/item_key_status_container"
+        style="@style/Item.StatusContainer"
+        app:layout_constraintBottom_toBottomOf="@id/item_key_image"
+        app:layout_constraintLeft_toRightOf="@id/item_key_image">
+
+        <ImageView
+            android:id="@+id/item_key_status_attention"
+            style="@style/Item.StatusPoint"
+            android:contentDescription="@string/description_icon_of_goal"
+            android:src="@drawable/ic_attention" />
+
+        <ImageView
+            android:id="@+id/item_key_status_started"
+            style="@style/Item.StatusPoint"
+            android:contentDescription="@string/description_icon_of_goal"
+            android:src="@drawable/ic_started" />
+
+        <ImageView
+            android:id="@+id/item_key_status_done"
+            style="@style/Item.StatusPoint"
+            android:contentDescription="@string/description_icon_of_goal"
+            android:src="@drawable/ic_done" />
+
+        <ImageView
+            android:id="@+id/item_key_status_linked"
+            style="@style/Item.StatusPoint"
+            android:contentDescription="@string/description_icon_of_goal"
+            android:src="@drawable/ic_link" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

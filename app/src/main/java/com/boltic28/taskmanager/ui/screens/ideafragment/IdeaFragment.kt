@@ -23,7 +23,7 @@ class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>(R.layout.fragment_ide
             .subscribe { idea ->
                 if (idea.id != 0L) {
                     (activity as? ActivityHelper)?.setToolbarText(idea.name)
-                    idea_fr_name.text = idea.name
+                    idea_fr_name.text = fetchName(idea.name)
                     idea_fr_start_date.text = fetchDate(idea.date)
                     idea_fr_image.setImageResource(R.drawable.idea_ph)
                     idea_fr_description_content.text = idea.description

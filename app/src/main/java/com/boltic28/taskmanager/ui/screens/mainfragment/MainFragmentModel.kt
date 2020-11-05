@@ -2,6 +2,7 @@ package com.boltic28.taskmanager.ui.screens.mainfragment
 
 import com.boltic28.taskmanager.businesslayer.FreeElementsInteractor
 import com.boltic28.taskmanager.datalayer.entities.Goal
+import com.boltic28.taskmanager.datalayer.entities.Task
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.base.BaseViewModel
@@ -20,8 +21,18 @@ class MainFragmentModel @Inject constructor(
 
     val disposables = mutableListOf<Disposable>()
 
+    fun update(item: Task){
+        disposables + interactor.update(item)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ _ ->
+                loadTasks()
+            }, {
+            })
+    }
+
     fun loadTasks() {
-        disposables + interactor.getFreeKeys()
+        disposables + interactor.getTasks()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
@@ -31,7 +42,7 @@ class MainFragmentModel @Inject constructor(
     }
 
     fun loadKeys() {
-        disposables + interactor.getFreeTasks()
+        disposables + interactor.getKeys()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
@@ -41,7 +52,7 @@ class MainFragmentModel @Inject constructor(
     }
 
     fun loadIdeas() {
-        disposables + interactor.getFreeIdeas()
+        disposables + interactor.getIdeas()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
@@ -51,7 +62,7 @@ class MainFragmentModel @Inject constructor(
     }
 
     fun loadSteps() {
-        disposables + interactor.getFreeSteps()
+        disposables + interactor.getSteps()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->

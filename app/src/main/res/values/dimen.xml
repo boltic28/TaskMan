@@ -38,17 +38,28 @@
     <dimen name="item_fragment_header2_text_size">18sp</dimen>
     <dimen name="item_fragment_other_text_size">14sp</dimen>
 
-    <!--Item -->
+    <!--Item big row-->
+    <dimen name="item_row_high">150dp</dimen>
     <dimen name="item_image_size">80dp</dimen>
-    <dimen name="item_padding_for_view">12dp</dimen>
+    <dimen name="item_image_status_size">24dp</dimen>
+    <dimen name="item_padding_for_view">16dp</dimen>
+    <dimen name="item_progress_width">16dp</dimen>
     <dimen name="item_margin_left_image_progress">24dp</dimen>
     <dimen name="item_margin_top_progress">8dp</dimen>
     <dimen name="item_progress_point_size_w">50dp</dimen>
     <dimen name="item_progress_point_size_h">20dp</dimen>
     <dimen name="item_progress_point_space_between">4dp</dimen>
-
     <dimen name="item_idea_button_w">80dp</dimen>
     <dimen name="item_idea_button_h">30dp</dimen>
     <dimen name="item_idea_space_between_button">16dp</dimen>
     <dimen name="item_idea_text_on_button">8sp</dimen>
+
+    <!--Item small row-->
+    <dimen name="item_small_row_high">50dp</dimen>
+    <dimen name="item_small_image_size">40dp</dimen>
+    <dimen name="item_small_image_status_size">20dp</dimen>
+    <dimen name="item_small_button_size">40dp</dimen>
+    <dimen name="item_small_margin_between_elements">4dp</dimen>
+    <dimen name="item_small_minus_margin_for_status">-24dp</dimen>
+
 </resources>
