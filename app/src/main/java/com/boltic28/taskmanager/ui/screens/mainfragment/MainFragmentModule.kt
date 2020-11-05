@@ -1,10 +1,9 @@
 package com.boltic28.taskmanager.ui.screens.mainfragment
 
 import androidx.lifecycle.ViewModel
-import com.boltic28.taskmanager.di.ViewModelKey
+import com.boltic28.taskmanager.ui.di.ViewModelKey
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.*
-import com.boltic28.taskmanager.ui.screens.keyfragment.KeyFragmentModel
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoMap

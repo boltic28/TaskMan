@@ -1,6 +1,5 @@
 package com.boltic28.taskmanager.ui.screens.keyfragment
 
-import android.util.Log
 import androidx.navigation.NavController
 import com.boltic28.taskmanager.businesslayer.KeyFragmentInteractor
 import com.boltic28.taskmanager.datalayer.entities.Goal
@@ -11,17 +10,17 @@ import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
-import com.boltic28.taskmanager.ui.screens.MainActivity
+import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
-import javax.inject.Named
 
 class KeyFragmentModel @Inject constructor(
     @AdapterForKey
     val adapter: ItemAdapter,
     val interactor: KeyFragmentInteractor,
-    override var userManager: UserManager
+    override var userManager: UserManager,
+    val messenger: Messenger
 ) : BaseEntityFragmentModel<KeyResult>() {
     override fun refresh() {
         disposables + interactor.getKeyById(itemId)

@@ -18,6 +18,17 @@ class InteractModule(
     private val ideaRepository: IdeaRepository,
     private val goalRepository: GoalRepository
 ) {
+
+    @Provides
+    fun provideCreatorInteractor(): CreatorInteractor =
+        CreatorInteractorImpl(
+            keyRepository,
+            stepRepository,
+            taskRepository,
+            ideaRepository,
+            goalRepository
+        )
+
     @Provides
     fun provideMainFragmentInteractor(): FreeElementsInteractor =
         FreeElementsInteractorImpl(

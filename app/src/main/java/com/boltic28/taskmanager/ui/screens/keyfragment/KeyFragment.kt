@@ -1,17 +1,11 @@
 package com.boltic28.taskmanager.ui.screens.keyfragment
 
-import android.os.Bundle
-import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.entities.KeyResult
-import com.boltic28.taskmanager.signtools.FireUserManager
 import com.boltic28.taskmanager.ui.base.BaseEntityFragment
-import com.boltic28.taskmanager.ui.screens.ActivityHelper
-import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment
+import com.boltic28.taskmanager.ui.screens.activity.ActivityHelper
 import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment.Companion.KEY_ID
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

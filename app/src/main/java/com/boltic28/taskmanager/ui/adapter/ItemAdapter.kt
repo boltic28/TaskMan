@@ -1,10 +1,8 @@
 package com.boltic28.taskmanager.ui.adapter
 
-import android.util.Log
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.boltic28.taskmanager.ui.screens.MainActivity
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 
 class ItemAdapter(

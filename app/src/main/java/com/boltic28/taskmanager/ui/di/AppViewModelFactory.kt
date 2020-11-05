@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.di
+package com.boltic28.taskmanager.ui.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

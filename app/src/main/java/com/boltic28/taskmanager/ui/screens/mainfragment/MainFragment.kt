@@ -1,14 +1,13 @@
 package com.boltic28.taskmanager.ui.screens.mainfragment
 
 import android.os.Bundle
-import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.entities.*
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseFragment
-import com.boltic28.taskmanager.ui.screens.ActivityHelper
+import com.boltic28.taskmanager.ui.screens.activity.ActivityHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_main.*

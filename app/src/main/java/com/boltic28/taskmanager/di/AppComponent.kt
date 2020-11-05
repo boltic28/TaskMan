@@ -25,28 +25,20 @@ interface AppComponent {
     fun getActivityComponent(
         activityModule: ActivityModule,
         settingsModule: SettingsFragmentModule,
-        interactModule: InteractModule,
-        goalFragModule: GoalFragmentModule,
-        stepFragModule: StepFragmentModule,
-        taskFragModule: TaskFragmentModule,
-        ideaFragModule: IdeaFragmentModule,
-        keyFragModule: KeyFragmentModule
+        interactModule: InteractModule
     ): LocalActivityComponent
 
     @Subcomponent(
         modules = [
             ScreensModule::class, AppModule::class,
-            ActivityModule::class, FragmentModule::class,
-            InteractModule::class, GoalFragmentModule::class,
-            StepFragmentModule::class, TaskFragmentModule::class,
-            IdeaFragmentModule::class, KeyFragmentModule::class,
+            ActivityModule::class, InteractModule::class,
             SettingsFragmentModule::class
         ]
     )
     interface LocalActivityComponent : ActivityComponent
 
     @Component.Builder
-    interface Builder{
+    interface Builder {
         fun addModule(module: AppModule): Builder
         fun createComponent(): AppComponent
     }
