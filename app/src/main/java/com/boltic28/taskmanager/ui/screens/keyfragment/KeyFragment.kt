@@ -11,7 +11,6 @@ import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment.Companion.K
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_key.*
-import kotlinx.android.synthetic.main.fragment_step.*
 
 class KeyFragment: BaseEntityFragment<KeyFragmentModel>(R.layout.fragment_key, KEY_ID) {
 
@@ -42,26 +41,26 @@ class KeyFragment: BaseEntityFragment<KeyFragmentModel>(R.layout.fragment_key, K
     }
 
     private fun setProgress(progress: Progress) {
-        step_fr_progress.text = resources.getString(R.string.progres_00, 0)
+        key_fr_progress.text = resources.getString(R.string.progres_00, 0)
         if (progress.value >= Progress.PROGRESS_20.value) {
-            step_fr_progress_20.setImageResource(R.drawable.bg_progress_on)
-            step_fr_progress.text = resources.getString(R.string.progres_00, 20)
+            key_fr_progress_20.setImageResource(R.drawable.bg_progress_on)
+            key_fr_progress.text = resources.getString(R.string.progres_00, 20)
         }
         if (progress.value >= Progress.PROGRESS_40.value) {
-            step_fr_progress_40.setImageResource(R.drawable.bg_progress_on)
-            step_fr_progress.text = resources.getString(R.string.progres_00, 40)
+            key_fr_progress_40.setImageResource(R.drawable.bg_progress_on)
+            key_fr_progress.text = resources.getString(R.string.progres_00, 40)
         }
         if (progress.value >= Progress.PROGRESS_60.value) {
-            step_fr_progress_60.setImageResource(R.drawable.bg_progress_on)
-            step_fr_progress.text = resources.getString(R.string.progres_00, 60)
+            key_fr_progress_60.setImageResource(R.drawable.bg_progress_on)
+            key_fr_progress.text = resources.getString(R.string.progres_00, 60)
         }
         if (progress.value >= Progress.PROGRESS_80.value) {
-            step_fr_progress_80.setImageResource(R.drawable.bg_progress_on)
-            step_fr_progress.text = resources.getString(R.string.progres_00, 80)
+            key_fr_progress_80.setImageResource(R.drawable.bg_progress_on)
+            key_fr_progress.text = resources.getString(R.string.progres_00, 80)
         }
         if (progress.value == Progress.DONE.value) {
-            step_fr_progress_100.setImageResource(R.drawable.bg_progress_on)
-            step_fr_progress.text = resources.getString(R.string.progres_00, 100)
+            key_fr_progress_100.setImageResource(R.drawable.bg_progress_on)
+            key_fr_progress.text = resources.getString(R.string.progres_00, 100)
         }
     }
 
@@ -78,12 +77,7 @@ class KeyFragment: BaseEntityFragment<KeyFragmentModel>(R.layout.fragment_key, K
         if (key.goalId != 0L){
             key_fr_owner_button.setImageResource(R.drawable.ic_unlink)
             key_fr_owner_button.setOnClickListener {
-                model.interactor.update(key.copy(goalId = 0L))
-                    .subscribeOn(Schedulers.io())
-                    .subscribe { _ ->
-                        model.refresh()
-                        model.isItemsElementIntoRecycler = false
-                    }
+                model.update(key.copy(goalId = 0L))
             }
             model.disposables + model.interactor.getGoalById(key.goalId)
                 .subscribeOn(Schedulers.io())

@@ -10,16 +10,14 @@ import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
-import com.boltic28.taskmanager.ui.screens.goalfragment.AdapterForGoal
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
-import javax.inject.Named
 
 class IdeaFragmentModel @Inject constructor(
     @AdapterForIdea
     val adapter: ItemAdapter,
-    private val interactor: IdeaFragmentInteractor,
+    val interactor: IdeaFragmentInteractor,
     override var userManager: UserManager,
 ) : BaseEntityFragmentModel<Idea>() {
 
@@ -40,7 +38,7 @@ class IdeaFragmentModel @Inject constructor(
             }
     }
 
-    fun loadAllElements(idea: Idea, nav: NavController) {
+    fun loadFreeElementsIntoAdapter(idea: Idea, nav: NavController) {
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun onActionButtonClick(item: Any) {
                 attachTo(idea, item)
@@ -49,7 +47,7 @@ class IdeaFragmentModel @Inject constructor(
                 goToItemFragment(item, nav)
             }
         })
-        disposables + interactor.getAllElements()
+        disposables + interactor.getFreeStepsGoalsKeys()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { list ->

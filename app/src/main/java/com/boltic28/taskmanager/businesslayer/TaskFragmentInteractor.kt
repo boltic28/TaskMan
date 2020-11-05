@@ -10,4 +10,8 @@ interface TaskFragmentInteractor {
     fun delete(item: Task): Single<Int>
 
     fun getTaskById(id: Long): Single<Task>
+
+    fun getParentName(item: Task): Single<String>
+
+    fun getFreeStepsGoalsKeys(): Single<List<Any>>
 }

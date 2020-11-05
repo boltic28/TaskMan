@@ -14,11 +14,13 @@ interface IdeaFragmentInteractor {
 
     fun getIdeaById(id: Long): Single<Idea>
 
-    fun getAllElements(): Single<List<Any>>
+    fun getFreeStepsGoalsKeys(): Single<List<Any>>
 
     fun create(item: Task): Single<Long>
 
     fun create(item: Step): Single<Long>
 
     fun create(item: Goal): Single<Long>
+
+    fun getParentName(item: Idea): Single<String>
 }

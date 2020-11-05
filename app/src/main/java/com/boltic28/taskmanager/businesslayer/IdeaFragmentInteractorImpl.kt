@@ -26,7 +26,7 @@ class IdeaFragmentInteractorImpl(
     override fun getIdeaById(id: Long): Single<Idea> =
         ideaRepository.getById(id)
 
-    override fun getAllElements(): Single<List<Any>> =
+    override fun getFreeStepsGoalsKeys(): Single<List<Any>> =
         Single.just(mutableListOf<Any>())
             .zipWith(
                 goalRepository.getAll(),
@@ -50,11 +50,16 @@ class IdeaFragmentInteractorImpl(
     override fun create(item: Task): Single<Long> =
         taskRepository.insert(item)
 
-    override fun create(item: Step): Single<Long> {
-        TODO("Not yet implemented")
-    }
+    override fun create(item: Step): Single<Long> =
+        stepRepository.insert(item)
 
-    override fun create(item: Goal): Single<Long> {
-        TODO("Not yet implemented")
+    override fun create(item: Goal): Single<Long> =
+        goalRepository.insert(item)
+
+    override fun getParentName(item: Idea): Single<String> {
+            if (item.goalId != 0L) return goalRepository.getById(item.goalId).map { it.name }
+            if (item.stepId != 0L) return stepRepository.getById(item.stepId).map { it.name }
+            if (item.keyId != 0L) return keyRepository.getById(item.keyId).map { it.name }
+            return Single.just("error")
     }
 }

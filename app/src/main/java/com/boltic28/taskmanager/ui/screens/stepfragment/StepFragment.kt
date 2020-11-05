@@ -1,6 +1,5 @@
 package com.boltic28.taskmanager.ui.screens.stepfragment
 
-import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.boltic28.taskmanager.R
@@ -11,9 +10,7 @@ import com.boltic28.taskmanager.ui.screens.ActivityHelper
 import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment.Companion.STEP_ID
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_goal.*
 import kotlinx.android.synthetic.main.fragment_step.*
-import java.time.format.DateTimeFormatter
 
 class StepFragment : BaseEntityFragment<StepFragmentModel>(R.layout.fragment_step, STEP_ID) {
 
@@ -83,12 +80,7 @@ class StepFragment : BaseEntityFragment<StepFragmentModel>(R.layout.fragment_ste
         if (step.goalId != 0L) {
             step_fr_owner_button.setImageResource(R.drawable.ic_unlink)
             step_fr_owner_button.setOnClickListener {
-                model.interactor.update(step.copy(goalId = 0L))
-                    .subscribeOn(Schedulers.io())
-                    .subscribe { _ ->
-                        model.refresh()
-                        model.isItemsElementIntoRecycler = false
-                    }
+                model.update(step.copy(goalId = 0L))
             }
             model.disposables + model.interactor.getGoalById(step.goalId)
                 .subscribeOn(Schedulers.io())
@@ -100,6 +92,7 @@ class StepFragment : BaseEntityFragment<StepFragmentModel>(R.layout.fragment_ste
                 })
         } else {
             step_fr_owner_button.setImageResource(R.drawable.ic_link)
+            step_fr_relative_owner.text = resources.getString(R.string.not_attached)
             step_fr_owner_button.setOnClickListener {
                 model.isItemsElementIntoRecycler = false
                 model.loadGoalsIntoAdapter(step, findNavController())

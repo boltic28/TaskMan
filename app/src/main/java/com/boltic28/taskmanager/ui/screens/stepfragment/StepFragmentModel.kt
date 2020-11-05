@@ -33,6 +33,16 @@ class StepFragmentModel @Inject constructor(
             )
     }
 
+    fun update(item: Step){
+        disposables + interactor.update(item)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { _ ->
+                refresh()
+                isItemsElementIntoRecycler = false
+            }
+    }
+
     private fun initStepValue(step: Step) {
         disposables + interactor.setChildrenFor(step)
             .subscribeOn(Schedulers.io())

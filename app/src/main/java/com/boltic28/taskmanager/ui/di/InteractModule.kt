@@ -81,7 +81,10 @@ class InteractModule(
     @Provides
     fun provideTaskInteractor(): TaskFragmentInteractor =
         TaskFragmentInteractorImpl(
-            taskRepository
+            taskRepository,
+            stepRepository,
+            keyRepository,
+            goalRepository
         )
 
     @Provides

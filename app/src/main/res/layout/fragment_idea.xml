@@ -11,14 +11,6 @@
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@string/description"/>
 
-    <ImageView
-        android:id="@+id/idea_fr_isDone_icon"
-        style="@style/ItemFragment.IsDone"
-        app:layout_constraintLeft_toRightOf="@id/idea_fr_name"
-        app:layout_constraintTop_toTopOf="@id/idea_fr_name"
-        app:layout_constraintBottom_toBottomOf="@id/idea_fr_name"
-        android:contentDescription="@string/description"/>
-
     <TextView
         android:id="@+id/idea_fr_name"
         style="@style/ItemFragment.Header"
