@@ -25,9 +25,8 @@ class KeySmallViewController : HolderController() {
         val button: ImageButton = itemView.findViewById(R.id.small_key_button_action)
         val status: ImageView = itemView.findViewById(R.id.small_key_image_status)
 
-        if (item.progress == Progress.DONE) {
-            status.setImageResource(R.drawable.ic_done)
-        }
+        if (item.isStarted) status.setImageResource(R.drawable.ic_started)
+        if (item.isDone) status.setImageResource(R.drawable.ic_done)
         name.text = fetchName(item.name)
         icon.setImageResource(R.drawable.key_ph)
 

@@ -9,7 +9,10 @@ data class KeyResult(
     val name: String,
     val description: String,
     val date: LocalDateTime,
+    val dateClose: LocalDateTime,
     val progress: Progress,
+    val isDone: Boolean,
+    val isStarted: Boolean,
     val steps: List<Step>,
     val tasks: List<Task>,
     val ideas: List<Idea>

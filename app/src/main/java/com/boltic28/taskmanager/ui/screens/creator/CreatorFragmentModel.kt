@@ -36,7 +36,7 @@ class CreatorFragmentModel @Inject constructor(
             )
         )
 
-    fun saveKey(name: String, description: String): Single<Long> =
+    fun saveKey(name: String, description: String, endDate: LocalDateTime): Single<Long> =
         interactor.create(
             KeyResult(
                 id = 0,
@@ -44,6 +44,9 @@ class CreatorFragmentModel @Inject constructor(
                 name = name,
                 description = description,
                 date = LocalDateTime.now(),
+                dateClose = endDate,
+                isDone = false,
+                isStarted = false,
                 progress = Progress.PROGRESS_0,
                 steps = emptyList(),
                 tasks = emptyList(),

@@ -6,6 +6,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import com.boltic28.taskmanager.R
+import com.boltic28.taskmanager.datalayer.Cycle
 import com.boltic28.taskmanager.ui.base.BaseFragment
 import com.boltic28.taskmanager.ui.screens.activity.ActivityHelper
 import io.reactivex.Single
@@ -92,7 +93,7 @@ class CreatorFragment : BaseFragment<CreatorFragmentModel>(R.layout.fragment_cre
             )
             R.id.creator_key_radio -> model.saveKey(
                 creator_name.text.toString(),
-                creator_description.text.toString()
+                creator_description.text.toString(), LocalDateTime.now()
             )
             R.id.creator_goal_radio -> model.saveGoal(
                 creator_name.text.toString(),

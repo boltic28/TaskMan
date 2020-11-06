@@ -38,10 +38,10 @@ class CaseGoalStructureImpl(
 
     override fun setProgressFor(goal: Goal): Goal {
         val pointsToFull = goal.keys.size + goal.steps.size + goal.tasks.size
-        val done = goal.keys.filter { it.progress == Progress.DONE }.size +
+        val done = goal.keys.filter { it.isDone }.size +
                 goal.steps.filter { it.isDone }.size +
                 goal.tasks.filter { it.isDone }.size
-        val isStarted = goal.keys.any { it.progress != Progress.PROGRESS_0 } ||
+        val isStarted = goal.keys.any { it.isStarted } ||
                 goal.steps.any { it.isStarted } ||
                 goal.tasks.any { it.isStarted }
         val nGoal = if (pointsToFull == 0) {

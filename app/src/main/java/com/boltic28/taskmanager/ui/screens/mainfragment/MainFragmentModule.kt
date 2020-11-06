@@ -23,6 +23,7 @@ class MainFragmentModule {
                 KeyViewController()
             ),
             object : HolderController.OnActionClickListener{
+                override fun isNeedToShowConnection(): Boolean = true
                 override fun onActionButtonClick(item: Any) {}
                 override fun onViewClick(item: Any) {}
             }

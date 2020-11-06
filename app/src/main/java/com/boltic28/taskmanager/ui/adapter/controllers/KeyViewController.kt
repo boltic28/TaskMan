@@ -30,7 +30,7 @@ class KeyViewController : HolderController() {
         dateStart.text =
             item.date.format(DateTimeFormatter.ofPattern(itemView.resources.getString(R.string.dateFormatterForItems)))
         icon.setImageResource(R.drawable.key_ph)
-        isDone.visibility = if (item.progress == Progress.DONE) View.VISIBLE else View.INVISIBLE
+        isDone.visibility = if (item.isDone) View.VISIBLE else View.INVISIBLE
 
         val statusIsAttached: ImageView = itemView.findViewById(R.id.item_key_status_linked)
         val statusAttention: ImageView = itemView.findViewById(R.id.item_key_status_attention)
@@ -44,7 +44,7 @@ class KeyViewController : HolderController() {
         statusStarted.setColorFilter(R.color.colorStatusOff)
         statusDone.setColorFilter(R.color.colorStatusOff)
 
-        if (item.progress == Progress.DONE) statusDone.setColorFilter(itemView.context.getColor(R.color.colorStatusInfo))
+        if (item.isDone) statusDone.setColorFilter(itemView.context.getColor(R.color.colorStatusInfo))
 
         val progress20: ImageView = itemView.findViewById(R.id.item_key_progress_20_percent)
         val progress40: ImageView = itemView.findViewById(R.id.item_key_progress_40_percent)

@@ -60,6 +60,7 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
 
     private fun loadGoals() {
         model.adapter.setAdapterListener(object : HolderController.OnActionClickListener {
+            override fun isNeedToShowConnection(): Boolean = true
             override fun onActionButtonClick(item: Any) {}
             override fun onViewClick(item: Any) {
                 item as Goal
@@ -73,6 +74,7 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
 
     private fun loadSteps() {
         model.adapter.setAdapterListener(object : HolderController.OnActionClickListener {
+            override fun isNeedToShowConnection(): Boolean = true
             override fun onActionButtonClick(item: Any) {}
             override fun onViewClick(item: Any) {
                 item as Step
@@ -86,6 +88,7 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
 
     private fun loadTasks() {
         model.adapter.setAdapterListener(object : HolderController.OnActionClickListener {
+            override fun isNeedToShowConnection(): Boolean = true
             override fun onActionButtonClick(item: Any) {
                 item as Task
                 if (item.isStarted) {
@@ -107,6 +110,7 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
 
     private fun loadIdeas() {
         model.adapter.setAdapterListener(object : HolderController.OnActionClickListener {
+            override fun isNeedToShowConnection(): Boolean = true
             override fun onActionButtonClick(item: Any) {
                 // todo go to convert fragment
             }
@@ -123,6 +127,7 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
 
     private fun loadKeys() {
         model.adapter.setAdapterListener(object : HolderController.OnActionClickListener {
+            override fun isNeedToShowConnection(): Boolean = true
             override fun onActionButtonClick(item: Any) {}
             override fun onViewClick(item: Any) {
                 item as KeyResult

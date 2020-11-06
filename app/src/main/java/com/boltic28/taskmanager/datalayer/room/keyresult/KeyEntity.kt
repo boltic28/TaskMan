@@ -13,5 +13,8 @@ data class KeyEntity(
     val name: String,
     val description: String,
     val date: LocalDateTime,
-    val progress: Progress
+    val dateClose: LocalDateTime,
+    val progress: Progress,
+    val isDone: Boolean,
+    val isStarted: Boolean
 )
