@@ -8,6 +8,7 @@ import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
+import com.boltic28.taskmanager.ui.constant.NO_ID
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -129,7 +130,7 @@ class GoalFragmentModel @Inject constructor(
     }
 
     private fun makeFree(item: Idea) {
-        disposables + goalInteract.updateIdea(item.copy(goalId = 0L))
+        disposables + goalInteract.updateIdea(item.copy(goalId = NO_ID))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -140,7 +141,7 @@ class GoalFragmentModel @Inject constructor(
     }
 
     private fun makeFree(item: Step) {
-        disposables + goalInteract.updateStep(item.copy(goalId = 0L))
+        disposables + goalInteract.updateStep(item.copy(goalId = NO_ID))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -151,7 +152,7 @@ class GoalFragmentModel @Inject constructor(
     }
 
     private fun makeFree(item: KeyResult) {
-        disposables + goalInteract.updateKey(item.copy(goalId = 0L))
+        disposables + goalInteract.updateKey(item.copy(goalId = NO_ID))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -162,7 +163,7 @@ class GoalFragmentModel @Inject constructor(
     }
 
     private fun makeFree(item: Task) {
-        disposables + goalInteract.updateTask(item.copy(goalId = 0L))
+        disposables + goalInteract.updateTask(item.copy(goalId = NO_ID))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

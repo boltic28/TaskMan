@@ -65,15 +65,15 @@ class KeyFragmentInteractorImpl(
         val done = key.tasks.filter { it.isDone }.size
         val isStarted = key.tasks.any { it.isStarted }
         val nKey = if (pointsToFull == 0) {
-            key.copy(progress = Progress.DONE, isStarted = isStarted)
+            key.copy(progress = Progress.DONE, isStarted = isStarted, isDone = true)
         } else {
             when ((done * 100.0) / pointsToFull) {
                 100.0 -> key.copy(progress = Progress.DONE, isDone = true, isStarted = isStarted)
-                in 75.0..99.0 -> key.copy(progress = Progress.PROGRESS_80, isStarted = isStarted)
-                in 55.0..74.0 -> key.copy(progress = Progress.PROGRESS_60, isStarted = isStarted)
-                in 35.0..54.0 -> key.copy(progress = Progress.PROGRESS_40, isStarted = isStarted)
-                in 15.0..34.0 -> key.copy(progress = Progress.PROGRESS_20, isStarted = isStarted)
-                else -> key.copy(progress = Progress.PROGRESS_0, isStarted = isStarted)
+                in 75.0..99.0 -> key.copy(progress = Progress.PROGRESS_80, isStarted = isStarted, isDone = false)
+                in 55.0..74.0 -> key.copy(progress = Progress.PROGRESS_60, isStarted = isStarted, isDone = false)
+                in 35.0..54.0 -> key.copy(progress = Progress.PROGRESS_40, isStarted = isStarted, isDone = false)
+                in 15.0..34.0 -> key.copy(progress = Progress.PROGRESS_20, isStarted = isStarted, isDone = false)
+                else -> key.copy(progress = Progress.PROGRESS_0, isStarted = isStarted, isDone = false)
             }
         }
         keyRepository.update(nKey).subscribeOn(Schedulers.io()).subscribe()

@@ -5,9 +5,9 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.datalayer.Progress
 import com.boltic28.taskmanager.datalayer.entities.KeyResult
 import com.boltic28.taskmanager.ui.adapter.DefaultViewHolder
+import com.boltic28.taskmanager.ui.constant.NO_ID
 import kotlin.reflect.KClass
 
 class KeySmallViewController : HolderController() {
@@ -31,7 +31,7 @@ class KeySmallViewController : HolderController() {
         icon.setImageResource(R.drawable.key_ph)
 
         if (listener.isNeedToShowConnection()) {
-            if (item.goalId == 0L) {
+            if (item.goalId == NO_ID) {
                 button.setImageResource(R.drawable.ic_link)
             } else {
                 button.setImageResource(R.drawable.ic_unlink)

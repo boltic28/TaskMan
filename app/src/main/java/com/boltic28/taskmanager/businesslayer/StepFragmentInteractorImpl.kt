@@ -69,11 +69,11 @@ class StepFragmentInteractorImpl(
         } else {
             when ((done * 100.0) / pointsToFull) {
                 100.0 -> step.copy(progress = Progress.DONE, isDone = true, isStarted = isStarted)
-                in 75.0..99.0 -> step.copy(progress = Progress.PROGRESS_80, isStarted = isStarted)
-                in 55.0..74.0 -> step.copy(progress = Progress.PROGRESS_60, isStarted = isStarted)
-                in 35.0..54.0 -> step.copy(progress = Progress.PROGRESS_40, isStarted = isStarted)
-                in 15.0..34.0 -> step.copy(progress = Progress.PROGRESS_20, isStarted = isStarted)
-                else -> step.copy(progress = Progress.PROGRESS_0, isStarted = isStarted)
+                in 75.0..99.0 -> step.copy(progress = Progress.PROGRESS_80, isStarted = isStarted, isDone = false)
+                in 55.0..74.0 -> step.copy(progress = Progress.PROGRESS_60, isStarted = isStarted, isDone = false)
+                in 35.0..54.0 -> step.copy(progress = Progress.PROGRESS_40, isStarted = isStarted, isDone = false)
+                in 15.0..34.0 -> step.copy(progress = Progress.PROGRESS_20, isStarted = isStarted, isDone = false)
+                else -> step.copy(progress = Progress.PROGRESS_0, isStarted = isStarted, isDone = false)
             }
         }
         stepRepository.update(nStep).subscribeOn(Schedulers.io()).subscribe()

@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.entities.Idea
 import com.boltic28.taskmanager.ui.base.BaseEntityFragment
+import com.boltic28.taskmanager.ui.constant.IDEA_EXTRA
+import com.boltic28.taskmanager.ui.constant.NO_ID
 import com.boltic28.taskmanager.ui.screens.activity.ActivityHelper
-import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment.Companion.IDEA_ID
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_idea.*
-import kotlinx.android.synthetic.main.fragment_task.*
 
-class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>(R.layout.fragment_idea, IDEA_ID) {
+class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>(R.layout.fragment_idea, IDEA_EXTRA) {
 
     override fun initView() {
         setButtonsBack()
@@ -21,7 +21,7 @@ class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>(R.layout.fragment_ide
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { idea ->
-                if (idea.id != 0L) {
+                if (idea.id != NO_ID) {
                     (activity as? ActivityHelper)?.setToolbarText(idea.name)
                     idea_fr_name.text = fetchName(idea.name)
                     idea_fr_start_date.text = fetchDate(idea.date)
@@ -49,7 +49,7 @@ class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>(R.layout.fragment_ide
     private fun setButtonOwner(idea: Idea) {
         idea_fr_recycler.visibility = View.INVISIBLE
         idea_fr_its_elements.visibility = View.INVISIBLE
-        if (idea.goalId != 0L || idea.keyId != 0L || idea.stepId != 0L) {
+        if (idea.goalId != NO_ID || idea.keyId != NO_ID || idea.stepId != NO_ID) {
             model.disposables + model.interactor.getParentName(idea)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -58,7 +58,7 @@ class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>(R.layout.fragment_ide
                 }
             idea_fr_owner_button.setImageResource(R.drawable.ic_unlink)
             idea_fr_owner_button.setOnClickListener {
-                model.update(idea.copy(goalId = 0L, keyId = 0L, stepId = 0L))
+                model.update(idea.copy(goalId = NO_ID, keyId = NO_ID, stepId = NO_ID))
             }
         } else {
             idea_fr_relative_owner.text = resources.getString(R.string.not_attached)

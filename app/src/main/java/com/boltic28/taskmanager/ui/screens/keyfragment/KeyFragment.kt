@@ -6,13 +6,14 @@ import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.Progress
 import com.boltic28.taskmanager.datalayer.entities.KeyResult
 import com.boltic28.taskmanager.ui.base.BaseEntityFragment
+import com.boltic28.taskmanager.ui.constant.KEY_EXTRA
+import com.boltic28.taskmanager.ui.constant.NO_ID
 import com.boltic28.taskmanager.ui.screens.activity.ActivityHelper
-import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment.Companion.KEY_ID
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_key.*
 
-class KeyFragment: BaseEntityFragment<KeyFragmentModel>(R.layout.fragment_key, KEY_ID) {
+class KeyFragment: BaseEntityFragment<KeyFragmentModel>(R.layout.fragment_key, KEY_EXTRA) {
 
     override fun initView() {
         setButtonsBack()
@@ -20,7 +21,7 @@ class KeyFragment: BaseEntityFragment<KeyFragmentModel>(R.layout.fragment_key, K
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ key ->
-                if (key.id != 0L) {
+                if (key.id != NO_ID) {
                     (activity as? ActivityHelper)?.setToolbarText(key.name)
                     key_fr_name.text = fetchName(key.name)
                     key_fr_image.setImageResource(R.drawable.key_ph)
@@ -82,7 +83,7 @@ class KeyFragment: BaseEntityFragment<KeyFragmentModel>(R.layout.fragment_key, K
         if (key.goalId != 0L){
             key_fr_owner_button.setImageResource(R.drawable.ic_unlink)
             key_fr_owner_button.setOnClickListener {
-                model.update(key.copy(goalId = 0L))
+                model.update(key.copy(goalId = NO_ID))
             }
             model.disposables + model.interactor.getGoalById(key.goalId)
                 .subscribeOn(Schedulers.io())

@@ -7,20 +7,13 @@ import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.entities.*
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseFragment
+import com.boltic28.taskmanager.ui.constant.*
 import com.boltic28.taskmanager.ui.screens.activity.ActivityHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
-
-    companion object {
-        const val GOAL_ID = "goalId"
-        const val STEP_ID = "stepId"
-        const val IDEA_ID = "ideaId"
-        const val TASK_ID = "taskId"
-        const val KEY_ID = "keyId"
-    }
 
     override fun onResume() {
         super.onResume()
@@ -65,7 +58,7 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
             override fun onViewClick(item: Any) {
                 item as Goal
                 val bundle = Bundle()
-                bundle.putLong(GOAL_ID, item.id)
+                bundle.putLong(GOAL_EXTRA, item.id)
                 findNavController().navigate(R.id.goalFragment, bundle)
             }
         })
@@ -79,7 +72,7 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
             override fun onViewClick(item: Any) {
                 item as Step
                 val bundle = Bundle()
-                bundle.putLong(STEP_ID, item.id)
+                bundle.putLong(STEP_EXTRA, item.id)
                 findNavController().navigate(R.id.stepFragment, bundle)
             }
         })
@@ -101,7 +94,7 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
             override fun onViewClick(item: Any) {
                 item as Task
                 val bundle = Bundle()
-                bundle.putLong(TASK_ID, item.id)
+                bundle.putLong(TASK_EXTRA, item.id)
                 findNavController().navigate(R.id.taskFragment, bundle)
             }
         })
@@ -118,7 +111,7 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
             override fun onViewClick(item: Any) {
                 item as Idea
                 val bundle = Bundle()
-                bundle.putLong(IDEA_ID, item.id)
+                bundle.putLong(IDEA_EXTRA, item.id)
                 findNavController().navigate(R.id.ideaFragment, bundle)
             }
         })
@@ -132,7 +125,7 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
             override fun onViewClick(item: Any) {
                 item as KeyResult
                 val bundle = Bundle()
-                bundle.putLong(KEY_ID, item.id)
+                bundle.putLong(KEY_EXTRA, item.id)
                 findNavController().navigate(R.id.ideaFragment, bundle)
             }
         })

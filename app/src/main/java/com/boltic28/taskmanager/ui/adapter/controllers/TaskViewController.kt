@@ -8,10 +8,9 @@ import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.Cycle
 import com.boltic28.taskmanager.datalayer.entities.Task
 import com.boltic28.taskmanager.ui.adapter.DefaultViewHolder
+import com.boltic28.taskmanager.ui.constant.NO_ID
 import java.time.LocalDateTime
-import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
-import java.util.concurrent.TimeUnit
 import kotlin.reflect.KClass
 
 class TaskViewController : HolderController() {
@@ -48,26 +47,20 @@ class TaskViewController : HolderController() {
             action.isEnabled = true
         }
 
-
         val statusCycling: ImageView = itemView.findViewById(R.id.item_task_status_cycle)
         val statusIsAttached: ImageView = itemView.findViewById(R.id.item_task_status_linked)
         val statusAttention: ImageView = itemView.findViewById(R.id.item_task_status_attention)
         val statusStarted: ImageView = itemView.findViewById(R.id.item_task_status_started)
         val statusDone: ImageView = itemView.findViewById(R.id.item_task_status_done)
-        val days = TimeUnit.DAYS.toDays(
-            LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) - item.dateClose.toEpochSecond(
-                ZoneOffset.UTC
-            )
-        )
 
         statusCycling.setColorFilter(
             if (item.cycle == Cycle.NOT_CYCLE)
-                R.color.colorStatusOff
+                itemView.context.getColor(R.color.colorStatusOff)
             else
-                R.color.colorStatusDescription
+                itemView.context.getColor(R.color.colorStatusDescription)
         )
         statusIsAttached.setImageResource(
-            if (item.goalId == 0L && item.stepId == 0L && item.keyId == 0L)
+            if (item.goalId == NO_ID && item.stepId == NO_ID && item.keyId == NO_ID)
                 R.drawable.ic_unlink
             else
                 R.drawable.ic_link
@@ -78,7 +71,9 @@ class TaskViewController : HolderController() {
 
         if (item.isStarted) statusStarted.setColorFilter(itemView.context.getColor(R.color.colorStatusInfo))
         if (item.isDone) statusDone.setColorFilter(itemView.context.getColor(R.color.colorStatusInfo))
-        if (days < 2) statusAttention.setColorFilter(itemView.context.getColor(R.color.colorStatusAttention))
+        if (LocalDateTime.now() >= item.dateClose && (!item.isDone)) statusAttention.setColorFilter(
+            itemView.context.getColor(R.color.colorStatusAttention)
+        )
 
         itemView.setOnClickListener {
             listener.onViewClick(item)

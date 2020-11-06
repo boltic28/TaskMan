@@ -6,13 +6,14 @@ import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.Progress
 import com.boltic28.taskmanager.datalayer.entities.Step
 import com.boltic28.taskmanager.ui.base.BaseEntityFragment
+import com.boltic28.taskmanager.ui.constant.NO_ID
+import com.boltic28.taskmanager.ui.constant.STEP_EXTRA
 import com.boltic28.taskmanager.ui.screens.activity.ActivityHelper
-import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment.Companion.STEP_ID
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_step.*
 
-class StepFragment : BaseEntityFragment<StepFragmentModel>(R.layout.fragment_step, STEP_ID) {
+class StepFragment : BaseEntityFragment<StepFragmentModel>(R.layout.fragment_step, STEP_EXTRA) {
 
     override fun initView() {
         setButtonsBack()
@@ -20,7 +21,7 @@ class StepFragment : BaseEntityFragment<StepFragmentModel>(R.layout.fragment_ste
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ step ->
-                if (step.id != 0L) {
+                if (step.id != NO_ID) {
                     (activity as? ActivityHelper)?.setToolbarText(step.name)
                     step_fr_name.text = fetchName(step.name)
                     step_fr_start_date.text = fetchDate(step.date)
@@ -85,7 +86,7 @@ class StepFragment : BaseEntityFragment<StepFragmentModel>(R.layout.fragment_ste
         if (step.goalId != 0L) {
             step_fr_owner_button.setImageResource(R.drawable.ic_unlink)
             step_fr_owner_button.setOnClickListener {
-                model.update(step.copy(goalId = 0L))
+                model.update(step.copy(goalId = NO_ID))
             }
             model.disposables + model.interactor.getGoalById(step.goalId)
                 .subscribeOn(Schedulers.io())
