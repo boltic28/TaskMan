@@ -49,7 +49,7 @@ class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>(R.layout.fragment_ide
     private fun setButtonOwner(idea: Idea) {
         idea_fr_recycler.visibility = View.INVISIBLE
         idea_fr_its_elements.visibility = View.INVISIBLE
-        if (idea.goalId != 0L && idea.keyId != 0L && idea.stepId != 0L) {
+        if (idea.goalId != 0L || idea.keyId != 0L || idea.stepId != 0L) {
             model.disposables + model.interactor.getParentName(idea)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -69,6 +69,7 @@ class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>(R.layout.fragment_ide
                 idea_fr_its_elements.text = resources.getString(R.string.attach_to)
                 idea_fr_recycler.layoutManager =
                     LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                idea_fr_recycler.adapter = model.adapter
                 model.loadFreeElementsIntoAdapter(idea, findNavController())
             }
         }

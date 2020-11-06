@@ -61,6 +61,7 @@ class KeyFragmentModel @Inject constructor(
     fun loadGoalsIntoAdapter(key: KeyResult, nav: NavController) {
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
+            override fun isNeedToShowConnection(): Boolean = true
             override fun onActionButtonClick(item: Any) {
                 item as Goal
                 disposables + interactor.update(key.copy(goalId = item.id))
@@ -81,6 +82,7 @@ class KeyFragmentModel @Inject constructor(
     fun loadKeysElementIntoAdapter(key: KeyResult, nav: NavController) {
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
+            override fun isNeedToShowConnection(): Boolean = true
             override fun onActionButtonClick(item: Any) {
                 if (item is Task) makeFree(item)
                 if (item is Idea) makeFree(item)
@@ -98,6 +100,7 @@ class KeyFragmentModel @Inject constructor(
     fun loadFreeElementIntoAdapter(nav: NavController) {
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
+            override fun isNeedToShowConnection(): Boolean = true
             override fun onActionButtonClick(item: Any) {
                 if (item is Idea) addToKey(item)
                 if (item is Task) addToKey(item)

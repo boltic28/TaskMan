@@ -1,20 +1,23 @@
 package com.boltic28.taskmanager.businesslayer
 
 import com.boltic28.taskmanager.datalayer.Progress
-import com.boltic28.taskmanager.datalayer.entities.*
+import com.boltic28.taskmanager.datalayer.entities.Goal
+import com.boltic28.taskmanager.datalayer.entities.Idea
+import com.boltic28.taskmanager.datalayer.entities.KeyResult
+import com.boltic28.taskmanager.datalayer.entities.Task
 import com.boltic28.taskmanager.datalayer.room.goal.GoalRepository
 import com.boltic28.taskmanager.datalayer.room.idea.IdeaRepository
 import com.boltic28.taskmanager.datalayer.room.keyresult.KeyRepository
 import com.boltic28.taskmanager.datalayer.room.task.TaskRepository
 import io.reactivex.Single
-import io.reactivex.functions.BiFunction
+import io.reactivex.schedulers.Schedulers
 
 class KeyFragmentInteractorImpl(
     private val keyRepository: KeyRepository,
     private val taskRepository: TaskRepository,
     private val ideaRepository: IdeaRepository,
     private val goalRepository: GoalRepository
-): KeyFragmentInteractor {
+) : KeyFragmentInteractor {
 
     override fun insert(item: KeyResult): Single<Long> =
         keyRepository.insert(item)
@@ -49,24 +52,22 @@ class KeyFragmentInteractorImpl(
     override fun setChildrenFor(item: KeyResult): Single<KeyResult> =
         Single.just(item)
             .zipWith(
-                taskRepository.getAllForKey(item.id),
-                BiFunction<KeyResult, List<Task>, KeyResult> { key, tasks ->
+                taskRepository.getAllForKey(item.id), { key, tasks ->
                     key.copy(tasks = tasks)
                 })
             .zipWith(
-                ideaRepository.getAllForKey(item.id),
-                BiFunction<KeyResult, List<Idea>, KeyResult> { key, ideas ->
+                ideaRepository.getAllForKey(item.id), { key, ideas ->
                     key.copy(ideas = ideas)
                 })
 
     override fun setProgressFor(key: KeyResult): KeyResult {
         val pointsToFull = key.tasks.size
         val done = key.tasks.filter { it.isDone }.size
-
-        return if (pointsToFull == 0) {
+        val isStarted = key.tasks.any { it.isStarted }
+        val nKey = if (pointsToFull == 0) {
             key.copy(progress = Progress.DONE)
         } else {
-            when ((done * 100.0 )/ pointsToFull) {
+            when ((done * 100.0) / pointsToFull) {
                 100.0 -> key.copy(progress = Progress.DONE)
                 in 75.0..99.0 -> key.copy(progress = Progress.PROGRESS_80)
                 in 55.0..74.0 -> key.copy(progress = Progress.PROGRESS_60)
@@ -75,5 +76,7 @@ class KeyFragmentInteractorImpl(
                 else -> key.copy(progress = Progress.PROGRESS_0)
             }
         }
+        keyRepository.update(nKey).subscribeOn(Schedulers.io()).subscribe()
+        return nKey
     }
 }

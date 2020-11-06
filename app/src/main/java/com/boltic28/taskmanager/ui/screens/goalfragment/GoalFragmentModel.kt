@@ -47,6 +47,7 @@ class GoalFragmentModel @Inject constructor(
     fun loadFreeElementIntoAdapter(nav: NavController) {
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
+            override fun isNeedToShowConnection(): Boolean = true
             override fun onActionButtonClick(item: Any) {
                 if (item is Step) addToGoal(item)
                 if (item is Task) addToGoal(item)
@@ -56,7 +57,6 @@ class GoalFragmentModel @Inject constructor(
             override fun onViewClick(item: Any) {
                 goToItemFragment(item, nav)
             }
-
         })
         loadKeys()
         loadSteps()
@@ -67,6 +67,7 @@ class GoalFragmentModel @Inject constructor(
     fun loadGoalsElementIntoAdapter(goal: Goal, nav: NavController) {
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
+            override fun isNeedToShowConnection(): Boolean = true
             override fun onActionButtonClick(item: Any) {
                 if (item is Step) makeFree(item)
                 if (item is Task) makeFree(item)

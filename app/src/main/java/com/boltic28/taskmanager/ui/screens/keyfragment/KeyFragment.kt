@@ -42,6 +42,11 @@ class KeyFragment: BaseEntityFragment<KeyFragmentModel>(R.layout.fragment_key, K
 
     private fun setProgress(progress: Progress) {
         key_fr_progress.text = resources.getString(R.string.progres_00, 0)
+        key_fr_progress_20.setImageResource(R.drawable.bg_progress_off)
+        key_fr_progress_40.setImageResource(R.drawable.bg_progress_off)
+        key_fr_progress_60.setImageResource(R.drawable.bg_progress_off)
+        key_fr_progress_80.setImageResource(R.drawable.bg_progress_off)
+        key_fr_progress_100.setImageResource(R.drawable.bg_progress_off)
         if (progress.value >= Progress.PROGRESS_20.value) {
             key_fr_progress_20.setImageResource(R.drawable.bg_progress_on)
             key_fr_progress.text = resources.getString(R.string.progres_00, 20)

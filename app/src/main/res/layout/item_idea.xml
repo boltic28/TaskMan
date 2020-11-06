@@ -51,7 +51,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/idea_button_convert_to"
+        android:id="@+id/item_idea_button_action"
         style="@style/Item.Button.Idea"
         android:text="@string/convert_to"
         app:layout_constraintRight_toRightOf="parent"

@@ -28,7 +28,7 @@ class TaskSmallViewController : HolderController() {
 
         if (item.isStarted) status.setImageResource(R.drawable.ic_started)
         if (item.isDone) status.setImageResource(R.drawable.ic_done)
-        name.text = item.name
+        name.text = fetchName(item.name)
         icon.setImageResource(R.drawable.task_ph)
 
         if (item.goalId == 0L && item.keyId == 0L && item.stepId == 0L) {

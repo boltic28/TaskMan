@@ -45,6 +45,11 @@ class StepFragment : BaseEntityFragment<StepFragmentModel>(R.layout.fragment_ste
 
     private fun setProgress(progress: Progress) {
         step_fr_progress.text = resources.getString(R.string.progres_00, 0)
+        step_fr_progress_20.setImageResource(R.drawable.bg_progress_off)
+        step_fr_progress_40.setImageResource(R.drawable.bg_progress_off)
+        step_fr_progress_60.setImageResource(R.drawable.bg_progress_off)
+        step_fr_progress_80.setImageResource(R.drawable.bg_progress_off)
+        step_fr_progress_100.setImageResource(R.drawable.bg_progress_off)
         if (progress.value >= Progress.PROGRESS_20.value) {
             step_fr_progress_20.setImageResource(R.drawable.bg_progress_on)
             step_fr_progress.text = resources.getString(R.string.progres_00, 20)

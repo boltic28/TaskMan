@@ -23,7 +23,7 @@ class IdeaViewController : HolderController() {
         val description: TextView = itemView.findViewById(R.id.item_idea_description)
         val dateStart: TextView = itemView.findViewById(R.id.item_idea_start)
         val icon: ImageView = itemView.findViewById(R.id.item_idea_image)
-        val action: Button = itemView.findViewById(R.id.item_task_button_action)
+        val action: Button = itemView.findViewById(R.id.item_idea_button_action)
 
         header.text = fetchName(item.name)
         description.text = fetchDescription(item.description)

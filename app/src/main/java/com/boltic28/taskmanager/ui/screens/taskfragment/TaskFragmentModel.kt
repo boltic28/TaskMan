@@ -36,6 +36,7 @@ class TaskFragmentModel @Inject constructor(
 
     fun loadParentsElements(task: Task, nav: NavController){
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
+            override fun isNeedToShowConnection(): Boolean = false
             override fun onActionButtonClick(item: Any) {
                 attachTo(task, item)
             }

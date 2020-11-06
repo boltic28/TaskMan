@@ -58,11 +58,13 @@
         <item name="android:layout_width">@dimen/main_search_field_w</item>
         <item name="android:layout_height">@dimen/main_search_field_h</item>
         <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:inputType">text</item>
     </style>
 
     <style name="Main.Buttons" parent="Widget.AppCompat.ImageButton">
         <item name="android:layout_width">@dimen/main_item_switcher_button_w</item>
         <item name="android:layout_height">@dimen/main_item_switcher_button_h</item>
+        <item name="android:scaleType">fitCenter</item>
         <item name="android:background">@color/transparent</item>
     </style>
 

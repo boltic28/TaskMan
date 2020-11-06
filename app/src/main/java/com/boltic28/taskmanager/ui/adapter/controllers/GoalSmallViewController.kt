@@ -23,7 +23,7 @@ class GoalSmallViewController : HolderController() {
         val name: TextView = itemView.findViewById(R.id.small_goal_name)
         val icon: ImageView = itemView.findViewById(R.id.small_goal_image)
 
-        name.text = item.name
+        name.text = fetchName(item.name)
         icon.setImageResource(R.drawable.goal_ph)
         val button: ImageButton = itemView.findViewById(R.id.small_goal_button_action)
 

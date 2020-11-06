@@ -11,6 +11,7 @@ import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment.Companion.G
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_goal.*
+import kotlinx.android.synthetic.main.fragment_step.*
 
 class GoalFragment : BaseEntityFragment<GoalFragmentModel>(R.layout.fragment_goal, GOAL_ID) {
 
@@ -57,6 +58,11 @@ class GoalFragment : BaseEntityFragment<GoalFragmentModel>(R.layout.fragment_goa
 
     private fun setProgress(progress: Progress) {
         goal_fr_progress.text = resources.getString(R.string.progres_00, 0)
+        goal_fr_progress_20.setImageResource(R.drawable.bg_progress_off)
+        goal_fr_progress_40.setImageResource(R.drawable.bg_progress_off)
+        goal_fr_progress_60.setImageResource(R.drawable.bg_progress_off)
+        goal_fr_progress_80.setImageResource(R.drawable.bg_progress_off)
+        goal_fr_progress_100.setImageResource(R.drawable.bg_progress_off)
         if (progress.value >= Progress.PROGRESS_20.value) {
             goal_fr_progress_20.setImageResource(R.drawable.bg_progress_on)
             goal_fr_progress.text = resources.getString(R.string.progres_00, 20)

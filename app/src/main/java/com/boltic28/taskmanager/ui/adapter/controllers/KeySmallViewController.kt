@@ -20,7 +20,6 @@ class KeySmallViewController : HolderController() {
         item as KeyResult
 
         val itemView: View = holder.itemView
-
         val name: TextView = itemView.findViewById(R.id.small_key_name)
         val icon: ImageView = itemView.findViewById(R.id.small_key_image)
         val button: ImageButton = itemView.findViewById(R.id.small_key_button_action)
@@ -29,13 +28,17 @@ class KeySmallViewController : HolderController() {
         if (item.progress == Progress.DONE) {
             status.setImageResource(R.drawable.ic_done)
         }
-        name.text = item.name
+        name.text = fetchName(item.name)
         icon.setImageResource(R.drawable.key_ph)
 
-        if (item.goalId == 0L) {
-            button.setImageResource(R.drawable.ic_link)
+        if (listener.isNeedToShowConnection()) {
+            if (item.goalId == 0L) {
+                button.setImageResource(R.drawable.ic_link)
+            } else {
+                button.setImageResource(R.drawable.ic_unlink)
+            }
         } else {
-            button.setImageResource(R.drawable.ic_unlink)
+            button.setImageResource(R.drawable.ic_attach)
         }
 
         itemView.setOnClickListener {

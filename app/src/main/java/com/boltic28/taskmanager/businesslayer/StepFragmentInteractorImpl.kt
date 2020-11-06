@@ -10,14 +10,14 @@ import com.boltic28.taskmanager.datalayer.room.idea.IdeaRepository
 import com.boltic28.taskmanager.datalayer.room.step.StepRepository
 import com.boltic28.taskmanager.datalayer.room.task.TaskRepository
 import io.reactivex.Single
-import io.reactivex.functions.BiFunction
+import io.reactivex.schedulers.Schedulers
 
 class StepFragmentInteractorImpl(
-    var taskRepository: TaskRepository,
-    var ideaRepository: IdeaRepository,
-    var stepRepository: StepRepository,
-    var goalRepository: GoalRepository
-): StepFragmentInteractor {
+    private var taskRepository: TaskRepository,
+    private var ideaRepository: IdeaRepository,
+    private var stepRepository: StepRepository,
+    private var goalRepository: GoalRepository
+) : StepFragmentInteractor {
 
     override fun insert(item: Step): Single<Long> =
         stepRepository.insert(item)
@@ -52,31 +52,31 @@ class StepFragmentInteractorImpl(
     override fun setChildrenFor(item: Step): Single<Step> =
         Single.just(item)
             .zipWith(
-                taskRepository.getAllForStep(item.id),
-                BiFunction<Step, List<Task>, Step> { step, tasks ->
+                taskRepository.getAllForStep(item.id), { step, tasks ->
                     step.copy(tasks = tasks)
                 })
             .zipWith(
-                ideaRepository.getAllForStep(item.id),
-                BiFunction<Step, List<Idea>, Step> { step, ideas ->
+                ideaRepository.getAllForStep(item.id), { step, ideas ->
                     step.copy(ideas = ideas)
                 })
 
     override fun setProgressFor(step: Step): Step {
         val pointsToFull = step.tasks.size
         val done = step.tasks.filter { it.isDone }.size
-
-        return if (pointsToFull == 0) {
-            step.copy(progress = Progress.DONE)
+        val isStarted = step.tasks.any { it.isStarted }
+        val nStep = if (pointsToFull == 0) {
+            step.copy(progress = Progress.DONE, isDone = true, isStarted = isStarted)
         } else {
-            when ((done * 100.0 )/ pointsToFull) {
-                100.0 -> step.copy(progress = Progress.DONE)
-                in 75.0..99.0 -> step.copy(progress = Progress.PROGRESS_80)
-                in 55.0..74.0 -> step.copy(progress = Progress.PROGRESS_60)
-                in 35.0..54.0 -> step.copy(progress = Progress.PROGRESS_40)
-                in 15.0..34.0 -> step.copy(progress = Progress.PROGRESS_20)
-                else -> step.copy(progress = Progress.PROGRESS_0)
+            when ((done * 100.0) / pointsToFull) {
+                100.0 -> step.copy(progress = Progress.DONE, isDone = true, isStarted = isStarted)
+                in 75.0..99.0 -> step.copy(progress = Progress.PROGRESS_80, isStarted = isStarted)
+                in 55.0..74.0 -> step.copy(progress = Progress.PROGRESS_60, isStarted = isStarted)
+                in 35.0..54.0 -> step.copy(progress = Progress.PROGRESS_40, isStarted = isStarted)
+                in 15.0..34.0 -> step.copy(progress = Progress.PROGRESS_20, isStarted = isStarted)
+                else -> step.copy(progress = Progress.PROGRESS_0, isStarted = isStarted)
             }
         }
+        stepRepository.update(nStep).subscribeOn(Schedulers.io()).subscribe()
+        return nStep
     }
 }

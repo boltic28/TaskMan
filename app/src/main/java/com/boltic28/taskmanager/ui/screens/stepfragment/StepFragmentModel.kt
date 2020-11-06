@@ -58,6 +58,7 @@ class StepFragmentModel @Inject constructor(
     fun loadFreeElementIntoAdapter(nav: NavController) {
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
+            override fun isNeedToShowConnection(): Boolean = true
             override fun onActionButtonClick(item: Any) {
                 if (item is Idea) addToStep(item)
                 if (item is Task) addToStep(item)
@@ -74,6 +75,7 @@ class StepFragmentModel @Inject constructor(
     fun loadGoalsIntoAdapter(step: Step, nav: NavController) {
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
+            override fun isNeedToShowConnection(): Boolean = true
             override fun onActionButtonClick(item: Any) {
                 item as Goal
                 disposables + interactor.update(step.copy(goalId = item.id))
@@ -94,6 +96,7 @@ class StepFragmentModel @Inject constructor(
     fun loadStepsElementIntoAdapter(step: Step, nav: NavController) {
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
+            override fun isNeedToShowConnection(): Boolean = true
             override fun onActionButtonClick(item: Any) {
                 if (item is Task) makeFree(item)
                 if (item is Idea) makeFree(item)

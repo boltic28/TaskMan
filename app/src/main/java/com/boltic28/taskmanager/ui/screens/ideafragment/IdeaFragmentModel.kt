@@ -35,13 +35,12 @@ class IdeaFragmentModel @Inject constructor(
     fun update(idea: Idea) {
         disposables + interactor.update(idea)
             .subscribeOn(Schedulers.io())
-            .subscribe { _ ->
-                refresh()
-            }
+            .subscribe { _ -> refresh() }
     }
 
     fun loadFreeElementsIntoAdapter(idea: Idea, nav: NavController) {
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
+            override fun isNeedToShowConnection(): Boolean = false
             override fun onActionButtonClick(item: Any) {
                 attachTo(idea, item)
             }
@@ -61,7 +60,8 @@ class IdeaFragmentModel @Inject constructor(
         if (item is Step) {
             disposables + interactor.update(idea.copy(stepId = item.id))
                 .subscribeOn(Schedulers.io())
-                .subscribe { _ -> refresh() }
+                .subscribe { _ ->
+                    refresh() }
         }
         if (item is Goal) {
             disposables + interactor.update(idea.copy(goalId = item.id))

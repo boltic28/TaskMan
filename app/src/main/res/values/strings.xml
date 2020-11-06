@@ -49,6 +49,7 @@
     <string name="progres_00">Progress, %d</string>
     <string name="free_elements">List of elements for connection</string>
     <string name="its_elements">Elements of Item</string>
+    <string name="Search">search</string>
 
     <string-array name="cycle">
         <item>hour</item>

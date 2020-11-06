@@ -24,7 +24,7 @@ class IdeaSmallViewController : HolderController() {
         val icon: ImageView = itemView.findViewById(R.id.small_idea_image)
         val button: ImageButton = itemView.findViewById(R.id.small_idea_button_action)
 
-        name.text = item.name
+        name.text = fetchName(item.name)
         icon.setImageResource(R.drawable.idea_ph)
 
         if (item.goalId == 0L && item.keyId == 0L && item.stepId == 0L) {

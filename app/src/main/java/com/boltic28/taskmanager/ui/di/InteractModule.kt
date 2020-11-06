@@ -67,7 +67,8 @@ class InteractModule(
             keyRepository,
             stepRepository,
             taskRepository,
-            ideaRepository
+            ideaRepository,
+            goalRepository
         )
 
     @Provides

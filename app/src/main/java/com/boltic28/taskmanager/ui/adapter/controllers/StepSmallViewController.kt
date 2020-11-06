@@ -28,13 +28,17 @@ class StepSmallViewController : HolderController() {
 
         if (item.isStarted) status.setImageResource(R.drawable.ic_started)
         if (item.progress == Progress.DONE) status.setImageResource(R.drawable.ic_done)
-        name.text = item.name
+        name.text = fetchName(item.name)
         icon.setImageResource(R.drawable.step_ph)
 
-        if (item.goalId == 0L && item.keyId == 0L) {
-            button.setImageResource(R.drawable.ic_link)
-        } else {
-            button.setImageResource(R.drawable.ic_unlink)
+        if (listener.isNeedToShowConnection()) {
+            if (item.goalId == 0L && item.keyId == 0L) {
+                button.setImageResource(R.drawable.ic_link)
+            } else {
+                button.setImageResource(R.drawable.ic_unlink)
+            }
+        }else{
+            button.setImageResource(R.drawable.ic_attach)
         }
 
         itemView.setOnClickListener {
