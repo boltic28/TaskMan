@@ -30,8 +30,8 @@ class KeyFragmentInteractorImpl(
     override fun getKeyById(id: Long): Single<KeyResult> =
         keyRepository.getById(id)
 
-    override fun getGoalById(id: Long): Single<Goal> =
-        goalRepository.getById(id)
+    override fun getParentName(id: Long): Single<String> =
+        goalRepository.getById(id).map { it.name }
 
     override fun getGoals(): Single<List<Goal>> =
         goalRepository.getAll()

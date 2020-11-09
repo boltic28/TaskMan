@@ -11,6 +11,7 @@ import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
 import com.boltic28.taskmanager.utils.Messenger
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -18,7 +19,7 @@ import javax.inject.Inject
 class IdeaFragmentModel @Inject constructor(
     @AdapterForIdea
     val adapter: ItemAdapter,
-    val interactor: IdeaFragmentInteractor,
+    private val interactor: IdeaFragmentInteractor,
     override var userManager: UserManager,
     val messenger: Messenger
 ) : BaseEntityFragmentModel<Idea>() {
@@ -37,6 +38,9 @@ class IdeaFragmentModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .subscribe { _ -> refresh() }
     }
+
+    fun getParentName(idea: Idea): Single<String> =
+        interactor.getParentName(idea)
 
     fun loadFreeElementsIntoAdapter(idea: Idea, nav: NavController) {
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {

@@ -88,14 +88,12 @@ class StepFragment : BaseEntityFragment<StepFragmentModel>(R.layout.fragment_ste
             step_fr_owner_button.setOnClickListener {
                 model.update(step.copy(goalId = NO_ID))
             }
-            model.disposables + model.interactor.getGoalById(step.goalId)
+            model.disposables + model.getParentName(step)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    step_fr_relative_owner.text = it.name
-                }, {
-
-                })
+                .subscribe{name ->
+                    step_fr_relative_owner.text = name
+                }
         } else {
             step_fr_owner_button.setImageResource(R.drawable.ic_link)
             step_fr_relative_owner.text = resources.getString(R.string.not_attached)

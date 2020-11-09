@@ -1,26 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    style="@style/ItemSm">
-
-    <ImageView
-        android:id="@+id/small_task_image"
-        style="@style/ItemSm.Image"
-        android:contentDescription="@string/description" />
-
-    <ImageView
-        android:id="@+id/small_task_image_status"
-        style="@style/ItemSm.Image.Status"
-        android:contentDescription="@string/description" />
-
-    <TextView
-        android:id="@+id/small_task_name"
-        style="@style/ItemSm.Header"
-        tools:text="Name of some element" />
-
-    <ImageButton
-        android:id="@+id/small_task_button_action"
-        style="@style/ItemSm.Button"
-        android:contentDescription="@string/description" />
-
-</LinearLayout>
+<FrameLayout style="@style/ItemSm">
+    <include layout="@layout/item_small_base" />
+</FrameLayout>

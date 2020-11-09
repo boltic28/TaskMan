@@ -11,7 +11,7 @@ interface IdeaFragmentInteractor {
 
     fun getIdeaById(id: Long): Single<Idea>
 
-    fun getStepsGoalsKeys(): Single<List<Any>>
+    fun getStepsGoalsKeys(): Single<List<ParentItem>>
 
     fun create(item: Task): Single<Long>
 

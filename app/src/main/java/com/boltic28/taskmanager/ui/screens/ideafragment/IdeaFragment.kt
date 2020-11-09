@@ -50,7 +50,7 @@ class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>(R.layout.fragment_ide
         idea_fr_recycler.visibility = View.INVISIBLE
         idea_fr_its_elements.visibility = View.INVISIBLE
         if (idea.goalId != NO_ID || idea.keyId != NO_ID || idea.stepId != NO_ID) {
-            model.disposables + model.interactor.getParentName(idea)
+            model.disposables + model.getParentName(idea)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { ownerName ->

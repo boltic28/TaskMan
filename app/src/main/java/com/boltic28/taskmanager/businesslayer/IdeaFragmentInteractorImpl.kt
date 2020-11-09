@@ -26,9 +26,9 @@ class IdeaFragmentInteractorImpl(
     override fun getIdeaById(id: Long): Single<Idea> =
         ideaRepository.getById(id)
 
-    override fun getStepsGoalsKeys(): Single<List<Any>> =
+    override fun getStepsGoalsKeys(): Single<List<ParentItem>> =
         zip(
-            Single.just(mutableListOf<Any>()),
+            Single.just(mutableListOf<ParentItem>()),
             goalRepository.getAll(),
             keyRepository.getAll(),
             stepRepository.getAll(),

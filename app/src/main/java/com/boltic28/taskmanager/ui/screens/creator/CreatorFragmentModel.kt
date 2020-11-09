@@ -44,6 +44,7 @@ class CreatorFragmentModel @Inject constructor(
                 goalId = NO_ID,
                 name = name,
                 description = description,
+                icon = "",
                 date = LocalDateTime.now(),
                 dateClose = endDate,
                 isDone = false,

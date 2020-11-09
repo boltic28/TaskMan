@@ -1,62 +1,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     style="@style/Item">
 
-    <TextView
-        android:id="@+id/item_idea_header"
-        style="@style/Item.Header"
-        tools:text="Some stupid idea"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        />
-
-    <ImageView
-        android:id="@+id/item_idea_image"
-        style="@style/Item.Image"
-        app:layout_constraintTop_toBottomOf="@+id/item_idea_header"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:contentDescription="@string/description_icon_of_goal" />
-
-    <TextView
-        android:id="@+id/item_idea_start"
-        style="@style/Item.Start"
-        tools:text="since: 22.09.2020"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
-    <TextView
-        android:id="@+id/item_idea_description"
-        style="@style/Item.Description"
-        android:maxLines="2"
-        tools:text="since: 22.09.2020 Some stupid idea come into my head,since: 22.09.2020 Some stupid idea come into my head,since: 22.09...."
-        app:layout_constraintLeft_toRightOf="@id/item_idea_image"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_idea_header"
-        />
-
-    <LinearLayout
-        android:id="@+id/item_idea_status_container"
-        style="@style/Item.StatusContainer"
-        app:layout_constraintBottom_toBottomOf="@id/item_idea_image"
-        app:layout_constraintLeft_toRightOf="@id/item_idea_image">
-
-        <ImageView
-            android:id="@+id/item_idea_status_linked"
-            style="@style/Item.StatusPoint"
-            android:contentDescription="@string/description_icon_of_goal"
-            android:src="@drawable/ic_unlink" />
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/item_idea_button_action"
-        style="@style/Item.Button.Idea"
-        android:text="@string/convert_to"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
-
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/item_base" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,6 +44,7 @@
     <dimen name="item_image_status_size">24dp</dimen>
     <dimen name="item_padding_for_view">16dp</dimen>
     <dimen name="item_progress_width">16dp</dimen>
+    <dimen name="item_progress_high">0dp</dimen>
     <dimen name="item_margin_left_image_progress">24dp</dimen>
     <dimen name="item_margin_top_progress">8dp</dimen>
     <dimen name="item_progress_point_size_w">50dp</dimen>

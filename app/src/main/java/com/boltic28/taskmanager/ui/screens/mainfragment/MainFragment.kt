@@ -53,7 +53,7 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
 
     private fun loadGoals() {
         model.adapter.setAdapterListener(object : HolderController.OnActionClickListener {
-            override fun isNeedToShowConnection(): Boolean = true
+            override fun isNeedToShowConnection(): Boolean = false
             override fun onActionButtonClick(item: Any) {}
             override fun onViewClick(item: Any) {
                 item as Goal

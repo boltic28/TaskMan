@@ -30,7 +30,7 @@ class TaskFragment : BaseEntityFragment<TaskFragmentModel>(R.layout.fragment_tas
                     task_fr_description_content.text = task.description
                     task_fr_close_date_content.text = fetchDate(task.dateClose)
                     task_fr_cycle_content.text = task.cycle.value
-                    task_fr_button_action.isEnabled = true
+                    task_fr_button_action.isActivated = true
 
                     setButtonOwner(task)
                     checkState(task)
@@ -50,14 +50,14 @@ class TaskFragment : BaseEntityFragment<TaskFragmentModel>(R.layout.fragment_tas
     private fun setButtonOwner(task: Task) {
         task_fr_recycler.visibility = View.INVISIBLE
         task_fr_its_elements.visibility = View.INVISIBLE
-        if (task.goalId != NO_ID || task.stepId != NO_ID || task.keyId != NO_ID) {
+        if ((task.goalId != NO_ID) || (task.stepId != NO_ID) || (task.keyId != NO_ID)) {
             task_fr_owner_button.setImageResource(R.drawable.ic_unlink)
             task_fr_owner_button.setOnClickListener {
                 model.update(
                     task.copy(goalId = NO_ID, stepId = NO_ID, keyId = NO_ID)
                 )
             }
-            model.disposables + model.interactor.getParentName(task)
+            model.disposables + model.getParentName(task)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { ownerName ->
@@ -83,8 +83,7 @@ class TaskFragment : BaseEntityFragment<TaskFragmentModel>(R.layout.fragment_tas
         }
 
         if (task.isDone) {
-            task_fr_button_action.isEnabled = false
-            task_fr_button_action.setColorFilter(R.color.colorItemProgressOff)
+            task_fr_button_action.isActivated =false
         }
 
         if (task.isStarted) {

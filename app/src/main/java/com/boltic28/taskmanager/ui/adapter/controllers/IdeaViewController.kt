@@ -3,15 +3,13 @@ package com.boltic28.taskmanager.ui.adapter.controllers
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.TextView
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.entities.Idea
 import com.boltic28.taskmanager.ui.adapter.DefaultViewHolder
 import com.boltic28.taskmanager.ui.constant.NO_ID
-import java.time.format.DateTimeFormatter
 import kotlin.reflect.KClass
 
-class IdeaViewController : HolderController() {
+class IdeaViewController : BaseItemController() {
     override fun getType(): Int = R.layout.item_idea
 
     override fun getItemType(): KClass<*> = Idea::class
@@ -20,20 +18,11 @@ class IdeaViewController : HolderController() {
         item as Idea
         val itemView: View = holder.itemView
 
-        val header: TextView = itemView.findViewById(R.id.item_idea_header)
-        val description: TextView = itemView.findViewById(R.id.item_idea_description)
-        val dateStart: TextView = itemView.findViewById(R.id.item_idea_start)
-        val icon: ImageView = itemView.findViewById(R.id.item_idea_image)
-        val action: Button = itemView.findViewById(R.id.item_idea_button_action)
+        fillBaseField(itemView, item)
+        setOnItemClickListener(itemView, item)
 
-        header.text = fetchName(item.name)
-        description.text = fetchDescription(item.description)
-        dateStart.text =
-            item.date.format(DateTimeFormatter.ofPattern(itemView.resources.getString(R.string.dateFormatterForItems)))
-        icon.setImageResource(R.drawable.idea_ph)
-
-        val statusIsAttached: ImageView = itemView.findViewById(R.id.item_idea_status_linked)
-
+        val statusIsAttached: ImageView = itemView.findViewById(R.id.item_status_linked)
+        statusIsAttached.visibility = View.VISIBLE
         statusIsAttached.setImageResource(
             if (item.goalId == NO_ID && item.stepId == NO_ID && item.keyId == NO_ID)
                 R.drawable.ic_unlink
@@ -41,10 +30,9 @@ class IdeaViewController : HolderController() {
                 R.drawable.ic_link
         )
 
-        itemView.setOnClickListener {
-            listener.onViewClick(item)
-        }
-
+        val action: Button = itemView.findViewById(R.id.item_button_action)
+        action.visibility = View.VISIBLE
+        action.text = itemView.resources.getString(R.string.convert_to)
         action.setOnClickListener {
             listener.onActionButtonClick(item)
         }

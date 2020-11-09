@@ -26,7 +26,15 @@ interface FreeElementsInteractor {
 
     fun setChildrenFor(goal: Goal): Single<Goal>
 
+    fun setChildrenFor(step: Step): Single<Step>
+
+    fun setChildrenFor(key: KeyResult): Single<KeyResult>
+
     fun setProgressFor(goal: Goal): Goal
+
+    fun setProgressFor(step: Step): Step
+
+    fun setProgressFor(key: KeyResult): KeyResult
 
     fun update(item: Task): Single<Int>
 }

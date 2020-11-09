@@ -12,6 +12,7 @@ data class KeyEntity(
     val goalId: Long,
     val name: String,
     val description: String,
+    val icon: String,
     val date: LocalDateTime,
     val dateClose: LocalDateTime,
     val progress: Progress,

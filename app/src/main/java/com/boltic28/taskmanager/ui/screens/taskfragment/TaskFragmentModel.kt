@@ -12,6 +12,7 @@ import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
 import com.boltic28.taskmanager.utils.Messenger
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.time.LocalDateTime
@@ -20,7 +21,7 @@ import javax.inject.Inject
 class TaskFragmentModel @Inject constructor(
     @AdapterForTask
     val adapter: ItemAdapter,
-    val interactor: TaskFragmentInteractor,
+    private val interactor: TaskFragmentInteractor,
     override var userManager: UserManager,
     val messenger: Messenger
 ) : BaseEntityFragmentModel<Task>() {
@@ -49,6 +50,9 @@ class TaskFragmentModel @Inject constructor(
 
         return false
     }
+
+    fun getParentName(item: Task): Single<String> =
+        interactor.getParentName(item)
 
     fun loadParentsElements(task: Task, nav: NavController) {
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {

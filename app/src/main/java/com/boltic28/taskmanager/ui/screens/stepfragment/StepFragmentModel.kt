@@ -11,6 +11,7 @@ import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
 import com.boltic28.taskmanager.utils.Messenger
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -18,7 +19,7 @@ import javax.inject.Inject
 class StepFragmentModel @Inject constructor(
     @AdapterForStep
     val adapter: ItemAdapter,
-    val interactor: StepFragmentInteractor,
+    private val interactor: StepFragmentInteractor,
     override var userManager: UserManager,
     val messenger: Messenger
 ) : BaseEntityFragmentModel<Step>() {
@@ -44,6 +45,9 @@ class StepFragmentModel @Inject constructor(
                 isItemsElementIntoRecycler = false
             }
     }
+
+    fun getParentName(item: Step): Single<String> =
+        interactor.getParentName(item.goalId)
 
     private fun initStepValue(step: Step) {
         disposables + interactor.setChildrenFor(step)

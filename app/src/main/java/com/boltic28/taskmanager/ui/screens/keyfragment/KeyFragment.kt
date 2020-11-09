@@ -20,7 +20,7 @@ class KeyFragment: BaseEntityFragment<KeyFragmentModel>(R.layout.fragment_key, K
         model.disposables + model.item
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ key ->
+            .subscribe{ key ->
                 if (key.id != NO_ID) {
                     (activity as? ActivityHelper)?.setToolbarText(key.name)
                     key_fr_name.text = fetchName(key.name)
@@ -36,9 +36,7 @@ class KeyFragment: BaseEntityFragment<KeyFragmentModel>(R.layout.fragment_key, K
                     setButtonOwner(key)
                     loadDataIntoRecycler(key)
                 }
-            }, {
-
-            })
+            }
     }
 
     private fun setProgress(progress: Progress) {
@@ -85,14 +83,12 @@ class KeyFragment: BaseEntityFragment<KeyFragmentModel>(R.layout.fragment_key, K
             key_fr_owner_button.setOnClickListener {
                 model.update(key.copy(goalId = NO_ID))
             }
-            model.disposables + model.interactor.getGoalById(key.goalId)
+            model.disposables + model.getParentName(key)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe( {
-                    key_fr_relative_owner.text = it.name
-                },{
-
-                })
+                .subscribe {name ->
+                    key_fr_relative_owner.text = name
+                }
         }else{
             key_fr_relative_owner.text = resources.getString(R.string.not_attached)
             key_fr_owner_button.setImageResource(R.drawable.ic_link)

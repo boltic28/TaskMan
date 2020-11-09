@@ -47,8 +47,20 @@ class FreeElementsInteractorImpl(
     override fun setChildrenFor(goal: Goal): Single<Goal> =
         structureProvider.setChildrenFor(goal)
 
+    override fun setChildrenFor(step: Step): Single<Step> =
+        structureProvider.setChildrenFor(step)
+
+    override fun setChildrenFor(key: KeyResult): Single<KeyResult> =
+        structureProvider.setChildrenFor(key)
+
     override fun setProgressFor(goal: Goal): Goal =
         structureProvider.setProgressFor(goal)
+
+    override fun setProgressFor(step: Step): Step =
+        structureProvider.setProgressFor(step)
+
+    override fun setProgressFor(key: KeyResult): KeyResult =
+        structureProvider.setProgressFor(key)
 
     override fun update(item: Task): Single<Int> =
         taskRepository.update(item)

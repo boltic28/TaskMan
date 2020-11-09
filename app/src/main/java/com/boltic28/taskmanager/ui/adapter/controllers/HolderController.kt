@@ -43,17 +43,7 @@ abstract class HolderController {
         fun onViewClick(item: Any)
     }
 
-    fun fetchDescription(description: String): String =
-        if (description.length > 78) {
-            description.substring(0..75) + "..."
-        } else {
-            description
-        }
+    fun provideCommonData(){
 
-    fun fetchName(name: String): String =
-        if (name.length > 23) {
-            name.substring(0..20) + "..."
-        } else {
-            name
-        }
+    }
 }

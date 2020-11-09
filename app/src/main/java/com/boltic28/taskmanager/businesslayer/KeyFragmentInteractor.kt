@@ -2,6 +2,7 @@ package com.boltic28.taskmanager.businesslayer
 
 import com.boltic28.taskmanager.datalayer.entities.*
 import io.reactivex.Single
+import java.util.jar.Attributes
 
 interface KeyFragmentInteractor {
 
@@ -15,7 +16,7 @@ interface KeyFragmentInteractor {
 
     fun setChildrenFor(item: KeyResult): Single<KeyResult>
 
-    fun getGoalById(id: Long): Single<Goal>
+    fun getParentName(id: Long): Single<String>
 
     fun getGoals(): Single<List<Goal>>
 

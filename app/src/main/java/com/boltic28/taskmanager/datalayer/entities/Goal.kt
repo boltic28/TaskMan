@@ -4,17 +4,17 @@ import com.boltic28.taskmanager.datalayer.Progress
 import java.time.LocalDateTime
 
 data class Goal(
-    val id: Long,
-    val name: String,
-    val description: String,
-    val icon: String,
-    val date: LocalDateTime,
-    val dateClose: LocalDateTime,
-    val isDone: Boolean,
-    val isStarted: Boolean,
+    override val id: Long,
+    override val name: String,
+    override val description: String,
+    override val icon: String,
+    override val date: LocalDateTime,
+    override val dateClose: LocalDateTime,
+    override val isDone: Boolean,
+    override val isStarted: Boolean,
+    override val progress: Progress,
     val steps: List<Step>,
     val tasks: List<Task>,
     val ideas: List<Idea>,
-    val keys: List<KeyResult>,
-    val progress: Progress
-)
+    val keys: List<KeyResult>
+): ParentItem

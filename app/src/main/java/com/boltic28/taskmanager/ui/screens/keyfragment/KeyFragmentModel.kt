@@ -12,6 +12,7 @@ import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
 import com.boltic28.taskmanager.ui.constant.NO_ID
 import com.boltic28.taskmanager.utils.Messenger
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -19,7 +20,7 @@ import javax.inject.Inject
 class KeyFragmentModel @Inject constructor(
     @AdapterForKey
     val adapter: ItemAdapter,
-    val interactor: KeyFragmentInteractor,
+    private val interactor: KeyFragmentInteractor,
     override var userManager: UserManager,
     val messenger: Messenger
 ) : BaseEntityFragmentModel<KeyResult>() {
@@ -45,6 +46,9 @@ class KeyFragmentModel @Inject constructor(
                 isItemsElementIntoRecycler = false
             }
     }
+
+    fun getParentName(item: KeyResult): Single<String> =
+        interactor.getParentName(item.goalId)
 
     private fun initValue(key: KeyResult) {
         disposables + interactor.setChildrenFor(key)

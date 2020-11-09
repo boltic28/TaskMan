@@ -1,8 +1,7 @@
 package com.boltic28.taskmanager.ui.screens.mainfragment
 
 import com.boltic28.taskmanager.businesslayer.FreeElementsInteractor
-import com.boltic28.taskmanager.datalayer.entities.Goal
-import com.boltic28.taskmanager.datalayer.entities.Task
+import com.boltic28.taskmanager.datalayer.entities.*
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.base.BaseViewModel
@@ -25,72 +24,83 @@ class MainFragmentModel @Inject constructor(
         disposables + interactor.update(item)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ _ ->
-                loadTasks()
-            }, {
-            })
+            .subscribe{ _ -> loadTasks() }
     }
 
     fun loadTasks() {
         disposables + interactor.getTasks()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ result ->
-                adapter.refreshData(result)
-            }, {
-            })
-    }
-
-    fun loadKeys() {
-        disposables + interactor.getKeys()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ result ->
-                adapter.refreshData(result)
-            }, {
-            })
+            .subscribe{ result -> adapter.refreshData(result) }
     }
 
     fun loadIdeas() {
         disposables + interactor.getIdeas()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ result ->
-                adapter.refreshData(result)
-            }, {
-            })
+            .subscribe{ result -> adapter.refreshData(result) }
+    }
+
+    fun loadKeys() {
+        disposables + interactor.getKeys()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe{ itemList ->
+                adapter.clearAll()
+                itemList.forEach { item ->
+                    makeAnalyzeAndPushIntoAdapter(item)
+                }
+            }
     }
 
     fun loadSteps() {
         disposables + interactor.getSteps()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ result ->
-                adapter.refreshData(result)
-            }, {
-            })
+            .subscribe{ itemList ->
+                adapter.clearAll()
+                itemList.forEach { item ->
+                    makeAnalyzeAndPushIntoAdapter(item)
+                }
+            }
     }
 
     fun loadGoals() {
         disposables + interactor.getGoals()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ goalsList ->
+            .subscribe{ itemList ->
                 adapter.clearAll()
-                goalsList.forEach { goal ->
-                    makeAnalyzeAndPushIntoAdapter(goal)
+                itemList.forEach { item ->
+                    makeAnalyzeAndPushIntoAdapter(item)
                 }
-            }, {
-            })
+            }
     }
 
-    private fun makeAnalyzeAndPushIntoAdapter(goal: Goal) {
-        disposables + interactor.setChildrenFor(goal)
+    private fun makeAnalyzeAndPushIntoAdapter(item: Goal) {
+        disposables + interactor.setChildrenFor(item)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                adapter.addElement(interactor.setProgressFor(it))
-            }, {
-            })
+            .subscribe{ mItem ->
+                adapter.addElement(interactor.setProgressFor(mItem))
+            }
+    }
+
+    private fun makeAnalyzeAndPushIntoAdapter(item: Step) {
+        disposables + interactor.setChildrenFor(item)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe{ mItem ->
+                adapter.addElement(interactor.setProgressFor(mItem))
+            }
+    }
+
+    private fun makeAnalyzeAndPushIntoAdapter(item: KeyResult) {
+        disposables + interactor.setChildrenFor(item)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe{ mItem ->
+                adapter.addElement(interactor.setProgressFor(mItem))
+            }
     }
 }
