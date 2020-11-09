@@ -15,5 +15,6 @@ class DataBaseModule(private val context: Context) {
     fun provideDataBase(): AppDataBase =
         Room
             .databaseBuilder(context, AppDataBase::class.java, AppDataBase.DB_NAME)
+            .fallbackToDestructiveMigration()
             .build()
 }

@@ -16,7 +16,7 @@ import com.boltic28.taskmanager.datalayer.room.task.TaskEntity
 
 @Database(
     entities = [GoalEntity::class, IdeaEntity::class, StepEntity::class, TaskEntity::class, KeyEntity::class],
-    version = 2,
+    version = 1,
     exportSchema = false
 )
 @TypeConverters(Converter::class)
