@@ -14,7 +14,7 @@ class FreeElementsInteractorImpl(
     private val taskRepository: TaskRepository,
     private val ideaRepository: IdeaRepository,
     private val goalRepository: GoalRepository,
-    private val goalCase: CaseGoalStructure
+    private val structureProvider: ItemsStructureProvider
 ) : FreeElementsInteractor {
 
     override fun getFreeTasks(): Single<List<Task>> =
@@ -45,10 +45,10 @@ class FreeElementsInteractorImpl(
         goalRepository.getAll()
 
     override fun setChildrenFor(goal: Goal): Single<Goal> =
-        goalCase.setChildrenFor(goal)
+        structureProvider.setChildrenFor(goal)
 
     override fun setProgressFor(goal: Goal): Goal =
-        goalCase.setProgressFor(goal)
+        structureProvider.setProgressFor(goal)
 
     override fun update(item: Task): Single<Int> =
         taskRepository.update(item)

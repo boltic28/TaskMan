@@ -7,10 +7,9 @@ import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.Progress
 import com.boltic28.taskmanager.datalayer.entities.Step
 import com.boltic28.taskmanager.ui.adapter.DefaultViewHolder
+import com.boltic28.taskmanager.ui.constant.NO_ID
 import java.time.LocalDateTime
-import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
-import java.util.concurrent.TimeUnit
 import kotlin.reflect.KClass
 
 class StepViewController : HolderController() {
@@ -40,14 +39,9 @@ class StepViewController : HolderController() {
         val statusAttention: ImageView = itemView.findViewById(R.id.item_step_status_attention)
         val statusStarted: ImageView = itemView.findViewById(R.id.item_step_status_started)
         val statusDone: ImageView = itemView.findViewById(R.id.item_step_status_done)
-        val days = TimeUnit.DAYS.toDays(
-            LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) - item.dateClose.toEpochSecond(
-                ZoneOffset.UTC
-            )
-        )
 
         statusIsAttached.setImageResource(
-            if (item.goalId == 0L) R.drawable.ic_unlink else R.drawable.ic_link
+            if (item.goalId == NO_ID) R.drawable.ic_unlink else R.drawable.ic_link
         )
         statusAttention.setColorFilter(R.color.colorStatusOff)
         statusStarted.setColorFilter(R.color.colorStatusOff)
@@ -55,7 +49,9 @@ class StepViewController : HolderController() {
 
         if (item.isStarted) statusStarted.setColorFilter(itemView.context.getColor(R.color.colorStatusInfo))
         if (item.isDone) statusDone.setColorFilter(itemView.context.getColor(R.color.colorStatusInfo))
-        if (days < 2) statusAttention.setColorFilter(itemView.context.getColor(R.color.colorStatusAttention))
+        if (LocalDateTime.now() >= item.dateClose && (!item.isDone)) statusAttention.setColorFilter(
+            itemView.context.getColor(R.color.colorStatusAttention)
+        )
 
         val progress20: ImageView = itemView.findViewById(R.id.item_step_progress_20_percent)
         val progress40: ImageView = itemView.findViewById(R.id.item_step_progress_40_percent)

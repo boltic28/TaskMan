@@ -5,10 +5,10 @@ import com.boltic28.taskmanager.datalayer.room.goal.GoalRepository
 import com.boltic28.taskmanager.datalayer.room.idea.IdeaRepository
 import com.boltic28.taskmanager.datalayer.room.keyresult.KeyRepository
 import com.boltic28.taskmanager.datalayer.room.step.StepRepository
-import com.boltic28.taskmanager.datalayer.room.task.DefaultTaskRepository
 import com.boltic28.taskmanager.datalayer.room.task.TaskRepository
+import com.boltic28.taskmanager.ui.constant.NO_ID
 import io.reactivex.Single
-import io.reactivex.functions.BiFunction
+import io.reactivex.Single.zip
 
 class IdeaFragmentInteractorImpl(
     private val ideaRepository: IdeaRepository,
@@ -26,26 +26,18 @@ class IdeaFragmentInteractorImpl(
     override fun getIdeaById(id: Long): Single<Idea> =
         ideaRepository.getById(id)
 
-    override fun getFreeStepsGoalsKeys(): Single<List<Any>> =
-        Single.just(mutableListOf<Any>())
-            .zipWith(
-                goalRepository.getAll(),
-                BiFunction<MutableList<Any>, List<Goal>, MutableList<Any>> { mList, list ->
-                    mList.addAll(list)
-                    return@BiFunction mList
-                })
-            .zipWith(
-                keyRepository.getAll(),
-                BiFunction<MutableList<Any>, List<KeyResult>, MutableList<Any>> { mList, list ->
-                    mList.addAll(list)
-                    return@BiFunction mList
-                })
-            .zipWith(
-                stepRepository.getAll(),
-                BiFunction<MutableList<Any>, List<Step>, MutableList<Any>> { mList, list ->
-                    mList.addAll(list)
-                    return@BiFunction mList
-                })
+    override fun getStepsGoalsKeys(): Single<List<Any>> =
+        zip(
+            Single.just(mutableListOf<Any>()),
+            goalRepository.getAll(),
+            keyRepository.getAll(),
+            stepRepository.getAll(),
+            { mList, goals, keys, steps ->
+                mList.addAll(goals)
+                mList.addAll(keys)
+                mList.addAll(steps)
+                return@zip mList
+            })
 
     override fun create(item: Task): Single<Long> =
         taskRepository.insert(item)
@@ -56,10 +48,13 @@ class IdeaFragmentInteractorImpl(
     override fun create(item: Goal): Single<Long> =
         goalRepository.insert(item)
 
+    override fun create(item: KeyResult): Single<Long> =
+        keyRepository.insert(item)
+
     override fun getParentName(item: Idea): Single<String> {
-            if (item.goalId != 0L) return goalRepository.getById(item.goalId).map { it.name }
-            if (item.stepId != 0L) return stepRepository.getById(item.stepId).map { it.name }
-            if (item.keyId != 0L) return keyRepository.getById(item.keyId).map { it.name }
-            return Single.just("error")
+        if (item.goalId != NO_ID) return goalRepository.getById(item.goalId).map { it.name }
+        if (item.stepId != NO_ID) return stepRepository.getById(item.stepId).map { it.name }
+        if (item.keyId != NO_ID) return keyRepository.getById(item.keyId).map { it.name }
+        return Single.just(item.name)
     }
 }

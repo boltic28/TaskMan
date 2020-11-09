@@ -7,8 +7,10 @@
     <TextView
         android:id="@+id/item_goal_header"
         style="@style/Item.Header"
+        android:ellipsize="end"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/item_goal_status_icon"
         tools:text="Some objective" />
 
     <ImageView
@@ -17,6 +19,7 @@
         android:contentDescription="@string/description"
         app:layout_constraintBottom_toBottomOf="@id/item_goal_header"
         app:layout_constraintLeft_toRightOf="@id/item_goal_header"
+        app:layout_constraintRight_toLeftOf="@id/item_goal_start"
         app:layout_constraintTop_toTopOf="@id/item_goal_header" />
 
     <TextView
@@ -24,7 +27,7 @@
         style="@style/Item.Start"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="since: 22.09.2020" />
+        tools:text="22.09.2020" />
 
     <ImageView
         android:id="@+id/item_goal_image"
@@ -36,7 +39,6 @@
     <TextView
         android:id="@+id/item_goal_description"
         style="@style/Item.Description"
-        android:maxLines="2"
         app:layout_constraintLeft_toRightOf="@id/item_goal_image"
         app:layout_constraintRight_toLeftOf="@id/item_goal_progress_container"
         app:layout_constraintTop_toBottomOf="@id/item_goal_header"

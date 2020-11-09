@@ -10,6 +10,7 @@ import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
+import com.boltic28.taskmanager.ui.constant.NO_ID
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -137,7 +138,7 @@ class KeyFragmentModel @Inject constructor(
     }
 
     private fun makeFree(item: Idea) {
-        disposables + interactor.updateIdea(item.copy(keyId = 0L))
+        disposables + interactor.updateIdea(item.copy(keyId = NO_ID))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -148,7 +149,7 @@ class KeyFragmentModel @Inject constructor(
     }
 
     private fun makeFree(item: Task) {
-        disposables + interactor.updateTask(item.copy(keyId = 0L))
+        disposables + interactor.updateTask(item.copy(keyId = NO_ID))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

@@ -6,16 +6,14 @@ import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.Progress
 import com.boltic28.taskmanager.datalayer.entities.Goal
 import com.boltic28.taskmanager.ui.base.BaseEntityFragment
+import com.boltic28.taskmanager.ui.constant.GOAL_EXTRA
+import com.boltic28.taskmanager.ui.constant.NO_ID
 import com.boltic28.taskmanager.ui.screens.activity.ActivityHelper
-import com.boltic28.taskmanager.ui.screens.mainfragment.MainFragment.Companion.GOAL_ID
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_goal.*
-import kotlinx.android.synthetic.main.fragment_step.*
 
-class GoalFragment : BaseEntityFragment<GoalFragmentModel>(R.layout.fragment_goal, GOAL_ID) {
-
-
+class GoalFragment : BaseEntityFragment<GoalFragmentModel>(R.layout.fragment_goal, GOAL_EXTRA) {
 
     override fun initView() {
         setButtonsBack()
@@ -23,7 +21,7 @@ class GoalFragment : BaseEntityFragment<GoalFragmentModel>(R.layout.fragment_goa
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ goal ->
-                if (goal.id != 0L) {
+                if (goal.id != NO_ID) {
                     (activity as? ActivityHelper)?.setToolbarText(goal.name)
                     goal_fr_name.text = fetchName(goal.name)
                     goal_fr_image.setImageResource(R.drawable.goal_ph)

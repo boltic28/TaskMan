@@ -1,9 +1,6 @@
 package com.boltic28.taskmanager.businesslayer
 
-import com.boltic28.taskmanager.datalayer.entities.Goal
-import com.boltic28.taskmanager.datalayer.entities.Idea
-import com.boltic28.taskmanager.datalayer.entities.Step
-import com.boltic28.taskmanager.datalayer.entities.Task
+import com.boltic28.taskmanager.datalayer.entities.*
 import io.reactivex.Single
 
 interface IdeaFragmentInteractor {
@@ -14,13 +11,15 @@ interface IdeaFragmentInteractor {
 
     fun getIdeaById(id: Long): Single<Idea>
 
-    fun getFreeStepsGoalsKeys(): Single<List<Any>>
+    fun getStepsGoalsKeys(): Single<List<Any>>
 
     fun create(item: Task): Single<Long>
 
     fun create(item: Step): Single<Long>
 
     fun create(item: Goal): Single<Long>
+
+    fun create(item: KeyResult): Single<Long>
 
     fun getParentName(item: Idea): Single<String>
 }

@@ -6,6 +6,7 @@ import com.boltic28.taskmanager.datalayer.Progress
 import com.boltic28.taskmanager.datalayer.entities.*
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.base.BaseViewModel
+import com.boltic28.taskmanager.ui.constant.NO_ID
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.Single
 import java.time.LocalDateTime
@@ -20,7 +21,7 @@ class CreatorFragmentModel @Inject constructor(
     fun saveGoal(name: String, description: String, endDate: LocalDateTime): Single<Long> =
         interactor.create(
             Goal(
-                id = 0,
+                id = NO_ID,
                 name = name,
                 description = description,
                 icon = "",
@@ -36,14 +37,17 @@ class CreatorFragmentModel @Inject constructor(
             )
         )
 
-    fun saveKey(name: String, description: String): Single<Long> =
+    fun saveKey(name: String, description: String, endDate: LocalDateTime): Single<Long> =
         interactor.create(
             KeyResult(
-                id = 0,
-                goalId = 0,
+                id = NO_ID,
+                goalId = NO_ID,
                 name = name,
                 description = description,
                 date = LocalDateTime.now(),
+                dateClose = endDate,
+                isDone = false,
+                isStarted = false,
                 progress = Progress.PROGRESS_0,
                 steps = emptyList(),
                 tasks = emptyList(),
@@ -54,9 +58,9 @@ class CreatorFragmentModel @Inject constructor(
     fun saveStep(name: String, description: String, endDate: LocalDateTime): Single<Long> =
         interactor.create(
             Step(
-                id = 0,
-                goalId = 0,
-                keyId = 0,
+                id = NO_ID,
+                goalId = NO_ID,
+                keyId = NO_ID,
                 name = name,
                 description = description,
                 icon = "",
@@ -78,10 +82,10 @@ class CreatorFragmentModel @Inject constructor(
     ): Single<Long> =
         interactor.create(
             Task(
-                id = 0,
-                stepId = 0,
-                goalId = 0,
-                keyId = 0,
+                id = NO_ID,
+                stepId = NO_ID,
+                goalId = NO_ID,
+                keyId = NO_ID,
                 name = name,
                 description = description,
                 icon = "",
@@ -96,10 +100,10 @@ class CreatorFragmentModel @Inject constructor(
     fun saveIdea(name: String, description: String): Single<Long> =
         interactor.create(
             Idea(
-                id = 0,
-                stepId = 0,
-                goalId = 0,
-                keyId = 0,
+                id = NO_ID,
+                stepId = NO_ID,
+                goalId = NO_ID,
+                keyId = NO_ID,
                 name = name,
                 description = description,
                 icon = "",

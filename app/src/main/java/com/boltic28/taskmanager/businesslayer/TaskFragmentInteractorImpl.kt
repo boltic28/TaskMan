@@ -24,6 +24,10 @@ class TaskFragmentInteractorImpl(
     override fun delete(item: Task): Single<Int> =
         taskRepository.delete(item)
 
+    override fun analyzeTask(item: Task): Single<Task> {
+        TODO("Not yet implemented")
+    }
+
     override fun getTaskById(id: Long): Single<Task> =
         taskRepository.getById(id)
 

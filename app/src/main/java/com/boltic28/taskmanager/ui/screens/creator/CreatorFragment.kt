@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.ui.base.BaseFragment
+import com.boltic28.taskmanager.ui.constant.NO_ID
 import com.boltic28.taskmanager.ui.screens.activity.ActivityHelper
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -39,7 +40,7 @@ class CreatorFragment : BaseFragment<CreatorFragmentModel>(R.layout.fragment_cre
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { id ->
-                    if (id == 0L) {
+                    if (id == NO_ID) {
                         model.messenger.showMessage("new instance is not created")
                     } else {
                         model.messenger.showMessage("new instance is created")
@@ -92,12 +93,12 @@ class CreatorFragment : BaseFragment<CreatorFragmentModel>(R.layout.fragment_cre
             )
             R.id.creator_key_radio -> model.saveKey(
                 creator_name.text.toString(),
-                creator_description.text.toString()
+                creator_description.text.toString(), LocalDateTime.now()
             )
             R.id.creator_goal_radio -> model.saveGoal(
                 creator_name.text.toString(),
                 creator_description.text.toString(), LocalDateTime.now()
             )
-            else -> Single.just(0L)
+            else -> Single.just(NO_ID)
         }
 }

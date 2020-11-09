@@ -52,10 +52,11 @@
     <string name="Search">search</string>
 
     <string-array name="cycle">
-        <item>hour</item>
-        <item>day</item>
-        <item>week</item>
-        <item>month</item>
-        <item>year</item>
+        <item>not cycle</item>
+        <item>once an hour</item>
+        <item>once a day</item>
+        <item>once a week</item>
+        <item>once a month</item>
+        <item>once an year</item>
     </string-array>
 </resources>

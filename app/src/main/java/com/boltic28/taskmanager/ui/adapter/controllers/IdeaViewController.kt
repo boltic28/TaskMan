@@ -7,6 +7,7 @@ import android.widget.TextView
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.entities.Idea
 import com.boltic28.taskmanager.ui.adapter.DefaultViewHolder
+import com.boltic28.taskmanager.ui.constant.NO_ID
 import java.time.format.DateTimeFormatter
 import kotlin.reflect.KClass
 
@@ -34,7 +35,7 @@ class IdeaViewController : HolderController() {
         val statusIsAttached: ImageView = itemView.findViewById(R.id.item_idea_status_linked)
 
         statusIsAttached.setImageResource(
-            if (item.goalId == 0L && item.stepId == 0L && item.keyId == 0L)
+            if (item.goalId == NO_ID && item.stepId == NO_ID && item.keyId == NO_ID)
                 R.drawable.ic_unlink
             else
                 R.drawable.ic_link

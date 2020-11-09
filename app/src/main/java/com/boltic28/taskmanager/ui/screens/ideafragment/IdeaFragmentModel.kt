@@ -48,7 +48,7 @@ class IdeaFragmentModel @Inject constructor(
                 goToItemFragment(item, nav)
             }
         })
-        disposables + interactor.getFreeStepsGoalsKeys()
+        disposables + interactor.getStepsGoalsKeys()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { list ->

@@ -27,5 +27,5 @@ interface KeyFragmentInteractor {
 
     fun updateIdea(item: Idea): Single<Int>
 
-    fun setProgressFor(key: KeyResult): KeyResult
+    fun setProgressFor(item: KeyResult): KeyResult
 }

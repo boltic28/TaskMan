@@ -36,7 +36,7 @@ class InteractModule(
             taskRepository,
             ideaRepository,
             goalRepository,
-            provideCaseGoalStructure()
+            provideCaseItemStructure()
         )
 
     @Provides
@@ -47,7 +47,7 @@ class InteractModule(
             taskRepository,
             ideaRepository,
             goalRepository,
-            provideCaseGoalStructure()
+            provideCaseItemStructure()
         )
 
     @Provides
@@ -58,12 +58,12 @@ class InteractModule(
             taskRepository,
             ideaRepository,
             goalRepository,
-            provideCaseGoalStructure()
+            provideCaseItemStructure()
         )
 
     @Provides
-    fun provideCaseGoalStructure(): CaseGoalStructure =
-        CaseGoalStructureImpl(
+    fun provideCaseItemStructure(): ItemsStructureProvider =
+        ItemsStructureProviderImpl(
             keyRepository,
             stepRepository,
             taskRepository,
@@ -77,7 +77,8 @@ class InteractModule(
             taskRepository,
             ideaRepository,
             stepRepository,
-            goalRepository
+            goalRepository,
+            provideCaseItemStructure()
         )
 
     @Provides
@@ -86,7 +87,8 @@ class InteractModule(
             keyRepository,
             taskRepository,
             ideaRepository,
-            goalRepository
+            goalRepository,
+            provideCaseItemStructure()
         )
 
     @Provides

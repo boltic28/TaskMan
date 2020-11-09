@@ -192,6 +192,7 @@
     <style name="Item.Header" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:ellipsize">end</item>
         <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorItemHeader</item>
@@ -207,6 +208,8 @@
     <style name="Item.Description" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
         <item name="android:paddingStart">8dp</item>
         <item name="android:paddingTop">8dp</item>
         <item name="android:textSize">14sp</item>

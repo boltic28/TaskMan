@@ -30,5 +30,5 @@ interface StepFragmentInteractor {
 
     fun updateIdea(item: Idea): Single<Int>
 
-    fun setProgressFor(step: Step): Step
+    fun setProgressFor(item: Step): Step
 }

@@ -8,9 +8,7 @@ import com.boltic28.taskmanager.datalayer.Progress
 import com.boltic28.taskmanager.datalayer.entities.Goal
 import com.boltic28.taskmanager.ui.adapter.DefaultViewHolder
 import java.time.LocalDateTime
-import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
-import java.util.concurrent.TimeUnit
 import kotlin.reflect.KClass
 
 class GoalViewController : HolderController() {
@@ -39,11 +37,6 @@ class GoalViewController : HolderController() {
         val statusAttention: ImageView = itemView.findViewById(R.id.item_goal_status_attention)
         val statusStarted: ImageView = itemView.findViewById(R.id.item_goal_status_started)
         val statusDone: ImageView = itemView.findViewById(R.id.item_goal_status_done)
-        val days = TimeUnit.DAYS.toDays(
-            LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) - item.dateClose.toEpochSecond(
-                ZoneOffset.UTC
-            )
-        )
 
         statusAttention.setColorFilter(R.color.colorStatusOff)
         statusStarted.setColorFilter(R.color.colorStatusOff)
@@ -51,7 +44,9 @@ class GoalViewController : HolderController() {
 
         if (item.isStarted) statusStarted.setColorFilter(itemView.context.getColor(R.color.colorStatusInfo))
         if (item.isDone) statusDone.setColorFilter(itemView.context.getColor(R.color.colorStatusInfo))
-        if (days < 2) statusAttention.setColorFilter(itemView.context.getColor(R.color.colorStatusAttention))
+        if (LocalDateTime.now() >= item.dateClose && (!item.isDone)) statusAttention.setColorFilter(
+            itemView.context.getColor(R.color.colorStatusAttention)
+        )
 
         val progress20: ImageView = itemView.findViewById(R.id.item_goal_progress_20_percent)
         val progress40: ImageView = itemView.findViewById(R.id.item_goal_progress_40_percent)
