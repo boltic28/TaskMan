@@ -79,6 +79,60 @@
         <item name="android:inputType">text</item>
     </style>
 
+    <!-- IdeaConverter -->
+
+    <style name="Converter" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:padding">@dimen/item_fragment_layout_padding</item>
+    </style>
+
+    <style name="Converter.Headers" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorItemHeader</item>
+    </style>
+
+    <style name="Converter.Content" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/item_fragment_margin_between_blocks</item>
+        <item name="android:layout_marginTop">@dimen/item_fragment_margin_between_blocks</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/colorItemHeader</item>
+    </style>
+
+    <style name="Converter.RadioGroup">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:layout_marginTop">@dimen/item_fragment_margin_between_blocks</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/colorItemHeader</item>
+    </style>
+
+    <style name="Converter.RadioItem" >
+        <item name="android:padding">0dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/colorItemHeader</item>
+    </style>
+
+    <style name="CycleCheck">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:enabled">false</item>
+        <item name="android:text">@string/is_cycle</item>
+    </style>
     <!-- ItemFragment -->
     <style name="ItemFragment">
         <item name="android:layout_width">match_parent</item>
@@ -178,6 +232,13 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_height">0dp</item>
+    </style>
+
+    <style name="ItemFragment.Converter" parent="Widget.Design.TabLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:visibility">gone</item>
     </style>
 
     <style name="ItemFragment.ButtonsGroup" parent="Widget.Design.TabLayout">

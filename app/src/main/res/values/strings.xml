@@ -23,6 +23,7 @@
     <string name="done_it">DONE</string>
     <string name="description_icon_of_step">description of the step</string>
     <string name="dateFormatterForItems">dd.MM.yyyy</string>
+    <string name="dateFormatterForCloseDate">dd-MMM-yyyy</string>
     <string name="add_new_item">add new item</string>
     <string name="percentage">Progress $s %</string>
     <string name="to_goals_element">To Goal\'s Elements</string>
@@ -50,6 +51,11 @@
     <string name="free_elements">List of elements for connection</string>
     <string name="its_elements">Elements of Item</string>
     <string name="Search">search</string>
+    <string name="goal">Goal</string>
+    <string name="step">Step</string>
+    <string name="task">Task</string>
+    <string name="close_date">Close date:</string>
+    <string name="name_of_issue">Name of issue:</string>
 
     <string-array name="cycle">
         <item>not cycle</item>

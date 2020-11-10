@@ -159,4 +159,9 @@ abstract class BaseEntityFragment<VM : BaseEntityFragmentModel<*>> :
         item_fr_close_date_header.visibility = View.GONE
         item_fr_close_date_content.visibility = View.GONE
     }
+
+    fun activateIdeaConverter(){
+        item_recycler_block.visibility = View.GONE
+        item_converter_block.visibility = View.VISIBLE
+    }
 }

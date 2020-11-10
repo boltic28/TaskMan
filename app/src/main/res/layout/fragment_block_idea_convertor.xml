@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Converter">
+
+    <TextView
+        android:id="@+id/converter_name_header"
+        style="@style/Converter.Headers"
+        android:text="@string/name_of_issue"
+        app:layout_constraintBottom_toBottomOf="@+id/converter_name_value"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/converter_name_value" />
+
+    <EditText
+        android:id="@+id/converter_name_value"
+        style="@style/Converter.Content"
+        android:inputType="text"
+        app:layout_constraintLeft_toRightOf="@+id/converter_name_header"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Name of some idea" />
+
+    <TextView
+        android:id="@+id/converter_description_header"
+        style="@style/Converter.Headers"
+        android:text="@string/description"
+        app:layout_constraintBottom_toBottomOf="@+id/converter_description_value"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/converter_description_value" />
+
+    <EditText
+        android:id="@+id/converter_description_value"
+        style="@style/Converter.Content"
+        android:gravity="start"
+        android:inputType="text"
+        app:layout_constraintLeft_toRightOf="@+id/converter_name_header"
+        app:layout_constraintTop_toBottomOf="@+id/converter_name_value"
+        tools:text="Description, description etc" />
+
+    <TextView
+        android:id="@+id/converter_time_close_time_header"
+        style="@style/Converter.Headers"
+        android:text="@string/close_date"
+        app:layout_constraintBottom_toBottomOf="@+id/converter_close_date_value"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/converter_close_date_value" />
+
+    <TextView
+        android:id="@+id/converter_close_date_value"
+        style="@style/Converter.Content"
+        app:layout_constraintLeft_toRightOf="@+id/converter_name_header"
+        app:layout_constraintTop_toBottomOf="@+id/converter_description_value"
+        tools:text="18:00" />
+
+    <RadioGroup
+        android:id="@+id/converter_group"
+        style="@style/Converter.RadioGroup"
+        android:checkedButton="@id/converter_step_radio"
+        app:layout_constraintBottom_toTopOf="@id/converter_is_cycle_checkbox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/converter_close_date_value">
+
+        <RadioButton
+            android:id="@+id/converter_task_radio"
+            style="@style/Converter.RadioItem"
+            android:text="@string/task" />
+
+        <RadioButton
+            android:id="@+id/converter_step_radio"
+            style="@style/Converter.RadioItem"
+            android:text="@string/step" />
+
+        <RadioButton
+            android:id="@+id/converter_goal_radio"
+            style="@style/Converter.RadioItem"
+            android:text="@string/goal" />
+
+    </RadioGroup>
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/converter_is_cycle_checkbox"
+        style="@style/CycleCheck"
+        app:layout_constraintEnd_toStartOf="@id/converter_cycle_spinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/converter_group" />
+
+    <Spinner
+        android:id="@+id/converter_cycle_spinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/converter_is_cycle_checkbox"
+        app:layout_constraintTop_toBottomOf="@+id/converter_group" />
+
+    <Button
+        android:id="@+id/converter_button_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/convert_to"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/converter_is_cycle_checkbox" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

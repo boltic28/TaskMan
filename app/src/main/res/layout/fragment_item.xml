@@ -22,8 +22,15 @@
         layout="@layout/fragment_block_recycler" />
 
     <include
+        android:id="@+id/item_converter_block"
+        style="@style/ItemFragment.Converter"
+        layout="@layout/fragment_block_idea_convertor"
+        />
+    <include
         android:id="@+id/item_buttons_block"
         style="@style/ItemFragment.ButtonsGroup"
         layout="@layout/fragment_block_buttons" />
+
+
 
 </LinearLayout>
