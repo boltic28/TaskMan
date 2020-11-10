@@ -83,12 +83,14 @@
     <style name="ItemFragment">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
         <item name="android:padding">@dimen/item_fragment_layout_padding</item>
     </style>
 
     <style name="ItemFragment.Header" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:ellipsize">end</item>
         <item name="android:textSize">28sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorItemHeader</item>
@@ -114,7 +116,7 @@
     </style>
 
     <style name="ItemFragment.Header2" parent="TextAppearance.AppCompat">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/item_fragment_margin_between_blocks</item>
         <item name="android:textSize">@dimen/item_fragment_other_text_size</item>
@@ -138,11 +140,15 @@
     </style>
 
     <style name="ItemFragment.Progress" parent="Widget.Design.TabLayout">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">@dimen/item_fragment_progress_height</item>
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_marginTop">-40dp</item>
+        <item name="android:visibility">invisible</item>
         <item name="android:layout_marginStart">@dimen/item_fragment_margin_between_blocks</item>
         <item name="android:layout_marginEnd">@dimen/item_fragment_margin_between_blocks</item>
     </style>
+
+
 
     <style name="ItemFragment.Progress.Section" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">0dp</item>
@@ -152,8 +158,9 @@
     </style>
 
     <style name="ItemFragment.Recycler" >
-        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:layout_marginTop">@dimen/item_fragment_margin_between_blocks</item>
         <item name="android:layout_marginBottom">@dimen/item_fragment_margin_between_blocks</item>
         <item name="android:background">@color/recyclerBGTransparent</item>
@@ -167,8 +174,20 @@
         <item name="android:src">@drawable/ic_link</item>
     </style>
 
+    <style name="ItemFragment.RecyclerGroup" parent="Widget.Design.TabLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+    <style name="ItemFragment.ButtonsGroup" parent="Widget.Design.TabLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
     <style name="ItemFragment.Button" parent="Widget.AppCompat.Button">
         <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:layout_height">@dimen/item_fragment_buttons_height</item>
     </style>
 

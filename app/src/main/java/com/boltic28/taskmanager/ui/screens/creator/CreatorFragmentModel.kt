@@ -1,5 +1,6 @@
 package com.boltic28.taskmanager.ui.screens.creator
 
+import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.businesslayer.CreatorInteractor
 import com.boltic28.taskmanager.datalayer.Cycle
 import com.boltic28.taskmanager.datalayer.Progress
@@ -24,7 +25,7 @@ class CreatorFragmentModel @Inject constructor(
                 id = NO_ID,
                 name = name,
                 description = description,
-                icon = "",
+                icon = R.drawable.goal_ph.toString(),
                 date = LocalDateTime.now(),
                 dateClose = endDate,
                 isDone = false,
@@ -44,7 +45,7 @@ class CreatorFragmentModel @Inject constructor(
                 goalId = NO_ID,
                 name = name,
                 description = description,
-                icon = "",
+                icon = R.drawable.key_ph.toString(),
                 date = LocalDateTime.now(),
                 dateClose = endDate,
                 isDone = false,
@@ -64,7 +65,7 @@ class CreatorFragmentModel @Inject constructor(
                 keyId = NO_ID,
                 name = name,
                 description = description,
-                icon = "",
+                icon = R.drawable.step_ph.toString(),
                 date = LocalDateTime.now(),
                 dateClose = endDate,
                 isDone = false,
@@ -89,7 +90,7 @@ class CreatorFragmentModel @Inject constructor(
                 keyId = NO_ID,
                 name = name,
                 description = description,
-                icon = "",
+                icon = R.drawable.task_ph.toString(),
                 date = LocalDateTime.now(),
                 dateClose = endDate,
                 cycle = Cycle.fromString(cycle),
@@ -107,7 +108,7 @@ class CreatorFragmentModel @Inject constructor(
                 keyId = NO_ID,
                 name = name,
                 description = description,
-                icon = "",
+                icon = R.drawable.idea_ph.toString(),
                 date = LocalDateTime.now()
             )
         )

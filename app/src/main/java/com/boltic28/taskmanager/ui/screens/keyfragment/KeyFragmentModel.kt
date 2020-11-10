@@ -10,6 +10,8 @@ import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
+import com.boltic28.taskmanager.ui.constant.GOAL_EXTRA
+import com.boltic28.taskmanager.ui.constant.KEY_EXTRA
 import com.boltic28.taskmanager.ui.constant.NO_ID
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.Single
@@ -24,6 +26,8 @@ class KeyFragmentModel @Inject constructor(
     override var userManager: UserManager,
     val messenger: Messenger
 ) : BaseEntityFragmentModel<KeyResult>() {
+
+    override val extraKey: String = KEY_EXTRA
 
     override fun refresh() {
         disposables + interactor.getKeyById(itemId)

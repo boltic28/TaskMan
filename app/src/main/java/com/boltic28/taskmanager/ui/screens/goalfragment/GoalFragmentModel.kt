@@ -8,6 +8,7 @@ import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
+import com.boltic28.taskmanager.ui.constant.GOAL_EXTRA
 import com.boltic28.taskmanager.ui.constant.NO_ID
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -22,6 +23,8 @@ class GoalFragmentModel @Inject constructor(
     override var userManager: UserManager,
     val messenger: Messenger
 ) : BaseEntityFragmentModel<Goal>() {
+
+    override val extraKey: String = GOAL_EXTRA
 
     override fun refresh() {
         disposables + interactor.getGoal(itemId)

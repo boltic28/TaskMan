@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ItemFragment">
+
+    <include
+        android:id="@+id/item_header_block"
+        layout="@layout/fragment_block_head" />
+
+    <include
+        android:id="@+id/item_progress_block"
+        style="@style/ItemFragment.Progress"
+        layout="@layout/fragment_block_progress" />
+
+    <include
+        android:id="@+id/item_info_block"
+        style="@style/ItemFragment.ButtonsGroup"
+        layout="@layout/fragment_block_info" />
+
+    <include
+        android:id="@+id/item_recycler_block"
+        style="@style/ItemFragment.RecyclerGroup"
+        layout="@layout/fragment_block_recycler" />
+
+    <include
+        android:id="@+id/item_buttons_block"
+        style="@style/ItemFragment.ButtonsGroup"
+        layout="@layout/fragment_block_buttons" />
+
+</LinearLayout>

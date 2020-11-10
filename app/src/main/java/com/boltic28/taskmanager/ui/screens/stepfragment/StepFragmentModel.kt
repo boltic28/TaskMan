@@ -10,6 +10,7 @@ import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
+import com.boltic28.taskmanager.ui.constant.STEP_EXTRA
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -23,6 +24,8 @@ class StepFragmentModel @Inject constructor(
     override var userManager: UserManager,
     val messenger: Messenger
 ) : BaseEntityFragmentModel<Step>() {
+
+    override val extraKey: String = STEP_EXTRA
 
     override fun refresh() {
         disposables + interactor.getStepById(itemId)

@@ -11,6 +11,8 @@ import io.reactivex.subjects.BehaviorSubject
 
 abstract class BaseEntityFragmentModel<T>: BaseViewModel() {
 
+    abstract val extraKey: String
+
     protected val mItem = BehaviorSubject.create<T>()
     val item: Observable<T>
         get() = mItem.hide()

@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.entities.BaseItem
+import com.bumptech.glide.Glide
 
 abstract class BaseSmallItemController : HolderController() {
 
@@ -14,7 +15,13 @@ abstract class BaseSmallItemController : HolderController() {
         val icon: ImageView = itemView.findViewById(R.id.small_item_image)
 
         name.text = item.name
-        icon.setImageResource(R.drawable.key_ph)
+        Glide.with(itemView)
+            .load(item.icon.toInt())
+            .centerCrop()
+            .placeholder(item.icon.toInt())
+            .error(item.icon.toInt())
+            .fallback(item.icon.toInt())
+            .into(icon)
     }
 
     fun setOnItemClick(itemView: View, item: BaseItem) {

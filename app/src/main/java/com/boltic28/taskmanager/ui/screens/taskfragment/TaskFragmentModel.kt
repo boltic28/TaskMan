@@ -11,6 +11,7 @@ import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
+import com.boltic28.taskmanager.ui.constant.TASK_EXTRA
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -25,6 +26,8 @@ class TaskFragmentModel @Inject constructor(
     override var userManager: UserManager,
     val messenger: Messenger
 ) : BaseEntityFragmentModel<Task>() {
+
+    override val extraKey: String = TASK_EXTRA
 
     override fun refresh() {
         disposables + interactor.getTaskById(itemId)
