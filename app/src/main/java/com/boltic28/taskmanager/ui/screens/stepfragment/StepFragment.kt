@@ -55,6 +55,7 @@ class StepFragment : BaseEntityFragment<StepFragmentModel>() {
             item_fr_relative_button.setImageResource(R.drawable.ic_link)
             item_fr_relative_owner.text = resources.getString(R.string.not_attached)
             item_fr_relative_button.setOnClickListener {
+                item_fr_its_elements.text = resources.getString(R.string.attach_to)
                 model.isItemsElementIntoRecycler = false
                 model.loadGoalsIntoAdapter(item, findNavController())
             }

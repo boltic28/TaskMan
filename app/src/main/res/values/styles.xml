@@ -53,6 +53,27 @@
         <item name="android:layout_height">@dimen/sign_progress_bar_size</item>
     </style>
 
+    <!-- Creator Fragment-->
+    <style name="Creator.Fragment" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:padding">@dimen/item_fragment_layout_padding</item>
+    </style>
+
+    <style name="Creator.Name" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:hint">@string/input_name_of_item</item>
+        <item name="android:inputType">text</item>
+    </style>
+
+    <style name="Creator.Description" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:hint">@string/input_description_of_item</item>
+        <item name="android:inputType">text</item>
+    </style>
+
     <!-- Main Fragment-->
     <style name="Main.Search" parent="Widget.AppCompat.EditText">
         <item name="android:layout_width">@dimen/main_search_field_w</item>
@@ -133,6 +154,7 @@
         <item name="android:enabled">false</item>
         <item name="android:text">@string/is_cycle</item>
     </style>
+
     <!-- ItemFragment -->
     <style name="ItemFragment">
         <item name="android:layout_width">match_parent</item>
@@ -201,8 +223,6 @@
         <item name="android:layout_marginStart">@dimen/item_fragment_margin_between_blocks</item>
         <item name="android:layout_marginEnd">@dimen/item_fragment_margin_between_blocks</item>
     </style>
-
-
 
     <style name="ItemFragment.Progress.Section" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">0dp</item>

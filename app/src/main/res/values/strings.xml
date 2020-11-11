@@ -39,7 +39,7 @@
     <string name="idea_image_description">idea image description</string>
     <string name="convert_to">Convert to</string>
     <string name="image_button_description">image button</string>
-    <string name="attach_to">Attach idea to</string>
+    <string name="attach_to">Attach to</string>
     <string name="attached">attached</string>
     <string name="description">Description:</string>
     <string name="close_before">Close before:</string>
@@ -56,6 +56,11 @@
     <string name="task">Task</string>
     <string name="close_date">Close date:</string>
     <string name="name_of_issue">Name of issue:</string>
+    <string name="idea">Idea</string>
+    <string name="key">Key</string>
+    <string name="input_name_of_item">input name of item</string>
+    <string name="input_description_of_item">input description of item</string>
+    <string name="field_name_must_be_not_empty">Field name must be not empty</string>
 
     <string-array name="cycle">
         <item>not cycle</item>

@@ -1,5 +1,6 @@
 package com.boltic28.taskmanager.ui.screens.creator
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -14,12 +15,17 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.disposables.Disposables
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.fragment_block_idea_convertor.*
 import kotlinx.android.synthetic.main.fragment_creator.*
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 class CreatorFragment : BaseFragment<CreatorFragmentModel>(R.layout.fragment_creator) {
 
     private var cycleType: String = ""
+    private var closeDate = LocalDate.now().plusDays(1)
     private var disposable: Disposable = Disposables.disposed()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,6 +33,7 @@ class CreatorFragment : BaseFragment<CreatorFragmentModel>(R.layout.fragment_cre
         (activity as? ActivityHelper)?.setToolbarText("Create new object")
         setOnButtons()
         setLayout()
+        setCloseDate()
     }
 
     override fun onDestroyView() {
@@ -36,18 +43,29 @@ class CreatorFragment : BaseFragment<CreatorFragmentModel>(R.layout.fragment_cre
 
     private fun setOnButtons() {
         creator_button_create.setOnClickListener {
-            disposable = createItem()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { id ->
-                    if (id == NO_ID) {
-                        model.messenger.showMessage("new instance is not created")
-                    } else {
-                        model.messenger.showMessage("new instance is created")
-                        findNavController().navigate(R.id.mainFragment)
+            if (creator_name.text.toString().isNotEmpty()) {
+                disposable = createItem()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe { id ->
+                        if (id == NO_ID) {
+                            model.messenger.showMessage("new instance is not created")
+                        } else {
+                            model.messenger.showMessage("new instance is created")
+                            findNavController().navigate(R.id.mainFragment)
+                        }
                     }
-                }
+            }else{
+                model.messenger.showMessage(resources.getString(R.string.field_name_must_be_not_empty))
+            }
         }
+    }
+
+    private fun setCloseDate() {
+        creator_close_date_value.text = closeDate.format(
+            DateTimeFormatter
+                .ofPattern(resources.getString(R.string.dateFormatterForCloseDate))
+        )
     }
 
     private fun setLayout() {
@@ -58,6 +76,16 @@ class CreatorFragment : BaseFragment<CreatorFragmentModel>(R.layout.fragment_cre
             } else {
                 creator_is_cycle_checkbox.isEnabled = false
                 creator_cycle_spinner.isEnabled = false
+            }
+        }
+        creator_idea_radio.setOnCheckedChangeListener { _, _ ->
+            if (creator_idea_radio.isChecked) {
+                creator_close_date_value.isEnabled = false
+                creator_close_date.isEnabled = false
+            } else {
+                creator_close_date_value.isEnabled = true
+                creator_close_date.isEnabled = true
+                setCloseDateClockListener()
             }
         }
         creator_is_cycle_checkbox.setOnCheckedChangeListener { _, _ ->
@@ -77,6 +105,23 @@ class CreatorFragment : BaseFragment<CreatorFragmentModel>(R.layout.fragment_cre
         }
     }
 
+    private fun setCloseDateClockListener() {
+        creator_close_date_value.setOnClickListener {
+            val listener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                closeDate = LocalDate.of(year, month + 1, dayOfMonth)
+                setCloseDate()
+            }
+            val timePicker = DatePickerDialog(
+                requireContext(),
+                listener,
+                closeDate.year,
+                closeDate.monthValue - 1,
+                closeDate.dayOfMonth
+            )
+            timePicker.show()
+        }
+    }
+
     private fun createItem(): Single<Long> =
         when (creator_group.checkedRadioButtonId) {
             R.id.creator_idea_radio -> model.saveIdea(
@@ -85,19 +130,24 @@ class CreatorFragment : BaseFragment<CreatorFragmentModel>(R.layout.fragment_cre
             )
             R.id.creator_task_radio -> model.saveTask(
                 creator_name.text.toString(),
-                creator_description.text.toString(), LocalDateTime.now(), cycleType
+                creator_description.text.toString(),
+                LocalDateTime.of(closeDate, LocalTime.now()),
+                cycleType
             )
             R.id.creator_step_radio -> model.saveStep(
                 creator_name.text.toString(),
-                creator_description.text.toString(), LocalDateTime.now()
+                creator_description.text.toString(),
+                LocalDateTime.of(closeDate, LocalTime.now())
             )
             R.id.creator_key_radio -> model.saveKey(
                 creator_name.text.toString(),
-                creator_description.text.toString(), LocalDateTime.now()
+                creator_description.text.toString(),
+                LocalDateTime.of(closeDate, LocalTime.now())
             )
             R.id.creator_goal_radio -> model.saveGoal(
                 creator_name.text.toString(),
-                creator_description.text.toString(), LocalDateTime.now()
+                creator_description.text.toString(),
+                LocalDateTime.of(closeDate, LocalTime.now())
             )
             else -> Single.just(NO_ID)
         }

@@ -126,7 +126,7 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
                 item as KeyResult
                 val bundle = Bundle()
                 bundle.putLong(KEY_EXTRA, item.id)
-                findNavController().navigate(R.id.ideaFragment, bundle)
+                findNavController().navigate(R.id.keyFragment, bundle)
             }
         })
         model.loadKeys()

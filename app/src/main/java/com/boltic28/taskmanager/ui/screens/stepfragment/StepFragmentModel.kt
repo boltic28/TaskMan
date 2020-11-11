@@ -82,7 +82,7 @@ class StepFragmentModel @Inject constructor(
     fun loadGoalsIntoAdapter(step: Step, nav: NavController) {
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
-            override fun isNeedToShowConnection(): Boolean = true
+            override fun isNeedToShowConnection(): Boolean = false
             override fun onActionButtonClick(item: Any) {
                 item as Goal
                 disposables + interactor.update(step.copy(goalId = item.id))

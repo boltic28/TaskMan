@@ -67,7 +67,7 @@ class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>() {
         }
     }
 
-    private fun setDateClose(closeDate: LocalDate) {
+    private fun setCloseDate(closeDate: LocalDate) {
         converter_close_date_value.text = closeDate.format(
             DateTimeFormatter
                 .ofPattern(resources.getString(R.string.dateFormatterForCloseDate))
@@ -78,18 +78,29 @@ class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>() {
         item_fr_button_action.setImageResource(R.drawable.ic_transform)
         item_fr_button_action.setOnClickListener {
             activateIdeaConverter()
+            fillConverterData(item)
         }
+    }
 
+    private var closeDate = LocalDate.now()
+    private var cycleType = ""
+    private fun fillConverterData(item: Idea){
         converter_name_value.setText(item.name)
         converter_description_value.setText(item.description)
+        converter_cycle_spinner.isEnabled = false
+        converter_cycle_spinner.adapter = ArrayAdapter.createFromResource(
+            requireView().context,
+            R.array.cycle,
+            R.layout.support_simple_spinner_dropdown_item
+        )
 
         closeDate = LocalDate.of(item.date.year, item.date.month, item.date.dayOfMonth)
-        setDateClose(closeDate)
+        setCloseDate(closeDate)
 
         converter_close_date_value.setOnClickListener {
             val listener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
                 closeDate = LocalDate.of(year, month + 1, dayOfMonth)
-                setDateClose(closeDate)
+                setCloseDate(closeDate)
             }
             val timePicker = DatePickerDialog(
                 requireContext(),
@@ -101,7 +112,6 @@ class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>() {
             timePicker.show()
         }
 
-        converter_cycle_spinner.isEnabled = false
         converter_task_radio.setOnCheckedChangeListener { _, _ ->
             if (converter_task_radio.isChecked) {
                 converter_is_cycle_checkbox.isEnabled = true
@@ -113,12 +123,6 @@ class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>() {
         converter_is_cycle_checkbox.setOnCheckedChangeListener { _, _ ->
             converter_cycle_spinner.isEnabled = converter_is_cycle_checkbox.isChecked
         }
-        converter_cycle_spinner.adapter = ArrayAdapter.createFromResource(
-            requireView().context,
-            R.array.cycle,
-            R.layout.support_simple_spinner_dropdown_item
-        )
-
 
         converter_cycle_spinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
@@ -150,8 +154,6 @@ class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>() {
         }
     }
 
-    private var closeDate = LocalDate.now()
-    private var cycleType = ""
     private fun createItem(item: Idea): Single<Long> =
         when (converter_group.checkedRadioButtonId) {
             R.id.converter_task_radio -> model.convertToTask(
