@@ -1,8 +1,6 @@
 package com.boltic28.taskmanager.businesslayer
 
-import com.boltic28.taskmanager.datalayer.entities.Goal
-import com.boltic28.taskmanager.datalayer.entities.KeyResult
-import com.boltic28.taskmanager.datalayer.entities.Step
+import com.boltic28.taskmanager.datalayer.entities.*
 import io.reactivex.Single
 
 interface ItemsStructureProvider {
@@ -18,4 +16,12 @@ interface ItemsStructureProvider {
     fun setProgressFor(step: Step): Step
 
     fun setProgressFor(key: KeyResult): KeyResult
+
+    fun getParentName(item: Step): Single<String>
+
+    fun getParentName(item: KeyResult): Single<String>
+
+    fun getParentName(item: Task): Single<String>
+
+    fun getParentName(item: Idea): Single<String>
 }

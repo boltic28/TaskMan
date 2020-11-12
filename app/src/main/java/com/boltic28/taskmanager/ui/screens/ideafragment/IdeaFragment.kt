@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.entities.Idea
 import com.boltic28.taskmanager.ui.base.BaseEntityFragment
+import com.boltic28.taskmanager.ui.constant.IDEA_CONVERTER
 import com.boltic28.taskmanager.ui.constant.NO_ID
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -75,11 +76,19 @@ class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>() {
     }
 
     private fun setActionButton(item: Idea) {
+        this.arguments?.let {
+            if (it.getBoolean(IDEA_CONVERTER, false)) initConverter(item)
+        }
+
         item_fr_button_action.setImageResource(R.drawable.ic_transform)
         item_fr_button_action.setOnClickListener {
-            activateIdeaConverter()
-            fillConverterData(item)
+            initConverter(item)
         }
+    }
+
+    private fun initConverter(item: Idea){
+        activateIdeaConverter()
+        fillConverterData(item)
     }
 
     private var closeDate = LocalDate.now()

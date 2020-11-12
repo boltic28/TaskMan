@@ -6,3 +6,5 @@ const val TASK_EXTRA = "task_id"
 const val STEP_EXTRA = "step_id"
 const val IDEA_EXTRA = "idea_id"
 const val KEY_EXTRA = "key_id"
+
+const val IDEA_CONVERTER = "idea_converter"

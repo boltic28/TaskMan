@@ -1,7 +1,7 @@
 package com.boltic28.taskmanager.ui.screens.goalfragment
 
 import androidx.navigation.NavController
-import com.boltic28.taskmanager.businesslayer.FreeElementsInteractor
+import com.boltic28.taskmanager.businesslayer.MainFragmentInteractor
 import com.boltic28.taskmanager.businesslayer.GoalFragmentInteractor
 import com.boltic28.taskmanager.datalayer.entities.*
 import com.boltic28.taskmanager.signtools.UserManager
@@ -19,7 +19,7 @@ class GoalFragmentModel @Inject constructor(
     @AdapterForGoal
     val adapter: ItemAdapter,
     private val interactor: GoalFragmentInteractor,
-    private val freeElementsInteract: FreeElementsInteractor,
+    private val mainFragmentInteract: MainFragmentInteractor,
     override var userManager: UserManager,
     val messenger: Messenger
 ) : BaseEntityFragmentModel<Goal>() {
@@ -177,7 +177,7 @@ class GoalFragmentModel @Inject constructor(
     }
 
     private fun loadTasks() {
-        disposables + freeElementsInteract.getFreeTasks()
+        disposables + mainFragmentInteract.getFreeTasks()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
@@ -187,7 +187,7 @@ class GoalFragmentModel @Inject constructor(
     }
 
     private fun loadKeys() {
-        disposables + freeElementsInteract.getFreeKeys()
+        disposables + mainFragmentInteract.getFreeKeys()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
@@ -197,7 +197,7 @@ class GoalFragmentModel @Inject constructor(
     }
 
     private fun loadIdeas() {
-        disposables + freeElementsInteract.getFreeIdeas()
+        disposables + mainFragmentInteract.getFreeIdeas()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
@@ -207,7 +207,7 @@ class GoalFragmentModel @Inject constructor(
     }
 
     private fun loadSteps() {
-        disposables + freeElementsInteract.getFreeSteps()
+        disposables + mainFragmentInteract.getFreeSteps()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->

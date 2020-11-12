@@ -1,7 +1,8 @@
 package com.boltic28.taskmanager.ui.screens.mainfragment
 
-import com.boltic28.taskmanager.businesslayer.FreeElementsInteractor
+import com.boltic28.taskmanager.businesslayer.MainFragmentInteractor
 import com.boltic28.taskmanager.datalayer.entities.*
+import com.boltic28.taskmanager.datalayer.firebaseworker.RemoteDB
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.base.BaseViewModel
@@ -12,13 +13,18 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class MainFragmentModel @Inject constructor(
-    private val interactor: FreeElementsInteractor,
+    private val interactor: MainFragmentInteractor,
     val adapter: ItemAdapter,
     val messenger: Messenger,
-    override var userManager: UserManager
+    override var userManager: UserManager,
+    val dbHelper: RemoteDB
 ) : BaseViewModel() {
 
     val disposables = mutableListOf<Disposable>()
+
+    fun observeRemote() {
+        dbHelper.observeGoals()
+    }
 
     fun update(item: Task){
         disposables + interactor.update(item)

@@ -1,10 +1,9 @@
 package com.boltic28.taskmanager.businesslayer
 
 import com.boltic28.taskmanager.datalayer.entities.*
-import io.reactivex.Completable
 import io.reactivex.Single
 
-interface FreeElementsInteractor {
+interface MainFragmentInteractor {
 
     fun getFreeTasks(): Single<List<Task>>
 

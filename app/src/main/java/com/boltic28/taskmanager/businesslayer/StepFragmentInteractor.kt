@@ -8,8 +8,6 @@ import io.reactivex.Single
 
 interface StepFragmentInteractor {
 
-    fun insert(item: Step): Single<Long>
-
     fun update(item: Step): Single<Int>
 
     fun delete(item: Step): Single<Int>
@@ -18,7 +16,7 @@ interface StepFragmentInteractor {
 
     fun setChildrenFor(item: Step): Single<Step>
 
-    fun getParentName(id: Long): Single<String>
+    fun getParentName(item: Step): Single<String>
 
     fun getGoals(): Single<List<Goal>>
 

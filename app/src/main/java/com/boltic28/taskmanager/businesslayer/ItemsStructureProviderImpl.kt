@@ -7,6 +7,7 @@ import com.boltic28.taskmanager.datalayer.room.idea.IdeaRepository
 import com.boltic28.taskmanager.datalayer.room.keyresult.KeyRepository
 import com.boltic28.taskmanager.datalayer.room.step.StepRepository
 import com.boltic28.taskmanager.datalayer.room.task.TaskRepository
+import com.boltic28.taskmanager.ui.constant.NO_ID
 import io.reactivex.Single
 import io.reactivex.Single.zip
 import io.reactivex.schedulers.Schedulers
@@ -16,10 +17,9 @@ class ItemsStructureProviderImpl(
     private val stepRepository: StepRepository,
     private val taskRepository: TaskRepository,
     private val ideaRepository: IdeaRepository,
-    private val goalRepository: GoalRepository
+    private val goalRepository: GoalRepository,
+    private val itemsProvider: ItemsProvider
 ) : ItemsStructureProvider {
-
-
 
     override fun setChildrenFor(goal: Goal): Single<Goal> =
         zip(
@@ -111,5 +111,25 @@ class ItemsStructureProviderImpl(
         }
         stepRepository.update(nStep).subscribeOn(Schedulers.io()).subscribe()
         return nStep
+    }
+
+    override fun getParentName(item: Step): Single<String> =
+        goalRepository.getById(item.goalId).map { it.name }
+
+    override fun getParentName(item: KeyResult): Single<String> =
+        goalRepository.getById(item.goalId).map { it.name }
+
+    override fun getParentName(item: Task): Single<String> {
+        if (item.goalId != NO_ID) return itemsProvider.getGoalById(item.goalId).map { it.name }
+        if (item.stepId != NO_ID) return itemsProvider.getStepById(item.stepId).map { it.name }
+        if (item.keyId != NO_ID) return itemsProvider.getKeyById(item.keyId).map { it.name }
+        return Single.just("error")
+    }
+
+    override fun getParentName(item: Idea): Single<String> {
+        if (item.goalId != NO_ID) return goalRepository.getById(item.goalId).map { it.name }
+        if (item.stepId != NO_ID) return stepRepository.getById(item.stepId).map { it.name }
+        if (item.keyId != NO_ID) return keyRepository.getById(item.keyId).map { it.name }
+        return Single.just(item.name)
     }
 }

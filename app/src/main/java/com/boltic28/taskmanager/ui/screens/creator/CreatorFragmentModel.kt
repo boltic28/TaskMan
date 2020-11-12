@@ -1,7 +1,7 @@
 package com.boltic28.taskmanager.ui.screens.creator
 
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.businesslayer.CreatorInteractor
+import com.boltic28.taskmanager.businesslayer.ItemsCreator
 import com.boltic28.taskmanager.datalayer.Cycle
 import com.boltic28.taskmanager.datalayer.Progress
 import com.boltic28.taskmanager.datalayer.entities.*
@@ -14,7 +14,7 @@ import java.time.LocalDateTime
 import javax.inject.Inject
 
 class CreatorFragmentModel @Inject constructor(
-    private val interactor: CreatorInteractor,
+    private val interactor: ItemsCreator,
     override var userManager: UserManager,
     val messenger: Messenger
 ) : BaseViewModel() {

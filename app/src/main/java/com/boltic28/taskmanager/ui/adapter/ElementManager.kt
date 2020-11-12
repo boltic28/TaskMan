@@ -1,12 +1,14 @@
 package com.boltic28.taskmanager.ui.adapter
 
+import com.boltic28.taskmanager.datalayer.entities.BaseItem
+
 interface ElementManager {
 
-    fun refreshData(list: List<Any>)
+    fun refreshData(list: List<BaseItem>)
 
-    fun addElement(item: Any)
+    fun addElement(item: BaseItem)
 
-    fun addList(list: List<Any>)
+    fun addList(list: List<BaseItem>)
 
     fun clearAll()
 }

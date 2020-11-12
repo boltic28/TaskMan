@@ -24,7 +24,7 @@
     <color name="colorItemDateStart">#A6A5A2</color>
     <color name="colorItemDescription">#7C7B79</color>
     <color name="colorItemProgressOn">#04BF04</color>
-    <color name="colorItemProgressOff">#C5C4C1</color>
+    <color name="colorItemProgressOff">#D7D7D7</color>
 
 
     <color name="colorStatusInfo">#4CAF50</color>

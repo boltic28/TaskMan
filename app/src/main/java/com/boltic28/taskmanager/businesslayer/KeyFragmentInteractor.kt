@@ -1,12 +1,12 @@
 package com.boltic28.taskmanager.businesslayer
 
-import com.boltic28.taskmanager.datalayer.entities.*
+import com.boltic28.taskmanager.datalayer.entities.Goal
+import com.boltic28.taskmanager.datalayer.entities.Idea
+import com.boltic28.taskmanager.datalayer.entities.KeyResult
+import com.boltic28.taskmanager.datalayer.entities.Task
 import io.reactivex.Single
-import java.util.jar.Attributes
 
 interface KeyFragmentInteractor {
-
-    fun insert(item: KeyResult): Single<Long>
 
     fun update(item: KeyResult): Single<Int>
 
@@ -16,7 +16,7 @@ interface KeyFragmentInteractor {
 
     fun setChildrenFor(item: KeyResult): Single<KeyResult>
 
-    fun getParentName(id: Long): Single<String>
+    fun getParentName(item: KeyResult): Single<String>
 
     fun getGoals(): Single<List<Goal>>
 

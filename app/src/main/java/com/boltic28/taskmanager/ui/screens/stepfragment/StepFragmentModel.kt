@@ -31,12 +31,7 @@ class StepFragmentModel @Inject constructor(
         disposables + interactor.getStepById(itemId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    initStepValue(it)
-                }, {
-                }
-            )
+            .subscribe{ it -> initStepValue(it) }
     }
 
     fun update(item: Step){
@@ -50,7 +45,7 @@ class StepFragmentModel @Inject constructor(
     }
 
     fun getParentName(item: Step): Single<String> =
-        interactor.getParentName(item.goalId)
+        interactor.getParentName(item)
 
     private fun initStepValue(step: Step) {
         disposables + interactor.setChildrenFor(step)

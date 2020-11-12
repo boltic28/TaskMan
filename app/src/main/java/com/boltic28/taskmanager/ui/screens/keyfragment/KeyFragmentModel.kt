@@ -10,7 +10,6 @@ import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
-import com.boltic28.taskmanager.ui.constant.GOAL_EXTRA
 import com.boltic28.taskmanager.ui.constant.KEY_EXTRA
 import com.boltic28.taskmanager.ui.constant.NO_ID
 import com.boltic28.taskmanager.utils.Messenger
@@ -52,7 +51,7 @@ class KeyFragmentModel @Inject constructor(
     }
 
     fun getParentName(item: KeyResult): Single<String> =
-        interactor.getParentName(item.goalId)
+        interactor.getParentName(item)
 
     private fun initValue(key: KeyResult) {
         disposables + interactor.setChildrenFor(key)

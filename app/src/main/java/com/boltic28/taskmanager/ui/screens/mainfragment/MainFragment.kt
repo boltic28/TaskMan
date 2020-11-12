@@ -105,7 +105,11 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
         model.adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun isNeedToShowConnection(): Boolean = true
             override fun onActionButtonClick(item: Any) {
-                // todo go to convert fragment
+                item as Idea
+                val bundle = Bundle()
+                bundle.putLong(IDEA_EXTRA, item.id)
+                bundle.putBoolean(IDEA_CONVERTER, true)
+                findNavController().navigate(R.id.ideaFragment, bundle)
             }
 
             override fun onViewClick(item: Any) {

@@ -30,16 +30,18 @@ class App : Application() {
 
         val dbModule = DataBaseModule(this)
         val repoModule = RepositoryModule(dbModule.provideDataBase())
+        val activityModule = ActivityModule(activity)
 
         return applicationComponent.getActivityComponent(
-            ActivityModule(activity),
+            activityModule,
             SettingsFragmentModule(this),
             InteractModule(
                 repoModule.provideKeyRepo(),
                 repoModule.provideStepRepo(),
                 repoModule.provideTaskRepo(),
                 repoModule.provideIdeaRepo(),
-                repoModule.provideGoalRepo()
+                repoModule.provideGoalRepo(),
+                activityModule.provideFBDataBase()
             )
         )
             .activityInjector.maybeInject(activity)

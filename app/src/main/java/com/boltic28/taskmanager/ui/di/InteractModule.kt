@@ -1,6 +1,7 @@
 package com.boltic28.taskmanager.ui.di
 
 import com.boltic28.taskmanager.businesslayer.*
+import com.boltic28.taskmanager.datalayer.firebaseworker.RemoteDB
 import com.boltic28.taskmanager.datalayer.room.goal.GoalRepository
 import com.boltic28.taskmanager.datalayer.room.idea.IdeaRepository
 import com.boltic28.taskmanager.datalayer.room.keyresult.KeyRepository
@@ -15,98 +16,122 @@ class InteractModule(
     private val stepRepository: StepRepository,
     private val taskRepository: TaskRepository,
     private val ideaRepository: IdeaRepository,
-    private val goalRepository: GoalRepository
+    private val goalRepository: GoalRepository,
+    private val remoteDB: RemoteDB
 ) {
 
     @Provides
-    fun provideCreatorInteractor(): CreatorInteractor =
-        CreatorInteractorImpl(
-            keyRepository,
-            stepRepository,
+    fun provideItemProvider(): ItemsProvider =
+        ItemsProviderImpl(
             taskRepository,
             ideaRepository,
-            goalRepository
+            stepRepository,
+            goalRepository,
+            keyRepository
         )
 
     @Provides
-    fun provideMainFragmentInteractor(): FreeElementsInteractor =
-        FreeElementsInteractorImpl(
+    fun provideCreator(): ItemsCreator =
+        ItemsCreatorImpl(
             keyRepository,
             stepRepository,
             taskRepository,
             ideaRepository,
             goalRepository,
-            provideCaseItemStructure()
+            remoteDB
         )
 
     @Provides
-    fun provideGoalFragmentInteractor(): GoalFragmentInteractor =
-        GoalFragmentInteractorImpl(
+    fun provideUpdater(): ItemsUpdater =
+        ItemsUpdaterImpl(
             keyRepository,
             stepRepository,
             taskRepository,
             ideaRepository,
             goalRepository,
-            provideCaseItemStructure()
+            remoteDB
         )
 
     @Provides
-    fun provideFreeElementsInteractor(): FreeElementsInteractorImpl =
-        FreeElementsInteractorImpl(
+    fun provideDeleter(): ItemsDeleter =
+        ItemsDeleterImpl(
             keyRepository,
             stepRepository,
             taskRepository,
             ideaRepository,
             goalRepository,
-            provideCaseItemStructure()
+            remoteDB
         )
 
     @Provides
-    fun provideCaseItemStructure(): ItemsStructureProvider =
+    fun provideStructureProvider(): ItemsStructureProvider =
         ItemsStructureProviderImpl(
             keyRepository,
             stepRepository,
             taskRepository,
             ideaRepository,
-            goalRepository
+            goalRepository,
+            provideItemProvider()
+        )
+
+    @Provides
+    fun provideMainFragmentInteractor(): MainFragmentInteractor =
+        MainFragmentInteractorImpl(
+            provideItemProvider(),
+            provideStructureProvider(),
+            provideUpdater()
+        )
+
+    @Provides
+    fun provideGoalFragmentInteractor(): GoalFragmentInteractor =
+        GoalFragmentInteractorImpl(
+            goalRepository,
+            provideStructureProvider(),
+            provideUpdater()
+        )
+
+    @Provides
+    fun provideFreeElementsInteractor(): MainFragmentInteractorImpl =
+        MainFragmentInteractorImpl(
+            provideItemProvider(),
+            provideStructureProvider(),
+            provideUpdater()
         )
 
     @Provides
     fun provideStepInteractor(): StepFragmentInteractor =
         StepFragmentInteractorImpl(
-            taskRepository,
-            ideaRepository,
-            stepRepository,
-            goalRepository,
-            provideCaseItemStructure()
+            provideItemProvider(),
+            provideUpdater(),
+            provideDeleter(),
+            provideStructureProvider()
         )
 
     @Provides
     fun provideKeyFragmentInteractor(): KeyFragmentInteractor =
         KeyFragmentInteractorImpl(
-            keyRepository,
-            taskRepository,
-            ideaRepository,
-            goalRepository,
-            provideCaseItemStructure()
+            provideItemProvider(),
+            provideUpdater(),
+            provideDeleter(),
+            provideStructureProvider()
         )
 
     @Provides
     fun provideTaskInteractor(): TaskFragmentInteractor =
         TaskFragmentInteractorImpl(
-            taskRepository,
-            stepRepository,
-            keyRepository,
-            goalRepository
+            provideItemProvider(),
+            provideUpdater(),
+            provideDeleter(),
+            provideStructureProvider()
         )
 
     @Provides
     fun provideIdeaInteractor(): IdeaFragmentInteractor =
         IdeaFragmentInteractorImpl(
-            ideaRepository,
-            stepRepository,
-            keyRepository,
-            goalRepository,
-            taskRepository
+            provideCreator(),
+            provideItemProvider(),
+            provideUpdater(),
+            provideDeleter(),
+            provideStructureProvider()
         )
 }

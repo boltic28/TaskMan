@@ -8,14 +8,13 @@ import com.boltic28.taskmanager.datalayer.room.step.StepRepository
 import com.boltic28.taskmanager.datalayer.room.task.TaskRepository
 import io.reactivex.Single
 
-class FreeElementsInteractorImpl(
-    private val keyRepository: KeyRepository,
-    private val stepRepository: StepRepository,
+class ItemsProviderImpl(
     private val taskRepository: TaskRepository,
     private val ideaRepository: IdeaRepository,
+    private val stepRepository: StepRepository,
     private val goalRepository: GoalRepository,
-    private val structureProvider: ItemsStructureProvider
-) : FreeElementsInteractor {
+    private val keyRepository: KeyRepository
+): ItemsProvider {
 
     override fun getFreeTasks(): Single<List<Task>> =
         taskRepository.getAllFree()
@@ -44,24 +43,31 @@ class FreeElementsInteractorImpl(
     override fun getGoals(): Single<List<Goal>> =
         goalRepository.getAll()
 
-    override fun setChildrenFor(goal: Goal): Single<Goal> =
-        structureProvider.setChildrenFor(goal)
+    override fun getFreeParents(): Single<List<ParentItem>> =
+        Single.zip(Single.just(mutableListOf<ParentItem>()),
+            goalRepository.getAll(),
+            keyRepository.getAll(),
+            stepRepository.getAll(),
+            { list, goals, keys, steps ->
+                list.addAll(goals)
+                list.addAll(keys)
+                list.addAll(steps)
+                return@zip list
+            }
+        )
 
-    override fun setChildrenFor(step: Step): Single<Step> =
-        structureProvider.setChildrenFor(step)
+    override fun getGoalById(id: Long): Single<Goal> =
+        goalRepository.getById(id)
 
-    override fun setChildrenFor(key: KeyResult): Single<KeyResult> =
-        structureProvider.setChildrenFor(key)
+    override fun getStepById(id: Long): Single<Step> =
+        stepRepository.getById(id)
 
-    override fun setProgressFor(goal: Goal): Goal =
-        structureProvider.setProgressFor(goal)
+    override fun getTaskById(id: Long): Single<Task> =
+        taskRepository.getById(id)
 
-    override fun setProgressFor(step: Step): Step =
-        structureProvider.setProgressFor(step)
+    override fun getIdeaById(id: Long): Single<Idea> =
+        ideaRepository.getById(id)
 
-    override fun setProgressFor(key: KeyResult): KeyResult =
-        structureProvider.setProgressFor(key)
-
-    override fun update(item: Task): Single<Int> =
-        taskRepository.update(item)
+    override fun getKeyById(id: Long): Single<KeyResult> =
+        keyRepository.getById(id)
 }

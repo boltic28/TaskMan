@@ -3,7 +3,7 @@ package com.boltic28.taskmanager.businesslayer
 import com.boltic28.taskmanager.datalayer.entities.*
 import io.reactivex.Single
 
-interface CreatorInteractor {
+interface ItemsCreator {
 
     fun create(item: Goal): Single<Long>
 

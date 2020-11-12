@@ -3,6 +3,7 @@ package com.boltic28.taskmanager.ui.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.boltic28.taskmanager.datalayer.entities.BaseItem
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 
 class ItemAdapter(
@@ -11,9 +12,9 @@ class ItemAdapter(
 ) :
     RecyclerView.Adapter<DefaultViewHolder>(), ElementManager {
 
-    private var items: List<Any> = emptyList()
+    private var items: List<BaseItem> = emptyList()
 
-    override fun refreshData(list: List<Any>) {
+    override fun refreshData(list: List<BaseItem>) {
         val diffUtil =
             ItemDiffUtil(list, items)
         val result = DiffUtil.calculateDiff(diffUtil)
@@ -21,15 +22,15 @@ class ItemAdapter(
         result.dispatchUpdatesTo(this)
     }
 
-    override fun addElement(item: Any) {
-        val newList = mutableListOf<Any>()
+    override fun addElement(item: BaseItem) {
+        val newList = mutableListOf<BaseItem>()
         newList.addAll(items)
         newList.add(item)
         refreshData(newList)
     }
 
-    override fun addList(list: List<Any>) {
-        val newList = mutableListOf<Any>()
+    override fun addList(list: List<BaseItem>) {
+        val newList = mutableListOf<BaseItem>()
         newList.addAll(items)
         newList.addAll(list)
         refreshData(newList)
