@@ -18,7 +18,8 @@ class ItemsStructureProviderImpl(
     private val taskRepository: TaskRepository,
     private val ideaRepository: IdeaRepository,
     private val goalRepository: GoalRepository,
-    private val itemsProvider: ItemsProvider
+    private val itemsProvider: ItemsProvider,
+    private val itemsUpdater: ItemsUpdater
 ) : ItemsStructureProvider {
 
     override fun setChildrenFor(goal: Goal): Single<Goal> =
@@ -69,7 +70,7 @@ class ItemsStructureProviderImpl(
                 else -> goal.copy(progress = Progress.PROGRESS_0, isStarted = isStarted, isDone = false)
             }
         }
-        goalRepository.update(nGoal).subscribeOn(Schedulers.io()).subscribe()
+        itemsUpdater.update(nGoal).subscribeOn(Schedulers.io()).subscribe()
         return nGoal
     }
 
@@ -89,7 +90,7 @@ class ItemsStructureProviderImpl(
                 else -> key.copy(progress = Progress.PROGRESS_0, isStarted = isStarted, isDone = false)
             }
         }
-        keyRepository.update(nKey).subscribeOn(Schedulers.io()).subscribe()
+        itemsUpdater.update(nKey).subscribeOn(Schedulers.io()).subscribe()
         return nKey
     }
 
@@ -109,21 +110,21 @@ class ItemsStructureProviderImpl(
                 else -> step.copy(progress = Progress.PROGRESS_0, isStarted = isStarted, isDone = false)
             }
         }
-        stepRepository.update(nStep).subscribeOn(Schedulers.io()).subscribe()
+        itemsUpdater.update(nStep).subscribeOn(Schedulers.io()).subscribe()
         return nStep
     }
 
     override fun getParentName(item: Step): Single<String> =
-        goalRepository.getById(item.goalId).map { it.name }
+        itemsProvider.getGoalById(item.goalId).map { it.name }
 
     override fun getParentName(item: KeyResult): Single<String> =
-        goalRepository.getById(item.goalId).map { it.name }
+        itemsProvider.getGoalById(item.goalId).map { it.name }
 
     override fun getParentName(item: Task): Single<String> {
         if (item.goalId != NO_ID) return itemsProvider.getGoalById(item.goalId).map { it.name }
         if (item.stepId != NO_ID) return itemsProvider.getStepById(item.stepId).map { it.name }
         if (item.keyId != NO_ID) return itemsProvider.getKeyById(item.keyId).map { it.name }
-        return Single.just("error")
+        return Single.just(item.name)
     }
 
     override fun getParentName(item: Idea): Single<String> {

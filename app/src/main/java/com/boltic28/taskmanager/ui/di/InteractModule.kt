@@ -71,7 +71,8 @@ class InteractModule(
             taskRepository,
             ideaRepository,
             goalRepository,
-            provideItemProvider()
+            provideItemProvider(),
+            provideUpdater()
         )
 
     @Provides
