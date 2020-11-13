@@ -1,6 +1,7 @@
 package com.boltic28.taskmanager.ui.di
 
-import com.boltic28.taskmanager.businesslayer.*
+import com.boltic28.taskmanager.businesslayer.crud.*
+import com.boltic28.taskmanager.businesslayer.fragments.*
 import com.boltic28.taskmanager.datalayer.firebaseworker.RemoteDB
 import com.boltic28.taskmanager.datalayer.room.goal.GoalRepository
 import com.boltic28.taskmanager.datalayer.room.idea.IdeaRepository
@@ -88,7 +89,8 @@ class InteractModule(
         GoalFragmentInteractorImpl(
             goalRepository,
             provideStructureProvider(),
-            provideUpdater()
+            provideUpdater(),
+            provideDeleter()
         )
 
     @Provides

@@ -248,6 +248,13 @@
         <item name="android:src">@drawable/ic_link</item>
     </style>
 
+    <style name="ItemFragment.Button.Settings" parent="Widget.AppCompat.ImageButton">
+        <item name="android:layout_width">@dimen/item_fragment_button_settings_size</item>
+        <item name="android:layout_height">@dimen/item_fragment_button_settings_size</item>
+        <item name="android:background">@drawable/bg_white_circle</item>
+        <item name="android:src">@drawable/ic_settings</item>
+    </style>
+
     <style name="ItemFragment.RecyclerGroup" parent="Widget.Design.TabLayout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_weight">1</item>

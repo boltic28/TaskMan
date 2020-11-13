@@ -9,7 +9,7 @@ import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.BehaviorSubject
 
-abstract class BaseEntityFragmentModel<T>: BaseViewModel() {
+abstract class BaseEntityFragmentModel<T> : BaseViewModel() {
 
     abstract val extraKey: String
 
@@ -23,28 +23,33 @@ abstract class BaseEntityFragmentModel<T>: BaseViewModel() {
     val disposables = mutableListOf<Disposable>()
 
     abstract fun refresh()
+    abstract fun update(item: BaseItem)
+    abstract fun delete(item: BaseItem, nav: NavController)
 
-    protected fun goToItemFragment(item: Any, nav: NavController){
+
+    protected fun goToItemFragment(item: BaseItem, nav: NavController) {
         val bundle = Bundle()
-        if (item is Goal){
-            bundle.putLong(GOAL_EXTRA, item.id)
-            nav.navigate(R.id.goalFragment, bundle)
-        }
-        if (item is Step){
-            bundle.putLong(STEP_EXTRA, item.id)
-            nav.navigate(R.id.stepFragment, bundle)
-        }
-        if (item is Task){
-            bundle.putLong(TASK_EXTRA, item.id)
-            nav.navigate(R.id.taskFragment, bundle)
-        }
-        if (item is Idea){
-            bundle.putLong(IDEA_EXTRA, item.id)
-            nav.navigate(R.id.ideaFragment, bundle)
-        }
-        if (item is KeyResult){
-            bundle.putLong(KEY_EXTRA, item.id)
-            nav.navigate(R.id.keyFragment, bundle)
+        when (item) {
+            is Goal -> {
+                bundle.putLong(GOAL_EXTRA, item.id)
+                nav.navigate(R.id.goalFragment, bundle)
+            }
+            is Step -> {
+                bundle.putLong(STEP_EXTRA, item.id)
+                nav.navigate(R.id.stepFragment, bundle)
+            }
+            is Task -> {
+                bundle.putLong(TASK_EXTRA, item.id)
+                nav.navigate(R.id.taskFragment, bundle)
+            }
+            is Idea -> {
+                bundle.putLong(IDEA_EXTRA, item.id)
+                nav.navigate(R.id.ideaFragment, bundle)
+            }
+            is KeyResult -> {
+                bundle.putLong(KEY_EXTRA, item.id)
+                nav.navigate(R.id.keyFragment, bundle)
+            }
         }
     }
 }

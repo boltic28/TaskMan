@@ -1,7 +1,10 @@
 package com.boltic28.taskmanager.ui.screens.mainfragment
 
-import com.boltic28.taskmanager.businesslayer.MainFragmentInteractor
-import com.boltic28.taskmanager.datalayer.entities.*
+import com.boltic28.taskmanager.businesslayer.fragments.MainFragmentInteractor
+import com.boltic28.taskmanager.datalayer.entities.Goal
+import com.boltic28.taskmanager.datalayer.entities.KeyResult
+import com.boltic28.taskmanager.datalayer.entities.Step
+import com.boltic28.taskmanager.datalayer.entities.Task
 import com.boltic28.taskmanager.datalayer.firebaseworker.RemoteDB
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter

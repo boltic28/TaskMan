@@ -7,7 +7,10 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import com.boltic28.taskmanager.R
+import com.boltic28.taskmanager.datalayer.entities.Goal
 import com.boltic28.taskmanager.ui.base.BaseFragment
+import com.boltic28.taskmanager.ui.constant.ITEM_SETTING
+import com.boltic28.taskmanager.ui.constant.ITEM_TYPE
 import com.boltic28.taskmanager.ui.constant.NO_ID
 import com.boltic28.taskmanager.ui.screens.activity.ActivityHelper
 import io.reactivex.Single
@@ -15,7 +18,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.disposables.Disposables
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_block_idea_convertor.*
 import kotlinx.android.synthetic.main.fragment_creator.*
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -31,6 +33,17 @@ class CreatorFragment : BaseFragment<CreatorFragmentModel>(R.layout.fragment_cre
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as? ActivityHelper)?.setToolbarText("Create new object")
+        arguments?.let {
+            if (it.containsKey(ITEM_SETTING) && it.containsKey(ITEM_TYPE)){
+
+                when(it.getString(ITEM_TYPE)){
+                }
+
+
+
+
+            }
+        }
         setOnButtons()
         setLayout()
         setCloseDate()

@@ -7,4 +7,7 @@ const val STEP_EXTRA = "step_id"
 const val IDEA_EXTRA = "idea_id"
 const val KEY_EXTRA = "key_id"
 
+const val ITEM_SETTING = "item_setting"
+const val ITEM_TYPE = "item_type"
+
 const val IDEA_CONVERTER = "idea_converter"

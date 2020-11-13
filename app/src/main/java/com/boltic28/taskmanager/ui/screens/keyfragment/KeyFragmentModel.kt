@@ -1,11 +1,9 @@
 package com.boltic28.taskmanager.ui.screens.keyfragment
 
 import androidx.navigation.NavController
-import com.boltic28.taskmanager.businesslayer.KeyFragmentInteractor
-import com.boltic28.taskmanager.datalayer.entities.Goal
-import com.boltic28.taskmanager.datalayer.entities.Idea
-import com.boltic28.taskmanager.datalayer.entities.KeyResult
-import com.boltic28.taskmanager.datalayer.entities.Task
+import com.boltic28.taskmanager.R
+import com.boltic28.taskmanager.businesslayer.fragments.KeyFragmentInteractor
+import com.boltic28.taskmanager.datalayer.entities.*
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
@@ -40,13 +38,23 @@ class KeyFragmentModel @Inject constructor(
             )
     }
 
-    fun update(key: KeyResult) {
-        disposables + interactor.update(key)
+    override fun update(item: BaseItem) {
+        disposables + interactor.update(item as KeyResult)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { _ ->
                 refresh()
                 isItemsElementIntoRecycler = false
+            }
+    }
+
+    override fun delete(item: BaseItem, nav: NavController){
+        disposables + interactor.delete(item as KeyResult)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe{ deleted ->
+                nav.navigate(R.id.mainFragment)
+                messenger.showMessage("$deleted item(s) deleted")
             }
     }
 
@@ -70,7 +78,7 @@ class KeyFragmentModel @Inject constructor(
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun isNeedToShowConnection(): Boolean = true
-            override fun onActionButtonClick(item: Any) {
+            override fun onActionButtonClick(item: BaseItem) {
                 item as Goal
                 disposables + interactor.update(key.copy(goalId = item.id))
                     .subscribeOn(Schedulers.io())
@@ -79,8 +87,7 @@ class KeyFragmentModel @Inject constructor(
                         isItemsElementIntoRecycler = false
                     }
             }
-
-            override fun onViewClick(item: Any) {
+            override fun onViewClick(item: BaseItem) {
                 goToItemFragment(item, nav)
             }
         })
@@ -91,12 +98,12 @@ class KeyFragmentModel @Inject constructor(
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun isNeedToShowConnection(): Boolean = true
-            override fun onActionButtonClick(item: Any) {
+            override fun onActionButtonClick(item: BaseItem) {
                 if (item is Task) makeFree(item)
                 if (item is Idea) makeFree(item)
             }
 
-            override fun onViewClick(item: Any) {
+            override fun onViewClick(item: BaseItem) {
                 goToItemFragment(item, nav)
             }
         })
@@ -109,12 +116,12 @@ class KeyFragmentModel @Inject constructor(
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun isNeedToShowConnection(): Boolean = true
-            override fun onActionButtonClick(item: Any) {
+            override fun onActionButtonClick(item: BaseItem) {
                 if (item is Idea) addToKey(item)
                 if (item is Task) addToKey(item)
             }
 
-            override fun onViewClick(item: Any) {
+            override fun onViewClick(item: BaseItem) {
                 goToItemFragment(item, nav)
             }
         })

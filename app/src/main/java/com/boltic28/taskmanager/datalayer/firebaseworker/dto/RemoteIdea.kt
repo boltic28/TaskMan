@@ -48,6 +48,7 @@ fun RemoteIdea.toLocalObject(): Idea =
         description = this.description,
         icon = this.icon,
         date = LocalDateTime.parse(this.date),
+        dateClose = LocalDateTime.parse(this.date),
         goalId = this.goalId,
         keyId = this.keyId,
         stepId = this.stepId

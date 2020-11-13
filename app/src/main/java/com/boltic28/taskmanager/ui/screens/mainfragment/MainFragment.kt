@@ -54,8 +54,8 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
     private fun loadGoals() {
         model.adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun isNeedToShowConnection(): Boolean = false
-            override fun onActionButtonClick(item: Any) {}
-            override fun onViewClick(item: Any) {
+            override fun onActionButtonClick(item: BaseItem) {}
+            override fun onViewClick(item: BaseItem) {
                 item as Goal
                 val bundle = Bundle()
                 bundle.putLong(GOAL_EXTRA, item.id)
@@ -68,8 +68,8 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
     private fun loadSteps() {
         model.adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun isNeedToShowConnection(): Boolean = true
-            override fun onActionButtonClick(item: Any) {}
-            override fun onViewClick(item: Any) {
+            override fun onActionButtonClick(item: BaseItem) {}
+            override fun onViewClick(item: BaseItem) {
                 item as Step
                 val bundle = Bundle()
                 bundle.putLong(STEP_EXTRA, item.id)
@@ -82,7 +82,7 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
     private fun loadTasks() {
         model.adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun isNeedToShowConnection(): Boolean = true
-            override fun onActionButtonClick(item: Any) {
+            override fun onActionButtonClick(item: BaseItem) {
                 item as Task
                 if (item.isStarted) {
                     model.update(item.copy(isDone = true))
@@ -91,7 +91,7 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
                 }
             }
 
-            override fun onViewClick(item: Any) {
+            override fun onViewClick(item: BaseItem) {
                 item as Task
                 val bundle = Bundle()
                 bundle.putLong(TASK_EXTRA, item.id)
@@ -104,7 +104,7 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
     private fun loadIdeas() {
         model.adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun isNeedToShowConnection(): Boolean = true
-            override fun onActionButtonClick(item: Any) {
+            override fun onActionButtonClick(item: BaseItem) {
                 item as Idea
                 val bundle = Bundle()
                 bundle.putLong(IDEA_EXTRA, item.id)
@@ -112,7 +112,7 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
                 findNavController().navigate(R.id.ideaFragment, bundle)
             }
 
-            override fun onViewClick(item: Any) {
+            override fun onViewClick(item: BaseItem) {
                 item as Idea
                 val bundle = Bundle()
                 bundle.putLong(IDEA_EXTRA, item.id)
@@ -125,8 +125,8 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
     private fun loadKeys() {
         model.adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun isNeedToShowConnection(): Boolean = true
-            override fun onActionButtonClick(item: Any) {}
-            override fun onViewClick(item: Any) {
+            override fun onActionButtonClick(item: BaseItem) {}
+            override fun onViewClick(item: BaseItem) {
                 item as KeyResult
                 val bundle = Bundle()
                 bundle.putLong(KEY_EXTRA, item.id)

@@ -1,5 +1,6 @@
-package com.boltic28.taskmanager.businesslayer
+package com.boltic28.taskmanager.businesslayer.fragments
 
+import com.boltic28.taskmanager.businesslayer.crud.*
 import com.boltic28.taskmanager.datalayer.entities.*
 import io.reactivex.Single
 

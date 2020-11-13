@@ -17,6 +17,12 @@ interface RemoteDB {
     fun write(item: Idea)
     fun write(item: KeyResult)
 
+    fun delete(item: Goal)
+    fun delete(item: Step)
+    fun delete(item: Task)
+    fun delete(item: Idea)
+    fun delete(item: KeyResult)
+
     fun observeGoals()
     fun observeSteps()
     fun observeTasks()

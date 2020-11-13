@@ -62,6 +62,26 @@ class FireBaseHelper : RemoteDB {
         db.child(uid).child(TABLE_KEY).child(item.name).setValue(item.toRemoteObject())
     }
 
+    override fun delete(item: Goal) {
+        db.child(uid).child(TABLE_GOAL).child(item.name).removeValue()
+    }
+
+    override fun delete(item: Step) {
+        db.child(uid).child(TABLE_STEP).child(item.name).removeValue()
+    }
+
+    override fun delete(item: Task) {
+        db.child(uid).child(TABLE_TASK).child(item.name).removeValue()
+    }
+
+    override fun delete(item: Idea) {
+        db.child(uid).child(TABLE_IDEA).child(item.name).removeValue()
+    }
+
+    override fun delete(item: KeyResult) {
+        db.child(uid).child(TABLE_KEY).child(item.name).removeValue()
+    }
+
     /**
      * Observers work once and always
      */

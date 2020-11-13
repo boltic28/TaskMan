@@ -61,6 +61,8 @@
     <string name="input_name_of_item">input name of item</string>
     <string name="input_description_of_item">input description of item</string>
     <string name="field_name_must_be_not_empty">Field name must be not empty</string>
+    <string name="save">save</string>
+    <string name="open_date">Open date</string>
 
     <string-array name="cycle">
         <item>not cycle</item>

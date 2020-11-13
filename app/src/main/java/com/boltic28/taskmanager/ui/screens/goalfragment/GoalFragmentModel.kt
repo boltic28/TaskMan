@@ -1,8 +1,9 @@
 package com.boltic28.taskmanager.ui.screens.goalfragment
 
 import androidx.navigation.NavController
-import com.boltic28.taskmanager.businesslayer.MainFragmentInteractor
-import com.boltic28.taskmanager.businesslayer.GoalFragmentInteractor
+import com.boltic28.taskmanager.R
+import com.boltic28.taskmanager.businesslayer.fragments.MainFragmentInteractor
+import com.boltic28.taskmanager.businesslayer.fragments.GoalFragmentInteractor
 import com.boltic28.taskmanager.datalayer.entities.*
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
@@ -30,35 +31,46 @@ class GoalFragmentModel @Inject constructor(
         disposables + interactor.getGoal(itemId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    initGoalValue(it)
-                }, {
-                }
-            )
+            .subscribe { goal -> initGoalValue(goal) }
+    }
+
+    override fun update(item: BaseItem){
+        disposables + interactor.update(item as Goal)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe{ _ -> refresh() }
+    }
+
+    override fun delete(item: BaseItem, nav: NavController){
+        disposables + interactor.delete(item as Goal)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe{ deleted ->
+                nav.navigate(R.id.mainFragment)
+                messenger.showMessage("$deleted item(s) deleted")
+            }
     }
 
     private fun initGoalValue(goal: Goal) {
         disposables + interactor.setChildrenFor(goal)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                mItem.onNext(interactor.setProgressFor(it))
-            }, {
-            })
+            .subscribe{ mGoal ->
+                mItem.onNext(interactor.setProgressFor(mGoal))
+            }
     }
 
     fun loadFreeElementIntoAdapter(nav: NavController) {
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun isNeedToShowConnection(): Boolean = true
-            override fun onActionButtonClick(item: Any) {
+            override fun onActionButtonClick(item: BaseItem) {
                 if (item is Step) addToGoal(item)
                 if (item is Task) addToGoal(item)
                 if (item is KeyResult) addToGoal(item)
                 if (item is Idea) addToGoal(item)
             }
-            override fun onViewClick(item: Any) {
+            override fun onViewClick(item: BaseItem) {
                 goToItemFragment(item, nav)
             }
         })
@@ -72,13 +84,13 @@ class GoalFragmentModel @Inject constructor(
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun isNeedToShowConnection(): Boolean = true
-            override fun onActionButtonClick(item: Any) {
+            override fun onActionButtonClick(item: BaseItem) {
                 if (item is Step) makeFree(item)
                 if (item is Task) makeFree(item)
                 if (item is KeyResult) makeFree(item)
                 if (item is Idea) makeFree(item)
             }
-            override fun onViewClick(item: Any) {
+            override fun onViewClick(item: BaseItem) {
                 goToItemFragment(item, nav)
             }
         })

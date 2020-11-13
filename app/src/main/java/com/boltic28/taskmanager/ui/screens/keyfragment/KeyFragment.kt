@@ -8,6 +8,8 @@ import com.boltic28.taskmanager.ui.constant.NO_ID
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_block_buttons.*
+import kotlinx.android.synthetic.main.fragment_block_head.*
+import kotlinx.android.synthetic.main.fragment_block_idea_convertor.*
 import kotlinx.android.synthetic.main.fragment_block_info.*
 import kotlinx.android.synthetic.main.fragment_block_recycler.*
 
@@ -31,6 +33,18 @@ class KeyFragment: BaseEntityFragment<KeyFragmentModel>() {
 
                     item_fr_button_action.setOnClickListener {
                         loadDataIntoRecycler(item)
+                    }
+                    item_fr_settings.setOnClickListener {
+                        initSetter(item)
+                        converter_button_create.setOnClickListener {
+                            model.update(item.copy(
+                                name = converter_name_value.text.toString(),
+                                description = converter_description_value.text.toString(),
+                                date = openDateTimePicker,
+                                dateClose = closeDateTimePicker
+                            ))
+                            deactivateSettingsView()
+                        }
                     }
                 }
             }
@@ -70,6 +84,22 @@ class KeyFragment: BaseEntityFragment<KeyFragmentModel>() {
             model.loadKeysElementIntoAdapter(item, findNavController())
             item_fr_its_elements.text = resources.getString(R.string.its_elements)
             item_fr_button_action.setImageResource(R.drawable.ic_add_item)
+        }
+    }
+
+    private fun initSetter(item: KeyResult){
+        activateSettingsView(item)
+        converter_button_create.setOnClickListener {
+            model.update(item.copy(
+                name = converter_name_value.text.toString(),
+                description = converter_description_value.text.toString(),
+                date = openDateTimePicker,
+                dateClose = closeDateTimePicker
+            ))
+            deactivateSettingsView()
+        }
+        converter_button_delete.setOnClickListener {
+            model.delete(item, findNavController())
         }
     }
 }

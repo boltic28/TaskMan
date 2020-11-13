@@ -2,7 +2,7 @@ package com.boltic28.taskmanager.ui.screens.ideafragment
 
 import androidx.navigation.NavController
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.businesslayer.IdeaFragmentInteractor
+import com.boltic28.taskmanager.businesslayer.fragments.IdeaFragmentInteractor
 import com.boltic28.taskmanager.datalayer.Cycle
 import com.boltic28.taskmanager.datalayer.Progress
 import com.boltic28.taskmanager.datalayer.entities.*
@@ -16,9 +16,7 @@ import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.LocalTime
 import javax.inject.Inject
 
 class IdeaFragmentModel @Inject constructor(
@@ -40,16 +38,19 @@ class IdeaFragmentModel @Inject constructor(
             }
     }
 
-    fun update(idea: Idea) {
-        disposables + interactor.update(idea)
+    override fun update(item: BaseItem) {
+        disposables + interactor.update(item as Idea)
             .subscribeOn(Schedulers.io())
             .subscribe { _ -> refresh() }
     }
 
-    fun delete(idea: Idea) {
-        disposables + interactor.delete(idea)
+    override fun delete(item: BaseItem, nav: NavController) {
+        disposables + interactor.delete(item as Idea)
             .subscribeOn(Schedulers.io())
-            .subscribe()
+            .subscribe{ deleted ->
+                messenger.showMessage("$deleted idea converted")
+                nav.navigate(R.id.mainFragment)
+            }
     }
 
     fun getParentName(idea: Idea): Single<String> =
@@ -58,11 +59,11 @@ class IdeaFragmentModel @Inject constructor(
     fun loadFreeElementsIntoAdapter(idea: Idea, nav: NavController) {
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun isNeedToShowConnection(): Boolean = false
-            override fun onActionButtonClick(item: Any) {
+            override fun onActionButtonClick(item: BaseItem) {
                 attachTo(idea, item)
             }
 
-            override fun onViewClick(item: Any) {
+            override fun onViewClick(item: BaseItem) {
                 goToItemFragment(item, nav)
             }
         })
@@ -98,7 +99,8 @@ class IdeaFragmentModel @Inject constructor(
         item: Idea,
         name: String,
         description: String,
-        closeDate: LocalDate,
+        openDate: LocalDateTime,
+        closeDate: LocalDateTime,
         cycle: String
     ): Single<Long> =
         interactor.create(
@@ -110,8 +112,8 @@ class IdeaFragmentModel @Inject constructor(
                 name = name,
                 description = description,
                 icon = R.drawable.task_ph.toString(),
-                date = item.date,
-                dateClose = LocalDateTime.of(closeDate, LocalTime.now()),
+                date = openDate,
+                dateClose = closeDate,
                 cycle = Cycle.fromString(cycle),
                 isDone = false,
                 isStarted = false
@@ -119,10 +121,10 @@ class IdeaFragmentModel @Inject constructor(
         )
 
     fun convertToGoal(
-        item: Idea,
         name: String,
         description: String,
-        closeDate: LocalDate
+        openDate: LocalDateTime,
+        closeDate: LocalDateTime
     ): Single<Long> =
         interactor.create(
             Goal(
@@ -130,8 +132,8 @@ class IdeaFragmentModel @Inject constructor(
                 name = name,
                 description = description,
                 icon = R.drawable.goal_ph.toString(),
-                date = item.date,
-                dateClose = LocalDateTime.of(closeDate, LocalTime.now()),
+                date = openDate,
+                dateClose = closeDate,
                 isDone = false,
                 isStarted = false,
                 steps = emptyList(),
@@ -146,7 +148,8 @@ class IdeaFragmentModel @Inject constructor(
         item: Idea,
         name: String,
         description: String,
-        closeDate: LocalDate
+        openDate: LocalDateTime,
+        closeDate: LocalDateTime
     ): Single<Long> =
         interactor.create(
             Step(
@@ -156,8 +159,8 @@ class IdeaFragmentModel @Inject constructor(
                 name = name,
                 description = description,
                 icon = R.drawable.step_ph.toString(),
-                date = item.date,
-                dateClose = LocalDateTime.of(closeDate, LocalTime.now()),
+                date = openDate,
+                dateClose = closeDate,
                 isDone = false,
                 isStarted = false,
                 progress = Progress.PROGRESS_0,

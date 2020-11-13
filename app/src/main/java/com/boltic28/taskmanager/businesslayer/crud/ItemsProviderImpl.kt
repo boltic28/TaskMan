@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.businesslayer
+package com.boltic28.taskmanager.businesslayer.crud
 
 import com.boltic28.taskmanager.datalayer.entities.*
 import com.boltic28.taskmanager.datalayer.room.goal.GoalRepository

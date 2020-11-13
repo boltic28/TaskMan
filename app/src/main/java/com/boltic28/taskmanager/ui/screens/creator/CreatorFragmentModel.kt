@@ -1,7 +1,7 @@
 package com.boltic28.taskmanager.ui.screens.creator
 
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.businesslayer.ItemsCreator
+import com.boltic28.taskmanager.businesslayer.crud.ItemsCreator
 import com.boltic28.taskmanager.datalayer.Cycle
 import com.boltic28.taskmanager.datalayer.Progress
 import com.boltic28.taskmanager.datalayer.entities.*
@@ -109,7 +109,8 @@ class CreatorFragmentModel @Inject constructor(
                 name = name,
                 description = description,
                 icon = R.drawable.idea_ph.toString(),
-                date = LocalDateTime.now()
+                date = LocalDateTime.now(),
+                dateClose = LocalDateTime.now()
             )
         )
 }

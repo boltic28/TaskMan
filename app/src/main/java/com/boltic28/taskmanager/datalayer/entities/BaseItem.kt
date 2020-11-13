@@ -8,4 +8,5 @@ interface BaseItem {
     val description: String
     val icon: String
     val date: LocalDateTime
+    val dateClose: LocalDateTime
 }

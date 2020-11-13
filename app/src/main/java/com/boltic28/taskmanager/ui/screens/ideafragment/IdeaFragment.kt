@@ -1,26 +1,26 @@
 package com.boltic28.taskmanager.ui.screens.ideafragment
 
-import android.app.DatePickerDialog
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.boltic28.taskmanager.R
+import com.boltic28.taskmanager.datalayer.Cycle
 import com.boltic28.taskmanager.datalayer.entities.Idea
 import com.boltic28.taskmanager.ui.base.BaseEntityFragment
+import com.boltic28.taskmanager.ui.base.setDate
 import com.boltic28.taskmanager.ui.constant.IDEA_CONVERTER
 import com.boltic28.taskmanager.ui.constant.NO_ID
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_block_buttons.*
+import kotlinx.android.synthetic.main.fragment_block_head.*
 import kotlinx.android.synthetic.main.fragment_block_idea_convertor.*
 import kotlinx.android.synthetic.main.fragment_block_info.*
 import kotlinx.android.synthetic.main.fragment_block_recycler.*
 import kotlinx.android.synthetic.main.fragment_item.*
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>() {
 
@@ -36,6 +36,19 @@ class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>() {
                     setButtonOwner(item)
                     setActionButton(item)
                     deactivateDataClosing()
+
+                    item_fr_settings.setOnClickListener {
+                        initSetter(item)
+                        converter_button_create.setOnClickListener {
+                            model.update(item.copy(
+                                name = converter_name_value.text.toString(),
+                                description = converter_description_value.text.toString(),
+                                date = openDateTimePicker,
+                                dateClose = closeDateTimePicker
+                            ))
+                            deactivateSettingsView()
+                        }
+                    }
                 }
             }
     }
@@ -68,13 +81,6 @@ class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>() {
         }
     }
 
-    private fun setCloseDate(closeDate: LocalDate) {
-        converter_close_date_value.text = closeDate.format(
-            DateTimeFormatter
-                .ofPattern(resources.getString(R.string.dateFormatterForCloseDate))
-        )
-    }
-
     private fun setActionButton(item: Idea) {
         this.arguments?.let {
             if (it.getBoolean(IDEA_CONVERTER, false)) initConverter(item)
@@ -87,12 +93,28 @@ class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>() {
     }
 
     private fun initConverter(item: Idea){
-        activateIdeaConverter()
+        activateConverter()
         fillConverterData(item)
     }
 
-    private var closeDate = LocalDate.now()
-    private var cycleType = ""
+    private fun initSetter(item: Idea){
+        activateSettingsView(item)
+        converter_button_create.setOnClickListener {
+            model.update(item.copy(
+                name = converter_name_value.text.toString(),
+                description = converter_description_value.text.toString(),
+                date = openDateTimePicker,
+                dateClose = closeDateTimePicker
+            ))
+            deactivateSettingsView()
+        }
+        converter_button_delete.setOnClickListener {
+            model.delete(item, findNavController())
+        }
+    }
+
+
+    private var cycleType = Cycle.NOT_CYCLE.value
     private fun fillConverterData(item: Idea){
         converter_name_value.setText(item.name)
         converter_description_value.setText(item.description)
@@ -102,24 +124,8 @@ class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>() {
             R.array.cycle,
             R.layout.support_simple_spinner_dropdown_item
         )
-
-        closeDate = LocalDate.of(item.date.year, item.date.month, item.date.dayOfMonth)
-        setCloseDate(closeDate)
-
-        converter_close_date_value.setOnClickListener {
-            val listener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                closeDate = LocalDate.of(year, month + 1, dayOfMonth)
-                setCloseDate(closeDate)
-            }
-            val timePicker = DatePickerDialog(
-                requireContext(),
-                listener,
-                closeDate.year,
-                closeDate.monthValue - 1,
-                closeDate.dayOfMonth
-            )
-            timePicker.show()
-        }
+        converter_open_date_value.setDate(item.date)
+        converter_close_date_value.setDate(item.date)
 
         converter_task_radio.setOnCheckedChangeListener { _, _ ->
             if (converter_task_radio.isChecked) {
@@ -155,9 +161,7 @@ class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>() {
                     if (id == NO_ID) {
                         model.messenger.showMessage("idea is not converted")
                     } else {
-                        model.messenger.showMessage("idea converted")
-                        model.delete(item)
-                        findNavController().navigate(R.id.mainFragment)
+                        model.delete(item, findNavController())
                     }
                 }
         }
@@ -169,20 +173,22 @@ class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>() {
                 item,
                 converter_name_value.text.toString(),
                 converter_description_value.text.toString(),
-                closeDate,
+                openDateTimePicker,
+                closeDateTimePicker,
                 cycleType
             )
             R.id.converter_step_radio -> model.convertToStep(
                 item,
                 converter_name_value.text.toString(),
                 converter_description_value.text.toString(),
-                closeDate
+                openDateTimePicker,
+                closeDateTimePicker
             )
             R.id.converter_goal_radio -> model.convertToGoal(
-                item,
                 converter_name_value.text.toString(),
                 converter_description_value.text.toString(),
-                closeDate
+                openDateTimePicker,
+                closeDateTimePicker
             )
             else -> Single.just(NO_ID)
         }

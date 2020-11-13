@@ -1,11 +1,9 @@
 package com.boltic28.taskmanager.ui.screens.stepfragment
 
 import androidx.navigation.NavController
-import com.boltic28.taskmanager.businesslayer.StepFragmentInteractor
-import com.boltic28.taskmanager.datalayer.entities.Goal
-import com.boltic28.taskmanager.datalayer.entities.Idea
-import com.boltic28.taskmanager.datalayer.entities.Step
-import com.boltic28.taskmanager.datalayer.entities.Task
+import com.boltic28.taskmanager.R
+import com.boltic28.taskmanager.businesslayer.fragments.StepFragmentInteractor
+import com.boltic28.taskmanager.datalayer.entities.*
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
@@ -34,13 +32,23 @@ class StepFragmentModel @Inject constructor(
             .subscribe{ it -> initStepValue(it) }
     }
 
-    fun update(item: Step){
-        disposables + interactor.update(item)
+    override fun update(item: BaseItem){
+        disposables + interactor.update(item as Step)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { _ ->
                 refresh()
                 isItemsElementIntoRecycler = false
+            }
+    }
+
+    override fun delete(item: BaseItem, nav: NavController){
+        disposables + interactor.delete(item as Step)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe{ deleted ->
+                nav.navigate(R.id.mainFragment)
+                messenger.showMessage("$deleted item(s) deleted")
             }
     }
 
@@ -61,12 +69,12 @@ class StepFragmentModel @Inject constructor(
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun isNeedToShowConnection(): Boolean = true
-            override fun onActionButtonClick(item: Any) {
+            override fun onActionButtonClick(item: BaseItem) {
                 if (item is Idea) addToStep(item)
                 if (item is Task) addToStep(item)
             }
 
-            override fun onViewClick(item: Any) {
+            override fun onViewClick(item: BaseItem) {
                 goToItemFragment(item, nav)
             }
         })
@@ -78,7 +86,7 @@ class StepFragmentModel @Inject constructor(
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun isNeedToShowConnection(): Boolean = false
-            override fun onActionButtonClick(item: Any) {
+            override fun onActionButtonClick(item: BaseItem) {
                 item as Goal
                 disposables + interactor.update(step.copy(goalId = item.id))
                     .subscribeOn(Schedulers.io())
@@ -88,7 +96,7 @@ class StepFragmentModel @Inject constructor(
                     }
             }
 
-            override fun onViewClick(item: Any) {
+            override fun onViewClick(item: BaseItem) {
                 goToItemFragment(item, nav)
             }
         })
@@ -99,12 +107,12 @@ class StepFragmentModel @Inject constructor(
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun isNeedToShowConnection(): Boolean = true
-            override fun onActionButtonClick(item: Any) {
+            override fun onActionButtonClick(item: BaseItem) {
                 if (item is Task) makeFree(item)
                 if (item is Idea) makeFree(item)
             }
 
-            override fun onViewClick(item: Any) {
+            override fun onViewClick(item: BaseItem) {
                 goToItemFragment(item, nav)
             }
         })

@@ -8,6 +8,7 @@ data class Idea(
     override val description: String,
     override val icon: String,
     override val date: LocalDateTime,
+    override val dateClose: LocalDateTime,
     val stepId: Long,
     val keyId: Long,
     val goalId: Long

@@ -1,12 +1,10 @@
 package com.boltic28.taskmanager.ui.screens.taskfragment
 
 import androidx.navigation.NavController
-import com.boltic28.taskmanager.businesslayer.TaskFragmentInteractor
+import com.boltic28.taskmanager.R
+import com.boltic28.taskmanager.businesslayer.fragments.TaskFragmentInteractor
 import com.boltic28.taskmanager.datalayer.Cycle
-import com.boltic28.taskmanager.datalayer.entities.Goal
-import com.boltic28.taskmanager.datalayer.entities.KeyResult
-import com.boltic28.taskmanager.datalayer.entities.Step
-import com.boltic28.taskmanager.datalayer.entities.Task
+import com.boltic28.taskmanager.datalayer.entities.*
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
@@ -36,11 +34,21 @@ class TaskFragmentModel @Inject constructor(
             .subscribe { it -> mItem.onNext(it) }
     }
 
-    fun update(task: Task) {
-        disposables + interactor.update(task)
+    override fun update(item: BaseItem) {
+        disposables + interactor.update(item as Task)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { _ -> refresh() }
+    }
+
+    override fun delete(item: BaseItem, nav: NavController){
+        disposables + interactor.delete(item as Task)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe{ deleted ->
+                nav.navigate(R.id.mainFragment)
+                messenger.showMessage("$deleted item(s) deleted")
+            }
     }
 
     fun isAttention(task: Task): Boolean {
@@ -60,11 +68,11 @@ class TaskFragmentModel @Inject constructor(
     fun loadParentsElements(task: Task, nav: NavController) {
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
             override fun isNeedToShowConnection(): Boolean = false
-            override fun onActionButtonClick(item: Any) {
+            override fun onActionButtonClick(item: BaseItem) {
                 attachTo(task, item)
             }
 
-            override fun onViewClick(item: Any) {
+            override fun onViewClick(item: BaseItem) {
                 goToItemFragment(item, nav)
             }
         })

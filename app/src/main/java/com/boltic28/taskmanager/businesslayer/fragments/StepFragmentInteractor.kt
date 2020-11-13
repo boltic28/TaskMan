@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.businesslayer
+package com.boltic28.taskmanager.businesslayer.fragments
 
 import com.boltic28.taskmanager.datalayer.entities.Goal
 import com.boltic28.taskmanager.datalayer.entities.Idea

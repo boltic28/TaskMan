@@ -1,5 +1,9 @@
-package com.boltic28.taskmanager.businesslayer
+package com.boltic28.taskmanager.businesslayer.fragments
 
+import com.boltic28.taskmanager.businesslayer.crud.ItemsDeleter
+import com.boltic28.taskmanager.businesslayer.crud.ItemsProvider
+import com.boltic28.taskmanager.businesslayer.crud.ItemsStructureProvider
+import com.boltic28.taskmanager.businesslayer.crud.ItemsUpdater
 import com.boltic28.taskmanager.datalayer.entities.ParentItem
 import com.boltic28.taskmanager.datalayer.entities.Task
 import io.reactivex.Single

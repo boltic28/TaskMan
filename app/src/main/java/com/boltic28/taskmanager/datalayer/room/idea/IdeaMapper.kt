@@ -23,5 +23,6 @@ fun IdeaEntity.toIdea(): Idea =
         name = this.name,
         description = this.description,
         icon = this.icon,
-        date = this.date
+        date = this.date,
+        dateClose = this.date
     )

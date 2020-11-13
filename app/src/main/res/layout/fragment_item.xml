@@ -30,7 +30,5 @@
         android:id="@+id/item_buttons_block"
         style="@style/ItemFragment.ButtonsGroup"
         layout="@layout/fragment_block_buttons" />
-
-
-
+    
 </LinearLayout>

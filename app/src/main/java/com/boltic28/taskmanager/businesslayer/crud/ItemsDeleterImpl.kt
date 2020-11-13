@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.businesslayer
+package com.boltic28.taskmanager.businesslayer.crud
 
 import com.boltic28.taskmanager.datalayer.entities.*
 import com.boltic28.taskmanager.datalayer.firebaseworker.RemoteDB
@@ -20,26 +20,26 @@ class ItemsDeleterImpl(
 
     override fun delete(item: Goal): Single<Int> =
         goalRepository.delete(item).doOnSuccess {
-            //todo delete on firebase
+            remoteDB.delete(item)
         }
 
     override fun delete(item: Step): Single<Int> =
         stepRepository.delete(item).doOnSuccess {
-            //todo delete on firebase
+            remoteDB.delete(item)
         }
 
     override fun delete(item: Task): Single<Int> =
         taskRepository.delete(item).doOnSuccess {
-            //todo delete on firebase
+            remoteDB.delete(item)
         }
 
     override fun delete(item: Idea): Single<Int> =
         ideaRepository.delete(item).doOnSuccess {
-            //todo delete on firebase
+            remoteDB.delete(item)
         }
 
     override fun delete(item: KeyResult): Single<Int> =
         keyRepository.delete(item).doOnSuccess {
-            //todo delete on firebase
+            remoteDB.delete(item)
         }
 }

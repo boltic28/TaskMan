@@ -12,6 +12,13 @@
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@string/description"/>
 
+    <ImageButton
+        android:id="@+id/item_fr_settings"
+        style="@style/ItemFragment.Button.Settings"
+        app:layout_constraintRight_toRightOf="@id/item_fr_image"
+        app:layout_constraintBottom_toBottomOf="@id/item_fr_image"
+        android:contentDescription="@string/description"/>
+
     <ImageView
         android:id="@+id/item_fr_isDone_icon"
         style="@style/ItemFragment.IsDone"

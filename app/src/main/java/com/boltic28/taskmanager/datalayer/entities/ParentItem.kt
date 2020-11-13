@@ -7,5 +7,4 @@ interface ParentItem: BaseItem {
     val isStarted: Boolean
     val isDone: Boolean
     val progress: Progress
-    val dateClose: LocalDateTime
 }
