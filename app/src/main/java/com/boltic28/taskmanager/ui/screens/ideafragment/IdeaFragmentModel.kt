@@ -2,7 +2,7 @@ package com.boltic28.taskmanager.ui.screens.ideafragment
 
 import androidx.navigation.NavController
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.businesslayer.fragments.IdeaFragmentInteractor
+import com.boltic28.taskmanager.businesslayer.interactors.IdeaFragmentInteractor
 import com.boltic28.taskmanager.datalayer.Cycle
 import com.boltic28.taskmanager.datalayer.Progress
 import com.boltic28.taskmanager.datalayer.entities.*
@@ -30,7 +30,7 @@ class IdeaFragmentModel @Inject constructor(
     override val extraKey: String = IDEA_EXTRA
 
     override fun refresh() {
-        disposables + interactor.getIdeaById(itemId)
+        disposables + interactor.getItemById(itemId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { item ->
@@ -47,6 +47,7 @@ class IdeaFragmentModel @Inject constructor(
     override fun delete(item: BaseItem, nav: NavController) {
         disposables + interactor.delete(item as Idea)
             .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe{ deleted ->
                 messenger.showMessage("$deleted idea converted")
                 nav.navigate(R.id.mainFragment)
@@ -67,7 +68,7 @@ class IdeaFragmentModel @Inject constructor(
                 goToItemFragment(item, nav)
             }
         })
-        disposables + interactor.getStepsGoalsKeys()
+        disposables + interactor.getParentItems()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { list ->

@@ -2,7 +2,7 @@ package com.boltic28.taskmanager.ui.screens.stepfragment
 
 import androidx.navigation.NavController
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.businesslayer.fragments.StepFragmentInteractor
+import com.boltic28.taskmanager.businesslayer.interactors.StepFragmentInteractor
 import com.boltic28.taskmanager.datalayer.entities.*
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
@@ -26,7 +26,7 @@ class StepFragmentModel @Inject constructor(
     override val extraKey: String = STEP_EXTRA
 
     override fun refresh() {
-        disposables + interactor.getStepById(itemId)
+        disposables + interactor.getItemById(itemId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe{ it -> initStepValue(it) }
@@ -122,7 +122,7 @@ class StepFragmentModel @Inject constructor(
     }
 
     private fun addToStep(item: Task) {
-        disposables + interactor.updateTask(item.copy(stepId = itemId))
+        disposables + interactor.update(item.copy(stepId = itemId))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -133,7 +133,7 @@ class StepFragmentModel @Inject constructor(
     }
 
     private fun addToStep(item: Idea) {
-        disposables + interactor.updateIdea(item.copy(stepId = itemId))
+        disposables + interactor.update(item.copy(stepId = itemId))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -144,7 +144,7 @@ class StepFragmentModel @Inject constructor(
     }
 
     private fun makeFree(item: Idea) {
-        disposables + interactor.updateIdea(item.copy(stepId = 0L))
+        disposables + interactor.update(item.copy(stepId = 0L))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -155,7 +155,7 @@ class StepFragmentModel @Inject constructor(
     }
 
     private fun makeFree(item: Task) {
-        disposables + interactor.updateTask(item.copy(stepId = 0L))
+        disposables + interactor.update(item.copy(stepId = 0L))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -186,7 +186,7 @@ class StepFragmentModel @Inject constructor(
     }
 
     private fun loadGoals() {
-        disposables + interactor.getGoals()
+        disposables + interactor.getAll()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->

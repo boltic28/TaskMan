@@ -1,6 +1,6 @@
 package com.boltic28.taskmanager.ui.screens.mainfragment
 
-import com.boltic28.taskmanager.businesslayer.fragments.MainFragmentInteractor
+import com.boltic28.taskmanager.businesslayer.interactors.MainFragmentInteractor
 import com.boltic28.taskmanager.datalayer.entities.Goal
 import com.boltic28.taskmanager.datalayer.entities.KeyResult
 import com.boltic28.taskmanager.datalayer.entities.Step

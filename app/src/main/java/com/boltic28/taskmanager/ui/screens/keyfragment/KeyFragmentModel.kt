@@ -2,7 +2,7 @@ package com.boltic28.taskmanager.ui.screens.keyfragment
 
 import androidx.navigation.NavController
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.businesslayer.fragments.KeyFragmentInteractor
+import com.boltic28.taskmanager.businesslayer.interactors.KeyFragmentInteractor
 import com.boltic28.taskmanager.datalayer.entities.*
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
@@ -27,7 +27,7 @@ class KeyFragmentModel @Inject constructor(
     override val extraKey: String = KEY_EXTRA
 
     override fun refresh() {
-        disposables + interactor.getKeyById(itemId)
+        disposables + interactor.getItemById(itemId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -130,7 +130,7 @@ class KeyFragmentModel @Inject constructor(
     }
 
     private fun addToKey(item: Task) {
-        disposables + interactor.updateTask(item.copy(keyId = itemId))
+        disposables + interactor.update(item.copy(keyId = itemId))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -141,7 +141,7 @@ class KeyFragmentModel @Inject constructor(
     }
 
     private fun addToKey(item: Idea) {
-        disposables + interactor.updateIdea(item.copy(keyId = itemId))
+        disposables + interactor.update(item.copy(keyId = itemId))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -152,7 +152,7 @@ class KeyFragmentModel @Inject constructor(
     }
 
     private fun makeFree(item: Idea) {
-        disposables + interactor.updateIdea(item.copy(keyId = NO_ID))
+        disposables + interactor.update(item.copy(keyId = NO_ID))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -163,7 +163,7 @@ class KeyFragmentModel @Inject constructor(
     }
 
     private fun makeFree(item: Task) {
-        disposables + interactor.updateTask(item.copy(keyId = NO_ID))
+        disposables + interactor.update(item.copy(keyId = NO_ID))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -194,7 +194,7 @@ class KeyFragmentModel @Inject constructor(
     }
 
     private fun loadGoals() {
-        disposables + interactor.getGoals()
+        disposables + interactor.getAll()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->

@@ -2,7 +2,7 @@ package com.boltic28.taskmanager.ui.screens.taskfragment
 
 import androidx.navigation.NavController
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.businesslayer.fragments.TaskFragmentInteractor
+import com.boltic28.taskmanager.businesslayer.interactors.TaskFragmentInteractor
 import com.boltic28.taskmanager.datalayer.Cycle
 import com.boltic28.taskmanager.datalayer.entities.*
 import com.boltic28.taskmanager.signtools.UserManager
@@ -28,7 +28,7 @@ class TaskFragmentModel @Inject constructor(
     override val extraKey: String = TASK_EXTRA
 
     override fun refresh() {
-        disposables + interactor.getTaskById(itemId)
+        disposables + interactor.getItemById(itemId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { it -> mItem.onNext(it) }
@@ -76,7 +76,7 @@ class TaskFragmentModel @Inject constructor(
                 goToItemFragment(item, nav)
             }
         })
-        disposables + interactor.getFreeStepsGoalsKeys()
+        disposables + interactor.getParentItems()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { list ->

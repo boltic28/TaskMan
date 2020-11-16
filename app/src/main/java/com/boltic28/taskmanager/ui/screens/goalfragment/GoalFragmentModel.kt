@@ -2,8 +2,7 @@ package com.boltic28.taskmanager.ui.screens.goalfragment
 
 import androidx.navigation.NavController
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.businesslayer.fragments.MainFragmentInteractor
-import com.boltic28.taskmanager.businesslayer.fragments.GoalFragmentInteractor
+import com.boltic28.taskmanager.businesslayer.interactors.GoalFragmentInteractor
 import com.boltic28.taskmanager.datalayer.entities.*
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
@@ -20,7 +19,6 @@ class GoalFragmentModel @Inject constructor(
     @AdapterForGoal
     val adapter: ItemAdapter,
     private val interactor: GoalFragmentInteractor,
-    private val mainFragmentInteract: MainFragmentInteractor,
     override var userManager: UserManager,
     val messenger: Messenger
 ) : BaseEntityFragmentModel<Goal>() {
@@ -28,7 +26,7 @@ class GoalFragmentModel @Inject constructor(
     override val extraKey: String = GOAL_EXTRA
 
     override fun refresh() {
-        disposables + interactor.getGoal(itemId)
+        disposables + interactor.getItemById(itemId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { goal -> initGoalValue(goal) }
@@ -101,7 +99,7 @@ class GoalFragmentModel @Inject constructor(
     }
 
     private fun addToGoal(item: Step) {
-        disposables + interactor.updateStep(item.copy(goalId = itemId))
+        disposables + interactor.update(item.copy(goalId = itemId))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -112,7 +110,7 @@ class GoalFragmentModel @Inject constructor(
     }
 
     private fun addToGoal(item: KeyResult) {
-        disposables + interactor.updateKey(item.copy(goalId = itemId))
+        disposables + interactor.update(item.copy(goalId = itemId))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -123,7 +121,7 @@ class GoalFragmentModel @Inject constructor(
     }
 
     private fun addToGoal(item: Task) {
-        disposables + interactor.updateTask(item.copy(goalId = itemId))
+        disposables + interactor.update(item.copy(goalId = itemId))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -134,7 +132,7 @@ class GoalFragmentModel @Inject constructor(
     }
 
     private fun addToGoal(item: Idea) {
-        disposables + interactor.updateIdea(item.copy(goalId = itemId))
+        disposables + interactor.update(item.copy(goalId = itemId))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -145,7 +143,7 @@ class GoalFragmentModel @Inject constructor(
     }
 
     private fun makeFree(item: Idea) {
-        disposables + interactor.updateIdea(item.copy(goalId = NO_ID))
+        disposables + interactor.update(item.copy(goalId = NO_ID))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -156,7 +154,7 @@ class GoalFragmentModel @Inject constructor(
     }
 
     private fun makeFree(item: Step) {
-        disposables + interactor.updateStep(item.copy(goalId = NO_ID))
+        disposables + interactor.update(item.copy(goalId = NO_ID))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -167,7 +165,7 @@ class GoalFragmentModel @Inject constructor(
     }
 
     private fun makeFree(item: KeyResult) {
-        disposables + interactor.updateKey(item.copy(goalId = NO_ID))
+        disposables + interactor.update(item.copy(goalId = NO_ID))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -178,7 +176,7 @@ class GoalFragmentModel @Inject constructor(
     }
 
     private fun makeFree(item: Task) {
-        disposables + interactor.updateTask(item.copy(goalId = NO_ID))
+        disposables + interactor.update(item.copy(goalId = NO_ID))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -189,7 +187,7 @@ class GoalFragmentModel @Inject constructor(
     }
 
     private fun loadTasks() {
-        disposables + mainFragmentInteract.getFreeTasks()
+        disposables + interactor.getFreeTasks()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
@@ -199,7 +197,7 @@ class GoalFragmentModel @Inject constructor(
     }
 
     private fun loadKeys() {
-        disposables + mainFragmentInteract.getFreeKeys()
+        disposables + interactor.getFreeKeys()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
@@ -209,7 +207,7 @@ class GoalFragmentModel @Inject constructor(
     }
 
     private fun loadIdeas() {
-        disposables + mainFragmentInteract.getFreeIdeas()
+        disposables + interactor.getFreeIdeas()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
@@ -219,7 +217,7 @@ class GoalFragmentModel @Inject constructor(
     }
 
     private fun loadSteps() {
-        disposables + mainFragmentInteract.getFreeSteps()
+        disposables + interactor.getFreeSteps()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
