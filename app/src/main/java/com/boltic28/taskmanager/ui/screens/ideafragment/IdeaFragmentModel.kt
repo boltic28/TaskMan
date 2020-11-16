@@ -10,8 +10,7 @@ import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
-import com.boltic28.taskmanager.ui.constant.IDEA_EXTRA
-import com.boltic28.taskmanager.ui.constant.NO_ID
+import com.boltic28.taskmanager.ui.constant.*
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -22,9 +21,9 @@ import javax.inject.Inject
 class IdeaFragmentModel @Inject constructor(
     @AdapterForIdea
     val adapter: ItemAdapter,
+    val messenger: Messenger,
     private val interactor: IdeaFragmentInteractor,
-    override var userManager: UserManager,
-    val messenger: Messenger
+    override var userManager: UserManager
 ) : BaseEntityFragmentModel<Idea>() {
 
     override val extraKey: String = IDEA_EXTRA
@@ -80,9 +79,7 @@ class IdeaFragmentModel @Inject constructor(
         if (item is Step) {
             disposables + interactor.update(idea.copy(stepId = item.id))
                 .subscribeOn(Schedulers.io())
-                .subscribe { _ ->
-                    refresh()
-                }
+                .subscribe { _ -> refresh() }
         }
         if (item is Goal) {
             disposables + interactor.update(idea.copy(goalId = item.id))
@@ -112,7 +109,7 @@ class IdeaFragmentModel @Inject constructor(
                 keyId = item.keyId,
                 name = name,
                 description = description,
-                icon = R.drawable.task_ph.toString(),
+                icon = TASK_EXTRA,
                 date = openDate,
                 dateClose = closeDate,
                 cycle = Cycle.fromString(cycle),
@@ -132,7 +129,7 @@ class IdeaFragmentModel @Inject constructor(
                 id = NO_ID,
                 name = name,
                 description = description,
-                icon = R.drawable.goal_ph.toString(),
+                icon = GOAL_EXTRA,
                 date = openDate,
                 dateClose = closeDate,
                 isDone = false,
@@ -159,7 +156,7 @@ class IdeaFragmentModel @Inject constructor(
                 keyId = item.keyId,
                 name = name,
                 description = description,
-                icon = R.drawable.step_ph.toString(),
+                icon = STEP_EXTRA,
                 date = openDate,
                 dateClose = closeDate,
                 isDone = false,

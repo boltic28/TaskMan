@@ -5,6 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.entities.BaseItem
+import com.boltic28.taskmanager.ui.setPlaceHolderForItem
 import com.bumptech.glide.Glide
 import java.time.format.DateTimeFormatter
 
@@ -22,11 +23,11 @@ abstract class BaseItemController: HolderController() {
             item.date.format(DateTimeFormatter.ofPattern(itemView.resources.getString(R.string.dateFormatterForItems)))
 
         Glide.with(itemView)
-            .load(item.icon.toInt())
+            .load(setPlaceHolderForItem(item.icon))
             .centerCrop()
-            .placeholder(item.icon.toInt())
-            .error(item.icon.toInt())
-            .fallback(item.icon.toInt())
+            .placeholder(R.drawable.undf_ph)
+            .error(R.drawable.undf_ph)
+            .fallback(R.drawable.undf_ph)
             .into(icon)
     }
 

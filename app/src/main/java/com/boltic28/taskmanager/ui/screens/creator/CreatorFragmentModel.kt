@@ -1,13 +1,12 @@
 package com.boltic28.taskmanager.ui.screens.creator
 
-import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.businesslayer.usecases.ItemsCreateUseCase
 import com.boltic28.taskmanager.datalayer.Cycle
 import com.boltic28.taskmanager.datalayer.Progress
 import com.boltic28.taskmanager.datalayer.entities.*
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.base.BaseViewModel
-import com.boltic28.taskmanager.ui.constant.NO_ID
+import com.boltic28.taskmanager.ui.constant.*
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.Single
 import java.time.LocalDateTime
@@ -25,7 +24,7 @@ class CreatorFragmentModel @Inject constructor(
                 id = NO_ID,
                 name = name,
                 description = description,
-                icon = R.drawable.goal_ph.toString(),
+                icon = GOAL_EXTRA,
                 date = LocalDateTime.now(),
                 dateClose = endDate,
                 isDone = false,
@@ -45,7 +44,7 @@ class CreatorFragmentModel @Inject constructor(
                 goalId = NO_ID,
                 name = name,
                 description = description,
-                icon = R.drawable.key_ph.toString(),
+                icon = KEY_EXTRA,
                 date = LocalDateTime.now(),
                 dateClose = endDate,
                 isDone = false,
@@ -65,7 +64,7 @@ class CreatorFragmentModel @Inject constructor(
                 keyId = NO_ID,
                 name = name,
                 description = description,
-                icon = R.drawable.step_ph.toString(),
+                icon = STEP_EXTRA,
                 date = LocalDateTime.now(),
                 dateClose = endDate,
                 isDone = false,
@@ -90,7 +89,7 @@ class CreatorFragmentModel @Inject constructor(
                 keyId = NO_ID,
                 name = name,
                 description = description,
-                icon = R.drawable.task_ph.toString(),
+                icon = TASK_EXTRA,
                 date = LocalDateTime.now(),
                 dateClose = endDate,
                 cycle = Cycle.fromString(cycle),
@@ -108,7 +107,7 @@ class CreatorFragmentModel @Inject constructor(
                 keyId = NO_ID,
                 name = name,
                 description = description,
-                icon = R.drawable.idea_ph.toString(),
+                icon = IDEA_EXTRA,
                 date = LocalDateTime.now(),
                 dateClose = LocalDateTime.now()
             )

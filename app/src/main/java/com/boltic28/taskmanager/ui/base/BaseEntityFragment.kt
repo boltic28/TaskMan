@@ -9,9 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.Progress
 import com.boltic28.taskmanager.datalayer.entities.BaseItem
-import com.boltic28.taskmanager.datalayer.entities.Goal
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
+import com.boltic28.taskmanager.ui.constant.*
 import com.boltic28.taskmanager.ui.screens.activity.ActivityHelper
+import com.boltic28.taskmanager.ui.setPlaceHolderForItem
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_block_buttons.*
 import kotlinx.android.synthetic.main.fragment_block_head.*
@@ -90,19 +91,15 @@ abstract class BaseEntityFragment<VM : BaseEntityFragmentModel<*>> :
     )
 
     private fun fetchVisibilityIsDoneStatus(isDone: Boolean): Int =
-        if (isDone) {
-            View.VISIBLE
-        } else {
-            View.INVISIBLE
-        }
+        if (isDone) View.VISIBLE else View.INVISIBLE
 
     private fun fetchIcon(itemView: View, icon: String) {
         Glide.with(itemView)
-            .load(icon.toInt())
+            .load(setPlaceHolderForItem(icon))
             .centerCrop()
-            .placeholder(icon.toInt())
-            .error(icon.toInt())
-            .fallback(icon.toInt())
+            .placeholder(R.drawable.undf_ph)
+            .error(R.drawable.undf_ph)
+            .fallback(R.drawable.undf_ph)
             .into(itemView.findViewById(R.id.item_fr_image))
     }
 
@@ -195,12 +192,12 @@ abstract class BaseEntityFragment<VM : BaseEntityFragmentModel<*>> :
         converter_close_date_value.setDate(item.dateClose)
     }
 
-    protected fun deactivateSettingsView(){
+    protected fun deactivateSettingsView() {
         item_recycler_block.visibility = View.VISIBLE
         item_converter_block.visibility = View.GONE
     }
 
-    protected fun initSetter(item: BaseItem){
+    protected fun initSetter(item: BaseItem) {
         activateSettingsView(item)
         converter_button_delete.setOnClickListener {
             model.delete(item, findNavController())
@@ -210,10 +207,11 @@ abstract class BaseEntityFragment<VM : BaseEntityFragmentModel<*>> :
     protected var closeDateTimePicker = LocalDateTime.now()!!
     protected var openDateTimePicker = LocalDateTime.now()!!
 
-    private fun setTimePickers(){
+    private fun setTimePickers() {
         converter_open_date_value.setOnClickListener {
             val listener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                openDateTimePicker = LocalDateTime.of(LocalDate.of(year, month + 1, dayOfMonth), LocalTime.MIN)
+                openDateTimePicker =
+                    LocalDateTime.of(LocalDate.of(year, month + 1, dayOfMonth), LocalTime.MIN)
                 converter_open_date_value.setDate(openDateTimePicker)
             }
             val timePicker = DatePickerDialog(
@@ -228,7 +226,8 @@ abstract class BaseEntityFragment<VM : BaseEntityFragmentModel<*>> :
 
         converter_close_date_value.setOnClickListener {
             val listener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                closeDateTimePicker = LocalDateTime.of(LocalDate.of(year, month + 1, dayOfMonth), LocalTime.MIN)
+                closeDateTimePicker =
+                    LocalDateTime.of(LocalDate.of(year, month + 1, dayOfMonth), LocalTime.MIN)
                 converter_close_date_value.setDate(closeDateTimePicker)
             }
             val timePicker = DatePickerDialog(
