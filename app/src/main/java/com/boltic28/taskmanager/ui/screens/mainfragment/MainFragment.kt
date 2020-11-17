@@ -1,5 +1,6 @@
 package com.boltic28.taskmanager.ui.screens.mainfragment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,7 +25,7 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
                 .subscribe {
                     (activity as? ActivityHelper)?.setToolbarText(it.email)
                 }
-            loadGoals()
+            showRefreshDialog()
         } else {
             (activity as? ActivityHelper)?.setToolbarText(resources.getString(R.string.app_name))
             findNavController().navigate(R.id.signFragment)
@@ -36,6 +37,16 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
     override fun onStop() {
         super.onStop()
         model.disposables.forEach { it.dispose() }
+    }
+
+    private fun showRefreshDialog(){
+        AlertDialog.Builder(context)
+            .setMessage(resources.getString(R.string.data_refreshed))
+            .setPositiveButton("OK") { _, _ -> loadGoals() }
+            .setTitle(resources.getString(R.string.app_name))
+            .setIcon(R.drawable.wow_ph)
+            .create()
+            .show()
     }
 
     private fun initView() {

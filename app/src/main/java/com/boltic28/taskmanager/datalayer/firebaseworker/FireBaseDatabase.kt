@@ -1,13 +1,27 @@
 package com.boltic28.taskmanager.datalayer.firebaseworker
 
 import com.boltic28.taskmanager.datalayer.entities.*
-import com.boltic28.taskmanager.datalayer.firebaseworker.dto.*
+import com.boltic28.taskmanager.datalayer.firebaseworker.dto.goal.RemoteGoal
+import com.boltic28.taskmanager.datalayer.firebaseworker.dto.goal.toLocalObject
+import com.boltic28.taskmanager.datalayer.firebaseworker.dto.goal.toRemoteObject
+import com.boltic28.taskmanager.datalayer.firebaseworker.dto.idea.RemoteIdea
+import com.boltic28.taskmanager.datalayer.firebaseworker.dto.idea.toLocalObject
+import com.boltic28.taskmanager.datalayer.firebaseworker.dto.idea.toRemoteObject
+import com.boltic28.taskmanager.datalayer.firebaseworker.dto.key.RemoteKey
+import com.boltic28.taskmanager.datalayer.firebaseworker.dto.key.toLocalObject
+import com.boltic28.taskmanager.datalayer.firebaseworker.dto.key.toRemoteObject
+import com.boltic28.taskmanager.datalayer.firebaseworker.dto.step.RemoteStep
+import com.boltic28.taskmanager.datalayer.firebaseworker.dto.step.toLocalObject
+import com.boltic28.taskmanager.datalayer.firebaseworker.dto.step.toRemoteObject
+import com.boltic28.taskmanager.datalayer.firebaseworker.dto.task.RemoteTask
+import com.boltic28.taskmanager.datalayer.firebaseworker.dto.task.toLocalObject
+import com.boltic28.taskmanager.datalayer.firebaseworker.dto.task.toRemoteObject
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 
-class FireBaseHelper : RemoteDB {
+class FireBaseDatabase() : RemoteDB {
 
     companion object {
         const val TABLE_GOAL = "goals"
@@ -18,9 +32,9 @@ class FireBaseHelper : RemoteDB {
     }
 
     private val firebaseDatabase = FirebaseDatabase.getInstance()
-    private val firebaseUser = FirebaseAuth.getInstance().currentUser
-    private val uid = firebaseUser!!.uid
-    private val db = firebaseDatabase.reference
+    private val firebaseUser by lazy{ FirebaseAuth.getInstance().currentUser}
+    private val uid by lazy { firebaseUser!!.uid }
+    private val db by lazy { firebaseDatabase.reference }
 
     private val _mGoal: BehaviorSubject<Goal> = BehaviorSubject.create()
     override val goal: Observable<Goal>
@@ -41,6 +55,8 @@ class FireBaseHelper : RemoteDB {
     private val _mKey: BehaviorSubject<KeyResult> = BehaviorSubject.create()
     override val key: Observable<KeyResult>
         get() = _mKey
+
+
 
     override fun write(item: Goal) {
         db.child(uid).child(TABLE_GOAL).child(item.name).setValue(item.toRemoteObject())
@@ -96,6 +112,7 @@ class FireBaseHelper : RemoteDB {
                         }
                     }
             }
+
             override fun onCancelled(error: DatabaseError) {}
         })
     }
@@ -110,6 +127,7 @@ class FireBaseHelper : RemoteDB {
                         }
                     }
             }
+
             override fun onCancelled(error: DatabaseError) {}
         })
     }
@@ -124,6 +142,7 @@ class FireBaseHelper : RemoteDB {
                         }
                     }
             }
+
             override fun onCancelled(error: DatabaseError) {}
         })
     }
@@ -138,6 +157,7 @@ class FireBaseHelper : RemoteDB {
                         }
                     }
             }
+
             override fun onCancelled(error: DatabaseError) {}
         })
     }
@@ -152,7 +172,10 @@ class FireBaseHelper : RemoteDB {
                         }
                     }
             }
+
             override fun onCancelled(error: DatabaseError) {}
         })
     }
+
+    override fun getRepositoryForUser(): DatabaseReference = db.child(uid)
 }

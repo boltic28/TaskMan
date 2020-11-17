@@ -19,7 +19,7 @@ class SignFragment : BaseFragment<SignFragmentModel>(R.layout.fragment_sign) {
         disposable = model.userManager.user
             .subscribe {user ->
                 if (user.id.isNotEmpty()){
-                    findNavController().navigate(R.id.action_signFragment_to_mainFragment)
+                    model.toMainFragment(findNavController())
                 }else {
                     turnOnButtonSignIn()
                     checkUserdata(user)

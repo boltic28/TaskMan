@@ -1,6 +1,7 @@
 package com.boltic28.taskmanager.businesslayer.interactors
 
 import com.boltic28.taskmanager.businesslayer.usecases.GetAllItemsUseCase
+import com.boltic28.taskmanager.businesslayer.usecases.RefreshDataUseCase
 import com.boltic28.taskmanager.businesslayer.usecases.interfaces.ItemUpdateUseCase
 import com.boltic28.taskmanager.businesslayer.usecases.interfaces.ParentItemStructureUseCase
 import com.boltic28.taskmanager.datalayer.entities.Goal
@@ -12,13 +13,16 @@ import io.reactivex.Single
 class MainFragmentInteractor(
     itemProvider: GetAllItemsUseCase,
     taskUpdater: ItemUpdateUseCase<Task>,
+    refresher: RefreshDataUseCase,
     private val goalStructureProvider: ParentItemStructureUseCase<Goal>,
     private val stepStructureProvider: ParentItemStructureUseCase<Step>,
     private val keyStructureProvider: ParentItemStructureUseCase<KeyResult>,
 ) :
     GetAllItemsUseCase by itemProvider,
     ItemUpdateUseCase<Task> by taskUpdater,
-    StructureProviderForParentItems {
+    StructureProviderForParentItems,
+    RefreshDataUseCase by refresher
+{
 
     override fun setChildrenFor(goal: Goal): Single<Goal> =
         goalStructureProvider.setChildrenFor(goal)

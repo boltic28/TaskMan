@@ -10,6 +10,7 @@ import com.boltic28.taskmanager.ui.constant.*
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.Single
 import java.time.LocalDateTime
+import java.time.ZoneOffset
 import javax.inject.Inject
 
 class CreatorFragmentModel @Inject constructor(
@@ -21,7 +22,8 @@ class CreatorFragmentModel @Inject constructor(
     fun saveGoal(name: String, description: String, endDate: LocalDateTime): Single<Long> =
         interactor.create(
             Goal(
-                id = NO_ID,
+                id = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
+                uid = "g" + LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
                 name = name,
                 description = description,
                 icon = GOAL_EXTRA,
@@ -40,7 +42,8 @@ class CreatorFragmentModel @Inject constructor(
     fun saveKey(name: String, description: String, endDate: LocalDateTime): Single<Long> =
         interactor.create(
             KeyResult(
-                id = NO_ID,
+                id = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
+                uid = "k" + LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
                 goalId = NO_ID,
                 name = name,
                 description = description,
@@ -59,7 +62,8 @@ class CreatorFragmentModel @Inject constructor(
     fun saveStep(name: String, description: String, endDate: LocalDateTime): Single<Long> =
         interactor.create(
             Step(
-                id = NO_ID,
+                id = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
+                uid = "s" + LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
                 goalId = NO_ID,
                 keyId = NO_ID,
                 name = name,
@@ -83,7 +87,8 @@ class CreatorFragmentModel @Inject constructor(
     ): Single<Long> =
         interactor.create(
             Task(
-                id = NO_ID,
+                id = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
+                uid = "t" + LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
                 stepId = NO_ID,
                 goalId = NO_ID,
                 keyId = NO_ID,
@@ -101,7 +106,8 @@ class CreatorFragmentModel @Inject constructor(
     fun saveIdea(name: String, description: String): Single<Long> =
         interactor.create(
             Idea(
-                id = NO_ID,
+                id = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
+                uid = "i" + LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
                 stepId = NO_ID,
                 goalId = NO_ID,
                 keyId = NO_ID,

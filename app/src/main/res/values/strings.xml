@@ -63,6 +63,7 @@
     <string name="field_name_must_be_not_empty">Field name must be not empty</string>
     <string name="save">save</string>
     <string name="open_date">Open date</string>
+    <string name="data_refreshed">Data refreshed</string>
 
     <string-array name="cycle">
         <item>not cycle</item>

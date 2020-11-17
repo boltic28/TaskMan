@@ -1,12 +1,15 @@
 package com.boltic28.taskmanager.datalayer.room.keyresult
 
 import com.boltic28.taskmanager.datalayer.entities.KeyResult
+import com.boltic28.taskmanager.datalayer.firebaseworker.dto.RemoteRepo
 import io.reactivex.Single
 
-class DefaultKeyRepository(private val dao: KeyDao) : KeyRepository {
+class DefaultKeyRepository(private val dao: KeyDao, private val remoteDB: RemoteRepo<KeyResult>) :
+    KeyRepository {
 
     override fun insert(item: KeyResult): Single<Long> =
         dao.insert(item.toEntity())
+            .doOnSuccess { remoteDB.create(item) }
 
     override fun getAll(): Single<List<KeyResult>> =
         dao.getAll().map { list ->
@@ -28,7 +31,15 @@ class DefaultKeyRepository(private val dao: KeyDao) : KeyRepository {
 
     override fun update(item: KeyResult): Single<Int> =
         dao.update(item.toEntity())
+            .doOnSuccess { remoteDB.create(item) }
 
     override fun delete(item: KeyResult): Single<Int> =
         dao.delete(item.toEntity())
+            .doOnSuccess { remoteDB.delete(item) }
+
+    override fun deleteAll(): Single<Int> =
+        dao.deleteAll()
+
+    override fun refreshData(item: KeyResult): Single<Long> =
+        dao.insert(item.toEntity())
 }

@@ -1,12 +1,13 @@
-package com.boltic28.taskmanager.datalayer.firebaseworker.dto
+package com.boltic28.taskmanager.datalayer.firebaseworker.dto.goal
 
 import com.boltic28.taskmanager.datalayer.Progress
-import com.boltic28.taskmanager.datalayer.entities.KeyResult
+import com.boltic28.taskmanager.datalayer.entities.Goal
 import com.boltic28.taskmanager.ui.constant.NO_ID
 import java.time.LocalDateTime
 
-data class RemoteKey(
+data class RemoteGoal(
     val id: Long,
+    val uid: String,
     val name: String,
     val description: String,
     val icon: String,
@@ -15,17 +16,17 @@ data class RemoteKey(
     val isDone: Boolean,
     val isStarted: Boolean,
     val progress: Int,
-    val goalId: Long
 ) {
     /**
      * firebase realtime database needs in empty constructor
      */
-    constructor() : this(NO_ID, "", "", "", "", "", false, false, 0, NO_ID)
+    constructor() : this(NO_ID, "","", "", "", "", "", false, false, 0)
 }
 
-fun KeyResult.toRemoteObject(): RemoteKey =
-    RemoteKey(
+fun Goal.toRemoteObject(): RemoteGoal =
+    RemoteGoal(
         id = this.id,
+        uid = this.uid,
         name = this.name,
         description = this.description,
         icon = this.icon,
@@ -33,13 +34,13 @@ fun KeyResult.toRemoteObject(): RemoteKey =
         dateClose = this.dateClose.toString(),
         isDone = this.isDone,
         isStarted = this.isStarted,
-        progress = this.progress.value,
-        goalId = this.goalId
+        progress = this.progress.value
     )
 
-fun RemoteKey.toLocalObject(): KeyResult =
-    KeyResult(
+fun RemoteGoal.toLocalObject(): Goal =
+    Goal(
         id = this.id,
+        uid = this.uid,
         name = this.name,
         description = this.description,
         icon = this.icon,
@@ -48,8 +49,8 @@ fun RemoteKey.toLocalObject(): KeyResult =
         isDone = this.isDone,
         isStarted = this.isStarted,
         progress = Progress.fromInteger(this.progress),
+        steps = emptyList(),
         tasks = emptyList(),
         ideas = emptyList(),
-        steps = emptyList(),
-        goalId = this.goalId
+        keys = emptyList(),
     )

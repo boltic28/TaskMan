@@ -5,6 +5,7 @@ import java.time.LocalDateTime
 
 data class Goal(
     override val id: Long,
+    override val uid: String,
     override val name: String,
     override val description: String,
     override val icon: String,

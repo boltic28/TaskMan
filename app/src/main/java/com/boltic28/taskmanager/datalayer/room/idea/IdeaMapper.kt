@@ -5,6 +5,7 @@ import com.boltic28.taskmanager.datalayer.entities.Idea
 fun Idea.toEntity(): IdeaEntity =
     IdeaEntity(
         id = this.id,
+        uid = this.uid,
         stepId = this.stepId,
         keyId = this.keyId,
         goalId = this.goalId,
@@ -17,6 +18,7 @@ fun Idea.toEntity(): IdeaEntity =
 fun IdeaEntity.toIdea(): Idea =
     Idea(
         id = this.id,
+        uid = this.uid,
         stepId = this.stepId,
         keyId = this.keyId,
         goalId = this.goalId,

@@ -10,6 +10,7 @@ import com.boltic28.taskmanager.businesslayer.usecases.step.*
 import com.boltic28.taskmanager.businesslayer.usecases.task.*
 import com.boltic28.taskmanager.datalayer.entities.*
 import com.boltic28.taskmanager.datalayer.firebaseworker.RemoteDB
+import com.boltic28.taskmanager.datalayer.firebaseworker.dto.RemoteRepo
 import com.boltic28.taskmanager.datalayer.room.goal.GoalRepository
 import com.boltic28.taskmanager.datalayer.room.idea.IdeaRepository
 import com.boltic28.taskmanager.datalayer.room.keyresult.KeyRepository
@@ -25,7 +26,11 @@ class InteractModule(
     private val taskRepository: TaskRepository,
     private val ideaRepository: IdeaRepository,
     private val goalRepository: GoalRepository,
-    private val remoteDB: RemoteDB
+    private val remRepoGoal: RemoteRepo<Goal>,
+    private val remRepoStep: RemoteRepo<Step>,
+    private val remRepoTask: RemoteRepo<Task>,
+    private val remRepoIdea: RemoteRepo<Idea>,
+    private val remRepoKey: RemoteRepo<KeyResult>
 ) {
 
     @Provides
@@ -214,8 +219,7 @@ class InteractModule(
             stepRepository,
             taskRepository,
             ideaRepository,
-            goalRepository,
-            remoteDB
+            goalRepository
         )
 
     @Provides
@@ -225,8 +229,22 @@ class InteractModule(
             stepRepository,
             taskRepository,
             ideaRepository,
+            goalRepository
+        )
+
+    @Provides
+    fun provideDataRefresher(): RefreshDataUseCase =
+        RefreshDataUseCaseImpl(
+            keyRepository,
+            stepRepository,
+            taskRepository,
+            ideaRepository,
             goalRepository,
-            remoteDB
+            remRepoGoal,
+            remRepoStep,
+            remRepoTask,
+            remRepoIdea,
+            remRepoKey
         )
 
     @Provides
@@ -234,9 +252,16 @@ class InteractModule(
         MainFragmentInteractor(
             provideItemsProvider(),
             provideTaskUpdateUseCase(),
+            provideDataRefresher(),
             provideGoalStructureUseCase(),
             provideStepStructureUseCase(),
             provideKeyStructureUseCase()
+        )
+
+    @Provides
+    fun provideSignFragmentInteractor(): SignFragmentInteractor =
+        SignFragmentInteractor(
+            provideDataRefresher()
         )
 
     @Provides

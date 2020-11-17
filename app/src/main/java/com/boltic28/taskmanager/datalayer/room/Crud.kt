@@ -10,7 +10,11 @@ interface Crud<T> {
 
     fun delete(item: T): Single<Int>
 
+    fun deleteAll(): Single<Int>
+
     fun getById(id: Long): Single<T>
 
     fun getAll(): Single<List<T>>
+
+    fun refreshData(item: T): Single<Long>
 }

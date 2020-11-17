@@ -28,9 +28,9 @@ class App : Application() {
 
     fun tryInjectActivity(activity: BaseActivity<*>): Boolean {
 
-        val dbModule = DataBaseModule(this)
-        val repoModule = RepositoryModule(dbModule.provideDataBase())
         val activityModule = ActivityModule(activity)
+        val dbModule = DataBaseModule(this)
+        val repoModule = RepositoryModule(dbModule.provideDataBase(), activityModule.provideFBDataBase())
 
         return applicationComponent.getActivityComponent(
             activityModule,
@@ -41,8 +41,13 @@ class App : Application() {
                 repoModule.provideTaskRepo(),
                 repoModule.provideIdeaRepo(),
                 repoModule.provideGoalRepo(),
-                activityModule.provideFBDataBase()
-            )
+                repoModule.provideGoalRemoteRepo(),
+                repoModule.provideStepRemoteRepo(),
+                repoModule.provideTaskRemoteRepo(),
+                repoModule.provideIdeaRemoteRepo(),
+                repoModule.provideKeyRemoteRepo()
+            ),
+            repoModule
         )
             .activityInjector.maybeInject(activity)
     }

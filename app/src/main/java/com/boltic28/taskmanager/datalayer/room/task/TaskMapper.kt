@@ -5,6 +5,7 @@ import com.boltic28.taskmanager.datalayer.entities.Task
 fun Task.toEntity(): TaskEntity =
     TaskEntity(
         id = this.id,
+        uid = this.uid,
         stepId = this.stepId,
         keyId = this.keyId,
         goalId = this.goalId,
@@ -21,6 +22,7 @@ fun Task.toEntity(): TaskEntity =
 fun TaskEntity.toTask(): Task =
     Task(
         id = this.id,
+        uid = this.uid,
         stepId = this.stepId,
         keyId = this.keyId,
         goalId = this.goalId,

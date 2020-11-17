@@ -25,6 +25,8 @@ class ItemAdapter(
     override fun addElement(item: BaseItem) {
         val newList = mutableListOf<BaseItem>()
         newList.addAll(items)
+        val sameItem = newList.firstOrNull { it.uid == item.uid }
+        if (sameItem != null){ newList.remove(sameItem) }
         newList.add(item)
         refreshData(newList)
     }

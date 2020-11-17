@@ -16,6 +16,7 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.time.LocalDateTime
+import java.time.ZoneOffset
 import javax.inject.Inject
 
 class IdeaFragmentModel @Inject constructor(
@@ -103,7 +104,8 @@ class IdeaFragmentModel @Inject constructor(
     ): Single<Long> =
         interactor.create(
             Task(
-                id = NO_ID,
+                id = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
+                uid = "t" + LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
                 stepId = item.stepId,
                 goalId = item.goalId,
                 keyId = item.keyId,
@@ -126,7 +128,8 @@ class IdeaFragmentModel @Inject constructor(
     ): Single<Long> =
         interactor.create(
             Goal(
-                id = NO_ID,
+                id = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
+                uid = "g" + LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
                 name = name,
                 description = description,
                 icon = GOAL_EXTRA,
@@ -151,7 +154,8 @@ class IdeaFragmentModel @Inject constructor(
     ): Single<Long> =
         interactor.create(
             Step(
-                id = NO_ID,
+                id = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
+                uid = "s" + LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
                 goalId = item.goalId,
                 keyId = item.keyId,
                 name = name,

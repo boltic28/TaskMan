@@ -1,6 +1,7 @@
 package com.boltic28.taskmanager.datalayer.firebaseworker
 
 import com.boltic28.taskmanager.datalayer.entities.*
+import com.google.firebase.database.DatabaseReference
 import io.reactivex.Observable
 
 interface RemoteDB {
@@ -28,4 +29,6 @@ interface RemoteDB {
     fun observeTasks()
     fun observeIdeas()
     fun observeKeys()
+
+    fun getRepositoryForUser(): DatabaseReference
 }

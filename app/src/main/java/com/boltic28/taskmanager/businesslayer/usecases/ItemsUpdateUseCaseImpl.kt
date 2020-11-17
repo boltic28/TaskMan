@@ -14,27 +14,21 @@ class ItemsUpdateUseCaseImpl(
     private val stepRepository: StepRepository,
     private val taskRepository: TaskRepository,
     private val ideaRepository: IdeaRepository,
-    private val goalRepository: GoalRepository,
-    private val remoteDB: RemoteDB
+    private val goalRepository: GoalRepository
 ): ItemsUpdateUseCase {
 
     override fun update(item: Goal): Single<Int> =
         goalRepository.update(item)
-            .doOnSuccess { remoteDB.write(item) }
 
     override fun update(item: Task): Single<Int> =
         taskRepository.update(item)
-            .doOnSuccess { remoteDB.write(item) }
 
     override fun update(item: Step): Single<Int> =
         stepRepository.update(item)
-            .doOnSuccess { remoteDB.write(item) }
 
     override fun update(item: Idea): Single<Int> =
         ideaRepository.update(item)
-            .doOnSuccess { remoteDB.write(item) }
 
     override fun update(item: KeyResult): Single<Int> =
         keyRepository.update(item)
-            .doOnSuccess { remoteDB.write(item) }
 }

@@ -6,7 +6,7 @@ import io.reactivex.Single
 @Dao
 interface KeyDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(keyEntity: KeyEntity): Single<Long>
 
     @Update
@@ -14,6 +14,9 @@ interface KeyDao {
 
     @Delete
     fun delete(keyEntity: KeyEntity): Single<Int>
+
+    @Query("DELETE FROM key_entity")
+    fun deleteAll(): Single<Int>
 
     @Transaction
     @Query("SELECT * FROM key_entity WHERE id = :id ORDER BY id")

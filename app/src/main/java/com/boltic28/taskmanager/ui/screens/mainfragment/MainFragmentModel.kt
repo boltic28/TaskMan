@@ -5,13 +5,14 @@ import com.boltic28.taskmanager.datalayer.entities.Goal
 import com.boltic28.taskmanager.datalayer.entities.KeyResult
 import com.boltic28.taskmanager.datalayer.entities.Step
 import com.boltic28.taskmanager.datalayer.entities.Task
-import com.boltic28.taskmanager.datalayer.firebaseworker.RemoteDB
+import com.boltic28.taskmanager.datalayer.firebaseworker.dto.goal.GoalRemoteRepo
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.base.BaseViewModel
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
+import io.reactivex.disposables.Disposables
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -19,14 +20,13 @@ class MainFragmentModel @Inject constructor(
     private val interactor: MainFragmentInteractor,
     val adapter: ItemAdapter,
     val messenger: Messenger,
-    override var userManager: UserManager,
-    val dbHelper: RemoteDB
+    override var userManager: UserManager
 ) : BaseViewModel() {
 
     val disposables = mutableListOf<Disposable>()
 
-    fun observeRemote() {
-        dbHelper.observeGoals()
+    fun refreshData() {
+        interactor.refreshAllData()
     }
 
     fun update(item: Task){
