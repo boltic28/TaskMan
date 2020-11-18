@@ -64,6 +64,7 @@
     <string name="save">save</string>
     <string name="open_date">Open date</string>
     <string name="data_refreshed">Data refreshed</string>
+    <string name="ok">OK</string>
 
     <string-array name="cycle">
         <item>not cycle</item>

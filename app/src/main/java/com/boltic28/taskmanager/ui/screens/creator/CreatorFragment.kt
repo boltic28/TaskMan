@@ -7,11 +7,8 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.datalayer.entities.Goal
 import com.boltic28.taskmanager.ui.base.BaseFragment
-import com.boltic28.taskmanager.ui.constant.ITEM_SETTING
-import com.boltic28.taskmanager.ui.constant.ITEM_TYPE
-import com.boltic28.taskmanager.ui.constant.NO_ID
+import com.boltic28.taskmanager.ui.constant.*
 import com.boltic28.taskmanager.ui.screens.activity.ActivityHelper
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -33,17 +30,6 @@ class CreatorFragment : BaseFragment<CreatorFragmentModel>(R.layout.fragment_cre
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as? ActivityHelper)?.setToolbarText("Create new object")
-        arguments?.let {
-            if (it.containsKey(ITEM_SETTING) && it.containsKey(ITEM_TYPE)){
-
-                when(it.getString(ITEM_TYPE)){
-                }
-
-
-
-
-            }
-        }
         setOnButtons()
         setLayout()
         setCloseDate()
@@ -65,7 +51,7 @@ class CreatorFragment : BaseFragment<CreatorFragmentModel>(R.layout.fragment_cre
                             model.messenger.showMessage("new instance is not created")
                         } else {
                             model.messenger.showMessage("new instance is created")
-                            findNavController().navigate(R.id.mainFragment)
+                            findNavController().navigate(R.id.mainFragment, bundle)
                         }
                     }
             }else{
@@ -135,33 +121,34 @@ class CreatorFragment : BaseFragment<CreatorFragmentModel>(R.layout.fragment_cre
         }
     }
 
+    private val bundle = Bundle()
     private fun createItem(): Single<Long> =
         when (creator_group.checkedRadioButtonId) {
             R.id.creator_idea_radio -> model.saveIdea(
                 creator_name.text.toString(),
                 creator_description.text.toString()
-            )
+            ).doOnSuccess { bundle.putString(LOAD_LIST, IDEA_EXTRA) }
             R.id.creator_task_radio -> model.saveTask(
                 creator_name.text.toString(),
                 creator_description.text.toString(),
                 LocalDateTime.of(closeDate, LocalTime.now()),
                 cycleType
-            )
+            ).doOnSuccess { bundle.putString(LOAD_LIST, TASK_EXTRA) }
             R.id.creator_step_radio -> model.saveStep(
                 creator_name.text.toString(),
                 creator_description.text.toString(),
                 LocalDateTime.of(closeDate, LocalTime.now())
-            )
+            ).doOnSuccess { bundle.putString(LOAD_LIST, STEP_EXTRA) }
             R.id.creator_key_radio -> model.saveKey(
                 creator_name.text.toString(),
                 creator_description.text.toString(),
                 LocalDateTime.of(closeDate, LocalTime.now())
-            )
+            ).doOnSuccess { bundle.putString(LOAD_LIST, KEY_EXTRA) }
             R.id.creator_goal_radio -> model.saveGoal(
                 creator_name.text.toString(),
                 creator_description.text.toString(),
                 LocalDateTime.of(closeDate, LocalTime.now())
-            )
+            ).doOnSuccess { bundle.putString(LOAD_LIST, GOAL_EXTRA) }
             else -> Single.just(NO_ID)
         }
 }

@@ -72,7 +72,7 @@ class IdeaFragmentModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { list ->
-                adapter.refreshData(list)
+                adapter.loadNewData(list)
             }
     }
 

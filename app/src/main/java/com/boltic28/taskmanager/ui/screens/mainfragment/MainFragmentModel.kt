@@ -1,18 +1,13 @@
 package com.boltic28.taskmanager.ui.screens.mainfragment
 
 import com.boltic28.taskmanager.businesslayer.interactors.MainFragmentInteractor
-import com.boltic28.taskmanager.datalayer.entities.Goal
-import com.boltic28.taskmanager.datalayer.entities.KeyResult
-import com.boltic28.taskmanager.datalayer.entities.Step
-import com.boltic28.taskmanager.datalayer.entities.Task
-import com.boltic28.taskmanager.datalayer.firebaseworker.dto.goal.GoalRemoteRepo
+import com.boltic28.taskmanager.datalayer.entities.*
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.base.BaseViewModel
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.disposables.Disposables
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -29,32 +24,36 @@ class MainFragmentModel @Inject constructor(
         interactor.refreshAllData()
     }
 
-    fun update(item: Task){
+    fun update(item: Task) {
         disposables + interactor.update(item)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe{ _ -> loadTasks() }
+            .subscribe { _ -> loadTasks() }
     }
 
     fun loadTasks() {
         disposables + interactor.getTasks()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe{ result -> adapter.refreshData(result) }
+            .subscribe { result ->
+                adapter.loadNewData(result)
+            }
     }
 
     fun loadIdeas() {
         disposables + interactor.getIdeas()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe{ result -> adapter.refreshData(result) }
+            .subscribe { result ->
+                adapter.loadNewData(result)
+            }
     }
 
     fun loadKeys() {
         disposables + interactor.getKeys()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe{ itemList ->
+            .subscribe { itemList ->
                 adapter.clearAll()
                 itemList.forEach { item ->
                     makeAnalyzeAndPushIntoAdapter(item)
@@ -66,7 +65,7 @@ class MainFragmentModel @Inject constructor(
         disposables + interactor.getSteps()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe{ itemList ->
+            .subscribe { itemList ->
                 adapter.clearAll()
                 itemList.forEach { item ->
                     makeAnalyzeAndPushIntoAdapter(item)
@@ -78,7 +77,7 @@ class MainFragmentModel @Inject constructor(
         disposables + interactor.getGoals()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe{ itemList ->
+            .subscribe { itemList ->
                 adapter.clearAll()
                 itemList.forEach { item ->
                     makeAnalyzeAndPushIntoAdapter(item)
@@ -90,7 +89,7 @@ class MainFragmentModel @Inject constructor(
         disposables + interactor.setChildrenFor(item)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe{ mItem ->
+            .subscribe { mItem ->
                 adapter.addElement(interactor.setProgressFor(mItem))
             }
     }
@@ -99,7 +98,7 @@ class MainFragmentModel @Inject constructor(
         disposables + interactor.setChildrenFor(item)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe{ mItem ->
+            .subscribe { mItem ->
                 adapter.addElement(interactor.setProgressFor(mItem))
             }
     }
@@ -108,7 +107,7 @@ class MainFragmentModel @Inject constructor(
         disposables + interactor.setChildrenFor(item)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe{ mItem ->
+            .subscribe { mItem ->
                 adapter.addElement(interactor.setProgressFor(mItem))
             }
     }

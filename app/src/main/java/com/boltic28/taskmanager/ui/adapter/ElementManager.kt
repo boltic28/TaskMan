@@ -10,5 +10,9 @@ interface ElementManager {
 
     fun addList(list: List<BaseItem>)
 
+    fun loadNewData(list: List<BaseItem>)
+
+    fun getItems(): List<BaseItem>
+
     fun clearAll()
 }

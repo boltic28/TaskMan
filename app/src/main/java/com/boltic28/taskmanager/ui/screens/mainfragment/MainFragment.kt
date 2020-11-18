@@ -2,6 +2,8 @@ package com.boltic28.taskmanager.ui.screens.mainfragment
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.boltic28.taskmanager.R
@@ -25,13 +27,17 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
                 .subscribe {
                     (activity as? ActivityHelper)?.setToolbarText(it.email)
                 }
-            showRefreshDialog()
+            arguments?.let {
+                if (it.containsKey(USER_SIGNED)) showRefreshDialog()
+            }
+            loadElements()
         } else {
             (activity as? ActivityHelper)?.setToolbarText(resources.getString(R.string.app_name))
             findNavController().navigate(R.id.signFragment)
         }
 
         initView()
+        setFilters()
     }
 
     override fun onStop() {
@@ -39,10 +45,22 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
         model.disposables.forEach { it.dispose() }
     }
 
-    private fun showRefreshDialog(){
+    private fun loadElements(){
+        arguments?.let {
+            when(it.getString(LOAD_LIST)){
+                KEY_EXTRA -> loadKeys()
+                STEP_EXTRA -> loadSteps()
+                TASK_EXTRA -> loadTasks()
+                IDEA_EXTRA -> loadIdeas()
+                else -> loadGoals()
+            }
+        }
+    }
+
+    private fun showRefreshDialog() {
         AlertDialog.Builder(context)
             .setMessage(resources.getString(R.string.data_refreshed))
-            .setPositiveButton("OK") { _, _ -> loadGoals() }
+            .setPositiveButton(resources.getString(R.string.ok)) { _, _ -> loadGoals() }
             .setTitle(resources.getString(R.string.app_name))
             .setIcon(R.drawable.wow_ph)
             .create()
@@ -145,5 +163,22 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
             }
         })
         model.loadKeys()
+    }
+
+    private fun setFilters() {
+        main_search_field.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun afterTextChanged(p0: Editable?) {
+                val predicate = main_search_field.text.toString()
+                if (predicate.isNotEmpty()) {
+                    model.adapter.filter(predicate)
+                } else {
+                    model.adapter.clearFilter()
+                }
+            }
+        })
     }
 }
