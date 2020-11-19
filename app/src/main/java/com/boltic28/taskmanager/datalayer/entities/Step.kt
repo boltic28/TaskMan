@@ -18,4 +18,4 @@ data class Step(
     val keyId: Long,
     val tasks: List<Task>,
     val ideas: List<Idea>
-): ParentItem
+): ProgressiveItem

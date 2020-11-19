@@ -138,12 +138,14 @@ abstract class BaseEntityFragment<VM : BaseEntityFragmentModel<*>> :
         }
     }
 
-    protected fun setButtonsBack() {
+    protected fun setButtonsBack(itemType: String) {
         item_fr_button_back.setOnClickListener {
             activity?.onBackPressed()
         }
         item_fr_button_home.setOnClickListener {
-            findNavController().navigate(R.id.mainFragment)
+            val bundle = Bundle()
+            bundle.putString(LOAD_LIST, itemType)
+            findNavController().navigate(R.id.mainFragment, bundle)
         }
     }
 

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_sign_fields"
+    app:layoutDescription="@xml/fragment_search_block_scene">
+
+    <ImageButton
+        android:id="@+id/main_button_search"
+        style="@style/Main.Buttons"
+        android:contentDescription="@string/description"
+        android:src="@drawable/ic_search"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <EditText
+        android:id="@+id/main_search_field"
+        style="@style/Main.Search"
+        android:visibility="gone"
+        android:autofillHints="@string/Search"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/main_button_search"
+        />
+
+    <ImageButton
+        android:id="@+id/main_free_goals"
+        style="@style/Main.Buttons"
+        android:contentDescription="@string/description"
+        android:src="@drawable/goal_ph"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/main_search_field"
+        />
+
+    <ImageButton
+        android:id="@+id/main_free_steps"
+        style="@style/Main.Buttons"
+        android:contentDescription="@string/description"
+        android:src="@drawable/step_ph"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/main_free_goals"
+        />
+
+    <ImageButton
+        android:id="@+id/main_free_tasks"
+        style="@style/Main.Buttons"
+        android:contentDescription="@string/description"
+        android:src="@drawable/task_ph"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/main_free_steps"
+        />
+
+    <ImageButton
+        android:id="@+id/main_free_keys"
+        style="@style/Main.Buttons"
+        android:contentDescription="@string/description"
+        android:src="@drawable/key_ph"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/main_free_tasks"
+        />
+
+    <ImageButton
+        android:id="@+id/main_free_ideas"
+        style="@style/Main.Buttons"
+        android:contentDescription="@string/description"
+        android:src="@drawable/idea_ph"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/main_free_keys"
+        />
+
+    <Space
+        android:id="@+id/space_search"
+        android:layout_width="20dp"
+        android:layout_height="60dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/main_free_ideas"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/search_second_panel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/main_button_search">
+
+        <LinearLayout
+            android:id="@+id/search_checkboxes_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/search_not_started_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/status_not_started" />
+
+            <CheckBox
+                android:id="@+id/search_is_done_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/isdone" />
+
+            <CheckBox
+                android:id="@+id/search_is_started_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/isstarted" />
+
+            <CheckBox
+                android:id="@+id/search_is_failed_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/isfailed" />
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/search_radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp">
+
+            <RadioButton
+                android:id="@+id/rb_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/any_period" />
+
+            <RadioButton
+                android:id="@+id/rb_make_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/today" />
+
+            <RadioButton
+                android:id="@+id/rb_make_week"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/on_week" />
+
+            <RadioButton
+                android:id="@+id/rb_make_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/om_month" />
+
+        </RadioGroup>
+    </LinearLayout>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
+

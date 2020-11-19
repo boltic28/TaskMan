@@ -65,6 +65,13 @@
     <string name="open_date">Open date</string>
     <string name="data_refreshed">Data refreshed</string>
     <string name="ok">OK</string>
+    <string name="isdone">is Done</string>
+    <string name="isfailed">is Failed</string>
+    <string name="isstarted">is Started</string>
+    <string name="today">today</string>
+    <string name="any_period">any</string>
+    <string name="on_week">on week</string>
+    <string name="om_month">om month</string>
 
     <string-array name="cycle">
         <item>not cycle</item>

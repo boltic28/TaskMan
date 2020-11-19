@@ -11,10 +11,10 @@ data class Task(
     override val icon: String,
     override val date: LocalDateTime,
     override val dateClose: LocalDateTime,
+    override val isDone: Boolean,
+    override val isStarted: Boolean,
     val stepId: Long,
     val keyId: Long,
     val goalId: Long,
-    val cycle: Cycle,
-    val isDone: Boolean,
-    val isStarted: Boolean
-): BaseItem
+    val cycle: Cycle
+): CompletableItem

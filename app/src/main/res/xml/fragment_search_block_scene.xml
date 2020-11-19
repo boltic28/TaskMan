@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetStart="@id/start"
+        motion:constraintSetEnd="@+id/end"
+        motion:duration="250">
+        <OnClick
+            motion:targetId="@id/main_button_search"
+            motion:clickAction="toggle" />
+
+        <KeyFrameSet >
+            <KeyPosition
+                motion:motionTarget="@+id/search_second_panel"
+                motion:framePosition="80"
+                motion:keyPositionType="parentRelative"
+                motion:percentX="0.4"
+                motion:percentY="0.4" />
+        </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/main_search_field"
+            motion:layout_constraintStart_toEndOf="@+id/main_button_search"
+            android:visibility="gone"
+            android:layout_width="0dp"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/search_second_panel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            motion:layout_constraintTop_toBottomOf="@+id/main_button_search" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/main_search_field"
+            motion:layout_constraintStart_toEndOf="@+id/main_button_search"
+            android:visibility="visible"
+            android:layout_width="80dp"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/search_second_panel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            motion:layout_constraintTop_toBottomOf="@+id/main_button_search" />
+    </ConstraintSet>
+</MotionScene>

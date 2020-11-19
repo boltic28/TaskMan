@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.entities.*
+import com.boltic28.taskmanager.ui.adapter.FilterImpl
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseFragment
 import com.boltic28.taskmanager.ui.constant.*
@@ -15,6 +16,9 @@ import com.boltic28.taskmanager.ui.screens.activity.ActivityHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.fragment_search_block.*
+import java.time.LocalDateTime
+import java.util.*
 
 class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
 
@@ -45,9 +49,9 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
         model.disposables.forEach { it.dispose() }
     }
 
-    private fun loadElements(){
+    private fun loadElements() {
         arguments?.let {
-            when(it.getString(LOAD_LIST)){
+            when (it.getString(LOAD_LIST)) {
                 KEY_EXTRA -> loadKeys()
                 STEP_EXTRA -> loadSteps()
                 TASK_EXTRA -> loadTasks()
@@ -171,14 +175,31 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
-            override fun afterTextChanged(p0: Editable?) {
-                val predicate = main_search_field.text.toString()
-                if (predicate.isNotEmpty()) {
-                    model.adapter.filter(predicate)
-                } else {
-                    model.adapter.clearFilter()
-                }
-            }
+            override fun afterTextChanged(p0: Editable?) { filterItems(LocalDateTime.MAX) }
         })
+
+        search_is_done_checkbox.setOnCheckedChangeListener { _, _ -> filterItems(LocalDateTime.MAX) }
+        search_is_started_checkbox.setOnCheckedChangeListener { _, _ -> filterItems(LocalDateTime.MAX) }
+        search_is_failed_checkbox.setOnCheckedChangeListener { _, _ -> filterItems(LocalDateTime.MAX) }
+        search_not_started_checkbox.setOnCheckedChangeListener { _, _ -> filterItems(LocalDateTime.MAX) }
+        search_radio_group.setOnCheckedChangeListener { _, i ->
+            when (i) {
+                R.id.rb_make_today -> filterItems(LocalDateTime.now().plusDays(1))
+                R.id.rb_make_week -> filterItems(LocalDateTime.now().plusWeeks(1))
+                R.id.rb_make_month -> filterItems(LocalDateTime.now().plusMonths(1))
+                else -> filterItems(LocalDateTime.MAX)
+            }
+        }
+    }
+
+    private fun filterItems(until: LocalDateTime) {
+        model.adapter.filterData(
+            main_search_field.text.toString().toLowerCase(Locale.ROOT),
+            search_is_done_checkbox.isChecked,
+            search_is_started_checkbox.isChecked,
+            search_is_failed_checkbox.isChecked,
+            search_not_started_checkbox.isChecked,
+            until
+        )
     }
 }

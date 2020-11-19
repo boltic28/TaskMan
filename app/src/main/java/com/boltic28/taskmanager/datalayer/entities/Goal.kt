@@ -18,4 +18,4 @@ data class Goal(
     val tasks: List<Task>,
     val ideas: List<Idea>,
     val keys: List<KeyResult>
-): ParentItem
+): ProgressiveItem

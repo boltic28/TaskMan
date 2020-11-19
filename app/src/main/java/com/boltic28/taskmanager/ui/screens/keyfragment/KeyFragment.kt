@@ -4,6 +4,7 @@ import androidx.navigation.fragment.findNavController
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.entities.KeyResult
 import com.boltic28.taskmanager.ui.base.BaseEntityFragment
+import com.boltic28.taskmanager.ui.constant.KEY_EXTRA
 import com.boltic28.taskmanager.ui.constant.NO_ID
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -16,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_block_recycler.*
 class KeyFragment: BaseEntityFragment<KeyFragmentModel>() {
 
     override fun initView() {
-        setButtonsBack()
+        setButtonsBack(KEY_EXTRA)
         model.disposables + model.item
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

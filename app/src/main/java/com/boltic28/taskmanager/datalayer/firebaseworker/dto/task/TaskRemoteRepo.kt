@@ -30,8 +30,8 @@ class TaskRemoteRepo(
                 override fun onDataChange(snapshot: DataSnapshot) {
                     snapshot.children
                         .forEach { data ->
-                            data.getValue(RemoteTask::class.java)?.let { dbGoal ->
-                                _mTask.onNext(dbGoal.toLocalObject())
+                            data.getValue(RemoteTask::class.java)?.let { dbTask ->
+                                _mTask.onNext(dbTask.toLocalObject())
                             }
                         }
                 }
@@ -47,8 +47,8 @@ class TaskRemoteRepo(
                 override fun onDataChange(snapshot: DataSnapshot) {
                     snapshot.children
                         .forEach { data ->
-                            data.getValue(RemoteTask::class.java)?.let { dbGoal ->
-                                _mTask.onNext(dbGoal.toLocalObject())
+                            data.getValue(RemoteTask::class.java)?.let { dbTask ->
+                                _mTask.onNext(dbTask.toLocalObject())
                             }
                         }
                 }

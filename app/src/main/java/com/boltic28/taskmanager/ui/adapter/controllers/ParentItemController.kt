@@ -6,14 +6,14 @@ import android.widget.LinearLayout
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.Progress
 import com.boltic28.taskmanager.datalayer.entities.KeyResult
-import com.boltic28.taskmanager.datalayer.entities.ParentItem
+import com.boltic28.taskmanager.datalayer.entities.ProgressiveItem
 import com.boltic28.taskmanager.datalayer.entities.Step
 import com.boltic28.taskmanager.ui.constant.NO_ID
 import java.time.LocalDateTime
 
 abstract class ParentItemController: BaseItemController() {
 
-    fun fillProgress(itemView: View, item: ParentItem){
+    fun fillProgress(itemView: View, item: ProgressiveItem){
 
         val progressContainer: LinearLayout = itemView.findViewById(R.id.item_progress_container)
         progressContainer.visibility = View.VISIBLE
@@ -37,7 +37,7 @@ abstract class ParentItemController: BaseItemController() {
         if (item.progress.value == Progress.DONE.value) progress100.setImageResource(R.drawable.bg_progress_on)
     }
 
-    fun setStatusContainer(itemView: View, item: ParentItem){
+    fun setStatusContainer(itemView: View, item: ProgressiveItem){
         val statusAttention: ImageView = itemView.findViewById(R.id.item_status_attention)
         val statusStarted: ImageView = itemView.findViewById(R.id.item_status_started)
         val statusDone: ImageView = itemView.findViewById(R.id.item_status_done)

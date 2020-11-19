@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.boltic28.taskmanager.datalayer.entities.BaseItem
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
-import java.util.*
+import java.time.LocalDateTime
 
 class ItemAdapter(
     private val controllers: List<HolderController>,
@@ -13,19 +13,29 @@ class ItemAdapter(
 ) :
     RecyclerView.Adapter<DefaultViewHolder>(), ElementManager, Filter {
 
-    override var listForFilter: List<BaseItem> = emptyList()
     private var items: List<BaseItem> = emptyList()
+    private val filter = FilterImpl(this)
 
-    override fun updateListForFilter(){
-        listForFilter = items
+    override fun clearFilter() {
+        filter.clearFilter()
     }
 
-    override fun filter(str: String){
-        refreshData(listForFilter.filter { it.name.toLowerCase(Locale.ROOT).contains(str) })
-    }
-
-    override fun clearFilter(){
-        refreshData(listForFilter)
+    override fun filterData(
+        stringFilter: String,
+        isDoneFilterOn: Boolean,
+        isStartedFilterOn: Boolean,
+        isFailedFilterOn: Boolean,
+        isNotStartedFilterOn: Boolean,
+        lastDateFilter: LocalDateTime
+    ) {
+        filter.start(
+            stringFilter,
+            isDoneFilterOn,
+            isStartedFilterOn,
+            isFailedFilterOn,
+            isNotStartedFilterOn,
+            lastDateFilter
+        )
     }
 
     override fun refreshData(list: List<BaseItem>) {
@@ -45,7 +55,7 @@ class ItemAdapter(
         }
         newList.add(item)
         refreshData(newList)
-        updateListForFilter()
+        filter.updateData()
     }
 
     override fun addList(list: List<BaseItem>) {
@@ -53,19 +63,19 @@ class ItemAdapter(
         newList.addAll(items)
         newList.addAll(list)
         refreshData(newList)
-        updateListForFilter()
+        filter.updateData()
     }
 
     override fun loadNewData(list: List<BaseItem>) {
         refreshData(list)
-        updateListForFilter()
+        filter.updateData()
     }
 
     override fun getItems(): List<BaseItem> = items
 
     override fun clearAll() {
         refreshData(listOf())
-        updateListForFilter()
+        filter.updateData()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DefaultViewHolder =

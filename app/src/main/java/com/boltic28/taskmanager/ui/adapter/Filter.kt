@@ -1,14 +1,16 @@
 package com.boltic28.taskmanager.ui.adapter
 
-import com.boltic28.taskmanager.datalayer.entities.BaseItem
+import java.time.LocalDateTime
 
 interface Filter {
 
-    var listForFilter: List<BaseItem>
-
-    fun updateListForFilter()
-
-    fun filter(str: String)
+    fun filterData(stringFilter: String,
+                   isDoneFilterOn: Boolean,
+                   isStartedFilterOn: Boolean,
+                   isFailedFilterOn: Boolean ,
+                   isNotStartedFilterOn: Boolean,
+                   lastDateFilter: LocalDateTime
+    )
 
     fun clearFilter()
 }

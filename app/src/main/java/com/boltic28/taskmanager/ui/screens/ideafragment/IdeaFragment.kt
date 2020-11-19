@@ -11,6 +11,7 @@ import com.boltic28.taskmanager.datalayer.entities.Idea
 import com.boltic28.taskmanager.ui.base.BaseEntityFragment
 import com.boltic28.taskmanager.ui.base.setDate
 import com.boltic28.taskmanager.ui.constant.IDEA_CONVERTER
+import com.boltic28.taskmanager.ui.constant.IDEA_EXTRA
 import com.boltic28.taskmanager.ui.constant.NO_ID
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -25,7 +26,7 @@ import kotlinx.android.synthetic.main.fragment_item.*
 class IdeaFragment : BaseEntityFragment<IdeaFragmentModel>() {
 
     override fun initView() {
-        setButtonsBack()
+        setButtonsBack(IDEA_EXTRA)
         model.disposables + model.item
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

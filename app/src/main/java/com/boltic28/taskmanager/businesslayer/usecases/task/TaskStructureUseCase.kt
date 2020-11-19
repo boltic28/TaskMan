@@ -1,7 +1,7 @@
 package com.boltic28.taskmanager.businesslayer.usecases.task
 
 import com.boltic28.taskmanager.businesslayer.usecases.interfaces.ChildrenItemStructureUseCase
-import com.boltic28.taskmanager.datalayer.entities.ParentItem
+import com.boltic28.taskmanager.datalayer.entities.ProgressiveItem
 import com.boltic28.taskmanager.datalayer.entities.Task
 import com.boltic28.taskmanager.datalayer.room.goal.GoalRepository
 import com.boltic28.taskmanager.datalayer.room.keyresult.KeyRepository
@@ -22,8 +22,8 @@ class TaskStructureUseCase (
         return Single.just(item.name)
     }
 
-    override fun getParentItems(): Single<List<ParentItem>> =
-        Single.zip(Single.just(mutableListOf<ParentItem>()),
+    override fun getParentItems(): Single<List<ProgressiveItem>> =
+        Single.zip(Single.just(mutableListOf<ProgressiveItem>()),
             goalRepository.getAll(),
             keyRepository.getAll(),
             stepRepository.getAll(),

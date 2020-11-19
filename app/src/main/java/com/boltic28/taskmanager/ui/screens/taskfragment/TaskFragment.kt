@@ -7,6 +7,7 @@ import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.entities.Task
 import com.boltic28.taskmanager.ui.base.BaseEntityFragment
 import com.boltic28.taskmanager.ui.constant.NO_ID
+import com.boltic28.taskmanager.ui.constant.TASK_EXTRA
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_block_buttons.*
@@ -19,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_item.*
 class TaskFragment : BaseEntityFragment<TaskFragmentModel>() {
 
     override fun initView() {
-        setButtonsBack()
+        setButtonsBack(TASK_EXTRA)
         model.disposables + model.item
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

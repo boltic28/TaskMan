@@ -13,8 +13,8 @@ data class RemoteKey(
     val icon: String,
     val date: String,
     val dateClose: String,
-    val isDone: Boolean,
-    val isStarted: Boolean,
+    val done: Boolean,
+    val started: Boolean,
     val progress: Int,
     val goalId: Long
 ) {
@@ -33,8 +33,8 @@ fun KeyResult.toRemoteObject(): RemoteKey =
         icon = this.icon,
         date = this.date.toString(),
         dateClose = this.dateClose.toString(),
-        isDone = this.isDone,
-        isStarted = this.isStarted,
+        done = this.isDone,
+        started = this.isStarted,
         progress = this.progress.value,
         goalId = this.goalId
     )
@@ -48,8 +48,8 @@ fun RemoteKey.toLocalObject(): KeyResult =
         icon = this.icon,
         date = LocalDateTime.parse(this.date),
         dateClose = LocalDateTime.parse(this.dateClose),
-        isDone = this.isDone,
-        isStarted = this.isStarted,
+        isDone = this.done,
+        isStarted = this.started,
         progress = Progress.fromInteger(this.progress),
         tasks = emptyList(),
         ideas = emptyList(),

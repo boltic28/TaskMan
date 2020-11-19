@@ -4,6 +4,7 @@ import androidx.navigation.fragment.findNavController
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.entities.Goal
 import com.boltic28.taskmanager.ui.base.BaseEntityFragment
+import com.boltic28.taskmanager.ui.constant.GOAL_EXTRA
 import com.boltic28.taskmanager.ui.constant.NO_ID
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -15,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_block_recycler.*
 class GoalFragment : BaseEntityFragment<GoalFragmentModel>() {
 
     override fun initView() {
-        setButtonsBack()
+        setButtonsBack(GOAL_EXTRA)
         model.disposables + model.item
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

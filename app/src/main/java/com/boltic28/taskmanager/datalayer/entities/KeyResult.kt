@@ -18,4 +18,4 @@ data class KeyResult(
     val steps: List<Step>,
     val tasks: List<Task>,
     val ideas: List<Idea>
-): ParentItem
+): ProgressiveItem

@@ -13,8 +13,8 @@ data class RemoteGoal(
     val icon: String,
     val date: String,
     val dateClose: String,
-    val isDone: Boolean,
-    val isStarted: Boolean,
+    val done: Boolean,
+    val started: Boolean,
     val progress: Int,
 ) {
     /**
@@ -32,8 +32,8 @@ fun Goal.toRemoteObject(): RemoteGoal =
         icon = this.icon,
         date = this.date.toString(),
         dateClose = this.dateClose.toString(),
-        isDone = this.isDone,
-        isStarted = this.isStarted,
+        done = this.isDone,
+        started = this.isStarted,
         progress = this.progress.value
     )
 
@@ -46,8 +46,8 @@ fun RemoteGoal.toLocalObject(): Goal =
         icon = this.icon,
         date = LocalDateTime.parse(this.date),
         dateClose = LocalDateTime.parse(this.dateClose),
-        isDone = this.isDone,
-        isStarted = this.isStarted,
+        isDone = this.done,
+        isStarted = this.started,
         progress = Progress.fromInteger(this.progress),
         steps = emptyList(),
         tasks = emptyList(),
