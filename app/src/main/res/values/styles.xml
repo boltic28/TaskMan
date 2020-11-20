@@ -7,12 +7,22 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+
     <!-- Sign Fragment-->
     <style name="Sign.Text.Info" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/colorSignInfoText</item>
         <item name="android:textSize">@dimen/sign_info_text_size</item>
+        <item name="android:text">@string/sign_signin_or_register</item>
     </style>
 
     <style name="Sign.Fields" parent="Widget.AppCompat.EditText">
@@ -40,10 +50,10 @@
     <style name="Sign.Button" parent="Widget.AppCompat.Button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:background">@drawable/bg_sign_button</item>
         <item name="android:textColor">@color/colorSignEditText</item>
         <item name="android:layout_marginTop">@dimen/sign_field_password_margin_top</item>
-        <item name="android:layout_marginEnd">@dimen/sign_field_password_margin_end</item>
     </style>
 
     <style name="Sign.Progress" parent="Widget.AppCompat.ProgressBar">

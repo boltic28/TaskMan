@@ -66,7 +66,7 @@ abstract class BaseEntityFragment<VM : BaseEntityFragmentModel<*>> :
     }
 
     protected fun fillBaseDate(item: BaseItem) {
-        (activity as? ActivityHelper)?.setToolbarText(item.name)
+        (activity as? ActivityHelper)?.hideToolbar()
         item_fr_name.text = item.name
         item_fr_start_date.text = fetchDate(item.date)
         item_fr_description_content.text = item.description

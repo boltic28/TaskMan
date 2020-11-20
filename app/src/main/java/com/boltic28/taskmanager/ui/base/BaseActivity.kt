@@ -7,6 +7,7 @@ import com.boltic28.taskmanager.di.App
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 abstract class BaseActivity<VM : ViewModel>(private val layout: Int)
@@ -22,6 +23,8 @@ abstract class BaseActivity<VM : ViewModel>(private val layout: Int)
         (application as App).tryInjectActivity(this)
         super.onCreate(savedInstanceState)
         setContentView(layout)
+
+        setActionBar(toolbar)
     }
 
     override fun androidInjector(): AndroidInjector<Any> = fragmentInjector

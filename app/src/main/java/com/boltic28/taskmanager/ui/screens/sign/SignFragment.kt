@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.boltic28.taskmanager.R
-import com.boltic28.taskmanager.signtools.UserIn
 import com.boltic28.taskmanager.ui.base.BaseFragment
+import com.boltic28.taskmanager.ui.screens.activity.ActivityHelper
 import io.reactivex.disposables.Disposables
 import kotlinx.android.synthetic.main.fragment_sign.*
 
@@ -22,10 +22,9 @@ class SignFragment : BaseFragment<SignFragmentModel>(R.layout.fragment_sign) {
                     model.toMainFragment(findNavController())
                 }else {
                     turnOnButtonSignIn()
-                    checkUserdata(user)
                 }
             }
-        setOnButtons()
+        initView()
     }
 
     override fun onDestroyView() {
@@ -33,23 +32,8 @@ class SignFragment : BaseFragment<SignFragmentModel>(R.layout.fragment_sign) {
         disposable.dispose()
     }
 
-    private fun checkUserdata(user: UserIn){
-        if (user.id.isNotEmpty()){
-            sign_mail.setText(user.email)
-            sign_text.text = resources.getString(R.string.sign_signout_text, user.name)
-            sign_in_button.visibility = View.GONE
-            sign_up_button.visibility = View.GONE
-            sign_out_button.visibility = View.VISIBLE
-        }else{
-            sign_mail.hint = resources.getString(R.string.sign_email)
-            sign_text.text = resources.getString(R.string.sign_signin_or_register)
-            sign_in_button.visibility = View.VISIBLE
-            sign_up_button.visibility = View.VISIBLE
-            sign_out_button.visibility = View.GONE
-        }
-    }
-
-    private fun setOnButtons() {
+    private fun initView() {
+        (activity as? ActivityHelper)?.setToolbarText(resources.getString(R.string.app_name))
         sign_in_button.setOnClickListener {
             if (isFieldsFillRight()) {
                 turnOffButtonSignIn()
@@ -67,10 +51,6 @@ class SignFragment : BaseFragment<SignFragmentModel>(R.layout.fragment_sign) {
                     , sign_password.text.toString()
                 )
             }
-        }
-
-        sign_out_button.setOnClickListener {
-            model.userManager.signOut()
         }
     }
 
