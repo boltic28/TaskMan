@@ -32,19 +32,31 @@
     <string name="to_steps_element">to steps elements</string>
     <string name="not_attached">not attached</string>
     <string name="tasks_image_description">tasks image</string>
-    <string name="in_progress">in progress</string>
-    <string name="not_started">task is not started</string>
+    <string name="status_in_progress">Status: in progress</string>
+    <string name="status_not_started">Status: not started</string>
+    <string name="status_done">Status: done</string>
     <string name="idea_image_description">idea image description</string>
-    <string name="convert_to">Convert to...</string>
+    <string name="convert_to">Convert to</string>
     <string name="image_button_description">image button</string>
-    <string name="attach_to">Attach idea to...</string>
+    <string name="attach_to">Attach idea to</string>
     <string name="attached">attached</string>
+    <string name="description">Description:</string>
+    <string name="close_before">Close before:</string>
+    <string name="information_about">Information about:</string>
+    <string name="elements">Its Elements</string>
+    <string name="attached_to">Attached to:</string>
+    <string name="cycling">Cycling:</string>
+    <string name="progres_00">Progress, %d</string>
+    <string name="free_elements">List of elements for connection</string>
+    <string name="its_elements">Elements of Item</string>
+    <string name="Search">search</string>
 
     <string-array name="cycle">
-        <item>hour</item>
-        <item>day</item>
-        <item>week</item>
-        <item>month</item>
-        <item>year</item>
+        <item>not cycle</item>
+        <item>once an hour</item>
+        <item>once a day</item>
+        <item>once a week</item>
+        <item>once a month</item>
+        <item>once an year</item>
     </string-array>
 </resources>

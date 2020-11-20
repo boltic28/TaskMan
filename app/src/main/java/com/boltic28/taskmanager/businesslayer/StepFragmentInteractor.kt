@@ -18,7 +18,7 @@ interface StepFragmentInteractor {
 
     fun setChildrenFor(item: Step): Single<Step>
 
-    fun getGoalById(id: Long): Single<Goal>
+    fun getParentName(id: Long): Single<String>
 
     fun getGoals(): Single<List<Goal>>
 
@@ -30,5 +30,5 @@ interface StepFragmentInteractor {
 
     fun updateIdea(item: Idea): Single<Int>
 
-    fun setProgressFor(step: Step): Step
+    fun setProgressFor(item: Step): Step
 }

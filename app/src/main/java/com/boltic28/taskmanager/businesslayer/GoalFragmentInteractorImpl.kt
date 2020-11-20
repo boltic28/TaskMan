@@ -14,7 +14,7 @@ class GoalFragmentInteractorImpl(
     private val taskRepository: TaskRepository,
     private val ideaRepository: IdeaRepository,
     private val goalRepository: GoalRepository,
-    private val goalCase: CaseGoalStructure
+    private val goalCase: ItemsStructureProvider
 ): GoalFragmentInteractor {
 
     override fun getGoal(id: Long): Single<Goal> =

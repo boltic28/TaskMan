@@ -8,6 +8,7 @@ import kotlin.reflect.KClass
 abstract class HolderController {
 
     private var mListener: OnActionClickListener = object : OnActionClickListener{
+        override fun isNeedToShowConnection(): Boolean = true
         override fun onActionButtonClick(item: Any) {}
         override fun onViewClick(item: Any) {}
     }
@@ -37,7 +38,12 @@ abstract class HolderController {
         holder.type == getType()
 
     interface OnActionClickListener {
+        fun isNeedToShowConnection(): Boolean
         fun onActionButtonClick(item: Any)
         fun onViewClick(item: Any)
+    }
+
+    fun provideCommonData(){
+
     }
 }

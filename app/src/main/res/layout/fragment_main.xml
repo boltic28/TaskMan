@@ -26,32 +26,39 @@
         <EditText
             android:id="@+id/main_search_field"
             style="@style/Main.Search"
-            android:drawableStart="@drawable/ic_search" />
+            android:autofillHints="@string/Search"
+            android:drawableStart="@drawable/ic_search"
+            tools:ignore="LabelFor" />
 
         <ImageButton
             android:id="@+id/main_free_goals"
             style="@style/Main.Buttons"
-            android:src="@drawable/ic_star" />
+            android:contentDescription="@string/description"
+            android:src="@drawable/goal_ph" />
 
         <ImageButton
             android:id="@+id/main_free_steps"
             style="@style/Main.Buttons"
-            android:src="@drawable/ic_star" />
+            android:contentDescription="@string/description"
+            android:src="@drawable/step_ph" />
 
         <ImageButton
             android:id="@+id/main_free_tasks"
             style="@style/Main.Buttons"
-            android:src="@drawable/ic_star" />
+            android:contentDescription="@string/description"
+            android:src="@drawable/task_ph" />
 
         <ImageButton
             android:id="@+id/main_free_keys"
             style="@style/Main.Buttons"
-            android:src="@drawable/ic_star" />
+            android:contentDescription="@string/description"
+            android:src="@drawable/key_ph" />
 
         <ImageButton
             android:id="@+id/main_free_ideas"
             style="@style/Main.Buttons"
-            android:src="@drawable/ic_star" />
+            android:contentDescription="@string/description"
+            android:src="@drawable/idea_ph" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -61,6 +68,7 @@
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/colorSignFieldEnd"
         android:clickable="true"
+        android:contentDescription="@string/description"
         android:foregroundTint="#FFFFFF"
         app:fabSize="auto"
         app:layout_constraintBottom_toTopOf="@+id/main_panel"

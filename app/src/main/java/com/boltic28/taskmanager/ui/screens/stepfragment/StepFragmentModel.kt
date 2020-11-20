@@ -11,6 +11,7 @@ import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
 import com.boltic28.taskmanager.utils.Messenger
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -18,7 +19,7 @@ import javax.inject.Inject
 class StepFragmentModel @Inject constructor(
     @AdapterForStep
     val adapter: ItemAdapter,
-    val interactor: StepFragmentInteractor,
+    private val interactor: StepFragmentInteractor,
     override var userManager: UserManager,
     val messenger: Messenger
 ) : BaseEntityFragmentModel<Step>() {
@@ -35,6 +36,19 @@ class StepFragmentModel @Inject constructor(
             )
     }
 
+    fun update(item: Step){
+        disposables + interactor.update(item)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { _ ->
+                refresh()
+                isItemsElementIntoRecycler = false
+            }
+    }
+
+    fun getParentName(item: Step): Single<String> =
+        interactor.getParentName(item.goalId)
+
     private fun initStepValue(step: Step) {
         disposables + interactor.setChildrenFor(step)
             .subscribeOn(Schedulers.io())
@@ -48,6 +62,7 @@ class StepFragmentModel @Inject constructor(
     fun loadFreeElementIntoAdapter(nav: NavController) {
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
+            override fun isNeedToShowConnection(): Boolean = true
             override fun onActionButtonClick(item: Any) {
                 if (item is Idea) addToStep(item)
                 if (item is Task) addToStep(item)
@@ -64,6 +79,7 @@ class StepFragmentModel @Inject constructor(
     fun loadGoalsIntoAdapter(step: Step, nav: NavController) {
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
+            override fun isNeedToShowConnection(): Boolean = true
             override fun onActionButtonClick(item: Any) {
                 item as Goal
                 disposables + interactor.update(step.copy(goalId = item.id))
@@ -84,6 +100,7 @@ class StepFragmentModel @Inject constructor(
     fun loadStepsElementIntoAdapter(step: Step, nav: NavController) {
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
+            override fun isNeedToShowConnection(): Boolean = true
             override fun onActionButtonClick(item: Any) {
                 if (item is Task) makeFree(item)
                 if (item is Idea) makeFree(item)

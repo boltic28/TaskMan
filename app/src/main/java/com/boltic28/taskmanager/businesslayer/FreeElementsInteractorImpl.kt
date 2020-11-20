@@ -14,29 +14,54 @@ class FreeElementsInteractorImpl(
     private val taskRepository: TaskRepository,
     private val ideaRepository: IdeaRepository,
     private val goalRepository: GoalRepository,
-    private val goalCase: CaseGoalStructure
+    private val structureProvider: ItemsStructureProvider
 ) : FreeElementsInteractor {
 
     override fun getFreeTasks(): Single<List<Task>> =
         taskRepository.getAllFree()
 
+    override fun getTasks(): Single<List<Task>> =
+        taskRepository.getAll()
+
     override fun getFreeIdeas(): Single<List<Idea>> =
         ideaRepository.getAllFree()
+
+    override fun getIdeas(): Single<List<Idea>> =
+        ideaRepository.getAll()
 
     override fun getFreeKeys(): Single<List<KeyResult>> =
         keyRepository.getAllFree()
 
+    override fun getKeys(): Single<List<KeyResult>> =
+        keyRepository.getAll()
+
     override fun getFreeSteps(): Single<List<Step>> =
         stepRepository.getAllFree()
+
+    override fun getSteps(): Single<List<Step>> =
+        stepRepository.getAll()
 
     override fun getGoals(): Single<List<Goal>> =
         goalRepository.getAll()
 
     override fun setChildrenFor(goal: Goal): Single<Goal> =
-        goalCase.setChildrenFor(goal)
+        structureProvider.setChildrenFor(goal)
+
+    override fun setChildrenFor(step: Step): Single<Step> =
+        structureProvider.setChildrenFor(step)
+
+    override fun setChildrenFor(key: KeyResult): Single<KeyResult> =
+        structureProvider.setChildrenFor(key)
 
     override fun setProgressFor(goal: Goal): Goal =
-        goalCase.setProgressFor(goal)
+        structureProvider.setProgressFor(goal)
 
+    override fun setProgressFor(step: Step): Step =
+        structureProvider.setProgressFor(step)
 
+    override fun setProgressFor(key: KeyResult): KeyResult =
+        structureProvider.setProgressFor(key)
+
+    override fun update(item: Task): Single<Int> =
+        taskRepository.update(item)
 }

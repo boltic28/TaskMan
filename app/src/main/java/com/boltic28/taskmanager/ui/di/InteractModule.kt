@@ -1,6 +1,5 @@
 package com.boltic28.taskmanager.ui.di
 
-import com.boltic28.taskmanager.businesslayer.TaskFragmentInteractorImpl
 import com.boltic28.taskmanager.businesslayer.*
 import com.boltic28.taskmanager.datalayer.room.goal.GoalRepository
 import com.boltic28.taskmanager.datalayer.room.idea.IdeaRepository
@@ -37,7 +36,7 @@ class InteractModule(
             taskRepository,
             ideaRepository,
             goalRepository,
-            provideCaseGoalStructure()
+            provideCaseItemStructure()
         )
 
     @Provides
@@ -48,7 +47,7 @@ class InteractModule(
             taskRepository,
             ideaRepository,
             goalRepository,
-            provideCaseGoalStructure()
+            provideCaseItemStructure()
         )
 
     @Provides
@@ -59,16 +58,17 @@ class InteractModule(
             taskRepository,
             ideaRepository,
             goalRepository,
-            provideCaseGoalStructure()
+            provideCaseItemStructure()
         )
 
     @Provides
-    fun provideCaseGoalStructure(): CaseGoalStructure =
-        CaseGoalStructureImpl(
+    fun provideCaseItemStructure(): ItemsStructureProvider =
+        ItemsStructureProviderImpl(
             keyRepository,
             stepRepository,
             taskRepository,
-            ideaRepository
+            ideaRepository,
+            goalRepository
         )
 
     @Provides
@@ -77,7 +77,8 @@ class InteractModule(
             taskRepository,
             ideaRepository,
             stepRepository,
-            goalRepository
+            goalRepository,
+            provideCaseItemStructure()
         )
 
     @Provides
@@ -86,13 +87,17 @@ class InteractModule(
             keyRepository,
             taskRepository,
             ideaRepository,
-            goalRepository
+            goalRepository,
+            provideCaseItemStructure()
         )
 
     @Provides
     fun provideTaskInteractor(): TaskFragmentInteractor =
         TaskFragmentInteractorImpl(
-            taskRepository
+            taskRepository,
+            stepRepository,
+            keyRepository,
+            goalRepository
         )
 
     @Provides

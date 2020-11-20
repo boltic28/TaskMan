@@ -1,60 +1,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="140dp"
-    android:padding="@dimen/item_padding_for_view"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    style="@style/Item">
 
-    <TextView
-        android:id="@+id/item_step_header"
-        style="@style/Item.Header"
-        tools:text="One small step"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        />
-
-    <TextView
-        android:id="@+id/item_step_start"
-        style="@style/Item.Start"
-        tools:text="since: 22.09.2020"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
-    <TextView
-        android:id="@+id/item_step_description"
-        style="@style/Item.Description"
-        android:maxLines="2"
-        tools:text="since: 22.09.2020 Some stupid idea come into my head,since: 22.09.2020 Some stupid idea come into my head,since: 22.09...."
-        app:layout_constraintLeft_toRightOf="@id/item_step_image"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_step_header"
-        />
-
-    <ImageView
-        android:id="@+id/item_step_image"
-        style="@style/Item.Image"
-        app:layout_constraintTop_toBottomOf="@+id/item_step_header"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:contentDescription="@string/description_icon_of_step" />
-
-    <Button
-        android:id="@+id/step_button_start"
-        style="@style/Item.Button.Idea"
-        android:text="@string/start_it"
-        app:layout_constraintLeft_toRightOf="@+id/item_step_image"
-        app:layout_constraintRight_toLeftOf="@+id/step_button_done"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
-
-    <Button
-        android:id="@+id/step_button_done"
-        style="@style/Item.Button.Idea"
-        android:text="@string/done_it"
-        app:layout_constraintLeft_toRightOf="@+id/step_button_start"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
-
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/item_base" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

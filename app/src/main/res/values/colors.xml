@@ -6,6 +6,7 @@
 
     <color name="colorWhite">#F5F8F8</color>
     <color name="transparent">#00000000</color>
+    <color name="recyclerBGTransparent">#88A2AAC3</color>
 
     <color name="colorSignFieldEnd">#1912E6</color>
     <color name="colorSignFieldStart">#AEBCEC</color>
@@ -24,4 +25,10 @@
     <color name="colorItemDescription">#7C7B79</color>
     <color name="colorItemProgressOn">#04BF04</color>
     <color name="colorItemProgressOff">#C5C4C1</color>
+
+
+    <color name="colorStatusInfo">#4CAF50</color>
+    <color name="colorStatusAttention">#FF5722</color>
+    <color name="colorStatusDescription">#703C08</color>
+    <color name="colorStatusOff">#C5C4C1</color>
 </resources>

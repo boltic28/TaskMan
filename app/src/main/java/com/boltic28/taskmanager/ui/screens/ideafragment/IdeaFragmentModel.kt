@@ -10,12 +10,11 @@ import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
-import com.boltic28.taskmanager.ui.screens.goalfragment.AdapterForGoal
 import com.boltic28.taskmanager.utils.Messenger
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
-import javax.inject.Named
 
 class IdeaFragmentModel @Inject constructor(
     @AdapterForIdea
@@ -37,13 +36,15 @@ class IdeaFragmentModel @Inject constructor(
     fun update(idea: Idea) {
         disposables + interactor.update(idea)
             .subscribeOn(Schedulers.io())
-            .subscribe { _ ->
-                refresh()
-            }
+            .subscribe { _ -> refresh() }
     }
 
-    fun loadAllElements(idea: Idea, nav: NavController) {
+    fun getParentName(idea: Idea): Single<String> =
+        interactor.getParentName(idea)
+
+    fun loadFreeElementsIntoAdapter(idea: Idea, nav: NavController) {
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
+            override fun isNeedToShowConnection(): Boolean = false
             override fun onActionButtonClick(item: Any) {
                 attachTo(idea, item)
             }
@@ -51,7 +52,7 @@ class IdeaFragmentModel @Inject constructor(
                 goToItemFragment(item, nav)
             }
         })
-        disposables + interactor.getAllElements()
+        disposables + interactor.getStepsGoalsKeys()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { list ->
@@ -63,7 +64,8 @@ class IdeaFragmentModel @Inject constructor(
         if (item is Step) {
             disposables + interactor.update(idea.copy(stepId = item.id))
                 .subscribeOn(Schedulers.io())
-                .subscribe { _ -> refresh() }
+                .subscribe { _ ->
+                    refresh() }
         }
         if (item is Goal) {
             disposables + interactor.update(idea.copy(goalId = item.id))

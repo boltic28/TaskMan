@@ -10,7 +10,9 @@ import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
+import com.boltic28.taskmanager.ui.constant.NO_ID
 import com.boltic28.taskmanager.utils.Messenger
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -18,10 +20,11 @@ import javax.inject.Inject
 class KeyFragmentModel @Inject constructor(
     @AdapterForKey
     val adapter: ItemAdapter,
-    val interactor: KeyFragmentInteractor,
+    private val interactor: KeyFragmentInteractor,
     override var userManager: UserManager,
     val messenger: Messenger
 ) : BaseEntityFragmentModel<KeyResult>() {
+
     override fun refresh() {
         disposables + interactor.getKeyById(itemId)
             .subscribeOn(Schedulers.io())
@@ -33,6 +36,19 @@ class KeyFragmentModel @Inject constructor(
                 }
             )
     }
+
+    fun update(key: KeyResult) {
+        disposables + interactor.update(key)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { _ ->
+                refresh()
+                isItemsElementIntoRecycler = false
+            }
+    }
+
+    fun getParentName(item: KeyResult): Single<String> =
+        interactor.getParentName(item.goalId)
 
     private fun initValue(key: KeyResult) {
         disposables + interactor.setChildrenFor(key)
@@ -50,6 +66,7 @@ class KeyFragmentModel @Inject constructor(
     fun loadGoalsIntoAdapter(key: KeyResult, nav: NavController) {
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
+            override fun isNeedToShowConnection(): Boolean = true
             override fun onActionButtonClick(item: Any) {
                 item as Goal
                 disposables + interactor.update(key.copy(goalId = item.id))
@@ -70,6 +87,7 @@ class KeyFragmentModel @Inject constructor(
     fun loadKeysElementIntoAdapter(key: KeyResult, nav: NavController) {
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
+            override fun isNeedToShowConnection(): Boolean = true
             override fun onActionButtonClick(item: Any) {
                 if (item is Task) makeFree(item)
                 if (item is Idea) makeFree(item)
@@ -87,6 +105,7 @@ class KeyFragmentModel @Inject constructor(
     fun loadFreeElementIntoAdapter(nav: NavController) {
         adapter.clearAll()
         adapter.setAdapterListener(object : HolderController.OnActionClickListener {
+            override fun isNeedToShowConnection(): Boolean = true
             override fun onActionButtonClick(item: Any) {
                 if (item is Idea) addToKey(item)
                 if (item is Task) addToKey(item)
@@ -123,7 +142,7 @@ class KeyFragmentModel @Inject constructor(
     }
 
     private fun makeFree(item: Idea) {
-        disposables + interactor.updateIdea(item.copy(keyId = 0L))
+        disposables + interactor.updateIdea(item.copy(keyId = NO_ID))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -134,7 +153,7 @@ class KeyFragmentModel @Inject constructor(
     }
 
     private fun makeFree(item: Task) {
-        disposables + interactor.updateTask(item.copy(keyId = 0L))
+        disposables + interactor.updateTask(item.copy(keyId = NO_ID))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
