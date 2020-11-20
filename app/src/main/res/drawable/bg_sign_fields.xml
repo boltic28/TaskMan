@@ -4,8 +4,8 @@
         android:bottomRightRadius="@dimen/sign_field_corner"
         android:topRightRadius="@dimen/sign_field_corner" />
     <gradient
-        android:endColor="@color/colorSignFieldEnd"
-        android:startColor="@color/colorSignFieldStart"
+        android:endColor="?attr/themeSignFieldsBGEndColor"
+        android:startColor="?attr/themeSignFieldsBGStartColor"
         android:angle="360"/>
     <stroke
         android:color="@color/colorSignFieldStroke"

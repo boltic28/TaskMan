@@ -1,6 +1,8 @@
 package com.boltic28.taskmanager.ui.di
 
 import android.app.Activity
+import com.boltic28.taskmanager.datalayer.firebaseworker.FireBaseDatabase
+import com.boltic28.taskmanager.datalayer.firebaseworker.RemoteDB
 import com.boltic28.taskmanager.signtools.FireUserManager
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.base.BaseActivity
@@ -18,4 +20,7 @@ open class ActivityModule(private val activity: BaseActivity<*>) {
     @Provides
     fun provideFirebaseManager(messenger: Messenger): UserManager =
         FireUserManager(activity, messenger)
+
+    @Provides
+    fun provideFBDataBase(): RemoteDB = FireBaseDatabase()
 }

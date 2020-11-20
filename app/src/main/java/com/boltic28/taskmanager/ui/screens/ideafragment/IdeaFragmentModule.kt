@@ -1,6 +1,7 @@
 package com.boltic28.taskmanager.ui.screens.ideafragment
 
 import androidx.lifecycle.ViewModel
+import com.boltic28.taskmanager.datalayer.entities.BaseItem
 import com.boltic28.taskmanager.ui.di.ViewModelKey
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.*
@@ -22,8 +23,8 @@ class IdeaFragmentModule {
             ),
             object : HolderController.OnActionClickListener{
                 override fun isNeedToShowConnection(): Boolean = true
-                override fun onActionButtonClick(item: Any) {}
-                override fun onViewClick(item: Any) {}
+                override fun onActionButtonClick(item: BaseItem) {}
+                override fun onViewClick(item: BaseItem) {}
             }
         )
 

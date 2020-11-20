@@ -6,6 +6,7 @@ import com.boltic28.taskmanager.datalayer.entities.Goal
 fun Goal.toEntity(): GoalEntity =
     GoalEntity(
         id = this.id,
+        uid = this.uid,
         name = this.name,
         description = this.description,
         icon = this.icon,
@@ -18,6 +19,7 @@ fun Goal.toEntity(): GoalEntity =
 fun GoalEntity.toGoal(): Goal =
     Goal(
         id = this.id,
+        uid = this.uid,
         name = this.name,
         description = this.description,
         icon = this.icon,

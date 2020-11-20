@@ -7,8 +7,9 @@ import java.time.LocalDateTime
 
 @Entity(tableName = "step")
 data class StepEntity(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     val id: Long,
+    val uid: String,
     val goalId: Long,
     val keyId: Long,
     val name: String,

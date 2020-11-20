@@ -12,6 +12,6 @@ class ItemDiffUtil(private val newList: List<*>, private val oldList: List<*>): 
     override fun getNewListSize(): Int = newList.size
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition] == newList[oldItemPosition]
+        return oldList[oldItemPosition] == newList[newItemPosition]
     }
 }

@@ -2,8 +2,11 @@ package com.boltic28.taskmanager.ui.screens.activity
 
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import androidx.navigation.findNavController
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.ui.base.BaseActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity<MainActivityModel>(R.layout.activity_main), ActivityHelper {
 
@@ -16,6 +19,8 @@ class MainActivity : BaseActivity<MainActivityModel>(R.layout.activity_main), Ac
         when (item.itemId) {
             R.id.sign_out_toolbar -> {
                 model.userManager.signOut()
+                setToolbarText(resources.getString(R.string.app_name))
+                findNavController(R.id.container).navigate(R.id.signFragment)
                 return true
             }
         }
@@ -23,7 +28,15 @@ class MainActivity : BaseActivity<MainActivityModel>(R.layout.activity_main), Ac
     }
 
     override fun setToolbarText(text: String) {
+        showToolbar()
         title = text
     }
 
+    override fun hideToolbar(){
+        toolbar.visibility = View.GONE
+    }
+
+    override fun showToolbar(){
+        toolbar.visibility = View.VISIBLE
+    }
 }

@@ -6,7 +6,7 @@ import io.reactivex.Single
 @Dao
 interface TaskDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(taskEntity: TaskEntity): Single<Long>
 
     @Update
@@ -14,6 +14,9 @@ interface TaskDao {
 
     @Delete
     fun delete(taskEntity: TaskEntity): Single<Int>
+
+    @Query("DELETE FROM task")
+    fun deleteAll(): Single<Int>
 
     @Query("SELECT * FROM task WHERE id = :id ORDER BY id")
     fun getById(id: Long): Single<TaskEntity>

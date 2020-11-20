@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/item_fr_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Progress: 60%" />
+
+    <LinearLayout
+        android:id="@+id/item_fr_progress_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/item_fr_progress_20"
+            style="@style/ItemFragment.Progress.Section"
+            android:contentDescription="@string/description" />
+
+        <ImageView
+            android:id="@+id/item_fr_progress_40"
+            style="@style/ItemFragment.Progress.Section"
+            android:contentDescription="@string/description" />
+
+        <ImageView
+            android:id="@+id/item_fr_progress_60"
+            style="@style/ItemFragment.Progress.Section"
+            android:contentDescription="@string/description" />
+
+        <ImageView
+            android:id="@+id/item_fr_progress_80"
+            style="@style/ItemFragment.Progress.Section"
+            android:contentDescription="@string/description" />
+
+        <ImageView
+            android:id="@+id/item_fr_progress_100"
+            style="@style/ItemFragment.Progress.Section"
+            android:contentDescription="@string/description" />
+
+    </LinearLayout>
+</LinearLayout>

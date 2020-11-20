@@ -5,7 +5,8 @@ import io.reactivex.Single
 
 @Dao
 interface StepDao {
-    @Insert
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(stepEntity: StepEntity): Single<Long>
 
     @Update
@@ -13,6 +14,9 @@ interface StepDao {
 
     @Delete
     fun delete(stepEntity: StepEntity): Single<Int>
+
+    @Query("DELETE FROM step")
+    fun deleteAll(): Single<Int>
 
     @Transaction
     @Query("SELECT * FROM step WHERE id = :id ORDER BY id")

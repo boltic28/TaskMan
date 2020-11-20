@@ -2,6 +2,7 @@ package com.boltic28.taskmanager.ui.adapter.controllers
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.boltic28.taskmanager.datalayer.entities.BaseItem
 import com.boltic28.taskmanager.ui.adapter.DefaultViewHolder
 import kotlin.reflect.KClass
 
@@ -9,8 +10,8 @@ abstract class HolderController {
 
     private var mListener: OnActionClickListener = object : OnActionClickListener{
         override fun isNeedToShowConnection(): Boolean = true
-        override fun onActionButtonClick(item: Any) {}
-        override fun onViewClick(item: Any) {}
+        override fun onActionButtonClick(item: BaseItem) {}
+        override fun onViewClick(item: BaseItem) {}
     }
         var listener: OnActionClickListener
         get() = mListener
@@ -39,8 +40,8 @@ abstract class HolderController {
 
     interface OnActionClickListener {
         fun isNeedToShowConnection(): Boolean
-        fun onActionButtonClick(item: Any)
-        fun onViewClick(item: Any)
+        fun onActionButtonClick(item: BaseItem)
+        fun onViewClick(item: BaseItem)
     }
 
     fun provideCommonData(){

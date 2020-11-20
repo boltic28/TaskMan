@@ -1,11 +1,14 @@
 package com.boltic28.taskmanager.datalayer.room.idea
 
 import com.boltic28.taskmanager.datalayer.entities.Idea
+import com.boltic28.taskmanager.datalayer.firebaseworker.dto.RemoteRepo
 import io.reactivex.Single
 
-class DefaultIdeaRepository(private val dao: IdeaDao) : IdeaRepository {
+class DefaultIdeaRepository(private val dao: IdeaDao, private val remoteDB: RemoteRepo<Idea>) :
+    IdeaRepository {
     override fun insert(item: Idea): Single<Long> =
         dao.insert(item.toEntity())
+            .doOnSuccess { remoteDB.create(item) }
 
     override fun getAll(): Single<List<Idea>> =
         dao.getAll().map { list ->
@@ -37,7 +40,15 @@ class DefaultIdeaRepository(private val dao: IdeaDao) : IdeaRepository {
 
     override fun update(item: Idea): Single<Int> =
         dao.update(item.toEntity())
+            .doOnSuccess { remoteDB.create(item) }
 
     override fun delete(item: Idea): Single<Int> =
         dao.delete(item.toEntity())
+            .doOnSuccess { remoteDB.delete(item) }
+
+    override fun deleteAll(): Single<Int> =
+        dao.deleteAll()
+
+    override fun refreshData(item: Idea): Single<Long> =
+        dao.insert(item.toEntity())
 }

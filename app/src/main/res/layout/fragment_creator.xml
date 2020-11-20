@@ -1,100 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Creator.Fragment">
 
     <EditText
         android:id="@+id/creator_name"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:hint="input name of item"
+        style="@style/Creator.Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/creator_description"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:hint="input name of item"
+        style="@style/Creator.Description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/creator_name" />
+        app:layout_constraintTop_toBottomOf="@+id/creator_name"
+        app:layout_constraintBottom_toTopOf="@id/creator_group"/>
 
     <RadioGroup
         android:id="@+id/creator_group"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
+        style="@style/Converter.RadioGroup"
         android:checkedButton="@id/creator_idea_radio"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/creator_description">
+        app:layout_constraintTop_toBottomOf="@+id/creator_description"
+        app:layout_constraintBottom_toTopOf="@id/creator_close_date">
 
         <RadioButton
             android:id="@+id/creator_idea_radio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="idea" />
+            style="@style/Converter.RadioItem"
+            android:text="@string/idea" />
 
         <RadioButton
             android:id="@+id/creator_task_radio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="task" />
+            style="@style/Converter.RadioItem"
+            android:text="@string/task" />
 
         <RadioButton
             android:id="@+id/creator_step_radio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="step" />
+            style="@style/Converter.RadioItem"
+            android:text="@string/step" />
 
         <RadioButton
             android:id="@+id/creator_key_radio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="key" />
+            style="@style/Converter.RadioItem"
+            android:text="@string/key" />
 
         <RadioButton
             android:id="@+id/creator_goal_radio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="goal" />
+            style="@style/Converter.RadioItem"
+            android:text="@string/goal" />
 
     </RadioGroup>
 
+    <TextView
+        android:id="@+id/creator_close_date"
+        style="@style/Creator.CloseDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/creator_group"
+        app:layout_constraintBottom_toTopOf="@id/creator_is_cycle_checkbox"/>
+
+    <TextView
+        android:id="@+id/creator_close_date_value"
+        style="@style/Creator.CloseDateVal"
+        app:layout_constraintStart_toEndOf="@id/creator_close_date"
+        app:layout_constraintTop_toTopOf="@+id/creator_close_date"
+        tools:text="15 Oct 2020" />
+
     <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/creator_is_cycle_checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:enabled="false"
-        android:text="@string/is_cycle"
+        style="@style/Creator.CheckBox"
         app:layout_constraintEnd_toStartOf="@id/creator_cycle_spinner"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/creator_group" />
+        app:layout_constraintTop_toBottomOf="@+id/creator_close_date"
+        app:layout_constraintBottom_toBottomOf="@id/creator_button_create"/>
 
     <Spinner
         android:id="@+id/creator_cycle_spinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/Creator.Spinner" app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/creator_is_cycle_checkbox"
-        app:layout_constraintTop_toBottomOf="@+id/creator_group" />
+        app:layout_constraintBottom_toBottomOf="@+id/creator_is_cycle_checkbox" />
 
     <Button
         android:id="@+id/creator_button_create"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/Creator.Button"
+        android:backgroundTint="?themeCreatorButtonCreateColor"
         android:text="@string/create"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/creator_button_cancel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/creator_is_cycle_checkbox" />
 
+    <Button
+        android:id="@+id/creator_button_cancel"
+        style="@style/Creator.Button"
+        android:backgroundTint="?themeCreatorButtonCancelColor"
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/creator_button_create"
+        app:layout_constraintTop_toBottomOf="@+id/creator_is_cycle_checkbox" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

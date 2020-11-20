@@ -1,20 +1,10 @@
 package com.boltic28.taskmanager.datalayer.room.task
 
 import com.boltic28.taskmanager.datalayer.entities.Task
+import com.boltic28.taskmanager.datalayer.room.ChildItem
 import io.reactivex.Single
 
-interface TaskRepository {
-    fun insert(item: Task): Single<Long>
-
-    fun update(item: Task): Single<Int>
-
-    fun delete(item: Task): Single<Int>
-
-    fun getById(id: Long): Single<Task>
-
-    fun getAll(): Single<List<Task>>
-
-    fun getAllFree(): Single<List<Task>>
+interface TaskRepository: ChildItem<Task> {
 
     fun getAllForStep(stepId: Long): Single<List<Task>>
 

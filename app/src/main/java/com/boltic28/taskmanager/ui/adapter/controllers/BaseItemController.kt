@@ -5,6 +5,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.entities.BaseItem
+import com.boltic28.taskmanager.ui.setPlaceHolderForItem
+import com.bumptech.glide.Glide
 import java.time.format.DateTimeFormatter
 
 abstract class BaseItemController: HolderController() {
@@ -19,7 +21,14 @@ abstract class BaseItemController: HolderController() {
         description.text = item.description
         dateStart.text =
             item.date.format(DateTimeFormatter.ofPattern(itemView.resources.getString(R.string.dateFormatterForItems)))
-        icon.setImageResource(R.drawable.goal_ph)// make with glide and placeholder
+
+        Glide.with(itemView)
+            .load(setPlaceHolderForItem(item.icon))
+            .centerCrop()
+            .placeholder(R.drawable.undf_ph)
+            .error(R.drawable.undf_ph)
+            .fallback(R.drawable.undf_ph)
+            .into(icon)
     }
 
     fun setOnItemClickListener(itemView: View, item: BaseItem){

@@ -9,7 +9,6 @@
     <TextView
         android:id="@+id/sign_text"
         style="@style/Sign.Text.Info"
-        android:text="@string/sign_signin_or_register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -40,7 +39,7 @@
     <Button
         android:id="@+id/sign_in_button"
         style="@style/Sign.Button"
-        android:backgroundTint="@color/colorSignInButton"
+        android:backgroundTint="@color/colorSignButtonInBg"
         android:text="@string/sign_in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/sign_up_button"
@@ -51,22 +50,11 @@
     <Button
         android:id="@+id/sign_up_button"
         style="@style/Sign.Button"
-        android:backgroundTint="@color/colorSignRegButton"
+        android:backgroundTint="@color/colorSignButtonUpBg"
         android:text="@string/sign_up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/sign_in_button"
-        app:layout_constraintTop_toBottomOf="@id/sign_password"
-        app:layout_constraintVertical_bias="0.1" />
-
-    <Button
-        android:id="@+id/sign_out_button"
-        style="@style/Sign.Button"
-        android:backgroundTint="@color/colorSignOutButton"
-        android:text="@string/sign_out_b"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sign_password"
         app:layout_constraintVertical_bias="0.1" />
 

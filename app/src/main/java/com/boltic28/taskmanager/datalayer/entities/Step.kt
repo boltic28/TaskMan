@@ -5,6 +5,7 @@ import java.time.LocalDateTime
 
 data class Step(
     override val id: Long,
+    override val uid: String,
     override val name: String,
     override val description: String,
     override val icon: String,
@@ -17,4 +18,4 @@ data class Step(
     val keyId: Long,
     val tasks: List<Task>,
     val ideas: List<Idea>
-): ParentItem
+): ProgressiveItem

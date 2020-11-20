@@ -5,15 +5,16 @@ import java.time.LocalDateTime
 
 data class Task(
     override val id: Long,
+    override val uid: String,
     override val name: String,
     override val description: String,
     override val icon: String,
     override val date: LocalDateTime,
+    override val dateClose: LocalDateTime,
+    override val isDone: Boolean,
+    override val isStarted: Boolean,
     val stepId: Long,
     val keyId: Long,
     val goalId: Long,
-    val dateClose: LocalDateTime,
-    val cycle: Cycle,
-    val isDone: Boolean,
-    val isStarted: Boolean
-): BaseItem
+    val cycle: Cycle
+): CompletableItem

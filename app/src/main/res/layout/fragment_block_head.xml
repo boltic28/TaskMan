@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/item_fr_image"
+        style="@style/ItemFragment.Image"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/description"/>
+
+    <ImageButton
+        android:id="@+id/item_fr_settings"
+        style="@style/ItemFragment.Button.Settings"
+        app:layout_constraintRight_toRightOf="@id/item_fr_image"
+        app:layout_constraintBottom_toBottomOf="@id/item_fr_image"
+        android:contentDescription="@string/description"/>
+
+    <ImageView
+        android:id="@+id/item_fr_isDone_icon"
+        style="@style/ItemFragment.IsDone"
+        app:layout_constraintLeft_toRightOf="@id/item_fr_name"
+        app:layout_constraintTop_toTopOf="@id/item_fr_name"
+        app:layout_constraintBottom_toBottomOf="@id/item_fr_name"
+        android:contentDescription="@string/description"/>
+
+    <TextView
+        android:id="@+id/item_fr_name"
+        style="@style/ItemFragment.Header"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/item_fr_image"
+        tools:text="Task numb 77" />
+
+    <TextView
+        android:id="@+id/item_fr_start_date"
+        style="@style/ItemFragment.StartDate"
+        app:layout_constraintRight_toLeftOf="@id/item_fr_image"
+        app:layout_constraintTop_toBottomOf="@id/item_fr_name"
+        tools:text="23 sep 2020" />
+
+    <TextView
+        android:id="@+id/item_fr_status"
+        style="@style/ItemFragment.OtherText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_fr_start_date"
+        tools:text="Status: not started" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,95 +8,113 @@ import com.boltic28.taskmanager.datalayer.entities.Task
 import com.boltic28.taskmanager.ui.base.BaseEntityFragment
 import com.boltic28.taskmanager.ui.constant.NO_ID
 import com.boltic28.taskmanager.ui.constant.TASK_EXTRA
-import com.boltic28.taskmanager.ui.screens.activity.ActivityHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_task.*
+import kotlinx.android.synthetic.main.fragment_block_buttons.*
+import kotlinx.android.synthetic.main.fragment_block_head.*
+import kotlinx.android.synthetic.main.fragment_block_idea_convertor.*
+import kotlinx.android.synthetic.main.fragment_block_info.*
+import kotlinx.android.synthetic.main.fragment_block_recycler.*
+import kotlinx.android.synthetic.main.fragment_item.*
 
-class TaskFragment : BaseEntityFragment<TaskFragmentModel>(R.layout.fragment_task, TASK_EXTRA) {
+class TaskFragment : BaseEntityFragment<TaskFragmentModel>() {
 
     override fun initView() {
-        setButtonsBack()
+        setButtonsBack(TASK_EXTRA)
         model.disposables + model.item
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { task ->
-                if (task.id != NO_ID) {
-                    (activity as? ActivityHelper)?.setToolbarText(task.name)
-                    task_fr_name.text = fetchName(task.name)
-                    task_fr_isDone_icon.visibility = fetchVisibility(task.isDone)
-                    task_fr_start_date.text = fetchDate(task.date)
-                    task_fr_status.text = fetchStatus(task.isStarted, task.isDone)
-                    task_fr_description_content.text = task.description
-                    task_fr_close_date_content.text = fetchDate(task.dateClose)
-                    task_fr_cycle_content.text = task.cycle.value
-                    task_fr_button_action.isActivated = true
+            .subscribe { item ->
+                if (item.id != NO_ID) {
+                    fillBaseDate(item)
+                    attachAdapter(model.adapter)
 
-                    setButtonOwner(task)
-                    checkState(task)
+                    fillStatusData(item.isStarted, item.isDone, item.dateClose)
+
+                    activateCycleLine()
+                    item_fr_cycle_content.text = item.cycle.value
+
+                    setButtonOwner(item)
+                    checkState(item)
+
+                    item_fr_settings.setOnClickListener {
+                        initSetter(item)
+                        converter_button_create.setOnClickListener {
+                            model.update(item.copy(
+                                name = converter_name_value.text.toString(),
+                                description = converter_description_value.text.toString(),
+                                date = openDateTimePicker,
+                                dateClose = closeDateTimePicker
+                            ))
+                            deactivateSettingsView()
+                        }
+                    }
                 }
             }
     }
 
-    private fun setButtonsBack() {
-        task_fr_button_back.setOnClickListener {
-            activity?.onBackPressed()
-        }
-        task_fr_button_home.setOnClickListener {
-            findNavController().navigate(R.id.mainFragment)
-        }
-    }
-
-    private fun setButtonOwner(task: Task) {
-        task_fr_recycler.visibility = View.INVISIBLE
-        task_fr_its_elements.visibility = View.INVISIBLE
-        if ((task.goalId != NO_ID) || (task.stepId != NO_ID) || (task.keyId != NO_ID)) {
-            task_fr_owner_button.setImageResource(R.drawable.ic_unlink)
-            task_fr_owner_button.setOnClickListener {
-                model.update(
-                    task.copy(goalId = NO_ID, stepId = NO_ID, keyId = NO_ID)
-                )
+    private fun setButtonOwner(item: Task) {
+        activateRelativeLine()
+        item_recycler_block.visibility = View.INVISIBLE
+        if ((item.goalId != NO_ID) || (item.stepId != NO_ID) || (item.keyId != NO_ID)) {
+            item_fr_relative_button.setImageResource(R.drawable.ic_unlink)
+            item_fr_relative_button.setOnClickListener {
+                model.update(item.copy(goalId = NO_ID, stepId = NO_ID, keyId = NO_ID))
             }
-            model.disposables + model.getParentName(task)
+            model.disposables + model.getParentName(item)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { ownerName ->
-                    task_fr_relative_owner.text = ownerName
+                    item_fr_relative_owner.text = ownerName
                 }
         } else {
-            task_fr_relative_owner.text = resources.getString(R.string.not_attached)
-            task_fr_owner_button.setImageResource(R.drawable.ic_link)
-            task_fr_owner_button.setOnClickListener {
-                task_fr_recycler.visibility = View.VISIBLE
-                task_fr_recycler.layoutManager =
+            item_fr_relative_owner.text = resources.getString(R.string.not_attached)
+            item_fr_relative_button.setImageResource(R.drawable.ic_link)
+            item_fr_relative_button.setOnClickListener {
+                item_recycler_block.visibility = View.VISIBLE
+                item_fr_its_elements.text = resources.getString(R.string.free_elements)
+                item_fr_recycler.layoutManager =
                     LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                task_fr_recycler.adapter = model.adapter
-                model.loadParentsElements(task, findNavController())
+                item_fr_recycler.adapter = model.adapter
+                model.loadParentsElements(item, findNavController())
             }
         }
     }
 
     private fun checkState(task: Task) {
-        if (model.isAttention(task)){
-            task_fr_isDone_icon.visibility = View.VISIBLE
-            task_fr_isDone_icon.setImageResource(R.drawable.ic_attention)
-        }
+        item_fr_button_action.isActivated = !task.isDone
 
-        if (task.isDone) {
-            task_fr_button_action.isActivated =false
+        if (model.isAttention(task)){
+            item_fr_isDone_icon.visibility = View.VISIBLE
+            item_fr_isDone_icon.setImageResource(R.drawable.ic_attention)
         }
 
         if (task.isStarted) {
-            task_fr_button_action.setImageResource(R.drawable.ic_done)
-            task_fr_button_action.setOnClickListener {
+            item_fr_button_action.setImageResource(R.drawable.ic_done)
+            item_fr_button_action.setOnClickListener {
                 model.update(task.copy(isDone = true))
             }
         } else {
-            task_fr_button_action.setImageResource(R.drawable.ic_start)
-            task_fr_button_action.setOnClickListener {
+            item_fr_button_action.setImageResource(R.drawable.ic_start)
+            item_fr_button_action.setOnClickListener {
                 model.update(task.copy(isStarted = true))
             }
         }
+    }
 
+    private fun initSetter(item: Task){
+        activateSettingsView(item)
+        converter_button_create.setOnClickListener {
+            model.update(item.copy(
+                name = converter_name_value.text.toString(),
+                description = converter_description_value.text.toString(),
+                date = openDateTimePicker,
+                dateClose = closeDateTimePicker
+            ))
+            deactivateSettingsView()
+        }
+        converter_button_delete.setOnClickListener {
+            model.delete(item, findNavController())
+        }
     }
 }

@@ -5,6 +5,7 @@ import com.boltic28.taskmanager.datalayer.entities.Step
 fun Step.toEntity(): StepEntity =
     StepEntity(
         id = this.id,
+        uid = this.uid,
         goalId = this.goalId,
         keyId = this.keyId,
         name = this.name,
@@ -20,6 +21,7 @@ fun Step.toEntity(): StepEntity =
 fun StepEntity.toStep(): Step =
     Step(
         id = this.id,
+        uid = this.uid,
         goalId = this.goalId,
         keyId = this.keyId,
         name = this.name,

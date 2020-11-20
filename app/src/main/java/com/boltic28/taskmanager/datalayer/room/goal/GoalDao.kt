@@ -6,7 +6,7 @@ import io.reactivex.Single
 @Dao
 interface GoalDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(goalEntity: GoalEntity): Single<Long>
 
     @Update
@@ -14,6 +14,9 @@ interface GoalDao {
 
     @Delete
     fun delete(goalEntity: GoalEntity): Single<Int>
+
+    @Query("DELETE FROM goal")
+    fun deleteAll(): Single<Int>
 
     @Transaction
     @Query("SELECT * FROM goal WHERE id = :id ORDER BY id")

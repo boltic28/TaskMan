@@ -6,12 +6,7 @@ import com.boltic28.taskmanager.datalayer.di.RepositoryModule
 import com.boltic28.taskmanager.ui.base.BaseActivity
 import com.boltic28.taskmanager.ui.di.ActivityModule
 import com.boltic28.taskmanager.ui.di.InteractModule
-import com.boltic28.taskmanager.ui.screens.goalfragment.GoalFragmentModule
-import com.boltic28.taskmanager.ui.screens.ideafragment.IdeaFragmentModule
-import com.boltic28.taskmanager.ui.screens.keyfragment.KeyFragmentModule
 import com.boltic28.taskmanager.ui.screens.settings.SettingsFragmentModule
-import com.boltic28.taskmanager.ui.screens.stepfragment.StepFragmentModule
-import com.boltic28.taskmanager.ui.screens.taskfragment.TaskFragmentModule
 
 class App : Application() {
 
@@ -28,19 +23,26 @@ class App : Application() {
 
     fun tryInjectActivity(activity: BaseActivity<*>): Boolean {
 
+        val activityModule = ActivityModule(activity)
         val dbModule = DataBaseModule(this)
-        val repoModule = RepositoryModule(dbModule.provideDataBase())
+        val repoModule = RepositoryModule(dbModule.provideDataBase(), activityModule.provideFBDataBase())
 
         return applicationComponent.getActivityComponent(
-            ActivityModule(activity),
+            activityModule,
             SettingsFragmentModule(this),
             InteractModule(
                 repoModule.provideKeyRepo(),
                 repoModule.provideStepRepo(),
                 repoModule.provideTaskRepo(),
                 repoModule.provideIdeaRepo(),
-                repoModule.provideGoalRepo()
-            )
+                repoModule.provideGoalRepo(),
+                repoModule.provideGoalRemoteRepo(),
+                repoModule.provideStepRemoteRepo(),
+                repoModule.provideTaskRemoteRepo(),
+                repoModule.provideIdeaRemoteRepo(),
+                repoModule.provideKeyRemoteRepo()
+            ),
+            repoModule
         )
             .activityInjector.maybeInject(activity)
     }

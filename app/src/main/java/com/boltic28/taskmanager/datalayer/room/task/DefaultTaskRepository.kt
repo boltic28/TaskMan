@@ -1,11 +1,14 @@
 package com.boltic28.taskmanager.datalayer.room.task
 
 import com.boltic28.taskmanager.datalayer.entities.Task
+import com.boltic28.taskmanager.datalayer.firebaseworker.dto.RemoteRepo
 import io.reactivex.Single
 
-class DefaultTaskRepository(private val dao: TaskDao) : TaskRepository {
+class DefaultTaskRepository(private val dao: TaskDao, private val remoteDB: RemoteRepo<Task>) :
+    TaskRepository {
     override fun insert(item: Task): Single<Long> =
         dao.insert(item.toEntity())
+            .doOnSuccess { remoteDB.create(item) }
 
     override fun getAll(): Single<List<Task>> =
         dao.getAll().map { list ->
@@ -17,9 +20,11 @@ class DefaultTaskRepository(private val dao: TaskDao) : TaskRepository {
 
     override fun update(item: Task): Single<Int> =
         dao.update(item.toEntity())
+            .doOnSuccess { remoteDB.create(item) }
 
     override fun delete(item: Task): Single<Int> =
         dao.delete(item.toEntity())
+            .doOnSuccess { remoteDB.delete(item) }
 
     override fun getAllFree(): Single<List<Task>> =
         dao.getAllFree().map { list ->
@@ -40,4 +45,10 @@ class DefaultTaskRepository(private val dao: TaskDao) : TaskRepository {
         dao.getAllForKey(keyId).map { list ->
             list.map { it.toTask() }
         }
+
+    override fun deleteAll(): Single<Int> =
+        dao.deleteAll()
+
+    override fun refreshData(item: Task): Single<Long> =
+        dao.insert(item.toEntity())
 }

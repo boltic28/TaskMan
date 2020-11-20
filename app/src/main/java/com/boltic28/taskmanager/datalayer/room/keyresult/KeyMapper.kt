@@ -5,6 +5,7 @@ import com.boltic28.taskmanager.datalayer.entities.KeyResult
 fun KeyResult.toEntity(): KeyEntity =
     KeyEntity(
         id = this.id,
+        uid = this.uid,
         goalId = this.goalId,
         name = this.name,
         description = this.description,
@@ -19,6 +20,7 @@ fun KeyResult.toEntity(): KeyEntity =
 fun KeyEntity.toKey(): KeyResult =
     KeyResult(
         id = this.id,
+        uid = this.uid,
         goalId = this.goalId,
         name = this.name,
         description = this.description,

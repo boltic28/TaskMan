@@ -6,8 +6,9 @@ import java.time.LocalDateTime
 
 @Entity(tableName = "goal")
 data class GoalEntity(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     val id: Long,
+    val uid: String,
     val name: String,
     val description: String,
     val icon: String,

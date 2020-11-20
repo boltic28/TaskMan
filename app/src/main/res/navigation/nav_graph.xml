@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/signFragment">
 
     <fragment
         android:id="@+id/signFragment"
@@ -45,6 +45,9 @@
         <action
             android:id="@+id/action_creatorFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_creatorFragment_to_signFragment"
+            app:destination="@id/signFragment" />
     </fragment>
     <fragment
         android:id="@+id/goalFragment"
@@ -68,21 +71,40 @@
         <action
             android:id="@+id/action_goalFragment_to_taskFragment"
             app:destination="@id/taskFragment" />
+        <action
+            android:id="@+id/action_goalFragment_to_signFragment2"
+            app:destination="@id/signFragment" />
     </fragment>
     <fragment
         android:id="@+id/ideaFragment"
         android:name="com.boltic28.taskmanager.ui.screens.ideafragment.IdeaFragment"
-        android:label="IdeaFragment" />
+        android:label="IdeaFragment" >
+        <action
+            android:id="@+id/action_ideaFragment_to_signFragment"
+            app:destination="@id/signFragment" />
+    </fragment>
     <fragment
         android:id="@+id/keyFragment"
         android:name="com.boltic28.taskmanager.ui.screens.keyfragment.KeyFragment"
-        android:label="KeyFragment" />
+        android:label="KeyFragment" >
+        <action
+            android:id="@+id/action_keyFragment_to_signFragment"
+            app:destination="@id/signFragment" />
+    </fragment>
     <fragment
         android:id="@+id/stepFragment"
         android:name="com.boltic28.taskmanager.ui.screens.stepfragment.StepFragment"
-        android:label="StepFragment" />
+        android:label="StepFragment" >
+        <action
+            android:id="@+id/action_stepFragment_to_signFragment"
+            app:destination="@id/signFragment" />
+    </fragment>
     <fragment
         android:id="@+id/taskFragment"
         android:name="com.boltic28.taskmanager.ui.screens.taskfragment.TaskFragment"
-        android:label="TaskFragment" />
+        android:label="TaskFragment" >
+        <action
+            android:id="@+id/action_taskFragment_to_signFragment"
+            app:destination="@id/signFragment" />
+    </fragment>
 </navigation>

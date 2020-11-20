@@ -7,8 +7,9 @@ import java.time.LocalDateTime
 
 @Entity(tableName = "task")
 data class TaskEntity(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     val id: Long,
+    val uid: String,
     val stepId: Long,
     val keyId: Long,
     val goalId: Long,

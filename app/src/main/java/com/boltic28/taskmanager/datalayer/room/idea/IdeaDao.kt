@@ -5,7 +5,7 @@ import io.reactivex.Single
 
 @Dao
 interface IdeaDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(ideaEntity: IdeaEntity): Single<Long>
 
     @Update
@@ -13,6 +13,9 @@ interface IdeaDao {
 
     @Delete
     fun delete(ideaEntity: IdeaEntity): Single<Int>
+
+    @Query("DELETE FROM idea")
+    fun deleteAll(): Single<Int>
 
     @Query("SELECT * FROM idea WHERE id = :id ORDER BY id")
     fun getById(id: Long): Single<IdeaEntity>

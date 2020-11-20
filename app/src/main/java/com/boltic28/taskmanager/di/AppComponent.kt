@@ -1,6 +1,7 @@
 package com.boltic28.taskmanager.di
 
 import androidx.lifecycle.ViewModel
+import com.boltic28.taskmanager.datalayer.di.RepositoryModule
 import com.boltic28.taskmanager.ui.di.*
 import com.boltic28.taskmanager.ui.screens.goalfragment.GoalFragmentModule
 import com.boltic28.taskmanager.ui.screens.ideafragment.IdeaFragmentModule
@@ -25,14 +26,15 @@ interface AppComponent {
     fun getActivityComponent(
         activityModule: ActivityModule,
         settingsModule: SettingsFragmentModule,
-        interactModule: InteractModule
+        interactModule: InteractModule,
+        repositoryModule: RepositoryModule
     ): LocalActivityComponent
 
     @Subcomponent(
         modules = [
             ScreensModule::class, AppModule::class,
             ActivityModule::class, InteractModule::class,
-            SettingsFragmentModule::class
+            SettingsFragmentModule::class, RepositoryModule::class
         ]
     )
     interface LocalActivityComponent : ActivityComponent
