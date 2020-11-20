@@ -14,8 +14,7 @@
 
     <EditText
         android:id="@+id/converter_name_value"
-        style="@style/Converter.Content"
-        android:inputType="text"
+        style="@style/Converter.ContentEdit"
         app:layout_constraintLeft_toRightOf="@+id/converter_name_header"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Name of some idea" />
@@ -30,9 +29,7 @@
 
     <EditText
         android:id="@+id/converter_description_value"
-        style="@style/Converter.Content"
-        android:gravity="start"
-        android:inputType="text"
+        style="@style/Converter.ContentEdit"
         app:layout_constraintLeft_toRightOf="@+id/converter_name_header"
         app:layout_constraintTop_toBottomOf="@+id/converter_name_value"
         tools:text="Description, description etc" />
@@ -47,7 +44,7 @@
 
     <TextView
         android:id="@+id/converter_open_date_value"
-        style="@style/Converter.Content"
+        style="@style/Converter.ContentText"
         app:layout_constraintLeft_toRightOf="@+id/converter_name_header"
         app:layout_constraintTop_toBottomOf="@+id/converter_description_value"
         tools:text="18:00" />
@@ -62,7 +59,7 @@
 
     <TextView
         android:id="@+id/converter_close_date_value"
-        style="@style/Converter.Content"
+        style="@style/Converter.ContentText"
         app:layout_constraintLeft_toRightOf="@+id/converter_name_header"
         app:layout_constraintTop_toBottomOf="@+id/converter_open_date_value"
         tools:text="18:00" />
@@ -102,31 +99,36 @@
 
     <Spinner
         android:id="@+id/converter_cycle_spinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="4dp"
+        style="@style/Creator.Spinner"
+        app:layout_constraintBottom_toBottomOf="@+id/converter_is_cycle_checkbox"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/converter_is_cycle_checkbox"
-        app:layout_constraintTop_toBottomOf="@+id/converter_group" />
+        app:layout_constraintStart_toEndOf="@+id/converter_is_cycle_checkbox" />
 
     <Button
         android:id="@+id/converter_button_create"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        style="@style/Creator.Button"
+        android:backgroundTint="@color/colorSignButtonInBg"
         android:text="@string/convert_to"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/converter_button_cancel"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/converter_is_cycle_checkbox" />
+
+    <Button
+        android:id="@+id/converter_button_cancel"
+        style="@style/Creator.Button"
+        android:backgroundTint="@color/colorSignButtonUpBg"
+        android:text="@string/cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/converter_button_create"
         app:layout_constraintTop_toBottomOf="@+id/converter_is_cycle_checkbox" />
 
     <ImageButton
         android:id="@+id/converter_button_delete"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:background="@drawable/bg_white_circle"
         android:src="@drawable/ic_delete"
         android:visibility="invisible"
-        android:background="@drawable/bg_white_circle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/converter_button_create" />
 

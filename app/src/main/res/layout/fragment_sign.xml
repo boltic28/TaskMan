@@ -39,7 +39,7 @@
     <Button
         android:id="@+id/sign_in_button"
         style="@style/Sign.Button"
-        android:backgroundTint="@color/colorSignInButton"
+        android:backgroundTint="@color/colorSignButtonInBg"
         android:text="@string/sign_in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/sign_up_button"
@@ -50,7 +50,7 @@
     <Button
         android:id="@+id/sign_up_button"
         style="@style/Sign.Button"
-        android:backgroundTint="@color/colorSignRegButton"
+        android:backgroundTint="@color/colorSignButtonUpBg"
         android:text="@string/sign_up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

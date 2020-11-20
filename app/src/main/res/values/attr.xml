@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--App-->
+    <attr name="themePrimary" format="reference"/>
+    <attr name="themePrimaryDark" format="reference"/>
+    <attr name="themeAccent" format="reference"/>
+    <attr name="themeMainTextColor" format="reference"/>
+    <attr name="themeSecondTextColor" format="reference"/>
+    <attr name="themeThirdTextColor" format="reference"/>
+    <attr name="themeHintTextColor" format="reference"/>
+
+    <!--Sign Fragment-->
+    <attr name="themeSignFieldsBG" format="reference"/>
+    <attr name="themeSignHeaderTextColor" format="reference"/>
+    <attr name="themeSignFieldsTextColor" format="reference"/>
+    <attr name="themeSignHintTextColor" format="reference"/>
+    <attr name="themeSignButtonInBgColor" format="reference"/>
+    <attr name="themeSignButtonUpBgColor" format="reference"/>
+    <attr name="themeSignButtonTextColor" format="reference"/>
+
+    <!--Main fragment-->
+    <attr name="themeMainSearchTextColor" format="reference"/>
+    <attr name="themeMainSearchBG" format="reference"/>
+    <attr name="themeMainSearchItemsColor" format="reference"/>
+    <attr name="themeMainFABColor" format="reference"/>
+    <attr name="themeMainFABImageColor" format="reference"/>
+
+    <!--Create fragment-->
+    <attr name="themeCreatorButtonCreateColor" format="reference"/>
+    <attr name="themeCreatorButtonCancelColor" format="reference"/>
+
+    <!--Item Fragment-->
+    <attr name="themeItemFRStartDateColor" format="reference"/>
+    <attr name="themeItemFRProgressOnColor" format="reference"/>
+    <attr name="themeItemFRProgressOffColor" format="reference"/>
+    <attr name="themeItemSettingButtonBG" format="reference"/>
+    <attr name="themeItemSettingButtonBGTint" format="reference"/>
+    <attr name="themeItemRecyclerBG" format="reference"/>
+    <attr name="themeItemButtonsBG" format="reference"/>
+    <attr name="themeItemButtonsBGTint" format="reference"/>
+
+    <!--Item Rows-->
+    <attr name="themeItemRowBG" format="reference"/>
+    <attr name="themeItemRowBGTint" format="reference"/>
+    <attr name="themeItemSmallRowBG" format="reference"/>
+    <attr name="themeItemSmallRowBGTint" format="reference"/>
+    <attr name="themeItemRowActionButton" format="reference"/>
+    <attr name="themeItemRowActionButtonTint" format="reference"/>
+</resources>

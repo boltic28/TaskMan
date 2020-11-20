@@ -1,34 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
-
-    <color name="colorWhite">#F5F8F8</color>
     <color name="transparent">#00000000</color>
-    <color name="recyclerBGTransparent">#88A2AAC3</color>
-
-    <color name="colorSignFieldEnd">#1912E6</color>
-    <color name="colorSignFieldStart">#AEBCEC</color>
-    <color name="colorSignFieldStroke">#080909</color>
-    <color name="colorSignFieldStrokeBadInput">#F44336</color>
-    <color name="colorButton">#03DAC5</color>
-    <color name="colorSignEditText">#E8F1F0</color>
-    <color name="colorSignInfoText">#767878</color>
-    <color name="colorSignInButton">#068806</color>
-    <color name="colorSignOutButton">#C80505</color>
-    <color name="colorSignRegButton">#595856</color>
-
-
-    <color name="colorItemHeader">#595856</color>
-    <color name="colorItemDateStart">#A6A5A2</color>
-    <color name="colorItemDescription">#7C7B79</color>
-    <color name="colorItemProgressOn">#04BF04</color>
-    <color name="colorItemProgressOff">#D7D7D7</color>
-
+    <color name="colorWhite">#F5F8F8</color>
 
     <color name="colorStatusInfo">#4CAF50</color>
     <color name="colorStatusAttention">#FF5722</color>
     <color name="colorStatusDescription">#703C08</color>
     <color name="colorStatusOff">#C5C4C1</color>
+
+    <color name="colorItemProgressOn">#04BF04</color>
+    <color name="colorItemProgressOff">#D7D7D7</color>
+
+    <!--Default theme-->
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="colorMainText">#595856</color>
+    <color name="colorSecondText">#7C7B79</color>
+    <color name="colorThirdText">#AEACA9</color>
+    <color name="colorHintText">#A6A5A2</color>
+
+    <!--ColorS for making bg gradients-->
+    <color name="colorSignFieldEnd">#1912E6</color>
+    <color name="colorSignFieldStart">#AEBCEC</color>
+    <color name="colorSignFieldStrokeBadInput">#F44336</color>
+    <color name="colorSignFieldStroke">#080909</color>
+
+    <!--Sign Fragment-->
+    <color name="colorSignHeader">#B3B6B6</color>
+    <color name="colorSignHint">#6C6E6E</color>
+    <color name="colorSignText">#F0F4F4</color>
+    <color name="colorSignButtonInBg">#349E38</color>
+    <color name="colorSignButtonUpBg">#4C4E4E</color>
+    <color name="colorSignButtonText">#EFF3F2</color>
+
+    <!--Main Fragment-->
+    <color name="colorMainSearchText">#EFF3F2</color>
+    <color name="colorMainSearchItemText">#EFF3F2</color>
+    <color name="colorMainFabImage">#EFF3F2</color>
+    <color name="colorMainFab">#1912E6</color>
+
+    <!--Create Fragment-->
+    <color name="colorCreatorCreateBg">#349E38</color>
+    <color name="colorCreatorCancelBg">#717371</color>
+
+    <!--Item Fragment-->
+    <color name="colorItemFRStartDate">#7C7B79</color>
+    <color name="colorItemFRSettingButtonBg">#D7DCDC</color>
+    <color name="colorItemFRRecyclerBg">#88A2AAC3</color>
+    <color name="colorItemFRButtonsBg">#C3C7C8</color>
+
+    <!--Item Row-->
+    <color name="colorItemRowBgTint">#C3C7C8</color>
+    <color name="colorItemSmallRowBgTint">#C3C7C8</color>
+    <color name="colorItemRowActButtonBgTint">#C3C7C8</color>
 </resources>

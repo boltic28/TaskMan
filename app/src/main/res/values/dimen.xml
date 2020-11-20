@@ -23,6 +23,16 @@
     <dimen name="main_item_switcher_button_h">40dp</dimen>
     <dimen name="main_panel_height">60dp</dimen>
     <dimen name="main_panel_searching_padding_start">16dp</dimen>
+    <dimen name="main_panel_searching_margin">16dp</dimen>
+    <dimen name="main_panel_button_margin_top">8dp</dimen>
+    <dimen name="main_panel_button_margin_start">4dp</dimen>
+    <dimen name="main_fab_margin_end">16dp</dimen>
+    <dimen name="main_fab_max_size">36dp</dimen>
+
+    <!--Creator/Converter-->
+    <dimen name="creator_close_date_text_size">20sp</dimen>
+    <dimen name="converter_headers_text_size">16sp</dimen>
+    <dimen name="converter_other_text_size">16sp</dimen>
 
     <!--Items fragment -->
     <dimen name="item_fragment_margin_between_view">16dp</dimen>
@@ -38,6 +48,10 @@
     <dimen name="item_fragment_header1_text_size">28sp</dimen>
     <dimen name="item_fragment_header2_text_size">18sp</dimen>
     <dimen name="item_fragment_other_text_size">14sp</dimen>
+    <dimen name="item_fragment_progress_block_high">40dp</dimen>
+    <dimen name="item_fragment_progress_block_width">150dp</dimen>
+    <dimen name="item_fragment_progress_block_margin_top">-40dp</dimen>
+    <dimen name="item_fragment_converter_radio_group_high">40dp</dimen>
 
     <!--Item big row-->
     <dimen name="item_row_high">150dp</dimen>
@@ -54,7 +68,12 @@
     <dimen name="item_idea_button_w">80dp</dimen>
     <dimen name="item_idea_button_h">30dp</dimen>
     <dimen name="item_idea_space_between_button">16dp</dimen>
+    <dimen name="item_row_description_padding">8dp</dimen>
     <dimen name="item_idea_text_on_button">8sp</dimen>
+    <dimen name="item_row_text_header">24sp</dimen>
+    <dimen name="item_row_text_start">16sp</dimen>
+    <dimen name="item_row_text_description">14sp</dimen>
+    <dimen name="item_row_text_progress">12sp</dimen>
 
     <!--Item small row-->
     <dimen name="item_small_row_high">50dp</dimen>
@@ -63,5 +82,6 @@
     <dimen name="item_small_button_size">40dp</dimen>
     <dimen name="item_small_margin_between_elements">4dp</dimen>
     <dimen name="item_small_minus_margin_for_status">-24dp</dimen>
+    <dimen name="item_small_row_text_header">20sp</dimen>
 
 </resources>

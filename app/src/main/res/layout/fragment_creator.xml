@@ -57,35 +57,21 @@
 
     <TextView
         android:id="@+id/creator_close_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:enabled="false"
-        android:text="@string/close_date"
-        android:textSize="20sp"
+        style="@style/Creator.CloseDate"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/creator_group"
         app:layout_constraintBottom_toTopOf="@id/creator_is_cycle_checkbox"/>
 
     <TextView
         android:id="@+id/creator_close_date_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:enabled="false"
-        android:textSize="20sp"
+        style="@style/Creator.CloseDateVal"
         app:layout_constraintStart_toEndOf="@id/creator_close_date"
         app:layout_constraintTop_toTopOf="@+id/creator_close_date"
         tools:text="15 Oct 2020" />
 
     <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/creator_is_cycle_checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:enabled="false"
-        android:text="@string/is_cycle"
-        android:textSize="20sp"
+        style="@style/Creator.CheckBox"
         app:layout_constraintEnd_toStartOf="@id/creator_cycle_spinner"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/creator_close_date"
@@ -93,24 +79,28 @@
 
     <Spinner
         android:id="@+id/creator_cycle_spinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/Creator.Spinner" app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/creator_is_cycle_checkbox"
-        app:layout_constraintTop_toTopOf="@+id/creator_is_cycle_checkbox" />
+        app:layout_constraintBottom_toBottomOf="@+id/creator_is_cycle_checkbox" />
 
     <Button
         android:id="@+id/creator_button_create"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        style="@style/Creator.Button"
+        android:backgroundTint="?themeCreatorButtonCreateColor"
         android:text="@string/create"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/creator_button_cancel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/creator_is_cycle_checkbox" />
 
+    <Button
+        android:id="@+id/creator_button_cancel"
+        style="@style/Creator.Button"
+        android:backgroundTint="?themeCreatorButtonCancelColor"
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/creator_button_create"
+        app:layout_constraintTop_toBottomOf="@+id/creator_is_cycle_checkbox" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

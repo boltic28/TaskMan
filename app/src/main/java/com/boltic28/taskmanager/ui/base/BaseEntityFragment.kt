@@ -147,6 +147,9 @@ abstract class BaseEntityFragment<VM : BaseEntityFragmentModel<*>> :
             bundle.putString(LOAD_LIST, itemType)
             findNavController().navigate(R.id.mainFragment, bundle)
         }
+        converter_button_cancel.setOnClickListener {
+            deactivateSettingsView()
+        }
     }
 
     protected fun activateRelativeLine() {

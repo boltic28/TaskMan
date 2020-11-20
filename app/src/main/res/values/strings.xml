@@ -72,6 +72,9 @@
     <string name="any_period">any</string>
     <string name="on_week">on week</string>
     <string name="om_month">om month</string>
+    <string name="progress_point_description">Point of progress</string>
+    <string name="fragment_item_image">item image</string>
+    <string name="cancel">cancel</string>
 
     <string-array name="cycle">
         <item>not cycle</item>
