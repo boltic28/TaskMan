@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--App-->
-    <attr name="themePrimary" format="reference"/>
-    <attr name="themePrimaryDark" format="reference"/>
-    <attr name="themeAccent" format="reference"/>
-    <attr name="themeMainTextColor" format="reference"/>
+    <attr name="themePrimaryCol" format="reference"/>
+    <attr name="themePrimaryDarkCol" format="reference"/>
+    <attr name="themeAccentCol" format="reference"/>
+    <attr name="themeHeaderTextColor" format="reference"/>
     <attr name="themeSecondTextColor" format="reference"/>
     <attr name="themeThirdTextColor" format="reference"/>
     <attr name="themeHintTextColor" format="reference"/>
+    <attr name="themeSearchTextColor" format="reference"/>
 
     <!--Sign Fragment-->
+    <attr name="themeSignFieldsBGStartColor" format="reference"/>
+    <attr name="themeSignFieldsBGEndColor" format="reference"/>
+
     <attr name="themeSignFieldsBG" format="reference"/>
+    <attr name="themeSignButtonsBG" format="reference"/>
     <attr name="themeSignHeaderTextColor" format="reference"/>
     <attr name="themeSignFieldsTextColor" format="reference"/>
     <attr name="themeSignHintTextColor" format="reference"/>
@@ -36,6 +41,7 @@
     <attr name="themeItemSettingButtonBG" format="reference"/>
     <attr name="themeItemSettingButtonBGTint" format="reference"/>
     <attr name="themeItemRecyclerBG" format="reference"/>
+    <attr name="themeItemRecyclerBGTint" format="reference"/>
     <attr name="themeItemButtonsBG" format="reference"/>
     <attr name="themeItemButtonsBGTint" format="reference"/>
 

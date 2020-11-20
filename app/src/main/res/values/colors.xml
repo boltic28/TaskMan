@@ -8,10 +8,7 @@
     <color name="colorStatusDescription">#703C08</color>
     <color name="colorStatusOff">#C5C4C1</color>
 
-    <color name="colorItemProgressOn">#04BF04</color>
-    <color name="colorItemProgressOff">#D7D7D7</color>
-
-    <!--Default theme-->
+<!--Default theme-->
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
@@ -19,6 +16,7 @@
     <color name="colorSecondText">#7C7B79</color>
     <color name="colorThirdText">#AEACA9</color>
     <color name="colorHintText">#A6A5A2</color>
+    <color name="colorSearchText">#F5F8F8</color>
 
     <!--ColorS for making bg gradients-->
     <color name="colorSignFieldEnd">#1912E6</color>
@@ -30,7 +28,7 @@
     <color name="colorSignHeader">#B3B6B6</color>
     <color name="colorSignHint">#6C6E6E</color>
     <color name="colorSignText">#F0F4F4</color>
-    <color name="colorSignButtonInBg">#349E38</color>
+    <color name="colorSignButtonInBg">#076CB8</color>
     <color name="colorSignButtonUpBg">#4C4E4E</color>
     <color name="colorSignButtonText">#EFF3F2</color>
 
@@ -41,7 +39,7 @@
     <color name="colorMainFab">#1912E6</color>
 
     <!--Create Fragment-->
-    <color name="colorCreatorCreateBg">#349E38</color>
+    <color name="colorCreatorCreateBg">#076CB8</color>
     <color name="colorCreatorCancelBg">#717371</color>
 
     <!--Item Fragment-->
@@ -49,9 +47,58 @@
     <color name="colorItemFRSettingButtonBg">#D7DCDC</color>
     <color name="colorItemFRRecyclerBg">#88A2AAC3</color>
     <color name="colorItemFRButtonsBg">#C3C7C8</color>
+    <color name="colorItemProgressOn">#049ABF</color>
+    <color name="colorItemProgressOff">#D7D7D7</color>
 
     <!--Item Row-->
     <color name="colorItemRowBgTint">#C3C7C8</color>
     <color name="colorItemSmallRowBgTint">#C3C7C8</color>
     <color name="colorItemRowActButtonBgTint">#C3C7C8</color>
+
+<!--Lite theme L-letter in the end of name-->
+    <color name="colorPrimaryL">#46F03C</color>
+    <color name="colorPrimaryDarkL">#468C3C</color>
+    <color name="colorAccentL">#DA0340</color>
+    <color name="colorMainTextL">#0B1705</color>
+    <color name="colorSecondTextL">#7C7B79</color>
+    <color name="colorThirdTextL">#AEACA9</color>
+    <color name="colorHintTextL">#807D75</color>
+    <color name="colorSearchTextL">#112B05</color>
+
+    <!--ColorS for making bg gradients-->
+    <color name="colorSignFieldEndL">#468C3C</color>
+    <color name="colorSignFieldStartL">#C9E1C9</color>
+    <color name="colorSignFieldStrokeBadInputL">#F44336</color>
+    <color name="colorSignFieldStrokeL">#080909</color>
+
+    <!--Sign Fragment-->
+    <color name="colorSignHeaderL">#B3B6B6</color>
+    <color name="colorSignHintL">#6C6E6E</color>
+    <color name="colorSignTextL">#112B05</color>
+    <color name="colorSignButtonInBgL">#46AA3C</color>
+    <color name="colorSignButtonUpBgL">#4C4E4E</color>
+    <color name="colorSignButtonTextL">#EFF3F2</color>
+
+    <!--Main Fragment-->
+    <color name="colorMainSearchTextL">#EFF3F2</color>
+    <color name="colorMainSearchItemTextL">#EFF3F2</color>
+    <color name="colorMainFabImageL">#080909</color>
+    <color name="colorMainFabL">#468C3C</color>
+
+    <!--Create Fragment-->
+    <color name="colorCreatorCreateBgL">#349E38</color>
+    <color name="colorCreatorCancelBgL">#717371</color>
+
+    <!--Item Fragment-->
+    <color name="colorItemFRStartDateL">#7C7B79</color>
+    <color name="colorItemFRSettingButtonBgL">#D7DCDC</color>
+    <color name="colorItemFRRecyclerBgL">#88A2AAC3</color>
+    <color name="colorItemFRButtonsBgL">#C3C7C8</color>
+    <color name="colorItemProgressOnL">#048304</color>
+    <color name="colorItemProgressOffL">#B3B6B6</color>
+
+    <!--Item Row-->
+    <color name="colorItemRowBgTintL">#C3C7C8</color>
+    <color name="colorItemSmallRowBgTintL">#C3C7C8</color>
+    <color name="colorItemRowActButtonBgTintL">#C3C7C8</color>
 </resources>

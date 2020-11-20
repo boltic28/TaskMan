@@ -1,18 +1,119 @@
 <resources>
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+
+    <style name="Lime" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimaryL</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkL</item>
+        <item name="colorAccent">@color/colorAccentL</item>
+
+        <item name="themeHeaderTextColor">@color/colorMainTextL</item>
+        <item name="themeSecondTextColor">@color/colorSecondTextL</item>
+        <item name="themeThirdTextColor">@color/colorThirdTextL</item>
+        <item name="themeHintTextColor">@color/colorHintTextL</item>
+        <item name="themeSearchTextColor">@color/colorSearchTextL</item>
+
+        <!--Sign Fragment-->
+        <item name="themeSignFieldsBGStartColor">@color/colorSignFieldStartL</item>
+        <item name="themeSignFieldsBGEndColor">@color/colorSignFieldEndL</item>
+        <item name="themeSignFieldsBG">@drawable/bg_sign_fields</item>
+
+        <item name="themeSignButtonsBG">@drawable/bg_white_circle</item>
+        <item name="themeSignHeaderTextColor">@color/colorSignHeaderL</item>
+        <item name="themeSignHintTextColor">@color/colorSignHintL</item>
+        <item name="themeSignFieldsTextColor">@color/colorSignTextL</item>
+        <item name="themeSignButtonInBgColor">@color/colorSignButtonInBgL</item>
+        <item name="themeSignButtonUpBgColor">@color/colorSignButtonUpBgL</item>
+        <item name="themeSignButtonTextColor">@color/colorSignButtonTextL</item>
+
+        <!--Main fragment-->
+        <item name="themeMainSearchTextColor">@color/colorMainSearchTextL</item>
+        <item name="themeMainSearchBG">@drawable/bg_sign_fields</item>
+        <item name="themeMainSearchItemsColor">@color/colorMainSearchItemTextL</item>
+        <item name="themeMainFABColor">@color/colorMainFabL</item>
+        <item name="themeMainFABImageColor">@color/colorMainFabImageL</item>
+
+        <!--Create fragment-->
+        <item name="themeCreatorButtonCreateColor">@color/colorCreatorCreateBgL</item>
+        <item name="themeCreatorButtonCancelColor">@color/colorCreatorCancelBgL</item>
+
+        <!--Item Fragment-->
+        <item name="themeItemFRStartDateColor">@color/colorItemFRStartDateL</item>
+        <item name="themeItemSettingButtonBG">@drawable/bg_white_circle</item>
+        <item name="themeItemSettingButtonBGTint">@color/colorItemFRSettingButtonBgL</item>
+        <item name="themeItemRecyclerBG">@drawable/bg_white_rectangle</item>
+        <item name="themeItemRecyclerBGTint">@color/transparent</item>
+        <item name="themeItemButtonsBG">@drawable/bg_white_circle</item>
+        <item name="themeItemButtonsBGTint">@color/colorItemFRButtonsBgL</item>
+        <item name="themeItemFRProgressOnColor">@color/colorItemProgressOnL</item>
+        <item name="themeItemFRProgressOffColor">@color/colorItemProgressOffL</item>
+
+        <!--Item Rows-->
+        <item name="themeItemRowBG">@drawable/bg_white_rectangle</item>
+        <item name="themeItemRowBGTint">@color/colorItemRowBgTintL</item>
+        <item name="themeItemSmallRowBG">@drawable/bg_white_rectangle</item>
+        <item name="themeItemSmallRowBGTint">@color/colorItemSmallRowBgTintL</item>
+        <item name="themeItemRowActionButton">@drawable/bg_white_rectangle</item>
+        <item name="themeItemRowActionButtonTint">@color/colorItemRowActButtonBgTintL</item>
+    </style>
+
+    <style name="Blue" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style>
 
+        <item name="themeHeaderTextColor">@color/colorMainText</item>
+        <item name="themeSecondTextColor">@color/colorSecondText</item>
+        <item name="themeThirdTextColor">@color/colorThirdText</item>
+        <item name="themeHintTextColor">@color/colorHintText</item>
+
+        <!--Sign Fragment-->
+        <item name="themeSignFieldsBGStartColor">@color/colorSignFieldStart</item>
+        <item name="themeSignFieldsBGEndColor">@color/colorSignFieldEnd</item>
+        <item name="themeSignFieldsBG">@drawable/bg_sign_fields</item>
+
+        <item name="themeSignHeaderTextColor">@color/colorSignHeader</item>
+        <item name="themeSignHintTextColor">@color/colorSignHint</item>
+        <item name="themeSignFieldsTextColor">@color/colorSignText</item>
+        <item name="themeSignButtonInBgColor">@color/colorSignButtonInBg</item>
+        <item name="themeSignButtonUpBgColor">@color/colorSignButtonUpBg</item>
+        <item name="themeSignButtonTextColor">@color/colorSignButtonText</item>
+
+        <!--Main fragment-->
+        <item name="themeMainSearchTextColor">@color/colorMainSearchText</item>
+        <item name="themeMainSearchBG">@drawable/bg_sign_fields</item>
+        <item name="themeMainSearchItemsColor">@color/colorMainSearchItemText</item>
+        <item name="themeMainFABColor">@color/colorMainFab</item>
+        <item name="themeMainFABImageColor">@color/colorMainFabImage</item>
+
+        <!--Create fragment-->
+        <item name="themeCreatorButtonCreateColor">@color/colorCreatorCreateBg</item>
+        <item name="themeCreatorButtonCancelColor">@color/colorCreatorCancelBg</item>
+
+        <!--Item Fragment-->
+        <item name="themeItemFRStartDateColor">@color/colorItemFRStartDate</item>
+        <item name="themeItemSettingButtonBG">@drawable/bg_white_circle</item>
+        <item name="themeItemSettingButtonBGTint">@color/colorItemFRSettingButtonBg</item>
+        <item name="themeItemRecyclerBG">@drawable/bg_white_rectangle</item>
+        <item name="themeItemRecyclerBGTint">@color/transparent</item>
+        <item name="themeItemButtonsBG">@drawable/bg_white_circle</item>
+        <item name="themeItemButtonsBGTint">@color/colorItemFRButtonsBg</item>
+        <item name="themeItemFRProgressOnColor">@drawable/bg_progress_on</item>
+        <item name="themeItemFRProgressOffColor">@drawable/bg_progress_off</item>
+
+        <!--Item Rows-->
+        <item name="themeItemRowBG">@drawable/bg_white_rectangle</item>
+        <item name="themeItemRowBGTint">@color/colorItemRowBgTint</item>
+        <item name="themeItemSmallRowBG">@drawable/bg_white_rectangle</item>
+        <item name="themeItemSmallRowBGTint">@color/colorItemSmallRowBgTint</item>
+        <item name="themeItemRowActionButton">@drawable/bg_white_rectangle</item>
+        <item name="themeItemRowActionButtonTint">@color/colorItemRowActButtonBgTint</item>
+    </style>
 
     <style name="Toolbar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:text">?themeSearchTextColor</item>
+        <item name="android:background">?colorPrimary</item>
     </style>
 
     <style name="WrapContent">
@@ -26,21 +127,21 @@
     </style>
 
     <style name="AppEditText" parent="Widget.AppCompat.EditText">
-        <item name="android:textColorHint">@color/colorHintText</item>
+        <item name="android:textColorHint">?themeHintTextColor</item>
         <item name="android:inputType">text</item>
-        <item name="android:textColor">@color/colorSecondText</item>
+        <item name="android:textColor">?themeSecondTextColor</item>
     </style>
 
     <style name="AppSecondText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/colorSecondText</item>
+        <item name="android:textColor">?themeSecondTextColor</item>
     </style>
 
     <style name="AppThirdText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/colorSecondText</item>
+        <item name="android:textColor">?themeThirdTextColor</item>
     </style>
 
     <style name="AppMainText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/colorSecondText</item>
+        <item name="android:textColor">?attr/themeHeaderTextColor</item>
     </style>
 
     <style name="AppScreen">
@@ -60,8 +161,8 @@
     <style name="Sign.Fields" parent="Widget.AppCompat.EditText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/sign_field_height</item>
-        <item name="android:background">@drawable/bg_sign_fields</item>
-        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">?themeSignFieldsBG</item>
+        <item name="android:textColor">?themeSignFieldsTextColor</item>
         <item name="android:textStyle">italic</item>
         <item name="android:paddingStart">@dimen/sign_field_text_start_padding</item>
         <item name="android:textSize">@dimen/sign_field_text_size</item>
@@ -85,19 +186,19 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:background">@drawable/bg_sign_button</item>
-        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">?themeSignButtonsBG</item>
+        <item name="android:textColor">?themeSignButtonTextColor</item>
         <item name="android:layout_marginTop">@dimen/sign_field_password_margin_top</item>
         <item name="android:layout_marginEnd">@dimen/sign_field_password_margin_end</item>
     </style>
 
     <style name="Sign.Button.In">
-        <item name="android:backgroundTint">?attr/themeSignButtonInBgColor</item>
+        <item name="android:backgroundTint">?themeSignButtonInBgColor</item>
         <item name="android:text">@string/sign_in</item>
     </style>
 
     <style name="Sign.Button.Up">
-        <item name="android:backgroundTint">?attr/themeSignButtonUpBgColor</item>
+        <item name="android:backgroundTint">?themeSignButtonUpBgColor</item>
         <item name="android:text">@string/sign_up</item>
     </style>
 
@@ -112,8 +213,14 @@
     <style name="Main.Search" parent="Widget.AppCompat.EditText">
         <item name="android:layout_width">@dimen/main_search_field_w</item>
         <item name="android:layout_height">@dimen/main_search_field_h</item>
-        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColor">?themeSearchTextColor</item>
         <item name="android:inputType">text</item>
+    </style>
+
+    <style name="Main.SearchMotion" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">?themeSignFieldsBG</item>
     </style>
 
     <style name="SearchPanel.IconButton">
@@ -127,8 +234,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginEnd">@dimen/main_fab_margin_end</item>
         <item name="android:clickable">true</item>
-        <item name="android:foregroundTint">@color/colorMainFabImage</item>
-        <item name="android:backgroundTint">@color/colorMainFab</item>
+        <item name="android:foregroundTint">?themeMainFABImageColor</item>
+        <item name="android:backgroundTint">?themeMainFABColor</item>
         <item name="maxImageSize">@dimen/main_fab_max_size</item>
         <item name="srcCompat">@drawable/ic_add</item>
         <item name="fabSize">auto</item>
@@ -146,8 +253,8 @@
     <style name="SearchPanel" parent="Widget.MaterialComponents.TabLayout">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">@dimen/main_panel_height</item>
-        <item name="android:background">@drawable/bg_sign_fields</item>
-        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">?themeSignFieldsBG</item>
+        <item name="android:textColor">?themeSearchTextColor</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:paddingStart">@dimen/main_panel_searching_padding_start</item>
@@ -212,7 +319,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/item_fragment_margin_between_view</item>
         <item name="android:background">@drawable/bg_sign_button</item>
-        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColor">?themeSignButtonTextColor</item>
     </style>
 
     <!-- Converter -->
@@ -299,7 +406,7 @@
         <item name="android:layout_marginEnd">@dimen/item_fragment_margin_between_view</item>
         <item name="android:textSize">@dimen/item_fragment_other_text_size</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/colorMainText</item>
+        <item name="android:textColor">?themeItemFRStartDateColor</item>
     </style>
 
     <style name="ItemFragment.Header2" parent="AppMainText">
@@ -324,9 +431,18 @@
         <item name="android:src">@drawable/goal_ph</item>
     </style>
 
-    <style name="ItemFragment.Progress" parent="Widget.Design.TabLayout">
+    <style name="ItemFragment.ProgressVertical" parent="Widget.Design.TabLayout">
         <item name="android:layout_width">@dimen/item_progress_width</item>
         <item name="android:layout_height">@dimen/item_progress_high</item>
+        <item name="android:layout_marginTop">@dimen/item_fragment_progress_block_margin_top</item>
+        <item name="android:visibility">invisible</item>
+        <item name="android:layout_marginStart">@dimen/item_fragment_margin_between_blocks</item>
+        <item name="android:layout_marginEnd">@dimen/item_fragment_margin_between_blocks</item>
+    </style>
+
+    <style name="ItemFragment.ProgressHorizontal" parent="Widget.Design.TabLayout">
+        <item name="android:layout_width">@dimen/item_progress_horizontal_width</item>
+        <item name="android:layout_height">@dimen/item_progress_horizontal_high</item>
         <item name="android:layout_marginTop">@dimen/item_fragment_progress_block_margin_top</item>
         <item name="android:visibility">invisible</item>
         <item name="android:layout_marginStart">@dimen/item_fragment_margin_between_blocks</item>
@@ -337,7 +453,7 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">@dimen/item_fragment_progress_height</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:background">@color/colorItemProgressOff</item>
+        <item name="android:background">?themeItemFRProgressOffColor</item>
     </style>
 
     <style name="ItemFragment.Recycler">
@@ -346,7 +462,7 @@
         <item name="android:layout_weight">1</item>
         <item name="android:layout_marginTop">@dimen/item_fragment_margin_between_blocks</item>
         <item name="android:layout_marginBottom">@dimen/item_fragment_margin_between_blocks</item>
-        <item name="android:background">@color/colorWhite</item>
+        <item name="android:background">?themeItemRecyclerBG</item>
     </style>
 
     <style name="ItemFragment.Button.Relative" parent="Widget.AppCompat.ImageButton">
@@ -360,7 +476,8 @@
     <style name="ItemFragment.Button.Settings" parent="Widget.AppCompat.ImageButton">
         <item name="android:layout_width">@dimen/item_fragment_button_settings_size</item>
         <item name="android:layout_height">@dimen/item_fragment_button_settings_size</item>
-        <item name="android:background">@drawable/bg_white_circle</item>
+        <item name="android:background">?themeItemSettingButtonBG</item>
+        <item name="android:backgroundTint">?themeItemSettingButtonBGTint</item>
         <item name="android:src">@drawable/ic_settings</item>
     </style>
 
@@ -387,8 +504,8 @@
         <item name="android:layout_weight">1</item>
         <item name="android:layout_height">@dimen/item_fragment_buttons_height</item>
         <item name="android:layout_margin">4dp</item>
-        <item name="android:background">@drawable/bg_white_circle</item>
-        <item name="android:backgroundTint">@color/colorItemFRButtonsBg</item>
+        <item name="android:background">?themeItemButtonsBG</item>
+        <item name="android:backgroundTint">?themeItemButtonsBGTint</item>
     </style>
 
     <style name="ItemFragment.Button.Home">
@@ -408,6 +525,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/item_row_high</item>
         <item name="android:padding">@dimen/item_fragment_layout_padding</item>
+        <item name="background">?themeItemRowBG</item>
+        <item name="android:backgroundTint">?themeItemRowBGTint</item>
     </style>
 
     <style name="Item.Header" parent="AppMainText">
@@ -447,7 +566,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:background">@color/colorItemProgressOff</item>
+        <item name="android:background">?themeItemFRProgressOffColor</item>
     </style>
 
     <style name="Item.StatusPoint" parent="TextAppearance.AppCompat">
@@ -481,6 +600,8 @@
     <style name="Item.Button.Action" parent="Widget.AppCompat.Button">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">@dimen/item_idea_button_h</item>
+        <item name="background">?themeItemRowActionButton</item>
+        <item name="android:backgroundTint">?themeItemRowActionButtonTint</item>
         <item name="android:visibility">invisible</item>
         <item name="android:layout_marginStart">@dimen/item_idea_space_between_button</item>
         <item name="android:textSize">@dimen/item_idea_text_on_button</item>
@@ -491,6 +612,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/item_small_row_high</item>
         <item name="android:orientation">horizontal</item>
+        <item name="background">?themeItemSmallRowBG</item>
+        <item name="android:backgroundTint">?themeItemSmallRowBGTint</item>
     </style>
 
     <style name="ItemSm.Image" parent="TextAppearance.AppCompat">

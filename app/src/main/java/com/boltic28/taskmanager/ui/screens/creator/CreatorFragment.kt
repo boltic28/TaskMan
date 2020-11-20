@@ -58,6 +58,10 @@ class CreatorFragment : BaseFragment<CreatorFragmentModel>(R.layout.fragment_cre
                 model.messenger.showMessage(resources.getString(R.string.field_name_must_be_not_empty))
             }
         }
+        creator_button_cancel.setOnClickListener {
+            bundle.putString(LOAD_LIST, GOAL_EXTRA)
+            findNavController().navigate(R.id.mainFragment, bundle)
+        }
     }
 
     private fun setCloseDate() {
@@ -68,27 +72,15 @@ class CreatorFragment : BaseFragment<CreatorFragmentModel>(R.layout.fragment_cre
     }
 
     private fun setLayout() {
-        creator_cycle_spinner.isEnabled = false
-        creator_task_radio.setOnCheckedChangeListener { _, _ ->
-            if (creator_task_radio.isChecked) {
-                creator_is_cycle_checkbox.isEnabled = true
-            } else {
-                creator_is_cycle_checkbox.isEnabled = false
-                creator_cycle_spinner.isEnabled = false
-            }
-        }
-        creator_idea_radio.setOnCheckedChangeListener { _, _ ->
-            if (creator_idea_radio.isChecked) {
-                creator_close_date_value.isEnabled = false
-                creator_close_date.isEnabled = false
-            } else {
-                creator_close_date_value.isEnabled = true
-                creator_close_date.isEnabled = true
-                setCloseDateClockListener()
-            }
-        }
+        creator_cycle_spinner.visibility = View.INVISIBLE
+        checkIdeaTool()
+        checkTaskTool()
+
+        creator_task_radio.setOnCheckedChangeListener { _, _ -> checkTaskTool() }
+        creator_idea_radio.setOnCheckedChangeListener { _, _ -> checkIdeaTool() }
         creator_is_cycle_checkbox.setOnCheckedChangeListener { _, _ ->
-            creator_cycle_spinner.isEnabled = creator_is_cycle_checkbox.isChecked
+            creator_cycle_spinner.visibility =
+                if (creator_is_cycle_checkbox.isChecked) View.VISIBLE else View.INVISIBLE
         }
         creator_cycle_spinner.adapter = ArrayAdapter.createFromResource(
             requireView().context,
@@ -101,6 +93,26 @@ class CreatorFragment : BaseFragment<CreatorFragmentModel>(R.layout.fragment_cre
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
                 cycleType = resources.getStringArray(R.array.cycle)[position]
             }
+        }
+    }
+
+    private fun checkTaskTool(){
+        if (creator_task_radio.isChecked) {
+            creator_is_cycle_checkbox.visibility = View.VISIBLE
+        } else {
+            creator_is_cycle_checkbox.visibility = View.INVISIBLE
+            creator_cycle_spinner.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun checkIdeaTool(){
+        if (creator_idea_radio.isChecked) {
+            creator_close_date_value.visibility = View.INVISIBLE
+            creator_close_date.visibility = View.INVISIBLE
+        } else {
+            creator_close_date_value.visibility = View.VISIBLE
+            creator_close_date.visibility = View.VISIBLE
+            setCloseDateClockListener()
         }
     }
 

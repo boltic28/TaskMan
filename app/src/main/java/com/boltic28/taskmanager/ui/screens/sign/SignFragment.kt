@@ -25,6 +25,7 @@ class SignFragment : BaseFragment<SignFragmentModel>(R.layout.fragment_sign) {
                 }
             }
         initView()
+        (activity as? ActivityHelper)?.setToolbarText(resources.getString(R.string.app_name))
     }
 
     override fun onDestroyView() {
@@ -33,7 +34,6 @@ class SignFragment : BaseFragment<SignFragmentModel>(R.layout.fragment_sign) {
     }
 
     private fun initView() {
-        (activity as? ActivityHelper)?.setToolbarText(resources.getString(R.string.app_name))
         sign_in_button.setOnClickListener {
             if (isFieldsFillRight()) {
                 turnOffButtonSignIn()

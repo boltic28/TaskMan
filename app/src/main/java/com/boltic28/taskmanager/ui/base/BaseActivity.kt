@@ -3,6 +3,7 @@ package com.boltic28.taskmanager.ui.base
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
+import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.di.App
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
