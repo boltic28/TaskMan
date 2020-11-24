@@ -36,9 +36,12 @@ class RefreshDataUseCaseImpl(
 
     override fun refreshAllData(): Observable<BaseItem> =
         merge(
-            refreshKeys(), refreshSteps(),
-            refreshTasks(),refreshIdeas()
-        ).mergeWith(refreshGoals())
+            remoteRepoKey.readAll(),
+            remoteRepoStep.readAll(),
+            remoteRepoTask.readAll(),
+            remoteRepoIdea.readAll()
+        )
+            .mergeWith(remoteRepoGoal.readAll())
             .doOnNext {
                 putDataIntoLocalDB(it)
             }
@@ -53,24 +56,4 @@ class RefreshDataUseCaseImpl(
             else -> throw ClassCastException()
         }.subscribeOn(Schedulers.io()).subscribe()
     }
-
-    override fun refreshGoals(): Observable<Goal> =
-        remoteRepoGoal.readAll()
-
-
-    override fun refreshSteps(): Observable<Step> =
-        remoteRepoStep.readAll()
-
-
-    override fun refreshTasks(): Observable<Task> =
-        remoteRepoTask.readAll()
-
-
-    override fun refreshIdeas(): Observable<Idea> =
-        remoteRepoIdea.readAll()
-
-
-    override fun refreshKeys(): Observable<KeyResult> =
-        remoteRepoKey.readAll()
-
 }

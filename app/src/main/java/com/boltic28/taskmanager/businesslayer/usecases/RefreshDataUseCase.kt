@@ -9,14 +9,4 @@ interface RefreshDataUseCase {
     fun clearLocalData() : Single<Int>
 
     fun refreshAllData(): Observable<BaseItem>
-
-    fun refreshGoals(): Observable<Goal>
-
-    fun refreshSteps(): Observable<Step>
-
-    fun refreshTasks(): Observable<Task>
-
-    fun refreshIdeas(): Observable<Idea>
-
-    fun refreshKeys(): Observable<KeyResult>
 }
