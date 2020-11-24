@@ -1,6 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/AppScreen">
+
+    <TextView
+        android:id="@+id/setting_theme_header"
+        style="@style/Setting"
+        android:text="@string/theme"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/setting_theme_value"
+        style="@style/Setting.RadioGroup"
+        app:layout_constraintLeft_toRightOf="@id/guideline"
+        app:layout_constraintTop_toTopOf="@id/setting_theme_header">
+
+        <RadioButton
+            android:id="@+id/settings_lime_theme"
+            style="@style/Setting"
+            android:text="@string/lime" />
+
+        <RadioButton
+            android:id="@+id/settings_blue_theme"
+            style="@style/Setting"
+            android:text="@string/blue" />
+
+        <RadioButton
+            android:id="@+id/settings_pink_theme"
+            style="@style/Setting"
+            android:text="@string/pink" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/setting_language_header"
+        style="@style/Setting"
+        android:text="@string/language"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setting_theme_value"/>
+
+    <RadioGroup
+        android:id="@+id/setting_language_value"
+        style="@style/Setting.RadioGroup"
+        app:layout_constraintLeft_toRightOf="@id/guideline"
+        app:layout_constraintTop_toTopOf="@id/setting_language_header">
+
+        <RadioButton
+            android:id="@+id/settings_english_lang"
+            style="@style/Setting"
+            android:text="@string/english" />
+
+        <RadioButton
+            android:id="@+id/settings_russian_lang"
+            style="@style/Setting"
+            android:text="@string/russian_language" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/setting_user_header"
+        style="@style/Setting"
+        android:text="@string/user"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setting_language_value" />
+
+    <TextView
+        android:id="@+id/setting_user_value"
+        style="@style/Setting"
+        tools:text="user@gmail.com"
+        app:layout_constraintLeft_toLeftOf="@id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/setting_user_header" />
+
+    <ImageButton
+        android:id="@+id/setting_user_sign_out"
+        style="@style/Setting.SignOutButton"
+        app:layout_constraintLeft_toRightOf="@id/setting_user_value"
+        app:layout_constraintTop_toTopOf="@+id/setting_user_header"
+        app:layout_constraintBottom_toBottomOf="@+id/setting_user_value"
+        />
+
+    <Button
+        android:id="@+id/setting_button_save"
+        style="@style/WrapContent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/save"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="130dp"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

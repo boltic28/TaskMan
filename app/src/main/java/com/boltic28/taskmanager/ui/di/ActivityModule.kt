@@ -17,6 +17,7 @@ open class ActivityModule(private val activity: BaseActivity<*>) {
     @Provides
     fun provideActivity(): Activity = activity
 
+    @ActivityScope
     @Provides
     fun provideFirebaseManager(messenger: Messenger): UserManager =
         FireUserManager(activity, messenger)

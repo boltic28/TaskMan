@@ -1,6 +1,5 @@
 package com.boltic28.taskmanager.ui.screens.mainfragment
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,11 +7,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.datalayer.entities.*
-import com.boltic28.taskmanager.ui.adapter.FilterImpl
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseFragment
 import com.boltic28.taskmanager.ui.constant.*
-import com.boltic28.taskmanager.ui.screens.activity.ActivityHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -25,50 +22,46 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
     override fun onResume() {
         super.onResume()
         if (model.userManager.isUserSigned()) {
-            model.disposables + model.userManager.user
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    (activity as? ActivityHelper)?.setToolbarText(it.email)
-                }
-            arguments?.let {
-                if (it.containsKey(USER_SIGNED)) showRefreshDialog()
-            }
             loadElements()
+            setToolbarText(model.userManager.userI.email)
+            initView()
+            setFilters()
         } else {
-            (activity as? ActivityHelper)?.setToolbarText(resources.getString(R.string.app_name))
+            setToolbarText(resources.getString(R.string.app_name))
             findNavController().navigate(R.id.signFragment)
         }
-
-        initView()
-        setFilters()
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onPause() {
+        super.onPause()
         model.disposables.forEach { it.dispose() }
     }
 
     private fun loadElements() {
         arguments?.let {
-            when (it.getString(LOAD_LIST)) {
-                KEY_EXTRA -> loadKeys()
-                STEP_EXTRA -> loadSteps()
-                TASK_EXTRA -> loadTasks()
-                IDEA_EXTRA -> loadIdeas()
-                else -> loadGoals()
+            if (it.containsKey(USER_SIGNED)) {
+                showProgressBar()
+                loadGoals()
+                model.disposables + model.refreshData()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe { item ->
+                        if (item is Goal) {
+                            hideProgressBar()
+                            model.adapter.addElement(item)
+                        }
+                    }
+            }
+            if (it.containsKey(LOAD_LIST)) {
+                when (it.getString(LOAD_LIST)) {
+                    KEY_EXTRA -> loadKeys()
+                    STEP_EXTRA -> loadSteps()
+                    TASK_EXTRA -> loadTasks()
+                    IDEA_EXTRA -> loadIdeas()
+                    else -> loadGoals()
+                }
             }
         }
-    }
-
-    private fun showRefreshDialog() {
-        AlertDialog.Builder(context)
-            .setMessage(resources.getString(R.string.data_refreshed))
-            .setPositiveButton(resources.getString(R.string.ok)) { _, _ -> loadGoals() }
-            .setTitle(resources.getString(R.string.app_name))
-            .setIcon(R.drawable.wow_ph)
-            .create()
-            .show()
     }
 
     private fun initView() {
@@ -175,7 +168,9 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
-            override fun afterTextChanged(p0: Editable?) { filterItems(LocalDateTime.MAX) }
+            override fun afterTextChanged(p0: Editable?) {
+                filterItems(LocalDateTime.MAX)
+            }
         })
 
         search_is_done_checkbox.setOnCheckedChangeListener { _, _ -> filterItems(LocalDateTime.MAX) }

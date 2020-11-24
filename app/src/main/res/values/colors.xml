@@ -101,4 +101,51 @@
     <color name="colorItemRowBgTintL">#C3C7C8</color>
     <color name="colorItemSmallRowBgTintL">#C3C7C8</color>
     <color name="colorItemRowActButtonBgTintL">#C3C7C8</color>
+
+<!--Pink theme P-letter in the end of name-->
+    <color name="colorPrimaryP">#DA05EA</color>
+    <color name="colorPrimaryDarkP">#95038E</color>
+    <color name="colorAccentP">#650181</color>
+    <color name="colorMainTextP">#2E002E</color>
+    <color name="colorSecondTextP">#7C7B79</color>
+    <color name="colorThirdTextP">#AEACA9</color>
+    <color name="colorHintTextP">#A6A5A2</color>
+    <color name="colorSearchTextP">#F5F8F8</color>
+
+    <!--ColorS for making bg gradients-->
+    <color name="colorSignFieldEndP">#8C0275</color>
+    <color name="colorSignFieldStartP">#E3AEEC</color>
+    <color name="colorSignFieldStrokeBadInputP">#F44336</color>
+    <color name="colorSignFieldStrokeP">#080909</color>
+
+    <!--Sign Fragment-->
+    <color name="colorSignHeaderP">#B3B6B6</color>
+    <color name="colorSignHintP">#6C6E6E</color>
+    <color name="colorSignTextP">#F0F4F4</color>
+    <color name="colorSignButtonInBgP">#CB0DED</color>
+    <color name="colorSignButtonUpBgP">#4C4E4E</color>
+    <color name="colorSignButtonTextP">#EFF3F2</color>
+
+    <!--Main Fragment-->
+    <color name="colorMainSearchTextP">#EFF3F2</color>
+    <color name="colorMainSearchItemTextP">#EFF3F2</color>
+    <color name="colorMainFabImageP">#EFF3F2</color>
+    <color name="colorMainFabP">#8C0275</color>
+
+    <!--Create Fragment-->
+    <color name="colorCreatorCreateBgP">#C209C8</color>
+    <color name="colorCreatorCancelBgP">#E80505</color>
+
+    <!--Item Fragment-->
+    <color name="colorItemFRStartDateP">#7C7B79</color>
+    <color name="colorItemFRSettingButtonBgP">#D7DCDC</color>
+    <color name="colorItemFRRecyclerBgP">#88A2AAC3</color>
+    <color name="colorItemFRButtonsBgP">#C3C7C8</color>
+    <color name="colorItemProgressOnP">#E974ED</color>
+    <color name="colorItemProgressOffP">#E1C7E3</color>
+
+    <!--Item Row-->
+    <color name="colorItemRowBgTintP">#C3C7C8</color>
+    <color name="colorItemSmallRowBgTintP">#C3C7C8</color>
+    <color name="colorItemRowActButtonBgTintP">#C3C7C8</color>
 </resources>

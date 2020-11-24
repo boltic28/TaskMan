@@ -7,9 +7,10 @@ import com.boltic28.taskmanager.datalayer.room.idea.IdeaRepository
 import com.boltic28.taskmanager.datalayer.room.keyresult.KeyRepository
 import com.boltic28.taskmanager.datalayer.room.step.StepRepository
 import com.boltic28.taskmanager.datalayer.room.task.TaskRepository
-import io.reactivex.Completable
 import io.reactivex.Observable
-import io.reactivex.Observable.zip
+import io.reactivex.Observable.merge
+import io.reactivex.Single
+import io.reactivex.Single.zip
 import io.reactivex.schedulers.Schedulers
 
 class RefreshDataUseCaseImpl(
@@ -23,59 +24,53 @@ class RefreshDataUseCaseImpl(
     private val remoteRepoTask: RemoteRepo<Task>,
     private val remoteRepoIdea: RemoteRepo<Idea>,
     private val remoteRepoKey: RemoteRepo<KeyResult>
-): RefreshDataUseCase {
+) : RefreshDataUseCase {
 
-    override fun refreshAllData() {
-        goalRepository.deleteAll().subscribeOn(Schedulers.io()).subscribe()
-        stepRepository.deleteAll().subscribeOn(Schedulers.io()).subscribe()
-        taskRepository.deleteAll().subscribeOn(Schedulers.io()).subscribe()
-        ideaRepository.deleteAll().subscribeOn(Schedulers.io()).subscribe()
-        keyRepository.deleteAll().subscribeOn(Schedulers.io()).subscribe()
+    override fun clearLocalData(): Single<Int> =
+        zip(goalRepository.deleteAll(),
+            stepRepository.deleteAll(),
+            taskRepository.deleteAll(),
+            ideaRepository.deleteAll(),
+            keyRepository.deleteAll(),
+            { g, s, t, i, k -> g + s + t + i + k })
 
-        refreshGoals().subscribeOn(Schedulers.io()).subscribe()
-        refreshSteps().subscribeOn(Schedulers.io()).subscribe()
-        refreshTasks().subscribeOn(Schedulers.io()).subscribe()
-        refreshIdeas().subscribeOn(Schedulers.io()).subscribe()
-        refreshKeys().subscribeOn(Schedulers.io()).subscribe()
+    override fun refreshAllData(): Observable<BaseItem> =
+        merge(
+            refreshKeys(), refreshSteps(),
+            refreshTasks(),refreshIdeas()
+        ).mergeWith(refreshGoals())
+            .doOnNext {
+                putDataIntoLocalDB(it)
+            }
+
+    private fun putDataIntoLocalDB(item: BaseItem) {
+        when (item) {
+            is Goal -> goalRepository.refreshData(item)
+            is Step -> stepRepository.refreshData(item)
+            is Task -> taskRepository.refreshData(item)
+            is Idea -> ideaRepository.refreshData(item)
+            is KeyResult -> keyRepository.refreshData(item)
+            else -> throw ClassCastException()
+        }.subscribeOn(Schedulers.io()).subscribe()
     }
 
     override fun refreshGoals(): Observable<Goal> =
         remoteRepoGoal.readAll()
-            .doOnNext { item ->
-                goalRepository.refreshData(item)
-                    .subscribeOn(Schedulers.io())
-                    .subscribe()
-            }
+
 
     override fun refreshSteps(): Observable<Step> =
         remoteRepoStep.readAll()
-            .doOnNext { item ->
-                stepRepository.refreshData(item)
-                    .subscribeOn(Schedulers.io())
-                    .subscribe()
-            }
+
 
     override fun refreshTasks(): Observable<Task> =
         remoteRepoTask.readAll()
-            .doOnNext { item ->
-                taskRepository.refreshData(item)
-                    .subscribeOn(Schedulers.io())
-                    .subscribe()
-            }
+
 
     override fun refreshIdeas(): Observable<Idea> =
         remoteRepoIdea.readAll()
-            .doOnNext { item ->
-                ideaRepository.refreshData(item)
-                    .subscribeOn(Schedulers.io())
-                    .subscribe()
-            }
+
 
     override fun refreshKeys(): Observable<KeyResult> =
         remoteRepoKey.readAll()
-            .doOnNext { item ->
-                keyRepository.refreshData(item)
-                    .subscribeOn(Schedulers.io())
-                    .subscribe()
-            }
+
 }

@@ -1,5 +1,6 @@
 package com.boltic28.taskmanager.ui.screens.ideafragment
 
+import android.os.Bundle
 import androidx.navigation.NavController
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.businesslayer.interactors.IdeaFragmentInteractor
@@ -50,7 +51,9 @@ class IdeaFragmentModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe{ deleted ->
                 messenger.showMessage("$deleted idea converted")
-                nav.navigate(R.id.mainFragment)
+                val bundle = Bundle()
+                bundle.putString(LOAD_LIST, IDEA_EXTRA)
+                nav.navigate(R.id.mainFragment, bundle)
             }
     }
 

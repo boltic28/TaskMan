@@ -4,6 +4,9 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <!--Sign fragment -->
+    <dimen name="setting_text_size">18sp</dimen>
+
+    <!--Sign fragment -->
     <dimen name="sign_field_corner">60dp</dimen>
     <dimen name="sign_field_width">200dp</dimen>
     <dimen name="sign_field_height">60dp</dimen>

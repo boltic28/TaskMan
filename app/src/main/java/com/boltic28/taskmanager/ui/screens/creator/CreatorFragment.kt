@@ -9,7 +9,6 @@ import androidx.navigation.fragment.findNavController
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.ui.base.BaseFragment
 import com.boltic28.taskmanager.ui.constant.*
-import com.boltic28.taskmanager.ui.screens.activity.ActivityHelper
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -29,7 +28,7 @@ class CreatorFragment : BaseFragment<CreatorFragmentModel>(R.layout.fragment_cre
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? ActivityHelper)?.setToolbarText("Create new object")
+        setToolbarText(resources.getString(R.string.create_new))
         setOnButtons()
         setLayout()
         setCloseDate()
@@ -42,15 +41,16 @@ class CreatorFragment : BaseFragment<CreatorFragmentModel>(R.layout.fragment_cre
 
     private fun setOnButtons() {
         creator_button_create.setOnClickListener {
+            hideKeyboard()
             if (creator_name.text.toString().isNotEmpty()) {
                 disposable = createItem()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe { id ->
                         if (id == NO_ID) {
-                            model.messenger.showMessage("new instance is not created")
+                            model.messenger.showMessage(resources.getString(R.string.instance_not_created))
                         } else {
-                            model.messenger.showMessage("new instance is created")
+                            model.messenger.showMessage(resources.getString(R.string.instance_created))
                             findNavController().navigate(R.id.mainFragment, bundle)
                         }
                     }

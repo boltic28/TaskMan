@@ -97,8 +97,62 @@
         <item name="themeItemRecyclerBGTint">@color/transparent</item>
         <item name="themeItemButtonsBG">@drawable/bg_white_circle</item>
         <item name="themeItemButtonsBGTint">@color/colorItemFRButtonsBg</item>
-        <item name="themeItemFRProgressOnColor">@drawable/bg_progress_on</item>
-        <item name="themeItemFRProgressOffColor">@drawable/bg_progress_off</item>
+        <item name="themeItemFRProgressOnColor">@color/colorItemProgressOn</item>
+        <item name="themeItemFRProgressOffColor">@color/colorItemProgressOff</item>
+
+        <!--Item Rows-->
+        <item name="themeItemRowBG">@drawable/bg_white_rectangle</item>
+        <item name="themeItemRowBGTint">@color/colorItemRowBgTint</item>
+        <item name="themeItemSmallRowBG">@drawable/bg_white_rectangle</item>
+        <item name="themeItemSmallRowBGTint">@color/colorItemSmallRowBgTint</item>
+        <item name="themeItemRowActionButton">@drawable/bg_white_rectangle</item>
+        <item name="themeItemRowActionButtonTint">@color/colorItemRowActButtonBgTint</item>
+    </style>
+
+    <style name="Pink" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryP</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkP</item>
+        <item name="colorAccent">@color/colorAccentP</item>
+
+        <item name="themeHeaderTextColor">@color/colorMainTextP</item>
+        <item name="themeSecondTextColor">@color/colorSecondTextP</item>
+        <item name="themeThirdTextColor">@color/colorThirdTextP</item>
+        <item name="themeHintTextColor">@color/colorHintTextP</item>
+
+        <!--Sign Fragment-->
+        <item name="themeSignFieldsBGStartColor">@color/colorSignFieldStartP</item>
+        <item name="themeSignFieldsBGEndColor">@color/colorSignFieldEndP</item>
+        <item name="themeSignFieldsBG">@drawable/bg_sign_fields</item>
+
+        <item name="themeSignHeaderTextColor">@color/colorSignHeaderP</item>
+        <item name="themeSignHintTextColor">@color/colorSignHintP</item>
+        <item name="themeSignFieldsTextColor">@color/colorSignTextP</item>
+        <item name="themeSignButtonInBgColor">@color/colorSignButtonInBgP</item>
+        <item name="themeSignButtonUpBgColor">@color/colorSignButtonUpBgP</item>
+        <item name="themeSignButtonTextColor">@color/colorSignButtonTextP</item>
+
+        <!--Main fragment-->
+        <item name="themeMainSearchTextColor">@color/colorMainSearchTextP</item>
+        <item name="themeMainSearchBG">@drawable/bg_sign_fields</item>
+        <item name="themeMainSearchItemsColor">@color/colorMainSearchItemTextP</item>
+        <item name="themeMainFABColor">@color/colorMainFabP</item>
+        <item name="themeMainFABImageColor">@color/colorMainFabImageP</item>
+
+        <!--Create fragment-->
+        <item name="themeCreatorButtonCreateColor">@color/colorCreatorCreateBgP</item>
+        <item name="themeCreatorButtonCancelColor">@color/colorCreatorCancelBgP</item>
+
+        <!--Item Fragment-->
+        <item name="themeItemFRStartDateColor">@color/colorItemFRStartDateP</item>
+        <item name="themeItemSettingButtonBG">@drawable/bg_white_circle</item>
+        <item name="themeItemSettingButtonBGTint">@color/colorItemFRSettingButtonBgP</item>
+        <item name="themeItemRecyclerBG">@drawable/bg_white_rectangle</item>
+        <item name="themeItemRecyclerBGTint">@color/transparent</item>
+        <item name="themeItemButtonsBG">@drawable/bg_white_circle</item>
+        <item name="themeItemButtonsBGTint">@color/colorItemFRButtonsBgP</item>
+        <item name="themeItemFRProgressOnColor">@color/colorItemProgressOnP</item>
+        <item name="themeItemFRProgressOffColor">@color/colorItemProgressOffP</item>
 
         <!--Item Rows-->
         <item name="themeItemRowBG">@drawable/bg_white_rectangle</item>
@@ -148,6 +202,34 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:padding">@dimen/item_fragment_layout_padding</item>
+    </style>
+
+    <!-- Setting Fragment-->
+    <style name="Setting" parent="AppMainText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/sign_info_text_size</item>
+    </style>
+
+    <style name="Setting.RadioGroup">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingBottom">@dimen/item_fragment_margin_between_blocks</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:textSize">@dimen/sign_info_text_size</item>
+    </style>
+
+    <style name="Setting.SignOutButton">
+        <item name="android:layout_marginStart">@dimen/item_fragment_margin_between_blocks</item>
+        <item name="android:src">@drawable/ic_exit</item>
+        <item name="android:background">@color/transparent</item>
+    </style>
+
+    <style name="Setting.RadioItem">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/sign_info_text_size</item>
+        <item name="android:textColor">?themeHeaderTextColor</item>
     </style>
 
     <!-- Sign Fragment-->
@@ -294,7 +376,6 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">@dimen/item_fragment_margin_between_blocks</item>
         <item name="android:textSize">@dimen/creator_close_date_text_size</item>
-        <item name="android:enabled">false</item>
     </style>
 
     <style name="Creator.CheckBox" parent="AppSecondText">
@@ -303,7 +384,6 @@
         <item name="android:text">@string/is_cycle</item>
         <item name="android:layout_marginTop">@dimen/item_fragment_margin_between_view</item>
         <item name="android:textSize">@dimen/creator_close_date_text_size</item>
-        <item name="android:enabled">false</item>
     </style>
 
     <style name="Creator.Spinner" parent="AppSecondText">
@@ -311,7 +391,6 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">@dimen/item_fragment_margin_between_blocks</item>
         <item name="android:textSize">@dimen/creator_close_date_text_size</item>
-        <item name="android:enabled">false</item>
     </style>
 
     <style name="Creator.Button" parent="Widget.AppCompat.Button">

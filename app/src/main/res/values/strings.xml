@@ -75,6 +75,20 @@
     <string name="progress_point_description">Point of progress</string>
     <string name="fragment_item_image">item image</string>
     <string name="cancel">cancel</string>
+    <string name="theme">Theme:</string>
+    <string name="language">Language:</string>
+    <string name="user">User mail:</string>
+    <string name="lime">Lime</string>
+    <string name="blue">Blue</string>
+    <string name="pink">Pink</string>
+    <string name="english">English</string>
+    <string name="russian_language">Русский</string>
+    <string name="setting_header">Settings</string>
+    <string name="settings">settings</string>
+    <string name="create_new">Create new object</string>
+    <string name="instance_not_created">new instance is not created</string>
+    <string name="instance_created">new instance is created</string>
+    <string name="sync_data">Sync data</string>
 
     <string-array name="cycle">
         <item>not cycle</item>

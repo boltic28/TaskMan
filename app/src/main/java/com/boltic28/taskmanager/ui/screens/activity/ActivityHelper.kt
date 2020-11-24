@@ -6,4 +6,10 @@ interface ActivityHelper {
     fun hideToolbar()
 
     fun showToolbar()
+
+    fun hideKeyBoard()
+
+    fun showProgressBar()
+
+    fun hideProgressBar()
 }

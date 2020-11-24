@@ -26,5 +26,4 @@
         app:layout_constraintBottom_toTopOf="@id/main_panel"
         app:layout_constraintEnd_toEndOf="parent" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>

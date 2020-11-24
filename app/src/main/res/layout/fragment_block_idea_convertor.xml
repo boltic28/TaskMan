@@ -107,7 +107,7 @@
     <Button
         android:id="@+id/converter_button_create"
         style="@style/Creator.Button"
-        android:backgroundTint="@color/colorSignButtonInBg"
+        android:backgroundTint="?themeCreatorButtonCreateColor"
         android:text="@string/convert_to"
         app:layout_constraintEnd_toStartOf="@+id/converter_button_cancel"
         app:layout_constraintStart_toStartOf="parent"
@@ -116,7 +116,7 @@
     <Button
         android:id="@+id/converter_button_cancel"
         style="@style/Creator.Button"
-        android:backgroundTint="@color/colorSignButtonUpBg"
+        android:backgroundTint="?themeCreatorButtonCancelColor"
         android:text="@string/cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/converter_button_create"

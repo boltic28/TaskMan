@@ -1,8 +1,10 @@
 package com.boltic28.taskmanager.ui.screens.activity
 
+import android.content.Context
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.navigation.findNavController
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.ui.base.BaseActivity
@@ -17,10 +19,8 @@ class MainActivity : BaseActivity<MainActivityModel>(R.layout.activity_main), Ac
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.sign_out_toolbar -> {
-                model.userManager.signOut()
-                setToolbarText(resources.getString(R.string.app_name))
-                findNavController(R.id.container).navigate(R.id.signFragment)
+            R.id.settings_toolbar -> {
+                findNavController(R.id.container).navigate(R.id.settingsFragment)
                 return true
             }
         }
@@ -32,11 +32,35 @@ class MainActivity : BaseActivity<MainActivityModel>(R.layout.activity_main), Ac
         title = text
     }
 
-    override fun hideToolbar(){
+    override fun hideToolbar() {
         toolbar.visibility = View.GONE
     }
 
-    override fun showToolbar(){
+    override fun showToolbar() {
         toolbar.visibility = View.VISIBLE
+    }
+
+    override fun hideKeyBoard() {
+        currentFocus?.let {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(it.windowToken, 0)
+        }
+    }
+
+    override fun showProgressBar() {
+        main_progressbar.visibility = View.VISIBLE
+        main_progressbar_text.visibility = View.VISIBLE
+    }
+
+    override fun hideProgressBar() {
+        main_progressbar.visibility = View.INVISIBLE
+        main_progressbar_text.visibility = View.INVISIBLE
+//        AlertDialog.Builder(context)
+//            .setMessage(resources.getString(R.string.data_refreshed))
+//            .setPositiveButton(resources.getString(R.string.ok)) { _, _ -> loadGoals() }
+//            .setTitle(resources.getString(R.string.app_name))
+//            .setIcon(R.drawable.wow_ph)
+//            .create()
+//            .show()
     }
 }

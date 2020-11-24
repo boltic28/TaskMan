@@ -24,4 +24,25 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:navGraph="@navigation/nav_graph" />
 
+    <ProgressBar
+        android:id="@+id/main_progressbar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/main_progressbar_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:text="@string/sync_data"
+        app:layout_constraintStart_toStartOf="@+id/main_progressbar"
+        app:layout_constraintEnd_toEndOf="@+id/main_progressbar"
+        app:layout_constraintTop_toBottomOf="@+id/main_progressbar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

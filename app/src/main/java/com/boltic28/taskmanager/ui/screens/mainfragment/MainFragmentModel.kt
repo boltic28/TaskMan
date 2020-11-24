@@ -6,6 +6,7 @@ import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.base.BaseViewModel
 import com.boltic28.taskmanager.utils.Messenger
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -20,9 +21,8 @@ class MainFragmentModel @Inject constructor(
 
     val disposables = mutableListOf<Disposable>()
 
-    fun refreshData() {
+    fun refreshData(): Observable<BaseItem> =
         interactor.refreshAllData()
-    }
 
     fun update(item: Task) {
         disposables + interactor.update(item)

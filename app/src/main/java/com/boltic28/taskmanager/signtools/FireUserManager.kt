@@ -1,7 +1,6 @@
 package com.boltic28.taskmanager.signtools
 
 import android.app.Activity
-import android.util.Log
 import com.boltic28.taskmanager.utils.Messenger
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
@@ -22,17 +21,19 @@ class FireUserManager(
         const val EMPTY_STRING = ""
     }
 
+    override lateinit var userI: UserIn
+
     private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
     private val userSubject = BehaviorSubject.createDefault<UserIn>(convertUser(mAuth.currentUser))
     override val user: Observable<UserIn>
-        get() = userSubject.hide()
+        get() = userSubject.hide().doOnNext { userI = it }
 
     init {
-
         mAuth.addAuthStateListener {
             val person = mAuth.currentUser
             if (person == null) {
+                userI = convertUser(person)
                 userSubject.onNext(convertUser(person))
             }
         }

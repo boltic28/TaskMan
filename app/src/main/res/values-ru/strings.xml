@@ -1,0 +1,101 @@
+<resources>
+    <string name="app_name">Менеджер задач</string>
+    <string name="sign_out">Выйти</string>
+    <string name="sign_in">Войти</string>
+    <string name="email_mail_com">email@mail.com</string>
+    <string name="not_autorizated">Не авторизован</string>
+    <string name="password">Пароль</string>
+    <string name="sign_up">Регистрация</string>
+    <string name="sign_out_b">Выйти</string>
+    <string name="registration">Регистрация</string>
+    <string name="sign_signin_or_register">Войти или регистрироваться</string>
+    <string name="sign_signout_text">Вы вошли как , %s</string>
+    <string name="sign_email">e-mail</string>
+    <string name="tip_input_right_data">Введите корректные данные</string>
+    <string name="description_icon_of_goal">icon of goal</string>
+    <string name="item_progress">прогресс</string>
+    <string name="create">создать</string>
+    <string name="is_cycle">цикл</string>
+    <string name="to_task">в ЗАДАЧУ</string>
+    <string name="to_goal">в ЦЕЛЬ</string>
+    <string name="to_step">в ШАГ</string>
+    <string name="start_it">НАЧАТЬ</string>
+    <string name="done_it">ОКОНЧЕНО</string>
+    <string name="description_icon_of_step">description of the step</string>
+    <string name="dateFormatterForItems">dd.MM.yyyy</string>
+    <string name="dateFormatterForCloseDate">dd-MMM-yyyy</string>
+    <string name="add_new_item">добавить элемент</string>
+    <string name="percentage">Выполнено на $s %</string>
+    <string name="to_goals_element">К закрепленным элементам</string>
+    <string name="to_free_elements">К свободным элементам</string>
+    <string name="unpin">открепить</string>
+    <string name="attach">закрепить за</string>
+    <string name="to_steps_element">к элементам шага</string>
+    <string name="not_attached">не закреплён</string>
+    <string name="tasks_image_description">tasks image</string>
+    <string name="status_in_progress">Статус: в процессе</string>
+    <string name="status_not_started">Статус: не начат</string>
+    <string name="status_done">Статус: окончен</string>
+    <string name="idea_image_description">idea image description</string>
+    <string name="convert_to">Конвертировать</string>
+    <string name="image_button_description">image button</string>
+    <string name="attach_to">Прикрепить к</string>
+    <string name="attached">прикреплено</string>
+    <string name="description">Описание:</string>
+    <string name="close_before">Закрыть до:</string>
+    <string name="information_about">Дополнительная информация:</string>
+    <string name="elements">Элементы</string>
+    <string name="attached_to">Связь с:</string>
+    <string name="cycling">Цикличность:</string>
+    <string name="progres_00">прогресс, %d</string>
+    <string name="free_elements">Элементы для связи</string>
+    <string name="its_elements">Элементы </string>
+    <string name="Search">поиск</string>
+    <string name="goal">Цель</string>
+    <string name="step">Шаг</string>
+    <string name="task">Задача</string>
+    <string name="close_date">Закрыть до:</string>
+    <string name="name_of_issue">Имя задачи:</string>
+    <string name="idea">Идея</string>
+    <string name="key">Поинт</string>
+    <string name="input_name_of_item">введите имя задачи</string>
+    <string name="input_description_of_item">опишите задачу</string>
+    <string name="field_name_must_be_not_empty">Ну хотя бы имя стоит указать</string>
+    <string name="save">сохранить</string>
+    <string name="open_date">Создана</string>
+    <string name="data_refreshed">Данные обновлены</string>
+    <string name="ok">OK</string>
+    <string name="isdone">выполнено</string>
+    <string name="isfailed">просрочено</string>
+    <string name="isstarted">в прогрессе</string>
+    <string name="today">сегодня</string>
+    <string name="any_period">любой</string>
+    <string name="on_week">на наделю</string>
+    <string name="om_month">на месяц</string>
+    <string name="progress_point_description">Point of progress</string>
+    <string name="fragment_item_image">item image</string>
+    <string name="cancel">отмена</string>
+    <string name="theme">Тема:</string>
+    <string name="language">Язык:</string>
+    <string name="user">E-mail:</string>
+    <string name="lime">Лайм</string>
+    <string name="blue">Синяя</string>
+    <string name="pink">Розовая</string>
+    <string name="english">English</string>
+    <string name="russian_language">Русский</string>
+    <string name="setting_header">Настройки</string>
+    <string name="settings">Настройки</string>
+    <string name="create_new">Создание нового элемента</string>
+    <string name="instance_not_created">Не удалось создать запись</string>
+    <string name="instance_created">Новая запись создана успешно</string>
+    <string name="sync_data">Синхронизация</string>
+
+    <string-array name="cycle">
+        <item>не циклична</item>
+        <item>once an hour</item>
+        <item>once a day</item>
+        <item>once a week</item>
+        <item>once a month</item>
+        <item>once an year</item>
+    </string-array>
+</resources>
