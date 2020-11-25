@@ -3,6 +3,8 @@ package com.boltic28.taskmanager.di
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModelProvider
+import com.boltic28.taskmanager.datalayer.firebaseworker.FireBaseDatabase
+import com.boltic28.taskmanager.datalayer.firebaseworker.RemoteDB
 import com.boltic28.taskmanager.ui.constant.APP_PREFERENCES
 import com.boltic28.taskmanager.ui.di.AppViewModelFactory
 import com.boltic28.taskmanager.utils.Messenger
@@ -31,4 +33,6 @@ class AppModule(private val app: App) {
     fun provideNetworkChecker(): NetworkChecker =
         NetworkChecker(app)
 
+    @Provides
+    fun provideFBDataBase(): RemoteDB = FireBaseDatabase()
 }

@@ -89,6 +89,8 @@
     <string name="instance_not_created">Не удалось создать запись</string>
     <string name="instance_created">Новая запись создана успешно</string>
     <string name="sync_data">Синхронизация</string>
+    <string name="remind_time">Напомнить:</string>
+    <string name="you_have_do">Есть %d задач на сегодня</string>
 
     <string-array name="cycle">
         <item>не циклична</item>

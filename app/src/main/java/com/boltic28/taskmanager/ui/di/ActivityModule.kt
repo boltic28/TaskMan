@@ -21,7 +21,4 @@ open class ActivityModule(private val activity: BaseActivity<*>) {
     @Provides
     fun provideFirebaseManager(messenger: Messenger): UserManager =
         FireUserManager(activity, messenger)
-
-    @Provides
-    fun provideFBDataBase(): RemoteDB = FireBaseDatabase()
 }

@@ -5,6 +5,7 @@ import com.boltic28.taskmanager.businesslayer.usecases.RefreshDataUseCase
 import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.base.BaseViewModel
 import com.boltic28.taskmanager.ui.constant.APP_SET_LANG
+import com.boltic28.taskmanager.ui.constant.APP_SET_NOTIFY_TIME
 import com.boltic28.taskmanager.ui.constant.APP_SET_THEME
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.Single
@@ -26,5 +27,9 @@ class SettingsFragmentModel @Inject constructor(
 
     fun writeLangInPreference(lang: String){
         preferences.edit().putString(APP_SET_LANG, lang).apply()
+    }
+
+    fun writeNotifyTimeInPreference(time: String){
+        preferences.edit().putString(APP_SET_NOTIFY_TIME, time).apply()
     }
 }

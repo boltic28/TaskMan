@@ -89,6 +89,8 @@
     <string name="instance_not_created">new instance is not created</string>
     <string name="instance_created">new instance is created</string>
     <string name="sync_data">Sync data</string>
+    <string name="remind_time">Remind time:</string>
+    <string name="you_have_do">you have do %d task(s) for today</string>
 
     <string-array name="cycle">
         <item>not cycle</item>

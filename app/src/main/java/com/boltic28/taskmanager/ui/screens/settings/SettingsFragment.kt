@@ -1,5 +1,7 @@
 package com.boltic28.taskmanager.ui.screens.settings
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -12,7 +14,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.disposables.Disposables
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.fragment_creator.*
 import kotlinx.android.synthetic.main.fragment_settings.*
+import kotlinx.coroutines.processNextEventInCurrentThread
+import java.time.LocalDate
+import java.time.LocalTime
 
 class SettingsFragment : BaseFragment<SettingsFragmentModel>(R.layout.fragment_settings) {
 
@@ -24,6 +30,7 @@ class SettingsFragment : BaseFragment<SettingsFragmentModel>(R.layout.fragment_s
 
         initThemeChooser()
         initLanguage()
+        initNotifyTime()
         initUser()
 
         setting_user_sign_out.setOnClickListener {
@@ -47,7 +54,7 @@ class SettingsFragment : BaseFragment<SettingsFragmentModel>(R.layout.fragment_s
         disposable.dispose()
     }
 
-    private fun initUser(){
+    private fun initUser() {
         disposable = model.userManager.user.subscribe {
             setting_user_value.text = it.email
         }
@@ -110,4 +117,28 @@ class SettingsFragment : BaseFragment<SettingsFragmentModel>(R.layout.fragment_s
             }
         }
     }
+
+    private fun initNotifyTime() {
+        var notifyTime =
+            model.preferences.getString(APP_SET_NOTIFY_TIME, APP_DEF_TIME_NOTIFY)
+                ?: APP_DEF_TIME_NOTIFY
+
+        setting_notify_time_value.text = notifyTime
+        setting_notify_time_value.setOnClickListener {
+            val listener = TimePickerDialog.OnTimeSetListener { _, h, m ->
+                notifyTime = LocalTime.of(h, m).toString()
+                setting_notify_time_value.text = notifyTime
+                model.writeNotifyTimeInPreference(notifyTime)
+            }
+            val timePicker = TimePickerDialog(
+                requireContext(),
+                listener,
+                9,
+                0,
+                true
+            )
+            timePicker.show()
+        }
+    }
+
 }

@@ -69,6 +69,7 @@
     <TextView
         android:id="@+id/setting_user_value"
         style="@style/Setting"
+        android:paddingBottom="@dimen/item_fragment_margin_between_blocks"
         tools:text="user@gmail.com"
         app:layout_constraintLeft_toLeftOf="@id/guideline"
         app:layout_constraintTop_toTopOf="@+id/setting_user_header" />
@@ -80,6 +81,20 @@
         app:layout_constraintTop_toTopOf="@+id/setting_user_header"
         app:layout_constraintBottom_toBottomOf="@+id/setting_user_value"
         />
+
+    <TextView
+        android:id="@+id/setting_notify_time_header"
+        style="@style/Setting"
+        android:text="@string/remind_time"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setting_user_value" />
+
+    <TextView
+        android:id="@+id/setting_notify_time_value"
+        style="@style/Setting"
+        tools:text="10:00"
+        app:layout_constraintLeft_toLeftOf="@id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/setting_notify_time_header" />
 
     <Button
         android:id="@+id/setting_button_save"
@@ -95,7 +110,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="130dp"
+        app:layout_constraintGuide_begin="150dp"
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
