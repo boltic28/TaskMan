@@ -1,6 +1,8 @@
 package com.boltic28.taskmanager.datalayer.room.idea
 
+import android.database.Cursor
 import androidx.room.*
+import com.boltic28.taskmanager.datalayer.room.step.StepEntity
 import io.reactivex.Single
 
 @Dao
@@ -17,7 +19,7 @@ interface IdeaDao {
     @Query("DELETE FROM idea")
     fun deleteAll(): Single<Int>
 
-    @Query("SELECT * FROM idea WHERE id = :id ORDER BY id")
+    @Query("SELECT * FROM idea WHERE id = :id")
     fun getById(id: Long): Single<IdeaEntity>
 
     @Query("SELECT * FROM idea")
@@ -34,4 +36,22 @@ interface IdeaDao {
 
     @Query("SELECT * FROM idea WHERE keyId = :keyId")
     fun getAllForKey(keyId: Long): Single<List<IdeaEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertFromContentProvider(entity: IdeaEntity): Long
+
+    @Update
+    fun updateFromContentProvider(entity: IdeaEntity): Int
+
+    @Query("DELETE FROM idea WHERE id = :id")
+    fun deleteByIdFromContentProvider(id: Long): Int
+
+    @Query("DELETE FROM idea")
+    fun deleteAllFromContentProvider(): Int
+
+    @Query("SELECT * FROM idea")
+    fun readAllForContentProvider(): Cursor
+
+    @Query("SELECT * FROM idea WHERE id = :id")
+    fun readByIdForContentProvider(id: Long): Cursor
 }

@@ -1,6 +1,8 @@
 package com.boltic28.taskmanager.datalayer.room.step
 
+import android.database.Cursor
 import androidx.room.*
+import com.boltic28.taskmanager.datalayer.room.goal.GoalEntity
 import io.reactivex.Single
 
 @Dao
@@ -19,7 +21,7 @@ interface StepDao {
     fun deleteAll(): Single<Int>
 
     @Transaction
-    @Query("SELECT * FROM step WHERE id = :id ORDER BY id")
+    @Query("SELECT * FROM step WHERE id = :id")
     fun getById(id: Long): Single<StepEntity>
 
     @Query("SELECT * FROM step")
@@ -35,4 +37,22 @@ interface StepDao {
     @Transaction
     @Query("SELECT * FROM step WHERE goalId = :goalId")
     fun getAllForKey(goalId: Long): Single<List<StepEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertFromContentProvider(entity: StepEntity): Long
+
+    @Update
+    fun updateFromContentProvider(entity: StepEntity): Int
+
+    @Query("DELETE FROM step WHERE id = :id")
+    fun deleteByIdFromContentProvider(id: Long): Int
+
+    @Query("DELETE FROM step")
+    fun deleteAllFromContentProvider(): Int
+
+    @Query("SELECT * FROM step")
+    fun readAllForContentProvider(): Cursor
+
+    @Query("SELECT * FROM step WHERE id = :id")
+    fun readByIdForContentProvider(id: Long): Cursor
 }

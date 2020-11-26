@@ -1,5 +1,6 @@
 package com.boltic28.taskmanager.datalayer.room.goal
 
+import android.database.Cursor
 import androidx.room.*
 import io.reactivex.Single
 
@@ -19,10 +20,28 @@ interface GoalDao {
     fun deleteAll(): Single<Int>
 
     @Transaction
-    @Query("SELECT * FROM goal WHERE id = :id ORDER BY id")
+    @Query("SELECT * FROM goal WHERE id = :id")
     fun getById(id: Long): Single<GoalEntity>
 
     @Transaction
     @Query("SELECT * FROM goal")
     fun getAll(): Single<List<GoalEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertFromContentProvider(entity: GoalEntity): Long
+
+    @Update
+    fun updateFromContentProvider(goalEntity: GoalEntity): Int
+
+    @Query("DELETE FROM goal WHERE id = :id")
+    fun deleteByIdFromContentProvider(id: Long): Int
+
+    @Query("DELETE FROM goal")
+    fun deleteAllFromContentProvider(): Int
+
+    @Query("SELECT * FROM goal")
+    fun readAllForContentProvider(): Cursor
+
+    @Query("SELECT * FROM goal WHERE id = :id")
+    fun readByIdForContentProvider(id: Long): Cursor
 }

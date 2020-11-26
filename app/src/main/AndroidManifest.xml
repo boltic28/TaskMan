@@ -24,6 +24,12 @@
         </activity>
 
         <service android:name=".businesslayer.service.NotifyService"/>
+
+        <provider
+            android:authorities="com.boltic28.taskmanager"
+            android:name=".businesslayer.Provider"
+            android:exported="true"/>
+
     </application>
 
 </manifest>
