@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.businesslayer
+package com.boltic28.taskmanager.businesslayer.contentprovider
 
 const val URI_CONTENT = "content://com.boltic28.taskmanager/"
 

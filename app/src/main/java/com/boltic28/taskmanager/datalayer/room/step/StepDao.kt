@@ -2,7 +2,6 @@ package com.boltic28.taskmanager.datalayer.room.step
 
 import android.database.Cursor
 import androidx.room.*
-import com.boltic28.taskmanager.datalayer.room.goal.GoalEntity
 import io.reactivex.Single
 
 @Dao

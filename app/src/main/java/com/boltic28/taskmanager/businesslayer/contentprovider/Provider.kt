@@ -1,4 +1,4 @@
-package com.boltic28.taskmanager.businesslayer
+package com.boltic28.taskmanager.businesslayer.contentprovider
 
 import android.content.ContentProvider
 import android.content.ContentUris
