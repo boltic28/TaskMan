@@ -18,7 +18,7 @@ abstract class BaseEntityFragmentModel<T> : BaseViewModel() {
         get() = mItem.hide()
 
     var itemId = NO_ID
-    var isItemsElementIntoRecycler = false
+    var isLoadFreeElements = false
 
     val disposables = mutableListOf<Disposable>()
 

@@ -1,5 +1,6 @@
 package com.boltic28.taskmanager.ui.screens.goalfragment
 
+import android.os.Bundle
 import androidx.navigation.NavController
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.businesslayer.interactors.GoalFragmentInteractor
@@ -9,6 +10,7 @@ import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
 import com.boltic28.taskmanager.ui.constant.GOAL_EXTRA
+import com.boltic28.taskmanager.ui.constant.LOAD_LIST
 import com.boltic28.taskmanager.ui.constant.NO_ID
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -44,7 +46,9 @@ class GoalFragmentModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe{ deleted ->
-                nav.navigate(R.id.mainFragment)
+                val bundle = Bundle()
+                bundle.putString(LOAD_LIST, GOAL_EXTRA)
+                nav.navigate(R.id.mainFragment, bundle)
                 messenger.showMessage("$deleted item(s) deleted")
             }
     }
@@ -104,7 +108,7 @@ class GoalFragmentModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 refresh()
-                isItemsElementIntoRecycler = true
+                isLoadFreeElements = true
             }, {
             })
     }
@@ -115,7 +119,7 @@ class GoalFragmentModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 refresh()
-                isItemsElementIntoRecycler = true
+                isLoadFreeElements = true
             }, {
             })
     }
@@ -126,7 +130,7 @@ class GoalFragmentModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 refresh()
-                isItemsElementIntoRecycler = true
+                isLoadFreeElements = true
             }, {
             })
     }
@@ -137,7 +141,7 @@ class GoalFragmentModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 refresh()
-                isItemsElementIntoRecycler = true
+                isLoadFreeElements = true
             }, {
             })
     }
@@ -148,7 +152,7 @@ class GoalFragmentModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 refresh()
-                isItemsElementIntoRecycler = false
+                isLoadFreeElements = false
             }, {
             })
     }
@@ -159,7 +163,7 @@ class GoalFragmentModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 refresh()
-                isItemsElementIntoRecycler = false
+                isLoadFreeElements = false
             }, {
             })
     }
@@ -170,7 +174,7 @@ class GoalFragmentModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 refresh()
-                isItemsElementIntoRecycler = false
+                isLoadFreeElements = false
             }, {
             })
     }
@@ -181,7 +185,7 @@ class GoalFragmentModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 refresh()
-                isItemsElementIntoRecycler = false
+                isLoadFreeElements = false
             }, {
             })
     }

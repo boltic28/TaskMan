@@ -50,13 +50,13 @@ class GoalFragment : BaseEntityFragment<GoalFragmentModel>() {
     }
 
     private fun loadDataIntoRecycler(item: Goal) {
-        if (model.isItemsElementIntoRecycler) {
-            model.isItemsElementIntoRecycler = false
+        if (model.isLoadFreeElements) {
+            model.isLoadFreeElements = false
             model.loadFreeElementIntoAdapter(findNavController())
             item_fr_its_elements.text = resources.getString(R.string.free_elements)
             item_fr_button_action.setImageResource(R.drawable.ic_elements)
         } else {
-            model.isItemsElementIntoRecycler = true
+            model.isLoadFreeElements = true
             model.loadGoalsElementIntoAdapter(item, findNavController())
             item_fr_its_elements.text = resources.getString(R.string.its_elements)
             item_fr_button_action.setImageResource(R.drawable.ic_add_item)

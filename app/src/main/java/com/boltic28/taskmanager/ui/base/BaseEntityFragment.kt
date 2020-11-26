@@ -34,6 +34,12 @@ abstract class BaseEntityFragment<VM : BaseEntityFragmentModel<*>> :
         initItemIfExist()
     }
 
+    override fun onResume() {
+        super.onResume()
+        model.isLoadFreeElements = false
+        initView()
+    }
+
     override fun onStop() {
         super.onStop()
         model.disposables.forEach { it.dispose() }
@@ -53,8 +59,6 @@ abstract class BaseEntityFragment<VM : BaseEntityFragmentModel<*>> :
         } else {
             findNavController().navigate(R.id.mainFragment)
         }
-
-        initView()
     }
 
     abstract fun initView()

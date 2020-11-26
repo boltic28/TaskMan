@@ -1,5 +1,6 @@
 package com.boltic28.taskmanager.ui.screens.stepfragment
 
+import android.os.Bundle
 import androidx.navigation.NavController
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.businesslayer.interactors.StepFragmentInteractor
@@ -8,6 +9,7 @@ import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.adapter.ItemAdapter
 import com.boltic28.taskmanager.ui.adapter.controllers.HolderController
 import com.boltic28.taskmanager.ui.base.BaseEntityFragmentModel
+import com.boltic28.taskmanager.ui.constant.LOAD_LIST
 import com.boltic28.taskmanager.ui.constant.STEP_EXTRA
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.Single
@@ -38,7 +40,7 @@ class StepFragmentModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { _ ->
                 refresh()
-                isItemsElementIntoRecycler = false
+                isLoadFreeElements = false
             }
     }
 
@@ -47,7 +49,9 @@ class StepFragmentModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe{ deleted ->
-                nav.navigate(R.id.mainFragment)
+                val bundle = Bundle()
+                bundle.putString(LOAD_LIST, STEP_EXTRA)
+                nav.navigate(R.id.mainFragment, bundle)
                 messenger.showMessage("$deleted item(s) deleted")
             }
     }
@@ -92,7 +96,7 @@ class StepFragmentModel @Inject constructor(
                     .subscribeOn(Schedulers.io())
                     .subscribe { _ ->
                         refresh()
-                        isItemsElementIntoRecycler = false
+                        isLoadFreeElements = false
                     }
             }
 
@@ -127,7 +131,7 @@ class StepFragmentModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 refresh()
-                isItemsElementIntoRecycler = true
+                isLoadFreeElements = true
             }, {
             })
     }
@@ -138,7 +142,7 @@ class StepFragmentModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 refresh()
-                isItemsElementIntoRecycler = true
+                isLoadFreeElements = true
             }, {
             })
     }
@@ -149,7 +153,7 @@ class StepFragmentModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 refresh()
-                isItemsElementIntoRecycler = false
+                isLoadFreeElements = false
             }, {
             })
     }
@@ -160,7 +164,7 @@ class StepFragmentModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 refresh()
-                isItemsElementIntoRecycler = false
+                isLoadFreeElements = false
             }, {
             })
     }

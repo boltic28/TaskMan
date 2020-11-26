@@ -69,20 +69,20 @@ class StepFragment : BaseEntityFragment<StepFragmentModel>() {
             item_fr_relative_owner.text = resources.getString(R.string.not_attached)
             item_fr_relative_button.setOnClickListener {
                 item_fr_its_elements.text = resources.getString(R.string.attach_to)
-                model.isItemsElementIntoRecycler = false
+                model.isLoadFreeElements = false
                 model.loadGoalsIntoAdapter(item, findNavController())
             }
         }
     }
 
     private fun loadDataIntoRecycler(item: Step) {
-        if (model.isItemsElementIntoRecycler) {
-            model.isItemsElementIntoRecycler = false
+        if (model.isLoadFreeElements) {
+            model.isLoadFreeElements = false
             model.loadFreeElementIntoAdapter(findNavController())
             item_fr_its_elements.text = resources.getString(R.string.free_elements)
             item_fr_button_action.setImageResource(R.drawable.ic_elements)
         } else {
-            model.isItemsElementIntoRecycler = true
+            model.isLoadFreeElements = true
             model.loadStepsElementIntoAdapter(item, findNavController())
             item_fr_its_elements.text = resources.getString(R.string.its_elements)
             item_fr_button_action.setImageResource(R.drawable.ic_add_item)

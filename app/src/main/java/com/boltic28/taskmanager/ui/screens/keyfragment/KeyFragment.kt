@@ -68,20 +68,20 @@ class KeyFragment: BaseEntityFragment<KeyFragmentModel>() {
             item_fr_relative_button.setImageResource(R.drawable.ic_link)
             item_fr_relative_owner.text = resources.getString(R.string.not_attached)
             item_fr_relative_button.setOnClickListener {
-                model.isItemsElementIntoRecycler = false
+                model.isLoadFreeElements = false
                 model.loadGoalsIntoAdapter(item, findNavController())
             }
         }
     }
 
     private fun loadDataIntoRecycler(item: KeyResult) {
-        if (model.isItemsElementIntoRecycler) {
-            model.isItemsElementIntoRecycler = false
+        if (model.isLoadFreeElements) {
+            model.isLoadFreeElements = false
             model.loadFreeElementIntoAdapter(findNavController())
             item_fr_its_elements.text = resources.getString(R.string.free_elements)
             item_fr_button_action.setImageResource(R.drawable.ic_elements)
         } else {
-            model.isItemsElementIntoRecycler = true
+            model.isLoadFreeElements = true
             model.loadKeysElementIntoAdapter(item, findNavController())
             item_fr_its_elements.text = resources.getString(R.string.its_elements)
             item_fr_button_action.setImageResource(R.drawable.ic_add_item)
