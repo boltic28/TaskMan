@@ -1,6 +1,7 @@
 package com.boltic28.taskmanager.signtools
 
 import android.app.Activity
+import android.os.Bundle
 import com.boltic28.taskmanager.utils.Messenger
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
@@ -22,10 +23,11 @@ class FireUserManager(
     }
 
     override lateinit var userI: UserIn
+    override var password: String = ""
 
     private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
-    private val userSubject = BehaviorSubject.createDefault<UserIn>(convertUser(mAuth.currentUser))
+    private val userSubject = BehaviorSubject.createDefault(convertUser(mAuth.currentUser))
     override val user: Observable<UserIn>
         get() = userSubject.hide().doOnNext { userI = it }
 
@@ -50,6 +52,7 @@ class FireUserManager(
     }
 
     override fun signIn(email: String, password: String) {
+        this.password = password
         mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(activity) {
                 checkTaskAndSetUser(
@@ -70,10 +73,12 @@ class FireUserManager(
                 user.uid,
                 user.displayName ?: EMPTY_STRING,
                 user.email ?: EMPTY_STRING,
-                user.photoUrl.toString()
+                user.photoUrl.toString(),
+                password
             )
         } else {
             UserIn(
+                EMPTY_STRING,
                 EMPTY_STRING,
                 EMPTY_STRING,
                 EMPTY_STRING,
@@ -88,5 +93,15 @@ class FireUserManager(
             messenger.showMessage("$type failed")
         }
         userSubject.onNext(convertUser(mAuth.currentUser))
+    }
+
+    override fun getUserData(): Bundle {
+        val bundle = Bundle()
+        bundle.putString(USER_DATA_ID, userI.id)
+        bundle.putString(USER_DATA_NAME, userI.name)
+        bundle.putString(USER_DATA_EMAIL, userI.email)
+        bundle.putString(USER_DATA_PHOTO_URL, userI.photoUrl)
+        bundle.putString(USER_DATA_PASSWORD, userI.password)
+        return bundle
     }
 }

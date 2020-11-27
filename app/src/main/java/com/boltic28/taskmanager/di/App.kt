@@ -19,10 +19,23 @@ class App : Application() {
         val dbModule = DataBaseModule(this)
         val repoModule = RepositoryModule(dbModule.provideDataBase(), appModule.provideFBDataBase())
         val serviceModule = ServiceModule(repoModule.provideTaskRepo())
+        val interactModule = InteractModule(
+            repoModule.provideKeyRepo(),
+            repoModule.provideStepRepo(),
+            repoModule.provideTaskRepo(),
+            repoModule.provideIdeaRepo(),
+            repoModule.provideGoalRepo(),
+            repoModule.provideGoalRemoteRepo(),
+            repoModule.provideStepRemoteRepo(),
+            repoModule.provideTaskRemoteRepo(),
+            repoModule.provideIdeaRemoteRepo(),
+            repoModule.provideKeyRemoteRepo()
+        )
         applicationComponent = DaggerAppComponent
             .builder()
             .addModule(appModule)
             .addModule(serviceModule)
+            .addModule(interactModule)
             .createComponent()
         applicationComponent.activityComponent.inject(this)
     }
@@ -37,18 +50,6 @@ class App : Application() {
         return applicationComponent.getActivityComponent(
             activityModule,
             SettingsFragmentModule(this),
-            InteractModule(
-                repoModule.provideKeyRepo(),
-                repoModule.provideStepRepo(),
-                repoModule.provideTaskRepo(),
-                repoModule.provideIdeaRepo(),
-                repoModule.provideGoalRepo(),
-                repoModule.provideGoalRemoteRepo(),
-                repoModule.provideStepRemoteRepo(),
-                repoModule.provideTaskRemoteRepo(),
-                repoModule.provideIdeaRemoteRepo(),
-                repoModule.provideKeyRemoteRepo()
-            ),
             repoModule
         )
             .activityInjector.maybeInject(activity)

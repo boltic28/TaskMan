@@ -1,5 +1,10 @@
 package com.boltic28.taskmanager.ui.base
 
+import android.accounts.Account
+import android.accounts.AccountManager
+import android.content.Context
+import android.util.Log
+import com.boltic28.taskmanager.businesslayer.syncmanager.ACCOUNT_TYPE
 import com.boltic28.taskmanager.ui.screens.activity.ActivityHelper
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -8,6 +13,8 @@ abstract class BaseFragment<VM : BaseViewModel>(layout: Int) : DaggerFragment(la
 
     @Inject
     lateinit var model: VM
+
+    protected lateinit var mAccount: Account
 
     fun hideKeyboard(){
         (activity as? ActivityHelper)?.hideKeyBoard()
@@ -23,5 +30,16 @@ abstract class BaseFragment<VM : BaseViewModel>(layout: Int) : DaggerFragment(la
 
     fun hideProgressBar(){
         (activity as? ActivityHelper)?.hideProgressBar()
+    }
+
+    protected fun createSyncAccount(): Account {
+        val accountManager = activity?.getSystemService(Context.ACCOUNT_SERVICE) as AccountManager
+        return Account(model.userManager.userI.email, ACCOUNT_TYPE).also { newAccount ->
+            if (accountManager.addAccountExplicitly(newAccount, model.userManager.userI.password, model.userManager.getUserData())) {
+                Log.d("AccountManager", "account ${model.userManager.userI.email} is creating")
+            } else {
+                Log.d("AccountManager", "account ${model.userManager.userI.email} is created alredy")
+            }
+        }
     }
 }

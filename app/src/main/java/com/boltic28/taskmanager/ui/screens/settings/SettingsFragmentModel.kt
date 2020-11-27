@@ -6,6 +6,7 @@ import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.base.BaseViewModel
 import com.boltic28.taskmanager.ui.constant.APP_SET_LANG
 import com.boltic28.taskmanager.ui.constant.APP_SET_NOTIFY_TIME
+import com.boltic28.taskmanager.ui.constant.APP_SET_SYNC_AUTO
 import com.boltic28.taskmanager.ui.constant.APP_SET_THEME
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.Single
@@ -31,5 +32,9 @@ class SettingsFragmentModel @Inject constructor(
 
     fun writeNotifyTimeInPreference(time: String){
         preferences.edit().putString(APP_SET_NOTIFY_TIME, time).apply()
+    }
+
+    fun writeAutoSyncStatus(isTurnedOn: Boolean){
+        preferences.edit().putBoolean(APP_SET_SYNC_AUTO, isTurnedOn).apply()
     }
 }

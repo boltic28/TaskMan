@@ -91,6 +91,8 @@
     <string name="sync_data">Sync data</string>
     <string name="remind_time">Remind time:</string>
     <string name="you_have_do">you have do %d task(s) for today</string>
+    <string name="sync_way">Sync data:</string>
+    <string name="auto">auto</string>
 
     <string-array name="cycle">
         <item>not cycle</item>

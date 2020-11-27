@@ -3,9 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.boltic28.taskmanager">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
 
     <application
         android:name=".di.App"
@@ -23,12 +26,32 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".businesslayer.service.NotifyService"/>
+        <service android:name=".businesslayer.service.NotifyService" />
+        <service
+            android:name=".businesslayer.syncmanager.AuthentificatorService">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator" />
+        </service>
+        <service
+            android:name=".businesslayer.syncmanager.SyncService"
+            android:exported="true"
+            android:process=":sync">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter"/>
+            </intent-filter>
+            <meta-data android:name="android.content.SyncAdapter"
+                android:resource="@xml/syncadapter" />
+        </service>
 
         <provider
-            android:authorities="com.boltic28.taskmanager"
             android:name=".businesslayer.contentprovider.Provider"
+            android:authorities="com.boltic28.taskmanager.provider"
             android:exported="true"
+            android:syncable="true"
             tools:ignore="ExportedContentProvider" />
 
     </application>

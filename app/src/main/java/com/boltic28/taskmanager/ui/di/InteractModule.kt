@@ -9,7 +9,6 @@ import com.boltic28.taskmanager.businesslayer.usecases.key.*
 import com.boltic28.taskmanager.businesslayer.usecases.step.*
 import com.boltic28.taskmanager.businesslayer.usecases.task.*
 import com.boltic28.taskmanager.datalayer.entities.*
-import com.boltic28.taskmanager.datalayer.firebaseworker.RemoteDB
 import com.boltic28.taskmanager.datalayer.firebaseworker.dto.RemoteRepo
 import com.boltic28.taskmanager.datalayer.room.goal.GoalRepository
 import com.boltic28.taskmanager.datalayer.room.idea.IdeaRepository

@@ -1,5 +1,6 @@
 package com.boltic28.taskmanager.ui.screens.mainfragment
 
+import android.app.Service
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -19,17 +20,22 @@ import java.util.*
 
 class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
 
-    override fun onResume() {
-        super.onResume()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         if (model.userManager.isUserSigned()) {
-            loadElements()
+            mAccount = createSyncAccount()
             setToolbarText(model.userManager.userI.email)
-            initView()
-            setFilters()
         } else {
             setToolbarText(resources.getString(R.string.app_name))
             findNavController().navigate(R.id.signFragment)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadElements()
+        initView()
+        setFilters()
     }
 
     override fun onPause() {
@@ -42,15 +48,7 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
             if (it.containsKey(USER_SIGNED)) {
                 showProgressBar()
                 loadGoals()
-                model.disposables + model.refreshData()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe { item ->
-                        if (item is Goal) {
-                            hideProgressBar()
-                            model.adapter.addElement(item)
-                        }
-                    }
+                updateData()
             }
             if (it.containsKey(LOAD_LIST)) {
                 when (it.getString(LOAD_LIST)) {
@@ -61,6 +59,28 @@ class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
                     else -> loadGoals()
                 }
             }
+        }
+    }
+
+    private fun updateData() {
+        val isNeedToSync =
+            requireActivity().getSharedPreferences(APP_PREFERENCES, Service.MODE_PRIVATE)
+                .getBoolean(
+                    APP_SET_SYNC_AUTO,
+                    APP_DEF_SYNC_AUTO_VAL
+                )
+        if (isNeedToSync) {
+            model.disposables + model.refreshData()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { item ->
+                    if (item is Goal) {
+                        hideProgressBar()
+                        model.adapter.addElement(item)
+                    }
+                }
+        } else {
+            hideProgressBar()
         }
     }
 

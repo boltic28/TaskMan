@@ -91,6 +91,8 @@
     <string name="sync_data">Синхронизация</string>
     <string name="remind_time">Напомнить:</string>
     <string name="you_have_do">Есть %d задач на сегодня</string>
+    <string name="sync_way">Синхро:</string>
+    <string name="auto">авто</string>
 
     <string-array name="cycle">
         <item>не циклична</item>

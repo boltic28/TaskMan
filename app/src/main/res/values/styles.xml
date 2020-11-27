@@ -220,7 +220,7 @@
     </style>
 
     <style name="Setting.SignOutButton">
-        <item name="android:layout_marginStart">@dimen/item_fragment_margin_between_blocks</item>
+        <item name="android:layout_marginStart">@dimen/item_fragment_margin_between_view</item>
         <item name="android:src">@drawable/ic_exit</item>
         <item name="android:background">@color/transparent</item>
     </style>

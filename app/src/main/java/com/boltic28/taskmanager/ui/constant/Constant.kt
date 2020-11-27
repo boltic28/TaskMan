@@ -6,8 +6,11 @@ const val APP_PREFERENCES = "task_man_pref"
 const val APP_SET_THEME = "setting_theme"
 const val APP_SET_LANG = "setting_language"
 const val APP_SET_USERS_MAIL = "setting_mail"
+const val APP_SET_SYNC_AUTO = "app_auto_sync"
 const val APP_SET_NOTIFY_TIME = "notify_time"
+
 const val APP_DEF_TIME_NOTIFY = "10:00"
+const val APP_DEF_SYNC_AUTO_VAL = true
 
 const val THEME_LIME = "theme_lime"
 const val THEME_BLUE = "theme_blue"

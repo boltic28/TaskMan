@@ -6,6 +6,7 @@ import android.content.ContentValues
 import android.content.UriMatcher
 import android.database.Cursor
 import android.net.Uri
+import android.util.Log
 import androidx.room.Room
 import com.boltic28.taskmanager.datalayer.room.AppDataBase
 
@@ -62,6 +63,7 @@ class Provider : ContentProvider() {
         selectArgs: Array<out String>?,
         sort: String?
     ): Cursor? {
+        Log.d("CPSA","query")
         val cursor: Cursor
         val code = uriMatcher.match(uri)
 
@@ -106,6 +108,7 @@ class Provider : ContentProvider() {
     }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
+        Log.d("CPSA","insert")
         values?.let {
             when (uriMatcher.match(uri)) {
                 CODE_GOAL_ITEM -> {
@@ -130,6 +133,7 @@ class Provider : ContentProvider() {
     }
 
     override fun delete(uri: Uri, p1: String?, p2: Array<out String>?): Int {
+        Log.d("CPSA","delete")
         val deleted: Int
         when (uriMatcher.match(uri)) {
             CODE_GOAL_ITEM -> {
@@ -174,6 +178,7 @@ class Provider : ContentProvider() {
         p2: String?,
         p3: Array<out String>?
     ): Int {
+        Log.d("CPSA","upd")
         values?.let {
             val updated: Int
             when (uriMatcher.match(uri)) {
@@ -204,4 +209,6 @@ class Provider : ContentProvider() {
         }
         return 0
     }
+
+
 }
