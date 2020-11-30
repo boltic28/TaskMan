@@ -34,11 +34,6 @@ class CreatorFragment : BaseFragment<CreatorFragmentModel>(R.layout.fragment_cre
         setCloseDate()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        disposable.dispose()
-    }
-
     private fun setOnButtons() {
         creator_button_create.setOnClickListener {
             hideKeyboard()

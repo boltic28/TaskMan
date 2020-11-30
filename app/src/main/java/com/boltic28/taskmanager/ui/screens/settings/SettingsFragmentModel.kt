@@ -10,6 +10,7 @@ import com.boltic28.taskmanager.ui.constant.APP_SET_SYNC_AUTO
 import com.boltic28.taskmanager.ui.constant.APP_SET_THEME
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.Single
+import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 class SettingsFragmentModel @Inject constructor(

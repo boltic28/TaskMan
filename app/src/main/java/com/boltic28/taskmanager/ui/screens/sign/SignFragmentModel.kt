@@ -8,6 +8,7 @@ import com.boltic28.taskmanager.signtools.UserManager
 import com.boltic28.taskmanager.ui.base.BaseViewModel
 import com.boltic28.taskmanager.ui.constant.USER_SIGNED
 import com.boltic28.taskmanager.utils.Messenger
+import io.reactivex.disposables.Disposable
 import io.reactivex.disposables.Disposables
 import javax.inject.Inject
 
@@ -16,8 +17,6 @@ class SignFragmentModel @Inject constructor(
     private val interactor: SignFragmentInteractor,
     val messenger: Messenger
 ) : BaseViewModel() {
-
-    var disposable = Disposables.disposed()
 
     fun toMainFragment(navController: NavController) {
         val bundle = Bundle()

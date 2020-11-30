@@ -20,8 +20,6 @@ abstract class BaseEntityFragmentModel<T> : BaseViewModel() {
     var itemId = NO_ID
     var isLoadFreeElements = false
 
-    val disposables = mutableListOf<Disposable>()
-
     abstract fun refresh()
     abstract fun update(item: BaseItem)
     abstract fun delete(item: BaseItem, nav: NavController)

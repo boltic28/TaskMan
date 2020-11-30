@@ -6,18 +6,15 @@ import androidx.navigation.fragment.findNavController
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.ui.base.BaseFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposables
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_sign.*
 
 class SignFragment : BaseFragment<SignFragmentModel>(R.layout.fragment_sign) {
 
-    private var disposable = Disposables.disposed()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        disposable = model.userManager.user
+        model.disposables + model.userManager.user
             .subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { user ->
@@ -30,12 +27,6 @@ class SignFragment : BaseFragment<SignFragmentModel>(R.layout.fragment_sign) {
                 }
             }
         initView()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        disposable.dispose()
-        model.disposable.dispose()
     }
 
     private fun initView() {

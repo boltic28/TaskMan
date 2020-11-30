@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ItemFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_weight="5"
+        android:layout_height="0dp">
+
+        <LinearLayout style="@style/ItemFragment">
+
+            <include
+                android:id="@+id/item_header_block"
+                layout="@layout/fragment_block_head" />
+
+            <include
+                android:id="@+id/item_progress_block"
+                style="@style/ItemFragment.ProgressHorizontal"
+                layout="@layout/fragment_block_progress" />
+
+            <include
+                android:id="@+id/item_info_block"
+                style="@style/ItemFragment.ButtonsGroup"
+                layout="@layout/fragment_block_info" />
+
+            <include
+                android:id="@+id/item_recycler_block"
+                style="@style/ItemFragment.RecyclerGroup"
+                layout="@layout/fragment_block_recycler" />
+
+            <include
+                android:id="@+id/item_converter_block"
+                style="@style/ItemFragment.Converter"
+                layout="@layout/fragment_block_idea_convertor" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/item_buttons_block"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        style="@style/ItemFragment.ButtonsGroup"
+        layout="@layout/fragment_block_buttons" />
+
+</LinearLayout>

@@ -64,8 +64,10 @@ class FireUserManager(
 
     override fun signOut() = mAuth.signOut()
 
-    override fun isUserSigned(): Boolean =
-        convertUser(mAuth.currentUser).id != EMPTY_STRING
+    override fun isUserSigned(): Boolean {
+        userI = convertUser(mAuth.currentUser)
+        return convertUser(mAuth.currentUser).id != EMPTY_STRING
+    }
 
     private fun convertUser(user: FirebaseUser?): UserIn =
         if (user != null) {

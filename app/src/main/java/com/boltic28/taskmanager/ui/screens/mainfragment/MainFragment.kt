@@ -20,27 +20,18 @@ import java.util.*
 
 class MainFragment : BaseFragment<MainFragmentModel>(R.layout.fragment_main) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onResume() {
+        super.onResume()
         if (model.userManager.isUserSigned()) {
-            mAccount = createSyncAccount()
+            checkUserAccount()
             setToolbarText(model.userManager.userI.email)
+            loadElements()
+            initView()
+            setFilters()
         } else {
             setToolbarText(resources.getString(R.string.app_name))
             findNavController().navigate(R.id.signFragment)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        loadElements()
-        initView()
-        setFilters()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        model.disposables.forEach { it.dispose() }
     }
 
     private fun loadElements() {

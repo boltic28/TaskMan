@@ -8,7 +8,6 @@ import com.boltic28.taskmanager.ui.base.BaseViewModel
 import com.boltic28.taskmanager.utils.Messenger
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -18,8 +17,6 @@ class MainFragmentModel @Inject constructor(
     val messenger: Messenger,
     override var userManager: UserManager
 ) : BaseViewModel() {
-
-    val disposables = mutableListOf<Disposable>()
 
     fun refreshData(): Observable<BaseItem> =
         interactor.refreshAllData()

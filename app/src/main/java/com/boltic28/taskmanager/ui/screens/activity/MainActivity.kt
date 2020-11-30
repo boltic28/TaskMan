@@ -55,12 +55,5 @@ class MainActivity : BaseActivity<MainActivityModel>(R.layout.activity_main), Ac
     override fun hideProgressBar() {
         main_progressbar.visibility = View.INVISIBLE
         main_progressbar_text.visibility = View.INVISIBLE
-//        AlertDialog.Builder(context)
-//            .setMessage(resources.getString(R.string.data_refreshed))
-//            .setPositiveButton(resources.getString(R.string.ok)) { _, _ -> loadGoals() }
-//            .setTitle(resources.getString(R.string.app_name))
-//            .setIcon(R.drawable.wow_ph)
-//            .create()
-//            .show()
     }
 }

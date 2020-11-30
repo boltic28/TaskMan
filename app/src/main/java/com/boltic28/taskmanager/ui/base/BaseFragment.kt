@@ -6,7 +6,9 @@ import android.content.Context
 import android.util.Log
 import com.boltic28.taskmanager.businesslayer.syncmanager.ACCOUNT_TYPE
 import com.boltic28.taskmanager.ui.screens.activity.ActivityHelper
+import com.boltic28.taskmanager.ui.screens.sign.SignFragment
 import dagger.android.support.DaggerFragment
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 abstract class BaseFragment<VM : BaseViewModel>(layout: Int) : DaggerFragment(layout) {
@@ -15,6 +17,10 @@ abstract class BaseFragment<VM : BaseViewModel>(layout: Int) : DaggerFragment(la
     lateinit var model: VM
 
     protected lateinit var mAccount: Account
+
+    fun checkUserAccount(){
+        mAccount = createSyncAccount()
+    }
 
     fun hideKeyboard(){
         (activity as? ActivityHelper)?.hideKeyBoard()
@@ -41,5 +47,10 @@ abstract class BaseFragment<VM : BaseViewModel>(layout: Int) : DaggerFragment(la
                 Log.d("AccountManager", "account ${model.userManager.userI.email} is created alredy")
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        model.disposables.dispose()
     }
 }

@@ -5,7 +5,6 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.ViewModel
 import com.boltic28.taskmanager.R
 import com.boltic28.taskmanager.businesslayer.service.NotifyService
 import com.boltic28.taskmanager.di.App
@@ -21,7 +20,7 @@ import java.time.ZoneId
 import java.util.*
 import javax.inject.Inject
 
-abstract class BaseActivity<VM : ViewModel>(private val layout: Int) : FragmentActivity(),
+abstract class BaseActivity<VM : BaseViewModel>(private val layout: Int) : FragmentActivity(),
     HasAndroidInjector {
 
     @Inject
@@ -33,11 +32,10 @@ abstract class BaseActivity<VM : ViewModel>(private val layout: Int) : FragmentA
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as App).tryInjectActivity(this)
         loadPreferences()
-
         super.onCreate(savedInstanceState)
         setContentView(layout)
-        setAlarmManager()
         setActionBar(toolbar)
+        setAlarmManager()
     }
 
     override fun androidInjector(): AndroidInjector<Any> = fragmentInjector

@@ -13,15 +13,11 @@ import com.boltic28.taskmanager.ui.base.BaseFragment
 import com.boltic28.taskmanager.ui.constant.*
 import com.boltic28.taskmanager.ui.screens.activity.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.disposables.Disposables
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_settings.*
 import java.time.LocalTime
 
 class SettingsFragment : BaseFragment<SettingsFragmentModel>(R.layout.fragment_settings) {
-
-    private var disposable: Disposable = Disposables.disposed()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,13 +49,8 @@ class SettingsFragment : BaseFragment<SettingsFragmentModel>(R.layout.fragment_s
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        disposable.dispose()
-    }
-
     private fun initUser() {
-        disposable = model.userManager.user.subscribe {
+        model.disposables + model.userManager.user.subscribe {
             setting_user_value.text = it.email
         }
     }

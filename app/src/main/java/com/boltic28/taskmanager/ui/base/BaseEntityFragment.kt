@@ -40,11 +40,6 @@ abstract class BaseEntityFragment<VM : BaseEntityFragmentModel<*>> :
         initView()
     }
 
-    override fun onStop() {
-        super.onStop()
-        model.disposables.forEach { it.dispose() }
-    }
-
     private fun initItemIfExist() {
         val itemId: Long? = arguments?.getLong(model.extraKey)
 
